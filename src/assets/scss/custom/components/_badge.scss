@@ -1,8 +1,8 @@
-// 
+//
 // _badge.scss
-// 
+//
 
-.badge{
+.badge {
   &[href] {
     color: $white;
   }
@@ -22,25 +22,27 @@
 
 @each $color, $value in $theme-colors {
   .badge-soft-#{$color} {
-      @include badge-variant-soft($value);
+    @include badge-variant-soft($value);
   }
 }
 
 // Dark badge
 
-.badge-dark{
+.badge-dark {
   color: $light;
 }
 
-body[data-layout-mode=dark]{
-  .badge{
-      &.bg-light, &.badge-soft-light, &.badge-outline-light{
-          color: $gray-dark-500;
-      }
+body[data-layout-mode="dark"] {
+  .badge {
+    &.bg-light,
+    &.badge-soft-light,
+    &.badge-outline-light {
+      color: $gray-dark-500;
+    }
   }
 
-  .badge-soft-dark{
-      background-color: rgba($gray-dark-500, 0.18);
-      color: $gray-dark-500;
+  .badge-soft-dark {
+    background-color: rgba($gray-dark-500, 0.18);
+    color: $gray-dark-500;
   }
 }

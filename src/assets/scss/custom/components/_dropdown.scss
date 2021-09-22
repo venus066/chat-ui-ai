@@ -1,11 +1,11 @@
-// 
+//
 // _dropdown.scss
-// 
+//
 
 .dropdown-menu {
   box-shadow: $box-shadow;
   animation-name: DropDownSlide;
-  animation-duration: .3s;
+  animation-duration: 0.3s;
   animation-fill-mode: both;
   position: absolute;
   z-index: 1000;
@@ -21,22 +21,21 @@
   }
 }
 
-
 @keyframes DropDownSlide {
   100% {
-      margin-top: -1px;
+    margin-top: -1px;
   }
   0% {
-      margin-top: 8px;
+    margin-top: 8px;
   }
 }
 
 @keyframes DropDownSlideDown {
   100% {
-      margin-bottom: 0;
+    margin-bottom: 0;
   }
   0% {
-      margin-bottom: 8px;
+    margin-bottom: 8px;
   }
 }
 
@@ -54,55 +53,54 @@
   }
 }
 
-.dropdown-divider{
+.dropdown-divider {
   border-top-color: $border-color;
 }
 
 // Dropdown Mega Menu
 
 .dropdown-mega {
-  position: static!important;
+  position: static !important;
 }
-
-
 
 // Dropdown size
 
-.dropdown-mega-menu-xl{
+.dropdown-mega-menu-xl {
   width: 40rem;
 }
 
-.dropdown-mega-menu-lg{
+.dropdown-mega-menu-lg {
   width: 26rem;
 }
-.dropdown-mega-menu-xl{
+.dropdown-mega-menu-xl {
   width: 32rem;
 }
 
 body[data-layout-mode="dark"] {
   // Dropdown
   .dropdown-menu {
-      background-color: lighten($gray-dark-300, 2%);
-      border-color: lighten($gray-dark-300, 4%);
-      color: $gray-dark-500;
-      box-shadow: 0 5px 6px rgba($gray-dark-200, 0.1);
+    background-color: lighten($gray-dark-300, 2%);
+    border-color: lighten($gray-dark-300, 4%);
+    color: $gray-dark-500;
+    box-shadow: 0 5px 6px rgba($gray-dark-200, 0.1);
   }
 
   .dropdown-item {
-      color: $gray-dark-500;
+    color: $gray-dark-500;
 
-      &:hover,
-      &:active,
-      &:focus {
-          background-color: lighten($gray-dark-300,4%);
-      }
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: lighten($gray-dark-300, 4%);
+    }
 
-      &.active, &:active{
-          background-color: lighten($gray-dark-300,4%);
-      }
+    &.active,
+    &:active {
+      background-color: lighten($gray-dark-300, 4%);
+    }
   }
 
   .dropdown-divider {
-      border-top-color: lighten($gray-dark-300, 4%);
+    border-top-color: lighten($gray-dark-300, 4%);
   }
 }

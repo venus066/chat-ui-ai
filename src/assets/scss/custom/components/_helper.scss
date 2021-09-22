@@ -72,12 +72,11 @@
   color: $gray-500;
   text-align: center;
   transition: all 0.4s;
-  &:hover{
+  &:hover {
     color: $gray-600;
     background-color: $gray-200;
   }
 }
-
 
 .w-xs {
   min-width: 80px;
@@ -96,7 +95,7 @@
   min-width: 160px;
 }
 
-.bg-overlay{
+.bg-overlay {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -108,39 +107,38 @@
 }
 
 .border-primary {
-  border-color: rgba(var(--bs-primary-rgb), 1)!important;
+  border-color: rgba(var(--bs-primary-rgb), 1) !important;
 }
 
-
 body[data-layout-mode="dark"] {
-  .text-muted{
+  .text-muted {
     color: $gray-dark-500 !important;
   }
 
-  .text-dark{
+  .text-dark {
     color: $gray-dark-600 !important;
   }
 
-  .text-body{
+  .text-body {
     color: $gray-dark-500 !important;
   }
 
-  .border-bottom, .border{
+  .border-bottom,
+  .border {
     border-color: $gray-dark-300 !important;
   }
 
-  @each $color,
-  $value in $theme-colors {
+  @each $color, $value in $theme-colors {
     .border-#{$color} {
       border-color: $value !important;
     }
   }
 
   .border-primary {
-    border-color: rgba(var(--bs-primary-rgb), 1)!important;
+    border-color: rgba(var(--bs-primary-rgb), 1) !important;
   }
 
-  .popover{
+  .popover {
     background-color: lighten($gray-dark-300, 2%);
     border-color: lighten($gray-dark-300, 4%);
   }
@@ -150,30 +148,31 @@ body[data-layout-mode="dark"] {
       &::before {
         border-top-color: lighten($gray-dark-300, 4%);
       }
-  
+
       &::after {
         border-top-color: lighten($gray-dark-300, 2%);
       }
     }
   }
-  
 
-  .img-thumbnail{
+  .img-thumbnail {
     background-color: $gray-dark-200;
     border-color: lighten($gray-dark-300, 2%);
   }
 
   .btn-close {
-    background: transparent escape-svg($btn-close-bg-dark) center / $btn-close-width auto no-repeat;
+    background: transparent escape-svg($btn-close-bg-dark) center /
+      $btn-close-width auto no-repeat;
   }
 
-  .alert{
+  .alert {
     .btn-close {
-      background: transparent escape-svg($btn-close-bg) center / $btn-close-width auto no-repeat;
+      background: transparent escape-svg($btn-close-bg) center /
+        $btn-close-width auto no-repeat;
     }
   }
 
-  .list-group-item{
+  .list-group-item {
     background-color: $gray-dark-200;
     border-color: $gray-dark-300;
   }

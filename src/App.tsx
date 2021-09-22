@@ -1,17 +1,15 @@
-import React from 'react';
+import React from "react";
 
 // scss
-import './assets/scss/theme.scss';
+import "./assets/scss/theme.scss";
 
 //api config
 import config from "./config";
 
-import Login from "./pages/Authentication/Login";
+import Routes from "./routes";
 
 const App = () => {
-  return (
-    <Login />
-  );
+  return <Routes />;
 };
 
 export default App;
