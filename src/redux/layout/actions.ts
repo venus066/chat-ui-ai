@@ -1,6 +1,6 @@
 import { LayoutActionTypes } from "./types";
 
-export const changeMode = (layoutMode: any) => ({
-  type: LayoutActionTypes.CHANGE_THEME_COLOR,
+export const changeTab = (layoutMode: any) => ({
+  type: LayoutActionTypes.CHANGE_TAB,
   payload: layoutMode,
 });

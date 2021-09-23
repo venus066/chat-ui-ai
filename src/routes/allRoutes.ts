@@ -10,7 +10,9 @@ import RecoverPassword from "../pages/Authentication/RecoverPassword";
 import ChangePassword from "../pages/Authentication/ChangePassword";
 import LockScreen from "../pages/Authentication/LockScreen";
 
+// dashboard
 import Dashboard from "../pages/Dashboard/index";
+import StarterPage from "../pages/StarterPage/index";
 
 interface RouteProps {
   path: string;
@@ -29,7 +31,8 @@ const publicRoutes: Array<RouteProps> = [
 ];
 
 const privateRoutes: Array<RouteProps> = [
-  { path: "/dashboard", exact: true, component: Dashboard },
+  { path: "/pages-starter", component: StarterPage },
+  { path: "/dashboard", component: Dashboard },
   { path: "/", exact: true, component: Root },
 ];
 

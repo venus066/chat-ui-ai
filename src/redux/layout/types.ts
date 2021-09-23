@@ -1,6 +1,9 @@
+// constants
+import { TABS } from "../../constants/index";
+
 export enum LayoutActionTypes {
-  CHANGE_THEME_COLOR = "@@layout/CHANGE_THEME_COLOR",
+  CHANGE_TAB = "@@layout/CHANGE_TAB",
 }
 export interface LayoutState {
-  layoutMode: string;
+  activeTab: TABS.BOOKMARK | TABS.CALLS | TABS.CHAT | TABS.CONTACTS | TABS.SETTINGS | TABS.USERS;
 }
