@@ -5,6 +5,11 @@ pages
 import Root from "../pages/Root/index";
 import Login from "../pages/Authentication/Login";
 import Logout from "../pages/Authentication/Logout";
+import Register from "../pages/Authentication/Register";
+import RecoverPassword from "../pages/Authentication/RecoverPassword";
+import ChangePassword from "../pages/Authentication/ChangePassword";
+import LockScreen from "../pages/Authentication/LockScreen";
+
 import Dashboard from "../pages/Dashboard/index";
 
 interface RouteProps {
@@ -15,7 +20,11 @@ interface RouteProps {
 
 const publicRoutes: Array<RouteProps> = [
   { path: "/logout", component: Logout },
-  { path: "/login", component: Login },
+  { path: "/auth-login", component: Login },
+  { path: "/auth-register", component: Register },
+  { path: "/auth-recoverpw", component: RecoverPassword },
+  { path: "/auth-changepassword", component: ChangePassword },
+  { path: "/auth-lock-screen", component: LockScreen },
   { path: "/logout", component: Logout },
 ];
 

@@ -23,3 +23,10 @@ export const userForgetPassword = (user: any) => {
     payload: user,
   };
 };
+
+export const userChangePassword = (newPassword: any) => {
+  return {
+    type: AuthForgetPassActionTypes.CHANGE_PASSWORD,
+    payload: newPassword,
+  };
+};

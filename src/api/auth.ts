@@ -24,6 +24,10 @@ const postFakeRegister = (data: any) => {
 const postJwtRegister = (data: any) => {
   return api.create(url.JWT_REGISTER, data);
 };
+const changePassword = (data: object) => {
+  return api.update(url.USER_CHANGE_PASSWORD, data);
+};
+
 export {
   postFakeForgetPwd,
   postJwtForgetPwd,
@@ -31,4 +35,5 @@ export {
   postJwtLogin,
   postFakeRegister,
   postJwtRegister,
+  changePassword,
 };

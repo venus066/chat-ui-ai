@@ -170,6 +170,18 @@ const fakeBackend = () => {
       });
     });
   });
+
+  mock.onPut(url.USER_CHANGE_PASSWORD).reply(config => {
+    return new Promise((resolve, reject) => {
+      const user = JSON.parse(config["data"]);
+      users[0].password = user.password;
+      if (user) {
+        resolve([200, users[0]]);
+      } else {
+        reject(["Some thing went wrong!"]);
+      }
+    });
+  });
 };
 
 export default fakeBackend;

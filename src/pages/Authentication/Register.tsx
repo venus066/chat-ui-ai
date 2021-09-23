@@ -1,19 +1,11 @@
-import React, { useEffect } from "react";
-import {
-  Alert,
-  Row,
-  Col,
-  Form,
-  Label,
-  Button,
-  UncontrolledTooltip,
-} from "reactstrap";
+import React from "react";
+import { Alert, Row, Col, Form, Button, UncontrolledTooltip } from "reactstrap";
 
 // redux
 import { useSelector, useDispatch } from "react-redux";
 
 // router
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 // validations
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -21,10 +13,10 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 
 // hooks
-import { useProfile } from "../../hooks/";
+import { useProfile } from "../../hooks";
 
 //actions
-import { loginUser } from "../../redux/actions";
+import { registerUser } from "../../redux/actions";
 
 // components
 import NonAuthLayoutWrapper from "../../components/NonAutnLayoutWrapper";
@@ -32,36 +24,27 @@ import AuthHeader from "../../components/AuthHeader";
 import FormInput from "../../components/FormInput";
 import Loader from "../../components/Loader";
 
-interface LoginProps {}
-const Login = (props: LoginProps) => {
-  const { isUserLogin, error, loginLoading, isUserLogout } = useSelector(
-    (state: any) => ({
-      isUserLogin: state.Login.isUserLogin,
-      error: state.Login.error,
-      loginLoading: state.Login.loading,
-      isUserLogout: state.Login.isUserLogout,
-    })
-  );
-
-  const history: any = useHistory();
-
-  useEffect(() => {
-    if (isUserLogin && !loginLoading && !isUserLogout) {
-      history.push("/dashboard");
-    }
-  }, [isUserLogin, history, loginLoading, isUserLogout]);
+interface RegisterProps {}
+const Register = (props: RegisterProps) => {
+  const { user, registrationError, regLoading } = useSelector((state: any) => ({
+    user: state.Register.user,
+    registrationError: state.Register.registrationError,
+    regLoading: state.Register.loading,
+    isUserRegistered: state.Register.isUserRegistered,
+  }));
 
   const resolver = yupResolver(
     yup.object().shape({
-      email: yup.string().required("Please Enter E-mail."),
+      email: yup
+        .string()
+        .email("This value should be a valid email.")
+        .required("Please Enter E-mail."),
+      username: yup.string().required("Please Enter E-mail."),
       password: yup.string().required("Please Enter Password."),
     })
   );
 
-  const defaultValues: any = {
-    email: "admin@themesbrand.com",
-    password: "123456",
-  };
+  const defaultValues: any = {};
 
   const methods = useForm({ defaultValues, resolver });
   const {
@@ -73,7 +56,7 @@ const Login = (props: LoginProps) => {
   const dispatch = useDispatch();
 
   const onSubmitForm = (values: object) => {
-    dispatch(loginUser(values));
+    dispatch(registerUser(values));
   };
 
   const { userProfile, loading } = useProfile();
@@ -88,22 +71,42 @@ const Login = (props: LoginProps) => {
         <Col sm={8} lg={6} xl={5} className="col-xxl-4">
           <div className="py-md-5 py-4">
             <AuthHeader
-              title="Welcome Back !"
-              subtitle="Sign in to continue to Doot."
+              title="Register Account"
+              subtitle="Get your free Doot account now."
             />
 
-            {error && <Alert color="danger">{error}</Alert>}
+            {user && user ? (
+              <Alert color="success">Register User Successfully</Alert>
+            ) : null}
+
+            {registrationError && registrationError ? (
+              <Alert color="danger">{registrationError}</Alert>
+            ) : null}
 
             <Form
               onSubmit={handleSubmit(onSubmitForm)}
               className="position-relative"
             >
-              {loginLoading && <Loader />}
+              {regLoading && <Loader />}
+              <div className="mb-3">
+                <FormInput
+                  label="Email"
+                  type="text"
+                  name="email"
+                  register={register}
+                  errors={errors}
+                  control={control}
+                  labelClassName="form-label"
+                  placeholder="Enter Email"
+                  className="form-control"
+                />
+              </div>
+
               <div className="mb-3">
                 <FormInput
                   label="Username"
                   type="text"
-                  name="email"
+                  name="username"
                   register={register}
                   errors={errors}
                   control={control}
@@ -127,29 +130,27 @@ const Login = (props: LoginProps) => {
                 />
               </div>
 
-              <div className="form-check form-check-info font-size-16">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  id="remember-check"
-                />
-                <Label
-                  className="form-check-label font-size-14"
-                  htmlFor="remember-check"
-                >
-                  Remember me
-                </Label>
+              <div className="mb-4">
+                <p className="mb-0">
+                  By registering you agree to the Doot{" "}
+                  <Link to="#" className="text-primary">
+                    Terms of Use
+                  </Link>
+                </p>
               </div>
 
-              <div className="text-center mt-4">
-                <Button color="primary" className="w-100" type="submit">
-                  Log In
+              <div className="text-center mb-3">
+                <Button
+                  color="primary"
+                  className="w-100  waves-effect waves-light"
+                  type="submit"
+                >
+                  Register
                 </Button>
               </div>
-
               <div className="mt-4 text-center">
                 <div className="signin-other-title">
-                  <h5 className="font-size-14 mb-4 title">Sign in with</h5>
+                  <h5 className="font-size-14 mb-4 title">Sign up using</h5>
                 </div>
                 <Row className="">
                   <div className="col-4">
@@ -200,13 +201,12 @@ const Login = (props: LoginProps) => {
 
             <div className="mt-5 text-center text-muted">
               <p>
-                Don't have an account ?{" "}
+                Already have an account ?{" "}
                 <Link
-                  to="/auth-register"
+                  to="/auth-login"
                   className="fw-medium text-decoration-underline"
                 >
-                  {" "}
-                  Register
+                  Login
                 </Link>
               </p>
             </div>
@@ -217,4 +217,4 @@ const Login = (props: LoginProps) => {
   );
 };
 
-export default Login;
+export default Register;

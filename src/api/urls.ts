@@ -6,3 +6,5 @@ export const POST_FAKE_JWT_PASSWORD_FORGET = "/jwt-forget-pwd";
 export const SOCIAL_LOGIN = "/social-login";
 export const JWT_REGISTER = "/post-jwt-register";
 export const POST_FAKE_REGISTER = "/post-fake-register";
+
+export const USER_CHANGE_PASSWORD = "/user-change-password";

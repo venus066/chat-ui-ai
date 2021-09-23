@@ -5,7 +5,7 @@ export const INIT_STATE: AuthForgetPassState = {
   forgetError: null,
 };
 
-const ForgetPass = (state = INIT_STATE, action: any) => {
+const ForgetPassword = (state = INIT_STATE, action: any) => {
   switch (action.type) {
     case AuthForgetPassActionTypes.API_RESPONSE_SUCCESS:
       switch (action.payload.actionType) {
@@ -16,6 +16,14 @@ const ForgetPass = (state = INIT_STATE, action: any) => {
             emailSended: true,
             loading: false,
           };
+        case AuthForgetPassActionTypes.CHANGE_PASSWORD: {
+          console.log("in this");
+          return {
+            ...state,
+            passwordChanged: true,
+            loading: false,
+          };
+        }
         default:
           return { ...state };
       }
@@ -29,6 +37,15 @@ const ForgetPass = (state = INIT_STATE, action: any) => {
             emailSended: false,
             loading: false,
           };
+        case AuthForgetPassActionTypes.CHANGE_PASSWORD: {
+          return {
+            ...state,
+            changepasswordError: action.payload.error,
+            passwordChanged: false,
+            loading: true,
+          };
+        }
+
         default:
           return { ...state };
       }
@@ -42,9 +59,17 @@ const ForgetPass = (state = INIT_STATE, action: any) => {
         loading: true,
       };
     }
+    case AuthForgetPassActionTypes.CHANGE_PASSWORD: {
+      return {
+        ...state,
+        passwordChanged: false,
+        loading: true,
+      };
+    }
+
     default:
       return { ...state };
   }
 };
 
-export default ForgetPass;
+export default ForgetPassword;
