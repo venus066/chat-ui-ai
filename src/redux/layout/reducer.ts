@@ -4,7 +4,7 @@ import { TABS } from "../../constants/index";
 import { LayoutActionTypes, LayoutState } from "./types";
 
 export const INIT_STATE: LayoutState = {
-  activeTab: TABS.USERS,
+  activeTab: TABS.CONTACTS,
 };
 
 const Layout = (state = INIT_STATE, action: any) => {

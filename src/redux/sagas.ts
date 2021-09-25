@@ -5,7 +5,14 @@ import registerSaga from "./auth/register/saga";
 import loginSaga from "./auth/login/saga";
 import forgetPasswordSaga from "./auth/forgetpwd/saga";
 import profileSaga from "./profile/saga";
+import contactsSaga from "./contacts/saga";
 
 export default function* rootSaga() {
-  yield all([registerSaga(), loginSaga(), forgetPasswordSaga(), profileSaga()]);
+  yield all([
+    registerSaga(),
+    loginSaga(),
+    forgetPasswordSaga(),
+    profileSaga(),
+    contactsSaga(),
+  ]);
 }

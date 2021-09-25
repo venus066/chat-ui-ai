@@ -3,7 +3,13 @@ import MockAdapter from "axios-mock-adapter";
 import * as url from "../api/urls";
 
 // dummy data
-import { profileDetails } from "../data/index";
+import {
+  // profile
+  profileDetails,
+
+  //contacts
+  contacts,
+} from "../data/index";
 
 const accessToken =
   "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6ImFkbWluIiwiYWRtaW4iOnRydWUsImp0aSI6ImQ2MTEwYzAxLWMwYjUtNDUzNy1iNDZhLTI0NTk5Mjc2YjY1NiIsImlhdCI6MTU5MjU2MDk2MCwiZXhwIjoxNTkyNTY0NjE5fQ.QgFSQtFaK_Ktauadttq1Is7f9w0SUtKcL8xCmkAvGLw";
@@ -196,6 +202,27 @@ const fakeBackend = () => {
       } else {
         reject(["Some thing went wrong!"]);
       }
+    });
+  });
+
+  /*
+  contacts
+  */
+  mock.onGet(url.GET_CONTACTS).reply(config => {
+    return new Promise((resolve, reject) => {
+      if (contacts) {
+        resolve([200, contacts]);
+      } else {
+        reject(["Some thing went wrong!"]);
+      }
+    });
+  });
+
+  mock.onPost(url.INVITE_CONTACT).reply(config => {
+    // const user = JSON.parse(config["data"]);
+
+    return new Promise((resolve, reject) => {
+      resolve([200, "User is Invited"]);
     });
   });
 };

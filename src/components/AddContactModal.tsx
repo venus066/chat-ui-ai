@@ -1,92 +1,138 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import {
+  Form,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Label,
+  Input,
+} from "reactstrap";
 
-const AddContactModal = () => {
+interface DataTypes {
+  email: string | null;
+  name: string | null;
+  message: string | null;
+}
+interface AddContactModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onInvite: (data: any) => void;
+}
+const AddContactModal = ({
+  isOpen,
+  onClose,
+  onInvite,
+}: AddContactModalProps) => {
+  /*
+  data input handeling
+  */
+  const [data, setData] = useState<DataTypes>({
+    email: null,
+    name: null,
+    message: null,
+  });
+  useEffect(() => {
+    setData({
+      email: null,
+      name: null,
+      message: null,
+    });
+  }, []);
+
+  const onChangeData = (field: "email" | "name" | "message", value: string) => {
+    let modifiedData: DataTypes = { ...data };
+    if (value === "") {
+      modifiedData[field] = null;
+    } else {
+      modifiedData[field] = value;
+    }
+    setData(modifiedData);
+  };
+
+  /*
+  validation
+  */
+  const [valid, setValid] = useState<boolean>(false);
+  useEffect(() => {
+    if (data.email !== null && data.message !== null && data.name !== null) {
+      setValid(true);
+    } else {
+      setValid(false);
+    }
+  }, [data]);
   return (
-    <div
-      className="modal fade"
-      id="AddContactModal-exampleModal"
-      tabIndex={-1}
-      role="dialog"
-      aria-labelledby="AddContactModal-exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5
-              className="modal-title font-size-16"
-              id="AddContactModal-exampleModalLabel"
+    <Modal isOpen={isOpen} toggle={onClose} tabIndex={-1} centered scrollable>
+      <ModalHeader className="modal-title-custom" toggle={onClose}>
+        Add Contact
+      </ModalHeader>
+      <ModalBody className=" p-4">
+        <Form>
+          <div className="mb-3">
+            <Label htmlFor="AddContactModalemail-input" className="form-label">
+              Email
+            </Label>
+            <Input
+              type="email"
+              className="form-control"
+              id="AddContactModalemail-input"
+              placeholder="Enter Email"
+              value={data["email"] || ""}
+              onChange={(e: any) => {
+                onChangeData("email", e.target.value);
+              }}
+            />
+          </div>
+          <div className="mb-3">
+            <Label htmlFor="AddContactModalname-input" className="form-label">
+              Name
+            </Label>
+            <Input
+              type="text"
+              className="form-control"
+              id="AddContactModalname-input"
+              placeholder="Enter Name"
+              value={data["name"] || ""}
+              onChange={(e: any) => {
+                onChangeData("name", e.target.value);
+              }}
+            />
+          </div>
+          <div className="mb-3">
+            <Label
+              htmlFor="AddContactModal-invitemessage-input"
+              className="form-label"
             >
-              Add Contact
-            </h5>
-            <button
-              type="button"
-              className="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+              Invatation Message
+            </Label>
+            <textarea
+              value={data["message"] || ""}
+              onChange={(e: any) => {
+                onChangeData("message", e.target.value);
+              }}
+              className="form-control"
+              id="AddContactModal-invitemessage-input"
+              rows={3}
+              placeholder="Enter Message"
+            ></textarea>
           </div>
-          <div className="modal-body p-4">
-            <form>
-              <div className="mb-3">
-                <label
-                  htmlFor="AddContactModalemail-input"
-                  className="form-label"
-                >
-                  Email
-                </label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="AddContactModalemail-input"
-                  placeholder="Enter Email"
-                />
-              </div>
-              <div className="mb-3">
-                <label
-                  htmlFor="AddContactModalname-input"
-                  className="form-label"
-                >
-                  Name
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="AddContactModalname-input"
-                  placeholder="Enter Name"
-                />
-              </div>
-              <div className="mb-3">
-                <label
-                  htmlFor="AddContactModal-invitemessage-input"
-                  className="form-label"
-                >
-                  Invatation Message
-                </label>
-                <textarea
-                  className="form-control"
-                  id="AddContactModal-invitemessage-input"
-                  rows={3}
-                  placeholder="Enter Message"
-                ></textarea>
-              </div>
-            </form>
-          </div>
-          <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-link"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" className="btn btn-primary">
-              Invite
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+        </Form>
+      </ModalBody>
+      <ModalFooter>
+        <Button type="button" color="link" className="btn" onClick={onClose}>
+          Close
+        </Button>
+        <Button
+          type="button"
+          color="primary"
+          disabled={!valid}
+          onClick={() => onInvite(data)}
+        >
+          Invite
+        </Button>
+      </ModalFooter>
+    </Modal>
   );
 };
 

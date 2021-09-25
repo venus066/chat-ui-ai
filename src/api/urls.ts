@@ -11,3 +11,7 @@ export const USER_CHANGE_PASSWORD = "/user-change-password";
 
 // profile
 export const GET_PROFILE_DETAILS = "/profile-details";
+
+// contacts
+export const GET_CONTACTS = "/user-contacts";
+export const INVITE_CONTACT = "/invite-contact";

@@ -10,7 +10,7 @@ import { TABS } from "../../constants/index";
 // component
 import Profile from "./Profile/index";
 // import Chats from "./Chats/index";
-// import Contacts from "./Contacts/index";
+import Contacts from "./Contacts/index";
 // import Calls from "./Calls/index";
 // import Bookmark from "./Bookmark/index";
 // import Settings from "./Settings/index";
@@ -36,27 +36,28 @@ const Leftbar = (props: LeftbarProps) => {
           </TabPane>
 
           {/* <TabPane tabId={TABS.CHAT} role="tabpanel" aria-labelledby="pills-chat-tab">
-                        <Chats />
-                    </TabPane >
+            <Chats />
+          </TabPane > */}
 
-                    <TabPane tabId={TABS.CONTACTS} role="tabpanel" aria-labelledby="pills-contacts-tab">
-                        <Contacts />
-                    </TabPane >
-                    
+          <TabPane
+            tabId={TABS.CONTACTS}
+            role="tabpanel"
+            aria-labelledby="pills-contacts-tab"
+          >
+            <Contacts />
+          </TabPane>
 
-                    <TabPane tabId={TABS.CALLS} role="tabpanel" aria-labelledby="pills-calls-tab">
-                        <Calls />
-                    </TabPane >
-                    
+          {/* <TabPane tabId={TABS.CALLS} role="tabpanel" aria-labelledby="pills-calls-tab">
+            <Calls />
+          </TabPane > */}
 
-                    <TabPane tabId={TABS.BOOKMARK} role="tabpanel" aria-labelledby="pills-bookmark-tab">
-                        <Bookmark />
-                    </TabPane >
-                    
+          {/* <TabPane tabId={TABS.BOOKMARK} role="tabpanel" aria-labelledby="pills-bookmark-tab">
+            <Bookmark />
+          </TabPane > */}
 
-                    <TabPane tabId={TABS.SETTINGS} role="tabpanel" aria-labelledby="pills-setting-tab">
-                        <Settings />
-                    </TabPane > */}
+          {/* <TabPane tabId={TABS.SETTINGS} role="tabpanel" aria-labelledby="pills-setting-tab">
+            <Settings />
+          </TabPane > */}
         </TabContent>
       </div>
     </>

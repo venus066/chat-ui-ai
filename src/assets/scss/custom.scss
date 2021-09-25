@@ -14,3 +14,24 @@
     transform: "translate(-50%; -50%)";
   }
 }
+
+.modal-title-custom {
+  .modal-title {
+    font-size: 16px !important;
+  }
+  .close {
+    box-sizing: content-box;
+    width: 0.6em;
+    height: 0.6em;
+    padding: 0.25em 0.25em;
+    color: #000;
+    background: transparent url("../images/close.svg") center/.6em auto
+      no-repeat;
+    border: 0;
+    border-radius: 0.25rem;
+    opacity: 0.5;
+    span {
+      display: none !important;
+    }
+  }
+}

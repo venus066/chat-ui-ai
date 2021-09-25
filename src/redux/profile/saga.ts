@@ -6,12 +6,9 @@ import { profileApiResponseSuccess, profileApiResponseError } from "./actions";
 
 import { getProfileDetails as getProfileDetailsApi } from "../../api/index";
 
-function* getProfileDetails({ payload: newPassword }: any) {
+function* getProfileDetails() {
   try {
-    const response: Promise<any> = yield call(
-      getProfileDetailsApi,
-      newPassword
-    );
+    const response: Promise<any> = yield call(getProfileDetailsApi);
     yield put(
       profileApiResponseSuccess(
         ProfileActionTypes.GET_PROFILE_DETAILS,

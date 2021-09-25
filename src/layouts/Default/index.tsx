@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 // costants
 import { LAYOUT_MODES } from "../../constants/index";
 
@@ -36,6 +39,7 @@ const Index = (props: IndexProps) => {
       <SideMenu themeMode={themeMode} onChangeMode={onChangeMode} />
 
       {props.children}
+      <ToastContainer autoClose={2000} />
     </div>
   );
 };

@@ -8,3 +8,6 @@ export * from "./layout/actions";
 
 // profile
 export * from "./profile/actions";
+
+// contacts
+export * from "./contacts/actions";
