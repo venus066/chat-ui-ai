@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect } from "react";
+
+//redux
+import { useSelector, useDispatch } from "react-redux";
 
 // components
 import AppSimpleBar from "../../../components/AppSimpleBar";
@@ -7,34 +10,44 @@ import UserDescription from "./UserDescription";
 import Media from "./Media";
 import AttachedFiles from "./AttachedFiles";
 
-// dummy data
-import { profileDetails } from "../../../data/index";
+// actions
+import { getProfileDetails } from "../../../redux/actions";
+import Loader from "../../../components/Loader";
 
-interface IndexProps {
-
-}
+interface IndexProps {}
 const Index = (props: IndexProps) => {
-    // get user profile details
-    return (
-        <div>
-            <MyProfile basicDetails={profileDetails.basicDetails} />
-            {/* End profile user */}
+  const dispatch = useDispatch();
 
-            {/* Start user-profile-desc */}
-            <AppSimpleBar className="p-4 profile-desc">
-                <UserDescription />
-                <hr className="my-4" />
+  const { profileDetails, getProfileLoading, isProfileFetched } = useSelector(
+    (state: any) => ({
+      profileDetails: state.Profile.profileDetails,
+      getProfileLoading: state.Profile.getProfileLoading,
+      isProfileFetched: state.Profile.isProfileFetched,
+    })
+  );
 
-                <Media />
+  // get user profile details
+  useEffect(() => {
+    dispatch(getProfileDetails());
+  }, [dispatch]);
 
-                <hr className="my-4" />
+  return (
+    <div className="position-relative">
+      {getProfileLoading && !isProfileFetched && <Loader />}
+      <MyProfile basicDetails={profileDetails.basicDetails} />
 
-                <AttachedFiles />
+      <AppSimpleBar className="p-4 profile-desc">
+        <UserDescription basicDetails={profileDetails.basicDetails} />
+        <hr className="my-4" />
 
-            </AppSimpleBar>
-            {/* end user-profile-desc */}
-        </div>
-    );
+        <Media media={profileDetails.media} />
+
+        <hr className="my-4" />
+
+        <AttachedFiles attachedFiles={profileDetails.attachedFiles} />
+      </AppSimpleBar>
+    </div>
+  );
 };
 
-export default Index;;
+export default Index;

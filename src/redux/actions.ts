@@ -5,3 +5,6 @@ export * from "./auth/register/actions";
 
 // layout
 export * from "./layout/actions";
+
+// profile
+export * from "./profile/actions";

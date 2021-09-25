@@ -1,14 +1,8 @@
-import React from 'react';
+import React from "react";
 
-interface IndexProps {
-
-}
+interface IndexProps {}
 const Index = (props: IndexProps) => {
-    return (
-        <div>
-            bookmark
-        </div>
-    );
+  return <div>bookmark</div>;
 };
 
 export default Index;

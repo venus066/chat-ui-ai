@@ -17,7 +17,6 @@ const ForgetPassword = (state = INIT_STATE, action: any) => {
             loading: false,
           };
         case AuthForgetPassActionTypes.CHANGE_PASSWORD: {
-          console.log("in this");
           return {
             ...state,
             passwordChanged: true,

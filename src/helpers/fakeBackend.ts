@@ -2,6 +2,9 @@ import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import * as url from "../api/urls";
 
+// dummy data
+import { profileDetails } from "../data/index";
+
 const accessToken =
   "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6ImFkbWluIiwiYWRtaW4iOnRydWUsImp0aSI6ImQ2MTEwYzAxLWMwYjUtNDUzNy1iNDZhLTI0NTk5Mjc2YjY1NiIsImlhdCI6MTU5MjU2MDk2MCwiZXhwIjoxNTkyNTY0NjE5fQ.QgFSQtFaK_Ktauadttq1Is7f9w0SUtKcL8xCmkAvGLw";
 
@@ -177,6 +180,19 @@ const fakeBackend = () => {
       users[0].password = user.password;
       if (user) {
         resolve([200, users[0]]);
+      } else {
+        reject(["Some thing went wrong!"]);
+      }
+    });
+  });
+
+  /*
+  profile
+  */
+  mock.onGet(url.GET_PROFILE_DETAILS).reply(config => {
+    return new Promise((resolve, reject) => {
+      if (profileDetails) {
+        resolve([200, profileDetails]);
       } else {
         reject(["Some thing went wrong!"]);
       }

@@ -13,14 +13,16 @@ interface IndexProps {
   children: any;
 }
 const Index = (props: IndexProps) => {
-
   // theme mode handeling
-  const [themeMode, setThemeMode] = useState<LAYOUT_MODES.DARK | LAYOUT_MODES.LIGHT>(LAYOUT_MODES.LIGHT);
+  const [themeMode, setThemeMode] = useState<
+    LAYOUT_MODES.DARK | LAYOUT_MODES.LIGHT
+  >(LAYOUT_MODES.LIGHT);
   const onChangeMode = () => {
     let mode = themeMode;
     if (mode === LAYOUT_MODES.LIGHT) {
       setThemeMode(LAYOUT_MODES.DARK);
-    } if (mode === LAYOUT_MODES.DARK) {
+    }
+    if (mode === LAYOUT_MODES.DARK) {
       setThemeMode(LAYOUT_MODES.LIGHT);
     }
   };
@@ -30,7 +32,6 @@ const Index = (props: IndexProps) => {
 
   return (
     <div className="layout-wrapper d-lg-flex">
-
       {/* side menu */}
       <SideMenu themeMode={themeMode} onChangeMode={onChangeMode} />
 

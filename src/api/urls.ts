@@ -8,3 +8,6 @@ export const JWT_REGISTER = "/post-jwt-register";
 export const POST_FAKE_REGISTER = "/post-fake-register";
 
 export const USER_CHANGE_PASSWORD = "/user-change-password";
+
+// profile
+export const GET_PROFILE_DETAILS = "/profile-details";

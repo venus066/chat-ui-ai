@@ -4,7 +4,8 @@ import { all } from "redux-saga/effects";
 import registerSaga from "./auth/register/saga";
 import loginSaga from "./auth/login/saga";
 import forgetPasswordSaga from "./auth/forgetpwd/saga";
+import profileSaga from "./profile/saga";
 
 export default function* rootSaga() {
-  yield all([registerSaga(), loginSaga(), forgetPasswordSaga()]);
+  yield all([registerSaga(), loginSaga(), forgetPasswordSaga(), profileSaga()]);
 }

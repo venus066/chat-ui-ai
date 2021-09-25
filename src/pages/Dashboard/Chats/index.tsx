@@ -1,14 +1,8 @@
-import React from 'react';
+import React from "react";
 
-interface IndexProps {
-
-}
+interface IndexProps {}
 const Index = (props: IndexProps) => {
-    return (
-        <div>
-            chats
-        </div>
-    );
+  return <div>chats</div>;
 };
 
 export default Index;
