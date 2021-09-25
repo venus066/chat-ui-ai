@@ -9,6 +9,9 @@ import {
 
   //contacts
   contacts,
+
+  // calls
+  calls
 } from "../data/index";
 
 const accessToken =
@@ -225,6 +228,20 @@ const fakeBackend = () => {
       resolve([200, "User is Invited"]);
     });
   });
+
+  /*
+  calls
+  */
+  mock.onGet(url.GET_CALLS_LIST).reply(config => {
+    return new Promise((resolve, reject) => {
+      if (calls) {
+        resolve([200, calls]);
+      } else {
+        reject(["Some thing went wrong!"]);
+      }
+    });
+  });
+
 };
 
 export default fakeBackend;

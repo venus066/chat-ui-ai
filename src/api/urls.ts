@@ -15,3 +15,6 @@ export const GET_PROFILE_DETAILS = "/profile-details";
 // contacts
 export const GET_CONTACTS = "/user-contacts";
 export const INVITE_CONTACT = "/invite-contact";
+
+// calls
+export const GET_CALLS_LIST = "/calls-list";
