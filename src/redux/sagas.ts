@@ -8,6 +8,7 @@ import profileSaga from "./profile/saga";
 import contactsSaga from "./contacts/saga";
 import callsSaga from "./calls/saga";
 import bookmarksSaga from "./bookmarks/saga";
+import settingsSaga from "./settings/saga";
 
 export default function* rootSaga() {
   yield all([
@@ -17,6 +18,7 @@ export default function* rootSaga() {
     profileSaga(),
     contactsSaga(),
     callsSaga(),
-    bookmarksSaga()
+    bookmarksSaga(),
+    settingsSaga()
   ]);
 }

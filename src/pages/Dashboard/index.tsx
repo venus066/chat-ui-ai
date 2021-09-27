@@ -2,17 +2,17 @@ import React from "react";
 
 // component
 import Leftbar from "./Leftbar";
-// import ConversationUser from "./ConversationUser/index";
-// import UserProfileDetails from "./UserProfileDetails";
-// import ChatInputSection from "./ChatInputSection";
+import ConversationUser from "./ConversationUser/index";
+import UserProfileDetails from "./UserProfileDetails";
+import ChatInputSection from "./ChatInputSection";
 
-interface IndexProps {}
+interface IndexProps { }
 const Index = (props: IndexProps) => {
   return (
     <>
       <Leftbar />
 
-      {/* <div className="user-chat w-100 overflow-hidden">
+      <div className="user-chat w-100 overflow-hidden">
         <div className="user-chat-overlay"></div>
 
         <div className="chat-content d-lg-flex">
@@ -24,7 +24,7 @@ const Index = (props: IndexProps) => {
 
           <UserProfileDetails />
         </div>
-      </div> */}
+      </div>
     </>
   );
 };

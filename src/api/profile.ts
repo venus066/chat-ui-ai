@@ -7,4 +7,8 @@ const getProfileDetails = () => {
   return api.get(url.GET_PROFILE_DETAILS);
 };
 
-export { getProfileDetails };
+const getSettings = () => {
+  return api.get(url.GET_USER_SETTINGS);
+};
+
+export { getProfileDetails, getSettings };

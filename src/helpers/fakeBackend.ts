@@ -16,6 +16,7 @@ import {
   // bookmarks
   bookmarks, onChangeBookmark
 } from "../data/index";
+import { settings } from "../data/settings";
 
 const accessToken =
   "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6ImFkbWluIiwiYWRtaW4iOnRydWUsImp0aSI6ImQ2MTEwYzAxLWMwYjUtNDUzNy1iNDZhLTI0NTk5Mjc2YjY1NiIsImlhdCI6MTU5MjU2MDk2MCwiZXhwIjoxNTkyNTY0NjE5fQ.QgFSQtFaK_Ktauadttq1Is7f9w0SUtKcL8xCmkAvGLw";
@@ -284,6 +285,19 @@ const fakeBackend = () => {
           onChangeBookmark(updatedB);
         }
         resolve([200, "Bookmark is Updated!"]);
+      } else {
+        reject(["Some thing went wrong!"]);
+      }
+    });
+  });
+
+  /*
+  settings
+  */
+  mock.onGet(url.GET_USER_SETTINGS).reply(config => {
+    return new Promise((resolve, reject) => {
+      if (settings) {
+        resolve([200, settings]);
       } else {
         reject(["Some thing went wrong!"]);
       }

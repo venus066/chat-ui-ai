@@ -17,3 +17,6 @@ export * from "./calls/actions";
 
 // bookmarks
 export * from "./bookmarks/actions";
+
+// settings
+export * from "./settings/actions";

@@ -9,11 +9,11 @@ import { TABS } from "../../constants/index";
 
 // component
 import Profile from "./Profile/index";
-// import Chats from "./Chats/index";
+import Chats from "./Chats/index";
 import Contacts from "./Contacts/index";
 import Calls from "./Calls/index";
 import Bookmark from "./Bookmark/index";
-// import Settings from "./Settings/index";
+import Settings from "./Settings/index";
 
 interface LeftbarProps { }
 const Leftbar = (props: LeftbarProps) => {
@@ -35,9 +35,9 @@ const Leftbar = (props: LeftbarProps) => {
             <Profile />
           </TabPane>
 
-          {/* <TabPane tabId={TABS.CHAT} role="tabpanel" aria-labelledby="pills-chat-tab">
+          <TabPane tabId={TABS.CHAT} role="tabpanel" aria-labelledby="pills-chat-tab">
             <Chats />
-          </TabPane > */}
+          </TabPane >
 
           <TabPane
             tabId={TABS.CONTACTS}
@@ -59,9 +59,9 @@ const Leftbar = (props: LeftbarProps) => {
             <Bookmark />
           </TabPane >
 
-          {/* <TabPane tabId={TABS.SETTINGS} role="tabpanel" aria-labelledby="pills-setting-tab">
+          <TabPane tabId={TABS.SETTINGS} role="tabpanel" aria-labelledby="pills-setting-tab">
             <Settings />
-          </TabPane > */}
+          </TabPane >
         </TabContent>
       </div>
     </>
