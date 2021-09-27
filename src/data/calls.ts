@@ -9,7 +9,20 @@ import avatar8 from "../assets/images/users/avatar-8.jpg";
 import avatar9 from "../assets/images/users/avatar-9.jpg";
 import avatar10 from "../assets/images/users/avatar-10.jpg";
 
-const calls = [
+export interface CallItem {
+  "callId": string | number,
+  "firstName": string;
+  "lastName": string;
+  "profileImage"?: string;
+  "callDuration": string;
+  "isIncomming": boolean;
+  "callDate": string;
+  "isGrouped": boolean;
+  "hasVideoCall": boolean;
+  "peoplesAvailableOnCall": number;
+  "peoples"?: Array<any>;
+}
+const calls: CallItem[] = [
   {
     "callId": 0,
     "firstName": "Burgess",
@@ -17,7 +30,7 @@ const calls = [
     "profileImage": avatar1,
     "callDuration": "5:37",
     "isIncomming": true,
-    "registered": "2016-05-05T06:21:22-06:-30",
+    "callDate": "2016-05-05T06:21:22",
     "isGrouped": false,
     "hasVideoCall": true,
     "peoplesAvailableOnCall": 2
@@ -29,10 +42,10 @@ const calls = [
     "profileImage": avatar2,
     "callDuration": "5:24",
     "isIncomming": true,
-    "registered": "2014-05-17T10:22:03-06:-30",
+    "callDate": "2014-05-17T10:22:03",
     "isGrouped": false,
-    "hasVideoCall": true,
-    "peoplesAvailableOnCall": 4
+    "hasVideoCall": false,
+    "peoplesAvailableOnCall": 2
   },
   {
     "callId": 2,
@@ -41,10 +54,41 @@ const calls = [
     "profileImage": avatar3,
     "callDuration": "2:43",
     "isIncomming": false,
-    "registered": "2020-11-27T04:11:34-06:-30",
+    "callDate": "2020-11-27T04:11:34",
     "isGrouped": false,
     "hasVideoCall": true,
-    "peoplesAvailableOnCall": 5
+    "peoplesAvailableOnCall": 5,
+    "peoples": [
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      }
+    ]
   },
   {
     "callId": 3,
@@ -52,10 +96,42 @@ const calls = [
     "lastName": "Gilliam",
     "callDuration": "2:41",
     "isIncomming": false,
-    "registered": "2019-08-29T09:52:06-06:-30",
+    "callDate": "2019-08-29T09:52:06",
     "isGrouped": true,
     "hasVideoCall": true,
-    "peoplesAvailableOnCall": 6
+    "peoplesAvailableOnCall": 6,
+    "peoples": [
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar2,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      }
+    ]
   },
   {
     "callId": 4,
@@ -63,10 +139,42 @@ const calls = [
     "lastName": "Snyder",
     "callDuration": "1:57",
     "isIncomming": false,
-    "registered": "2018-12-23T06:05:34-06:-30",
+    "callDate": "2018-12-23T06:05:34",
     "isGrouped": true,
     "hasVideoCall": false,
-    "peoplesAvailableOnCall": 5
+    "peoplesAvailableOnCall": 5,
+    "peoples": [
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      }
+    ]
   },
   {
     "callId": 5,
@@ -74,10 +182,10 @@ const calls = [
     "lastName": "Atkinson",
     "callDuration": "1:24",
     "isIncomming": true,
-    "registered": "2019-10-28T09:42:19-06:-30",
+    "callDate": "2019-10-28T09:42:19",
     "isGrouped": false,
     "hasVideoCall": true,
-    "peoplesAvailableOnCall": 4
+    "peoplesAvailableOnCall": 2
   },
   {
     "callId": 6,
@@ -86,7 +194,7 @@ const calls = [
     "profileImage": avatar4,
     "callDuration": "1:22",
     "isIncomming": true,
-    "registered": "2019-09-19T07:33:53-06:-30",
+    "callDate": "2019-09-19T07:33:53",
     "isGrouped": false,
     "hasVideoCall": false,
     "peoplesAvailableOnCall": 2
@@ -97,10 +205,41 @@ const calls = [
     "lastName": "Davis",
     "callDuration": "4:52",
     "isIncomming": true,
-    "registered": "2019-10-07T02:04:57-06:-30",
+    "callDate": "2019-10-07T02:04:57",
     "isGrouped": false,
     "hasVideoCall": true,
-    "peoplesAvailableOnCall": 6
+    "peoplesAvailableOnCall": 6,
+    "peoples": [
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      }
+    ]
   },
   {
     "callId": 8,
@@ -109,10 +248,42 @@ const calls = [
     "profileImage": avatar5,
     "callDuration": "4:24",
     "isIncomming": false,
-    "registered": "2014-01-16T01:31:46-06:-30",
+    "callDate": "2014-01-16T01:31:46",
     "isGrouped": true,
     "hasVideoCall": false,
-    "peoplesAvailableOnCall": 5
+    "peoplesAvailableOnCall": 5,
+    "peoples": [
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      }
+    ]
   },
   {
     "callId": 9,
@@ -121,10 +292,10 @@ const calls = [
     "profileImage": avatar6,
     "callDuration": "4:13",
     "isIncomming": false,
-    "registered": "2014-03-12T06:47:49-06:-30",
+    "callDate": "2014-03-12T06:47:49",
     "isGrouped": false,
     "hasVideoCall": true,
-    "peoplesAvailableOnCall": 3
+    "peoplesAvailableOnCall": 2
   },
   {
     "callId": 10,
@@ -132,10 +303,41 @@ const calls = [
     "lastName": "Russo",
     "callDuration": "2:12",
     "isIncomming": true,
-    "registered": "2021-09-11T09:09:00-06:-30",
+    "callDate": "2021-09-11T09:09:00",
     "isGrouped": false,
     "hasVideoCall": false,
-    "peoplesAvailableOnCall": 6
+    "peoplesAvailableOnCall": 6,
+    "peoples": [
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      }
+    ]
   },
   {
     "callId": 11,
@@ -143,10 +345,41 @@ const calls = [
     "lastName": "Lawrence",
     "callDuration": "5:33",
     "isIncomming": true,
-    "registered": "2016-12-13T10:53:36-06:-30",
+    "callDate": "2016-12-13T10:53:36",
     "isGrouped": false,
     "hasVideoCall": true,
-    "peoplesAvailableOnCall": 6
+    "peoplesAvailableOnCall": 6,
+    "peoples": [
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      }
+    ]
   },
   {
     "callId": 12,
@@ -155,10 +388,41 @@ const calls = [
     "profileImage": avatar7,
     "callDuration": "2:55",
     "isIncomming": true,
-    "registered": "2015-04-22T07:35:32-06:-30",
+    "callDate": "2015-04-22T07:35:32",
     "isGrouped": true,
     "hasVideoCall": false,
-    "peoplesAvailableOnCall": 6
+    "peoplesAvailableOnCall": 6,
+    "peoples": [
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      }
+    ]
   },
   {
     "callId": 13,
@@ -166,10 +430,42 @@ const calls = [
     "lastName": "Weiss",
     "callDuration": "2:52",
     "isIncomming": false,
-    "registered": "2015-07-22T11:03:38-06:-30",
+    "callDate": "2015-07-22T11:03:38",
     "isGrouped": true,
     "hasVideoCall": true,
-    "peoplesAvailableOnCall": 5
+    "peoplesAvailableOnCall": 5,
+    "peoples": [
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      }
+    ]
   },
   {
     "callId": 14,
@@ -177,10 +473,10 @@ const calls = [
     "lastName": "Randall",
     "callDuration": "3:13",
     "isIncomming": false,
-    "registered": "2015-02-14T10:54:34-06:-30",
+    "callDate": "2015-02-14T10:54:34",
     "isGrouped": false,
     "hasVideoCall": false,
-    "peoplesAvailableOnCall": 4
+    "peoplesAvailableOnCall": 2
   },
   {
     "callId": 15,
@@ -189,10 +485,41 @@ const calls = [
     "profileImage": avatar8,
     "callDuration": "3:44",
     "isIncomming": true,
-    "registered": "2015-11-18T12:29:36-06:-30",
+    "callDate": "2015-11-18T12:29:36",
     "isGrouped": true,
     "hasVideoCall": true,
-    "peoplesAvailableOnCall": 6
+    "peoplesAvailableOnCall": 6,
+    "peoples": [
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      }
+    ]
   },
   {
     "callId": 16,
@@ -200,10 +527,10 @@ const calls = [
     "lastName": "Norton",
     "callDuration": "3:2",
     "isIncomming": true,
-    "registered": "2018-07-02T09:37:16-06:-30",
+    "callDate": "2018-07-02T09:37:16",
     "isGrouped": true,
     "hasVideoCall": false,
-    "peoplesAvailableOnCall": 3
+    "peoplesAvailableOnCall": 2
   },
   {
     "callId": 17,
@@ -212,10 +539,42 @@ const calls = [
     "profileImage": avatar9,
     "callDuration": "3:18",
     "isIncomming": true,
-    "registered": "2020-09-01T07:55:38-06:-30",
+    "callDate": "2020-09-01T07:55:38",
     "isGrouped": true,
     "hasVideoCall": true,
-    "peoplesAvailableOnCall": 5
+    "peoplesAvailableOnCall": 5,
+    "peoples": [
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      }
+    ]
   },
   {
     "callId": 18,
@@ -224,7 +583,7 @@ const calls = [
     "profileImage": avatar10,
     "callDuration": "2:20",
     "isIncomming": false,
-    "registered": "2015-04-06T05:00:05-06:-30",
+    "callDate": "2015-04-06T05:00:05",
     "isGrouped": false,
     "hasVideoCall": true,
     "peoplesAvailableOnCall": 2
@@ -235,7 +594,7 @@ const calls = [
     "lastName": "Rich",
     "callDuration": "1:3",
     "isIncomming": true,
-    "registered": "2020-08-14T09:30:17-06:-30",
+    "callDate": "2020-08-14T09:30:17",
     "isGrouped": false,
     "hasVideoCall": false,
     "peoplesAvailableOnCall": 2
@@ -246,10 +605,41 @@ const calls = [
     "lastName": "Burch",
     "callDuration": "1:25",
     "isIncomming": true,
-    "registered": "2016-04-04T11:35:00-06:-30",
+    "callDate": "2016-04-04T11:35:00",
     "isGrouped": false,
     "hasVideoCall": false,
-    "peoplesAvailableOnCall": 6
+    "peoplesAvailableOnCall": 6,
+    "peoples": [
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      }
+    ]
   },
   {
     "callId": 21,
@@ -257,7 +647,7 @@ const calls = [
     "lastName": "Sparks",
     "callDuration": "4:32",
     "isIncomming": false,
-    "registered": "2015-01-25T02:54:51-06:-30",
+    "callDate": "2015-01-25T02:54:51",
     "isGrouped": true,
     "hasVideoCall": false,
     "peoplesAvailableOnCall": 2
@@ -269,10 +659,42 @@ const calls = [
     "profileImage": avatar2,
     "callDuration": "1:7",
     "isIncomming": true,
-    "registered": "2014-12-07T07:31:15-06:-30",
+    "callDate": "2014-12-07T07:31:15",
     "isGrouped": false,
     "hasVideoCall": false,
-    "peoplesAvailableOnCall": 5
+    "peoplesAvailableOnCall": 5,
+    "peoples": [
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      }
+    ]
   },
   {
     "callId": 23,
@@ -280,10 +702,10 @@ const calls = [
     "lastName": "Myers",
     "callDuration": "1:58",
     "isIncomming": true,
-    "registered": "2019-04-25T06:48:20-06:-30",
+    "callDate": "2019-04-25T06:48:20",
     "isGrouped": false,
     "hasVideoCall": true,
-    "peoplesAvailableOnCall": 4
+    "peoplesAvailableOnCall": 2
   },
   {
     "callId": 24,
@@ -291,10 +713,42 @@ const calls = [
     "lastName": "Mercer",
     "callDuration": "1:12",
     "isIncomming": false,
-    "registered": "2020-05-17T08:30:41-06:-30",
+    "callDate": "2020-05-17T08:30:41",
     "isGrouped": false,
     "hasVideoCall": false,
-    "peoplesAvailableOnCall": 5
+    "peoplesAvailableOnCall": 5,
+    "peoples": [
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      }
+    ]
   },
   {
     "callId": 25,
@@ -303,7 +757,7 @@ const calls = [
     "profileImage": avatar10,
     "callDuration": "4:8",
     "isIncomming": false,
-    "registered": "2017-02-03T02:29:44-06:-30",
+    "callDate": "2017-02-03T02:29:44",
     "isGrouped": true,
     "hasVideoCall": false,
     "peoplesAvailableOnCall": 2
@@ -314,10 +768,10 @@ const calls = [
     "lastName": "Hyde",
     "callDuration": "4:2",
     "isIncomming": true,
-    "registered": "2016-12-14T10:08:37-06:-30",
+    "callDate": "2016-12-14T10:08:37",
     "isGrouped": true,
     "hasVideoCall": false,
-    "peoplesAvailableOnCall": 3
+    "peoplesAvailableOnCall": 2
   },
   {
     "callId": 27,
@@ -325,10 +779,10 @@ const calls = [
     "lastName": "Holmes",
     "callDuration": "3:20",
     "isIncomming": true,
-    "registered": "2021-03-14T06:44:41-06:-30",
+    "callDate": "2021-03-14T06:44:41",
     "isGrouped": false,
     "hasVideoCall": true,
-    "peoplesAvailableOnCall": 3
+    "peoplesAvailableOnCall": 2
   },
   {
     "callId": 28,
@@ -336,10 +790,41 @@ const calls = [
     "lastName": "Mccullough",
     "callDuration": "3:2",
     "isIncomming": false,
-    "registered": "2019-06-30T07:48:48-06:-30",
+    "callDate": "2019-06-30T07:48:48",
     "isGrouped": false,
     "hasVideoCall": false,
-    "peoplesAvailableOnCall": 6
+    "peoplesAvailableOnCall": 6,
+    "peoples": [
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      }
+    ]
   },
   {
     "callId": 29,
@@ -347,10 +832,10 @@ const calls = [
     "lastName": "Slater",
     "callDuration": "1:47",
     "isIncomming": true,
-    "registered": "2020-05-30T08:28:38-06:-30",
+    "callDate": "2020-05-30T08:28:38",
     "isGrouped": false,
     "hasVideoCall": true,
-    "peoplesAvailableOnCall": 4
+    "peoplesAvailableOnCall": 2
   },
   {
     "callId": 30,
@@ -358,10 +843,10 @@ const calls = [
     "lastName": "Tyson",
     "callDuration": "5:37",
     "isIncomming": false,
-    "registered": "2018-06-21T07:24:29-06:-30",
+    "callDate": "2018-06-21T07:24:29",
     "isGrouped": false,
     "hasVideoCall": true,
-    "peoplesAvailableOnCall": 4
+    "peoplesAvailableOnCall": 2
   },
   {
     "callId": 31,
@@ -369,10 +854,42 @@ const calls = [
     "lastName": "Kinney",
     "callDuration": "3:51",
     "isIncomming": true,
-    "registered": "2014-08-01T03:11:08-06:-30",
+    "callDate": "2014-08-01T03:11:08",
     "isGrouped": true,
     "hasVideoCall": true,
-    "peoplesAvailableOnCall": 5
+    "peoplesAvailableOnCall": 5,
+    "peoples": [
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      }
+    ]
   },
   {
     "callId": 32,
@@ -380,10 +897,42 @@ const calls = [
     "lastName": "Mullins",
     "callDuration": "0:3",
     "isIncomming": false,
-    "registered": "2021-02-07T10:02:29-06:-30",
+    "callDate": "2021-02-07T10:02:29",
     "isGrouped": false,
     "hasVideoCall": false,
-    "peoplesAvailableOnCall": 5
+    "peoplesAvailableOnCall": 5,
+    "peoples": [
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      }
+    ]
   },
   {
     "callId": 33,
@@ -391,10 +940,41 @@ const calls = [
     "lastName": "Berg",
     "callDuration": "5:21",
     "isIncomming": true,
-    "registered": "2017-01-28T12:15:42-06:-30",
+    "callDate": "2017-01-28T12:15:42",
     "isGrouped": true,
     "hasVideoCall": true,
-    "peoplesAvailableOnCall": 6
+    "peoplesAvailableOnCall": 6,
+    "peoples": [
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      }
+    ]
   },
   {
     "callId": 34,
@@ -402,10 +982,10 @@ const calls = [
     "lastName": "Miles",
     "callDuration": "2:21",
     "isIncomming": true,
-    "registered": "2019-08-10T09:37:49-06:-30",
+    "callDate": "2019-08-10T09:37:49",
     "isGrouped": false,
     "hasVideoCall": false,
-    "peoplesAvailableOnCall": 4
+    "peoplesAvailableOnCall": 2
   },
   {
     "callId": 35,
@@ -413,10 +993,10 @@ const calls = [
     "lastName": "Edwards",
     "callDuration": "2:43",
     "isIncomming": false,
-    "registered": "2015-03-22T12:52:34-06:-30",
+    "callDate": "2015-03-22T12:52:34",
     "isGrouped": true,
     "hasVideoCall": true,
-    "peoplesAvailableOnCall": 4
+    "peoplesAvailableOnCall": 2
   },
   {
     "callId": 36,
@@ -424,7 +1004,7 @@ const calls = [
     "lastName": "Buck",
     "callDuration": "5:40",
     "isIncomming": false,
-    "registered": "2019-11-30T09:45:18-06:-30",
+    "callDate": "2019-11-30T09:45:18",
     "isGrouped": true,
     "hasVideoCall": false,
     "peoplesAvailableOnCall": 2
@@ -436,10 +1016,42 @@ const calls = [
     "profileImage": avatar5,
     "callDuration": "5:49",
     "isIncomming": true,
-    "registered": "2019-12-26T12:16:06-06:-30",
+    "callDate": "2019-12-26T12:16:06",
     "isGrouped": false,
     "hasVideoCall": false,
-    "peoplesAvailableOnCall": 5
+    "peoplesAvailableOnCall": 5,
+    "peoples": [
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      }
+    ]
   },
   {
     "callId": 38,
@@ -447,10 +1059,41 @@ const calls = [
     "lastName": "Ray",
     "callDuration": "1:31",
     "isIncomming": false,
-    "registered": "2020-02-25T08:00:54-06:-30",
+    "callDate": "2020-02-25T08:00:54",
     "isGrouped": true,
     "hasVideoCall": false,
-    "peoplesAvailableOnCall": 6
+    "peoplesAvailableOnCall": 6,
+    "peoples": [
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      },
+      {
+        "id": 1,
+        "firstName": "Shaffer",
+        "lastName": "Ballard",
+        "profileImage": avatar5,
+      }
+    ]
   },
   {
     "callId": 39,
@@ -459,10 +1102,10 @@ const calls = [
     "profileImage": avatar5,
     "callDuration": "2:41",
     "isIncomming": false,
-    "registered": "2016-02-16T03:26:28-06:-30",
+    "callDate": "2016-02-16T03:26:28",
     "isGrouped": true,
     "hasVideoCall": false,
-    "peoplesAvailableOnCall": 3
+    "peoplesAvailableOnCall": 2
   },
   {
     "callId": 40,
@@ -471,10 +1114,10 @@ const calls = [
     "profileImage": avatar6,
     "callDuration": "4:37",
     "isIncomming": false,
-    "registered": "2014-09-15T09:25:59-06:-30",
+    "callDate": "2014-09-15T09:25:59",
     "isGrouped": false,
     "hasVideoCall": true,
-    "peoplesAvailableOnCall": 4
+    "peoplesAvailableOnCall": 2
   },
 ];
 
