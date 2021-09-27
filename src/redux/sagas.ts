@@ -15,6 +15,6 @@ export default function* rootSaga() {
     forgetPasswordSaga(),
     profileSaga(),
     contactsSaga(),
-    callsSaga()
+    callsSaga(),
   ]);
 }

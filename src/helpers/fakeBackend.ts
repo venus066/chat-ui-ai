@@ -11,7 +11,7 @@ import {
   contacts,
 
   // calls
-  calls
+  calls,
 } from "../data/index";
 
 const accessToken =
@@ -241,7 +241,6 @@ const fakeBackend = () => {
       }
     });
   });
-
 };
 
 export default fakeBackend;

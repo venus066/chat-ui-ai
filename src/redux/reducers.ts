@@ -15,5 +15,5 @@ export default combineReducers({
   Layout,
   Profile,
   Contacts,
-  Calls
+  Calls,
 });

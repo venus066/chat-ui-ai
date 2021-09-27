@@ -12,19 +12,17 @@ import Call from "./Call";
 // actions
 import { getCalls } from "../../../redux/actions";
 
-// interface 
+// interface
 import { CallItem } from "../../../data/calls";
 
-interface IndexProps { }
+interface IndexProps {}
 const Index = (props: IndexProps) => {
   const dispatch = useDispatch();
 
-  const { calls, getCallsLoading } = useSelector(
-    (state: any) => ({
-      calls: state.Calls.calls,
-      getCallsLoading: state.Calls.getCallsLoading
-    })
-  );
+  const { calls, getCallsLoading } = useSelector((state: any) => ({
+    calls: state.Calls.calls,
+    getCallsLoading: state.Calls.getCallsLoading,
+  }));
 
   // get user calls
   useEffect(() => {
@@ -46,11 +44,9 @@ const Index = (props: IndexProps) => {
       {/* Start contact lists */}
       <AppSimpleBar className="chat-message-list chat-call-list">
         <ul className="list-unstyled chat-list">
-          {
-            (callsList || []).map((call: CallItem, key: number) =>
-              <Call call={call} key={key} />
-            )
-          }
+          {(callsList || []).map((call: CallItem, key: number) => (
+            <Call call={call} key={key} />
+          ))}
         </ul>
       </AppSimpleBar>
       {/* end contact lists */}

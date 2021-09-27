@@ -1,11 +1,7 @@
 import React from "react";
-import {
-  Button,
-  Modal,
-  ModalBody,
-} from "reactstrap";
+import { Button, Modal, ModalBody } from "reactstrap";
 
-// interface 
+// interface
 import { CallItem } from "../data/calls";
 
 //images
@@ -17,11 +13,13 @@ interface VideoCallModalProps {
   onClose: () => void;
 }
 
-
 const VideoCallModal = ({ isOpen, onClose, user }: VideoCallModalProps) => {
   return (
     <Modal
-      isOpen={isOpen} toggle={onClose} tabIndex={-1} centered
+      isOpen={isOpen}
+      toggle={onClose}
+      tabIndex={-1}
+      centered
       className="videocallModal"
       contentClassName="shadow-lg border-0"
     >

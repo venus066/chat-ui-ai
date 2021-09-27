@@ -9,16 +9,9 @@ import { getCalls as getCallsApi } from "../../api/index";
 function* getCalls() {
   try {
     const response: Promise<any> = yield call(getCallsApi);
-    yield put(
-      callsApiResponseSuccess(
-        CallsActionTypes.GET_CALLS,
-        response
-      )
-    );
+    yield put(callsApiResponseSuccess(CallsActionTypes.GET_CALLS, response));
   } catch (error: any) {
-    yield put(
-      callsApiResponseError(CallsActionTypes.GET_CALLS, error)
-    );
+    yield put(callsApiResponseError(CallsActionTypes.GET_CALLS, error));
   }
 }
 

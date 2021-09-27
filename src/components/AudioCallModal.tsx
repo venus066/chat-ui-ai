@@ -1,11 +1,7 @@
 import React from "react";
-import {
-  Button,
-  Modal,
-  ModalBody,
-} from "reactstrap";
+import { Button, Modal, ModalBody } from "reactstrap";
 
-// interface 
+// interface
 import { CallItem } from "../data/calls";
 
 //images
@@ -18,15 +14,21 @@ interface AudioCallModalProps {
 
 const AudioCallModal = ({ isOpen, onClose, user }: AudioCallModalProps) => {
   return (
-    <Modal isOpen={isOpen} toggle={onClose}
-      tabIndex={-1} centered className="audiocallModal"
+    <Modal
+      isOpen={isOpen}
+      toggle={onClose}
+      tabIndex={-1}
+      centered
+      className="audiocallModal"
       contentClassName="shadow-lg border-0"
     >
       <ModalBody className="p-0">
         <div className="text-center p-4 pb-0">
           <div className="avatar-xl mx-auto mb-4">
             <img
-              src={user && user.profileImage ? user.profileImage : imagePlaceholder}
+              src={
+                user && user.profileImage ? user.profileImage : imagePlaceholder
+              }
               alt=""
               className="img-thumbnail rounded-circle"
             />
