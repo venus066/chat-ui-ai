@@ -12,10 +12,10 @@ import Profile from "./Profile/index";
 // import Chats from "./Chats/index";
 import Contacts from "./Contacts/index";
 import Calls from "./Calls/index";
-// import Bookmark from "./Bookmark/index";
+import Bookmark from "./Bookmark/index";
 // import Settings from "./Settings/index";
 
-interface LeftbarProps {}
+interface LeftbarProps { }
 const Leftbar = (props: LeftbarProps) => {
   const { activeTab } = useSelector((state: any) => ({
     activeTab: state.Layout.activeTab,
@@ -55,9 +55,9 @@ const Leftbar = (props: LeftbarProps) => {
             <Calls />
           </TabPane>
 
-          {/* <TabPane tabId={TABS.BOOKMARK} role="tabpanel" aria-labelledby="pills-bookmark-tab">
+          <TabPane tabId={TABS.BOOKMARK} role="tabpanel" aria-labelledby="pills-bookmark-tab">
             <Bookmark />
-          </TabPane > */}
+          </TabPane >
 
           {/* <TabPane tabId={TABS.SETTINGS} role="tabpanel" aria-labelledby="pills-setting-tab">
             <Settings />

@@ -7,6 +7,7 @@ import Layout from "./layout/reducer";
 import Profile from "./profile/reducer";
 import Contacts from "./contacts/reducer";
 import Calls from "./calls/reducer";
+import Bookmarks from "./bookmarks/reducer";
 
 export default combineReducers({
   ForgetPassword,
@@ -16,4 +17,5 @@ export default combineReducers({
   Profile,
   Contacts,
   Calls,
+  Bookmarks
 });

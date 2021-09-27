@@ -12,5 +12,8 @@ export * from "./profile/actions";
 // contacts
 export * from "./contacts/actions";
 
-//cals
+//calls
 export * from "./calls/actions";
+
+// bookmarks
+export * from "./bookmarks/actions";

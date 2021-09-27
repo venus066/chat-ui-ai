@@ -14,7 +14,7 @@ import {
 } from "../../api/index";
 
 // helpers
-import { showSuccessNotification } from "../../helpers/notifications";
+import { showSuccessNotification, showErrorNotification } from "../../helpers/notifications";
 
 function* getContacts({ payload: filters }: any) {
   try {
@@ -37,6 +37,7 @@ function* inviteContact({ payload: newPassword }: any) {
     );
     yield call(showSuccessNotification, response + "");
   } catch (error: any) {
+    yield call(showErrorNotification, error);
     yield put(
       contactsApiResponseError(ContactsActionTypes.INVITE_CONTACT, error)
     );

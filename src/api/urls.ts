@@ -18,3 +18,8 @@ export const INVITE_CONTACT = "/invite-contact";
 
 // calls
 export const GET_CALLS_LIST = "/calls-list";
+
+// bookmarks
+export const GET_BOOKMARKS_LIST = "/bookmarks-list";
+export const DELETE_BOOKMARK = "/bookmarks-delete";
+export const UPDATE_BOOKMARK = "/bookmarks-update";

@@ -12,6 +12,9 @@ import {
 
   // calls
   calls,
+
+  // bookmarks
+  bookmarks, onChangeBookmark
 } from "../data/index";
 
 const accessToken =
@@ -236,6 +239,51 @@ const fakeBackend = () => {
     return new Promise((resolve, reject) => {
       if (calls) {
         resolve([200, calls]);
+      } else {
+        reject(["Some thing went wrong!"]);
+      }
+    });
+  });
+
+  /*
+  bookmarks
+  */
+  mock.onGet(url.GET_BOOKMARKS_LIST).reply(config => {
+    return new Promise((resolve, reject) => {
+      if (bookmarks) {
+        resolve([200, bookmarks]);
+      } else {
+        reject(["Some thing went wrong!"]);
+      }
+    });
+  });
+
+  mock.onDelete(new RegExp(`${url.DELETE_BOOKMARK}/*`)).reply(config => {
+    const { params } = config;
+
+    return new Promise((resolve, reject) => {
+      if (params.id && bookmarks.length !== 0) {
+        const updatedB = bookmarks.filter((b: any) => b.id + '' !== params.id + '');
+        onChangeBookmark(updatedB);
+        resolve([200, "Bookmark is Deleted!"]);
+      } else {
+        reject(["Your id is not found"]);
+      }
+    });
+  });
+
+  mock.onPut(new RegExp(`${url.UPDATE_BOOKMARK}/*`)).reply(config => {
+    const data = JSON.parse(config["data"]);
+    return new Promise((resolve, reject) => {
+      if (data.id && bookmarks.length !== 0) {
+        const bookmIdx = bookmarks.findIndex((b: any) => b.id + '' === data.id + '');
+
+        if (bookmIdx > -1) {
+          let updatedB = [...bookmarks];
+          updatedB[bookmIdx] = data;
+          onChangeBookmark(updatedB);
+        }
+        resolve([200, "Bookmark is Updated!"]);
       } else {
         reject(["Some thing went wrong!"]);
       }

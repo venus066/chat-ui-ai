@@ -7,6 +7,7 @@ import forgetPasswordSaga from "./auth/forgetpwd/saga";
 import profileSaga from "./profile/saga";
 import contactsSaga from "./contacts/saga";
 import callsSaga from "./calls/saga";
+import bookmarksSaga from "./bookmarks/saga";
 
 export default function* rootSaga() {
   yield all([
@@ -16,5 +17,6 @@ export default function* rootSaga() {
     profileSaga(),
     contactsSaga(),
     callsSaga(),
+    bookmarksSaga()
   ]);
 }

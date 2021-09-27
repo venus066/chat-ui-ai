@@ -1,7 +1,6 @@
 import { toast } from "react-toastify";
 
 const showSuccessNotification = (message: string) => {
-  console.log("AAA");
   toast.success(message);
 };
 
