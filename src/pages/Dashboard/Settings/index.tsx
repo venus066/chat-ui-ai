@@ -80,7 +80,7 @@ const Index = (props: IndexProps) => {
   */
   const [selectedMenu, setSelectedMenu] = useState<
     null | SETTINGS_COLLAPSES.PROFILE | SETTINGS_COLLAPSES.HELP | SETTINGS_COLLAPSES.PRIVACY | SETTINGS_COLLAPSES.SECURITY | SETTINGS_COLLAPSES.THEME
-  >(SETTINGS_COLLAPSES.PROFILE);
+  >(SETTINGS_COLLAPSES.PRIVACY);
 
   const collapseItems: CollapseItemTypes[] = [
     {

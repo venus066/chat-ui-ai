@@ -12,8 +12,8 @@ const Index = (props: IndexProps) => {
     <>
       <Leftbar />
 
-      <div className="user-chat w-100 overflow-hidden">
-        <div className="user-chat-overlay"></div>
+      <div className="user-chat w-100 overflow-hidden" id="user-chat">
+        <div className="user-chat-overlay" id="user-chat-overlay"></div>
 
         <div className="chat-content d-lg-flex">
           <div className="w-100 overflow-hidden position-relative">

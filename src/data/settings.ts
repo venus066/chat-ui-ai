@@ -13,7 +13,7 @@ export interface BasicDetailsTypes {
 }
 
 export interface ThemeTypes {
-    color: string;
+    color?: string;
     image: string;
 }
 export interface PrivacyTypes {
@@ -44,8 +44,8 @@ let settings: SettingsTypes = {
         location: "California, USA"
     },
     theme: {
-        color: "78, 172, 109",
-        image: pattern05,
+        // color: "bgcolor-radio1",
+        image: "bgimg-radio5",
     },
     privacy: {
         displayprofilePhoto: "selected",
