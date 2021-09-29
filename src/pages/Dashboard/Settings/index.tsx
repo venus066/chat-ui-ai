@@ -21,6 +21,9 @@ import Help from "./Help";
 
 // constants
 import { SETTINGS_COLLAPSES } from "../../../constants";
+
+// interface
+import { SettingsTypes } from "../../../data/settings";
 interface CollapseItemTypes {
   value: SETTINGS_COLLAPSES.PROFILE | SETTINGS_COLLAPSES.HELP | SETTINGS_COLLAPSES.PRIVACY | SETTINGS_COLLAPSES.SECURITY | SETTINGS_COLLAPSES.THEME;
   label: string;
@@ -62,9 +65,9 @@ interface IndexProps { }
 const Index = (props: IndexProps) => {
   const dispatch = useDispatch();
 
-  const { settings, getSettingsLoading, isSettingsFetched } = useSelector(
+  const { settingsData, getSettingsLoading, isSettingsFetched } = useSelector(
     (state: any) => ({
-      settings: state.Settings.settings,
+      settingsData: state.Settings.settings,
       getSettingsLoading: state.Profile.getSettingsLoading,
       isSettingsFetched: state.Profile.isSettingsFetched,
     })
@@ -75,12 +78,24 @@ const Index = (props: IndexProps) => {
     dispatch(getSettings());
   }, [dispatch]);
 
+  const [settings, setSettings] = useState<SettingsTypes>(settingsData);
+  useEffect(() => {
+    setSettings(settingsData);
+  }, [settingsData]);
+
+  /*
+  api calling
+  */
+  const onChangeData = (field: string, value: string | boolean) => {
+
+  };
+
   /*
   collapse handeling
   */
   const [selectedMenu, setSelectedMenu] = useState<
     null | SETTINGS_COLLAPSES.PROFILE | SETTINGS_COLLAPSES.HELP | SETTINGS_COLLAPSES.PRIVACY | SETTINGS_COLLAPSES.SECURITY | SETTINGS_COLLAPSES.THEME
-  >(SETTINGS_COLLAPSES.PRIVACY);
+  >(SETTINGS_COLLAPSES.THEME);
 
   const collapseItems: CollapseItemTypes[] = [
     {

@@ -43,8 +43,10 @@ const Privacy = ({ privacy }: PrivacyProps) => {
                 <li className="list-group-item py-3 px-0 pt-0">
                     <DisplaySelect
                         value={data.displayprofilePhoto}
-                        onChange={onChangeData}
                         label="Profile photo"
+                        onChange={(value: string) => {
+                            onChangeData("displayprofilePhoto", value);
+                        }}
                     />
                 </li>
                 <li className="list-group-item py-3 px-0">
@@ -56,8 +58,13 @@ const Privacy = ({ privacy }: PrivacyProps) => {
                         <div className="flex-shrink-0 ms-2">
                             <div className="form-check form-switch">
                                 <input
-                                    type="checkbox" className="form-check-input" id="privacy-lastseenSwitch"
-                                    checked={data.displayLastSeen === true} />
+                                    type="checkbox"
+                                    className="form-check-input" id="privacy-lastseenSwitch"
+                                    checked={data.displayLastSeen === true}
+                                    onChange={(e: any) => {
+                                        onChangeData("displayLastSeen", e.target.checked);
+                                    }}
+                                />
                                 <label className="form-check-label" htmlFor="privacy-lastseenSwitch"></label>
                             </div>
                         </div>
@@ -66,9 +73,11 @@ const Privacy = ({ privacy }: PrivacyProps) => {
                 <li className="list-group-item py-3 px-0">
                     <DisplaySelect
                         value={data.displayStatus}
-                        onChange={onChangeData}
+                        onChange={(value: string) => {
+                            onChangeData("displayStatus", value);
+                        }}
                         label="Status"
-                    />
+                    />displayStatus
                 </li>
                 <li className="list-group-item py-3 px-0">
                     <div className="d-flex align-items-center">
@@ -77,7 +86,14 @@ const Privacy = ({ privacy }: PrivacyProps) => {
                         </div>
                         <div className="flex-shrink-0 ms-2">
                             <div className="form-check form-switch">
-                                <input type="checkbox" className="form-check-input" id="privacy-readreceiptSwitch" checked={data.readReceipts === true} />
+                                <input type="checkbox"
+                                    className="form-check-input"
+                                    id="privacy-readreceiptSwitch"
+                                    checked={data.readReceipts === true}
+                                    onChange={(e: any) => {
+                                        onChangeData("readReceipts", e.target.checked);
+                                    }}
+                                />
                                 <label className="form-check-label" htmlFor="privacy-readreceiptSwitch"></label>
                             </div>
                         </div>
@@ -86,7 +102,9 @@ const Privacy = ({ privacy }: PrivacyProps) => {
                 <li className="list-group-item py-3 px-0 pb-0">
                     <DisplaySelect
                         value={data.displayGroups}
-                        onChange={onChangeData}
+                        onChange={(value: string) => {
+                            onChangeData("displayGroups", value);
+                        }}
                         label="Groups"
                     />
                 </li>

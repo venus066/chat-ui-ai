@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 // interface
 import { SecurityTypes } from "../../../data/settings";
@@ -7,6 +7,17 @@ interface SecurityProps {
     security: SecurityTypes;
 }
 const Security = ({ security }: SecurityProps) => {
+    const [show, setShow] = useState<boolean>(false);
+    const onChange = (checked: boolean) => {
+        setShow(checked);
+    };
+
+    useEffect(() => {
+        if (security) {
+            setShow(security.securityNotification);
+        }
+    }, [security]);
+
     return (
         <div className="accordion-body">
             <ul className="list-group list-group-flush">
@@ -18,7 +29,14 @@ const Security = ({ security }: SecurityProps) => {
                         </div>
                         <div className="flex-shrink-0 ms-2">
                             <div className="form-check form-switch">
-                                <input type="checkbox" className="form-check-input" id="security-notificationswitch" />
+                                <input type="checkbox"
+                                    className="form-check-input"
+                                    id="security-notificationswitch"
+                                    checked={show === true}
+                                    onChange={(e: any) => {
+                                        onChange(e.target.checked);
+                                    }}
+                                />
                                 <label className="form-check-label" htmlFor="security-notificationswitch"></label>
                             </div>
                         </div>
