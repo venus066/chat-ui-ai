@@ -16,17 +16,17 @@ const Bookmarks = (state = INIT_STATE, action: any) => {
             isBookmarksFetched: true,
             getBookmarksLoading: false,
             isBookmarkUpdated: false,
-            isBookmarkDeleted: false
+            isBookmarkDeleted: false,
           };
         case BookmarksActionTypes.UPDATE_BOOKMARK:
           return {
             ...state,
-            isBookmarkUpdated: true
+            isBookmarkUpdated: true,
           };
         case BookmarksActionTypes.DELETE_BOOKMARK:
           return {
             ...state,
-            isBookmarkDeleted: true
+            isBookmarkDeleted: true,
           };
         default:
           return { ...state };
@@ -44,13 +44,13 @@ const Bookmarks = (state = INIT_STATE, action: any) => {
           return {
             ...state,
             isBookmarkUpdated: false,
-            error: action.payload.error
+            error: action.payload.error,
           };
         case BookmarksActionTypes.DELETE_BOOKMARK:
           return {
             ...state,
             isBookmarkDeleted: false,
-            error: action.payload.error
+            error: action.payload.error,
           };
         default:
           return { ...state };
@@ -66,7 +66,7 @@ const Bookmarks = (state = INIT_STATE, action: any) => {
     case BookmarksActionTypes.UPDATE_BOOKMARK:
       return {
         ...state,
-        isBookmarkUpdated: false
+        isBookmarkUpdated: false,
       };
     case BookmarksActionTypes.DELETE_BOOKMARK:
       return {

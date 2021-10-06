@@ -14,7 +14,10 @@ import {
 } from "../../api/index";
 
 // helpers
-import { showSuccessNotification, showErrorNotification } from "../../helpers/notifications";
+import {
+  showSuccessNotification,
+  showErrorNotification,
+} from "../../helpers/notifications";
 
 function* getContacts({ payload: filters }: any) {
   try {

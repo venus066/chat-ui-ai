@@ -14,7 +14,8 @@ import {
   calls,
 
   // bookmarks
-  bookmarks, onChangeBookmark
+  bookmarks,
+  onChangeBookmark,
 } from "../data/index";
 import { settings } from "../data/settings";
 
@@ -264,7 +265,9 @@ const fakeBackend = () => {
 
     return new Promise((resolve, reject) => {
       if (params.id && bookmarks.length !== 0) {
-        const updatedB = bookmarks.filter((b: any) => b.id + '' !== params.id + '');
+        const updatedB = bookmarks.filter(
+          (b: any) => b.id + "" !== params.id + ""
+        );
         onChangeBookmark(updatedB);
         resolve([200, "Bookmark is Deleted!"]);
       } else {
@@ -277,7 +280,9 @@ const fakeBackend = () => {
     const data = JSON.parse(config["data"]);
     return new Promise((resolve, reject) => {
       if (data.id && bookmarks.length !== 0) {
-        const bookmIdx = bookmarks.findIndex((b: any) => b.id + '' === data.id + '');
+        const bookmIdx = bookmarks.findIndex(
+          (b: any) => b.id + "" === data.id + ""
+        );
 
         if (bookmIdx > -1) {
           let updatedB = [...bookmarks];

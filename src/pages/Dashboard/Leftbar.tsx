@@ -15,7 +15,7 @@ import Calls from "./Calls/index";
 import Bookmark from "./Bookmark/index";
 import Settings from "./Settings/index";
 
-interface LeftbarProps { }
+interface LeftbarProps {}
 const Leftbar = (props: LeftbarProps) => {
   const { activeTab } = useSelector((state: any) => ({
     activeTab: state.Layout.activeTab,
@@ -35,9 +35,13 @@ const Leftbar = (props: LeftbarProps) => {
             <Profile />
           </TabPane>
 
-          <TabPane tabId={TABS.CHAT} role="tabpanel" aria-labelledby="pills-chat-tab">
+          <TabPane
+            tabId={TABS.CHAT}
+            role="tabpanel"
+            aria-labelledby="pills-chat-tab"
+          >
             <Chats />
-          </TabPane >
+          </TabPane>
 
           <TabPane
             tabId={TABS.CONTACTS}
@@ -55,13 +59,21 @@ const Leftbar = (props: LeftbarProps) => {
             <Calls />
           </TabPane>
 
-          <TabPane tabId={TABS.BOOKMARK} role="tabpanel" aria-labelledby="pills-bookmark-tab">
+          <TabPane
+            tabId={TABS.BOOKMARK}
+            role="tabpanel"
+            aria-labelledby="pills-bookmark-tab"
+          >
             <Bookmark />
-          </TabPane >
+          </TabPane>
 
-          <TabPane tabId={TABS.SETTINGS} role="tabpanel" aria-labelledby="pills-setting-tab">
+          <TabPane
+            tabId={TABS.SETTINGS}
+            role="tabpanel"
+            aria-labelledby="pills-setting-tab"
+          >
             <Settings />
-          </TabPane >
+          </TabPane>
         </TabContent>
       </div>
     </>

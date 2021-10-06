@@ -6,7 +6,10 @@ export const settingsApiResponseSuccess = (actionType: string, data: any) => ({
   payload: { actionType, data },
 });
 // common error
-export const settingsApiResponseError = (actionType: string, error: string) => ({
+export const settingsApiResponseError = (
+  actionType: string,
+  error: string
+) => ({
   type: SettingsActionTypes.API_RESPONSE_ERROR,
   payload: { actionType, error },
 });

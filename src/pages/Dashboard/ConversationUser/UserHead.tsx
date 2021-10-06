@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const UserHead = () => {
   return (
@@ -7,12 +8,12 @@ const UserHead = () => {
         <div className="col-sm-4 col-8">
           <div className="d-flex align-items-center">
             <div className="flex-shrink-0 d-block d-lg-none me-2">
-              <a
-                href="javascript: void(0);"
+              <Link
+                to="#"
                 className="user-chat-remove text-muted font-size-24 p-2"
               >
                 <i className="bx bx-chevron-left align-middle"></i>
-              </a>
+              </Link>
             </div>
             <div className="flex-grow-1 overflow-hidden">
               <div className="d-flex align-items-center">
@@ -26,9 +27,9 @@ const UserHead = () => {
                 </div>
                 <div className="flex-grow-1 overflow-hidden">
                   <h6 className="text-truncate mb-0 font-size-18">
-                    <a href="#" className="user-profile-show text-reset">
+                    <Link to="#" className="user-profile-show text-reset">
                       Jean Berwick
-                    </a>
+                    </Link>
                   </h6>
                   <p className="text-truncate text-muted mb-0">
                     <small>Online</small>
@@ -103,46 +104,46 @@ const UserHead = () => {
                   <i className="bx bx-dots-vertical-rounded"></i>
                 </button>
                 <div className="dropdown-menu dropdown-menu-end">
-                  <a
+                  <Link
                     className="dropdown-item d-flex justify-content-between align-items-center d-lg-none user-profile-show"
-                    href="#"
+                    to="#"
                   >
                     View Profile <i className="bx bx-user text-muted"></i>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     className="dropdown-item d-flex justify-content-between align-items-center d-lg-none"
-                    href="#"
+                    to="#"
                     data-bs-toggle="modal"
                     data-bs-target=".audiocallModal"
                   >
                     Audio <i className="bx bxs-phone-call text-muted"></i>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     className="dropdown-item d-flex justify-content-between align-items-center d-lg-none"
-                    href="#"
+                    to="#"
                     data-bs-toggle="modal"
                     data-bs-target=".videocallModal"
                   >
                     Video <i className="bx bx-video text-muted"></i>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     className="dropdown-item d-flex justify-content-between align-items-center"
-                    href="#"
+                    to="#"
                   >
                     Archive <i className="bx bx-archive text-muted"></i>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     className="dropdown-item d-flex justify-content-between align-items-center"
-                    href="#"
+                    to="#"
                   >
                     Muted <i className="bx bx-microphone-off text-muted"></i>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     className="dropdown-item d-flex justify-content-between align-items-center"
-                    href="#"
+                    to="#"
                   >
                     Delete <i className="bx bx-trash text-muted"></i>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </li>
@@ -155,18 +156,18 @@ const UserHead = () => {
       >
         <div className="d-flex align-items-start bookmark-tabs">
           <div className="tab-list-link">
-            <a
-              href="#"
+            <Link
+              to="#"
               className="tab-links"
               data-bs-toggle="modal"
               data-bs-target=".pinnedtabModal"
             >
               <i className="ri-pushpin-fill align-middle me-1"></i> 10 Pinned
-            </a>
+            </Link>
           </div>
           <div>
-            <a
-              href="#"
+            <Link
+              to="#"
               className="tab-links border-0 px-3"
               data-bs-toggle="tooltip"
               data-bs-trigger="hover"
@@ -174,7 +175,7 @@ const UserHead = () => {
               title="Add Bookmark"
             >
               <i className="ri-add-fill align-middle"></i>
-            </a>
+            </Link>
           </div>
         </div>
         <button

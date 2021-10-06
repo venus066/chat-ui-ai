@@ -4,7 +4,11 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // actions
-import { getBookmarks, deleteBookmark, updateBookmark } from "../../../redux/actions";
+import {
+  getBookmarks,
+  deleteBookmark,
+  updateBookmark,
+} from "../../../redux/actions";
 
 // components
 import Loader from "../../../components/Loader";
@@ -12,18 +16,23 @@ import AppSimpleBar from "../../../components/AppSimpleBar";
 import LeftbarTitle from "../../../components/LeftbarTitle";
 import BookMark from "./BookMark";
 
-// interface 
+// interface
 import { BookMarkTypes } from "../../../data/bookmarks";
 
-interface IndexProps { }
+interface IndexProps {}
 const Index = (props: IndexProps) => {
   const dispatch = useDispatch();
 
-  const { bookmarksList, getBookmarksLoading, isBookmarkDeleted, isBookmarkUpdated } = useSelector((state: any) => ({
+  const {
+    bookmarksList,
+    getBookmarksLoading,
+    isBookmarkDeleted,
+    isBookmarkUpdated,
+  } = useSelector((state: any) => ({
     bookmarksList: state.Bookmarks.bookmarks,
     getBookmarksLoading: state.Bookmarks.getBookmarksLoading,
     isBookmarkDeleted: state.Bookmarks.isBookmarkDeleted,
-    isBookmarkUpdated: state.Bookmarks.isBookmarkUpdated
+    isBookmarkUpdated: state.Bookmarks.isBookmarkUpdated,
   }));
 
   /*
@@ -64,16 +73,14 @@ const Index = (props: IndexProps) => {
       <LeftbarTitle title="Bookmark" />
       <AppSimpleBar className="chat-message-list chat-bookmark-list">
         <ul className="list-unstyled chat-list">
-          {
-            (bookmarks || []).map((bookmark: BookMarkTypes, key: number) =>
-              <BookMark
-                key={key}
-                bookmark={bookmark}
-                onUpdate={onUpdate}
-                onDelete={onDelete}
-              />
-            )
-          }
+          {(bookmarks || []).map((bookmark: BookMarkTypes, key: number) => (
+            <BookMark
+              key={key}
+              bookmark={bookmark}
+              onUpdate={onUpdate}
+              onDelete={onDelete}
+            />
+          ))}
         </ul>
       </AppSimpleBar>
     </div>

@@ -2,16 +2,26 @@ import { takeEvery, fork, put, all, call } from "redux-saga/effects";
 
 // Login Redux States
 import { SettingsActionTypes } from "./types";
-import { settingsApiResponseSuccess, settingsApiResponseError } from "./actions";
+import {
+  settingsApiResponseSuccess,
+  settingsApiResponseError,
+} from "./actions";
 
 import { getSettings as getSettingsApi } from "../../api/index";
 
 function* getSettings() {
   try {
     const response: Promise<any> = yield call(getSettingsApi);
-    yield put(settingsApiResponseSuccess(SettingsActionTypes.GET_USER_SETTINGS, response));
+    yield put(
+      settingsApiResponseSuccess(
+        SettingsActionTypes.GET_USER_SETTINGS,
+        response
+      )
+    );
   } catch (error: any) {
-    yield put(settingsApiResponseError(SettingsActionTypes.GET_USER_SETTINGS, error));
+    yield put(
+      settingsApiResponseError(SettingsActionTypes.GET_USER_SETTINGS, error)
+    );
   }
 }
 

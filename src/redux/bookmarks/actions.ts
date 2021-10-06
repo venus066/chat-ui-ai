@@ -6,7 +6,10 @@ export const bookmarksApiResponseSuccess = (actionType: string, data: any) => ({
   payload: { actionType, data },
 });
 // common error
-export const bookmarksApiResponseError = (actionType: string, error: string) => ({
+export const bookmarksApiResponseError = (
+  actionType: string,
+  error: string
+) => ({
   type: BookmarksActionTypes.API_RESPONSE_ERROR,
   payload: { actionType, error },
 });
@@ -17,12 +20,12 @@ export const getBookmarks = () => ({
 
 export const updateBookmark = (id: number, data: object) => ({
   type: BookmarksActionTypes.UPDATE_BOOKMARK,
-  payload: { id, data }
+  payload: { id, data },
 });
 
 export const deleteBookmark = (id: number) => ({
   type: BookmarksActionTypes.DELETE_BOOKMARK,
-  payload: id
+  payload: id,
 });
 
 export const resetBookmarks = (flag: string, value: any) => ({

@@ -1,5 +1,6 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
 const UserProfileDetails = () => {
   return (
     <>
@@ -40,47 +41,47 @@ const UserProfileDetails = () => {
                         <i className="bx bx-dots-vertical-rounded"></i>
                       </button>
                       <div className="dropdown-menu dropdown-menu-end">
-                        <a
+                        <Link
                           className="dropdown-item d-flex justify-content-between align-items-center d-lg-none user-profile-show"
-                          href="#"
+                          to="#"
                         >
                           View Profile <i className="bx bx-user text-muted"></i>
-                        </a>
-                        <a
+                        </Link>
+                        <Link
                           className="dropdown-item d-flex justify-content-between align-items-center d-lg-none"
-                          href="#"
+                          to="#"
                           data-bs-toggle="modal"
                           data-bs-target=".audiocallModal"
                         >
                           Audio <i className="bx bxs-phone-call text-muted"></i>
-                        </a>
-                        <a
+                        </Link>
+                        <Link
                           className="dropdown-item d-flex justify-content-between align-items-center d-lg-none"
-                          href="#"
+                          to="#"
                           data-bs-toggle="modal"
                           data-bs-target=".videocallModal"
                         >
                           Video <i className="bx bx-video text-muted"></i>
-                        </a>
-                        <a
+                        </Link>
+                        <Link
                           className="dropdown-item d-flex justify-content-between align-items-center"
-                          href="#"
+                          to="#"
                         >
                           Archive <i className="bx bx-archive text-muted"></i>
-                        </a>
-                        <a
+                        </Link>
+                        <Link
                           className="dropdown-item d-flex justify-content-between align-items-center"
-                          href="#"
+                          to="#"
                         >
                           Muted{" "}
                           <i className="bx bx-microphone-off text-muted"></i>
-                        </a>
-                        <a
+                        </Link>
+                        <Link
                           className="dropdown-item d-flex justify-content-between align-items-center"
-                          href="#"
+                          to="#"
                         >
                           Delete <i className="bx bx-trash text-muted"></i>
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -181,25 +182,25 @@ const UserProfileDetails = () => {
                     </button>
 
                     <div className="dropdown-menu dropdown-menu-end">
-                      <a
+                      <Link
                         className="dropdown-item d-flex justify-content-between align-items-center"
-                        href="#"
+                        to="#"
                       >
                         Archive <i className="bx bx-archive text-muted"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex justify-content-between align-items-center"
-                        href="#"
+                        to="#"
                       >
                         Muted{" "}
                         <i className="bx bx-microphone-off text-muted"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex justify-content-between align-items-center"
-                        href="#"
+                        to="#"
                       >
                         Delete <i className="bx bx-trash text-muted"></i>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                   <h5 className="font-size-11 text-uppercase text-muted mt-2">
@@ -253,7 +254,7 @@ const UserProfileDetails = () => {
 
             <ul className="list-unstyled chat-list mx-n4">
               <li>
-                <a href="javascript: void(0);">
+                <Link to="#">
                   <div className="d-flex align-items-center">
                     <div className="flex-shrink-0 avatar-xs me-2">
                       <span className="avatar-title rounded-circle bg-soft-light text-dark">
@@ -264,10 +265,10 @@ const UserProfileDetails = () => {
                       <p className="text-truncate mb-0">Landing Design</p>
                     </div>
                   </div>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="javascript: void(0);">
+                <Link to="#">
                   <div className="d-flex align-items-center">
                     <div className="flex-shrink-0 avatar-xs me-2">
                       <span className="avatar-title rounded-circle bg-soft-light text-dark">
@@ -278,7 +279,7 @@ const UserProfileDetails = () => {
                       <p className="text-truncate mb-0">Design Phase 2</p>
                     </div>
                   </div>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -291,48 +292,48 @@ const UserProfileDetails = () => {
                 </h5>
               </div>
               <div className="flex-shrink-0">
-                <a href="#" className="font-size-12 d-block mb-2">
+                <Link to="#" className="font-size-12 d-block mb-2">
                   Show all
-                </a>
+                </Link>
               </div>
             </div>
             <div className="profile-media-img">
               <div className="media-img-list">
-                <a href="#">
+                <Link to="#">
                   <img
                     src="assets/images/small/img-1.jpg"
                     alt="media img"
                     className="img-fluid"
                   />
-                </a>
+                </Link>
               </div>
               <div className="media-img-list">
-                <a href="#">
+                <Link to="#">
                   <img
                     src="assets/images/small/img-2.jpg"
                     alt="media img"
                     className="img-fluid"
                   />
-                </a>
+                </Link>
               </div>
               <div className="media-img-list">
-                <a href="#">
+                <Link to="#">
                   <img
                     src="assets/images/small/img-3.jpg"
                     alt="media img"
                     className="img-fluid"
                   />
-                </a>
+                </Link>
               </div>
               <div className="media-img-list">
-                <a href="#">
+                <Link to="#">
                   <img
                     src="assets/images/small/img-4.jpg"
                     alt="media img"
                     className="img-fluid"
                   />
                   <div className="bg-overlay">+ 15</div>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -362,44 +363,44 @@ const UserProfileDetails = () => {
                   <div className="flex-shrink-0 ms-3">
                     <div className="d-flex gap-2">
                       <div>
-                        <a href="#" className="text-muted px-1">
+                        <Link to="#" className="text-muted px-1">
                           <i className="bx bxs-download"></i>
-                        </a>
+                        </Link>
                       </div>
                       <div className="dropdown">
-                        <a
+                        <Link
                           className="dropdown-toggle text-muted px-1"
-                          href="#"
+                          to="#"
                           role="button"
                           data-bs-toggle="dropdown"
                           aria-haspopup="true"
                           aria-expanded="false"
                         >
                           <i className="bx bx-dots-horizontal-rounded"></i>
-                        </a>
+                        </Link>
                         <div className="dropdown-menu dropdown-menu-end">
-                          <a
+                          <Link
                             className="dropdown-item d-flex align-items-center justify-content-between"
-                            href="#"
+                            to="#"
                           >
                             Share{" "}
                             <i className="bx bx-share-alt ms-2 text-muted"></i>
-                          </a>
-                          <a
+                          </Link>
+                          <Link
                             className="dropdown-item d-flex align-items-center justify-content-between"
-                            href="#"
+                            to="#"
                           >
                             Bookmark{" "}
                             <i className="bx bx-bookmarks text-muted ms-2"></i>
-                          </a>
+                          </Link>
                           <div className="dropdown-divider"></div>
-                          <a
+                          <Link
                             className="dropdown-item d-flex align-items-center justify-content-between"
-                            href="#"
+                            to="#"
                           >
                             Delete{" "}
                             <i className="bx bx-trash ms-2 text-muted"></i>
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -424,44 +425,44 @@ const UserProfileDetails = () => {
                   <div className="flex-shrink-0 ms-3">
                     <div className="d-flex gap-2">
                       <div>
-                        <a href="#" className="text-muted px-1">
+                        <Link to="#" className="text-muted px-1">
                           <i className="bx bxs-download"></i>
-                        </a>
+                        </Link>
                       </div>
                       <div className="dropdown">
-                        <a
+                        <Link
                           className="dropdown-toggle text-muted px-1"
-                          href="#"
+                          to="#"
                           role="button"
                           data-bs-toggle="dropdown"
                           aria-haspopup="true"
                           aria-expanded="false"
                         >
                           <i className="bx bx-dots-horizontal-rounded"></i>
-                        </a>
+                        </Link>
                         <div className="dropdown-menu dropdown-menu-end">
-                          <a
+                          <Link
                             className="dropdown-item d-flex align-items-center justify-content-between"
-                            href="#"
+                            to="#"
                           >
                             Share{" "}
                             <i className="bx bx-share-alt ms-2 text-muted"></i>
-                          </a>
-                          <a
+                          </Link>
+                          <Link
                             className="dropdown-item d-flex align-items-center justify-content-between"
-                            href="#"
+                            to="#"
                           >
                             Bookmark{" "}
                             <i className="bx bx-bookmarks text-muted ms-2"></i>
-                          </a>
+                          </Link>
                           <div className="dropdown-divider"></div>
-                          <a
+                          <Link
                             className="dropdown-item d-flex align-items-center justify-content-between"
-                            href="#"
+                            to="#"
                           >
                             Delete{" "}
                             <i className="bx bx-trash ms-2 text-muted"></i>
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -486,44 +487,44 @@ const UserProfileDetails = () => {
                   <div className="flex-shrink-0 ms-3">
                     <div className="d-flex gap-2">
                       <div>
-                        <a href="#" className="text-muted px-1">
+                        <Link to="#" className="text-muted px-1">
                           <i className="bx bxs-download"></i>
-                        </a>
+                        </Link>
                       </div>
                       <div className="dropdown">
-                        <a
+                        <Link
                           className="dropdown-toggle text-muted px-1"
-                          href="#"
+                          to="#"
                           role="button"
                           data-bs-toggle="dropdown"
                           aria-haspopup="true"
                           aria-expanded="false"
                         >
                           <i className="bx bx-dots-horizontal-rounded"></i>
-                        </a>
+                        </Link>
                         <div className="dropdown-menu dropdown-menu-end">
-                          <a
+                          <Link
                             className="dropdown-item d-flex align-items-center justify-content-between"
-                            href="#"
+                            to="#"
                           >
                             Share{" "}
                             <i className="bx bx-share-alt ms-2 text-muted"></i>
-                          </a>
-                          <a
+                          </Link>
+                          <Link
                             className="dropdown-item d-flex align-items-center justify-content-between"
-                            href="#"
+                            to="#"
                           >
                             Bookmark{" "}
                             <i className="bx bx-bookmarks text-muted ms-2"></i>
-                          </a>
+                          </Link>
                           <div className="dropdown-divider"></div>
-                          <a
+                          <Link
                             className="dropdown-item d-flex align-items-center justify-content-between"
-                            href="#"
+                            to="#"
                           >
                             Delete{" "}
                             <i className="bx bx-trash ms-2 text-muted"></i>
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -548,44 +549,44 @@ const UserProfileDetails = () => {
                   <div className="flex-shrink-0 ms-3">
                     <div className="d-flex gap-2">
                       <div>
-                        <a href="#" className="text-muted px-1">
+                        <Link to="#" className="text-muted px-1">
                           <i className="bx bxs-download"></i>
-                        </a>
+                        </Link>
                       </div>
                       <div className="dropdown">
-                        <a
+                        <Link
                           className="dropdown-toggle text-muted px-1"
-                          href="#"
+                          to="#"
                           role="button"
                           data-bs-toggle="dropdown"
                           aria-haspopup="true"
                           aria-expanded="false"
                         >
                           <i className="bx bx-dots-horizontal-rounded"></i>
-                        </a>
+                        </Link>
                         <div className="dropdown-menu dropdown-menu-end">
-                          <a
+                          <Link
                             className="dropdown-item d-flex align-items-center justify-content-between"
-                            href="#"
+                            to="#"
                           >
                             Share{" "}
                             <i className="bx bx-share-alt ms-2 text-muted"></i>
-                          </a>
-                          <a
+                          </Link>
+                          <Link
                             className="dropdown-item d-flex align-items-center justify-content-between"
-                            href="#"
+                            to="#"
                           >
                             Bookmark{" "}
                             <i className="bx bx-bookmarks text-muted ms-2"></i>
-                          </a>
+                          </Link>
                           <div className="dropdown-divider"></div>
-                          <a
+                          <Link
                             className="dropdown-item d-flex align-items-center justify-content-between"
-                            href="#"
+                            to="#"
                           >
                             Delete{" "}
                             <i className="bx bx-trash ms-2 text-muted"></i>
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </div>

@@ -19,6 +19,6 @@ export default function* rootSaga() {
     contactsSaga(),
     callsSaga(),
     bookmarksSaga(),
-    settingsSaga()
+    settingsSaga(),
   ]);
 }

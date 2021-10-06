@@ -6,7 +6,7 @@ import ConversationUser from "./ConversationUser/index";
 import UserProfileDetails from "./UserProfileDetails";
 import ChatInputSection from "./ChatInputSection";
 
-interface IndexProps { }
+interface IndexProps {}
 const Index = (props: IndexProps) => {
   return (
     <>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Conversation = () => {
   return (
@@ -24,60 +25,60 @@ const Conversation = () => {
                     <p className="mb-0 ctext-content">Good morning 😊</p>
                   </div>
                   <div className="dropdown align-self-start message-box-drop">
-                    <a
+                    <Link
                       className="dropdown-toggle"
-                      href="#"
+                      to="#"
                       role="button"
                       data-bs-toggle="dropdown"
                       aria-haspopup="true"
                       aria-expanded="false"
                     >
                       <i className="ri-more-2-fill"></i>
-                    </a>
+                    </Link>
                     <div className="dropdown-menu">
-                      <a
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                         data-bs-toggle="collapse"
                         data-bs-target=".replyCollapse"
                       >
                         Reply <i className="bx bx-share ms-2 text-muted"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                         data-bs-toggle="modal"
                         data-bs-target=".forwardModal"
                       >
                         Forward{" "}
                         <i className="bx bx-share-alt ms-2 text-muted"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                       >
                         Copy <i className="bx bx-copy text-muted ms-2"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                       >
                         Bookmark{" "}
                         <i className="bx bx-bookmarks text-muted ms-2"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                       >
                         Mark as Unread{" "}
                         <i className="bx bx-message-error text-muted ms-2"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between delete-item"
-                        href="#"
+                        to="#"
                       >
                         Delete <i className="bx bx-trash text-muted ms-2"></i>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -104,60 +105,60 @@ const Conversation = () => {
                   </div>
 
                   <div className="dropdown align-self-start message-box-drop">
-                    <a
+                    <Link
                       className="dropdown-toggle"
-                      href="#"
+                      to="#"
                       role="button"
                       data-bs-toggle="dropdown"
                       aria-haspopup="true"
                       aria-expanded="false"
                     >
                       <i className="ri-more-2-fill"></i>
-                    </a>
+                    </Link>
                     <div className="dropdown-menu">
-                      <a
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                         data-bs-toggle="collapse"
                         data-bs-target=".replyCollapse"
                       >
                         Reply <i className="bx bx-share ms-2 text-muted"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                         data-bs-toggle="modal"
                         data-bs-target=".forwardModal"
                       >
                         Forward{" "}
                         <i className="bx bx-share-alt ms-2 text-muted"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between copy-btn"
-                        href="#"
+                        to="#"
                       >
                         Copy <i className="bx bx-copy text-muted ms-2"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                       >
                         Bookmark{" "}
                         <i className="bx bx-bookmarks text-muted ms-2"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                       >
                         Mark as Unread{" "}
                         <i className="bx bx-message-error text-muted ms-2"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between delete-item"
-                        href="#"
+                        to="#"
                       >
                         Delete <i className="bx bx-trash text-muted ms-2"></i>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -187,60 +188,60 @@ const Conversation = () => {
                     </p>
                   </div>
                   <div className="dropdown align-self-start message-box-drop">
-                    <a
+                    <Link
                       className="dropdown-toggle"
-                      href="#"
+                      to="#"
                       role="button"
                       data-bs-toggle="dropdown"
                       aria-haspopup="true"
                       aria-expanded="false"
                     >
                       <i className="ri-more-2-fill"></i>
-                    </a>
+                    </Link>
                     <div className="dropdown-menu">
-                      <a
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                         data-bs-toggle="collapse"
                         data-bs-target=".replyCollapse"
                       >
                         Reply <i className="bx bx-share ms-2 text-muted"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                         data-bs-toggle="modal"
                         data-bs-target=".forwardModal"
                       >
                         Forward{" "}
                         <i className="bx bx-share-alt ms-2 text-muted"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between copy-btn"
-                        href="#"
+                        to="#"
                       >
                         Copy <i className="bx bx-copy text-muted ms-2"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                       >
                         Bookmark{" "}
                         <i className="bx bx-bookmarks text-muted ms-2"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                       >
                         Mark as Unread{" "}
                         <i className="bx bx-message-error text-muted ms-2"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between delete-item"
-                        href="#"
+                        to="#"
                       >
                         Delete <i className="bx bx-trash text-muted ms-2"></i>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -268,60 +269,60 @@ const Conversation = () => {
                     </p>
                   </div>
                   <div className="dropdown align-self-start message-box-drop">
-                    <a
+                    <Link
                       className="dropdown-toggle"
-                      href="#"
+                      to="#"
                       role="button"
                       data-bs-toggle="dropdown"
                       aria-haspopup="true"
                       aria-expanded="false"
                     >
                       <i className="ri-more-2-fill"></i>
-                    </a>
+                    </Link>
                     <div className="dropdown-menu">
-                      <a
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                         data-bs-toggle="collapse"
                         data-bs-target=".replyCollapse"
                       >
                         Reply <i className="bx bx-share ms-2 text-muted"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                         data-bs-toggle="modal"
                         data-bs-target=".forwardModal"
                       >
                         Forward{" "}
                         <i className="bx bx-share-alt ms-2 text-muted"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between copy-btn"
-                        href="#"
+                        to="#"
                       >
                         Copy <i className="bx bx-copy text-muted ms-2"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                       >
                         Bookmark{" "}
                         <i className="bx bx-bookmarks text-muted ms-2"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                       >
                         Mark as Unread{" "}
                         <i className="bx bx-message-error text-muted ms-2"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between delete-item"
-                        href="#"
+                        to="#"
                       >
                         Delete <i className="bx bx-trash text-muted ms-2"></i>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -345,60 +346,60 @@ const Conversation = () => {
                     <p className="item-name mb-0">Wow that's great</p>
                   </div>
                   <div className="dropdown align-self-start message-box-drop">
-                    <a
+                    <Link
                       className="dropdown-toggle"
-                      href="#"
+                      to="#"
                       role="button"
                       data-bs-toggle="dropdown"
                       aria-haspopup="true"
                       aria-expanded="false"
                     >
                       <i className="ri-more-2-fill"></i>
-                    </a>
+                    </Link>
                     <div className="dropdown-menu">
-                      <a
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                         data-bs-toggle="collapse"
                         data-bs-target=".replyCollapse"
                       >
                         Reply <i className="bx bx-share ms-2 text-muted"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                         data-bs-toggle="modal"
                         data-bs-target=".forwardModal"
                       >
                         Forward{" "}
                         <i className="bx bx-share-alt ms-2 text-muted"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                       >
                         Copy <i className="bx bx-copy text-muted ms-2"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                       >
                         Bookmark{" "}
                         <i className="bx bx-bookmarks text-muted ms-2"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                       >
                         Mark as Unread{" "}
                         <i className="bx bx-message-error text-muted ms-2"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between delete-item"
-                        href="#"
+                        to="#"
                       >
                         Delete <i className="bx bx-trash text-muted ms-2"></i>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -430,70 +431,70 @@ const Conversation = () => {
                   <div className="message-img mb-0">
                     <div className="message-img-list">
                       <div>
-                        <a
+                        <Link
                           className="popup-img d-inline-block"
-                          href="assets/images/small/img-1.jpg"
+                          to="assets/images/small/img-1.jpg"
                         >
                           <img
                             src="assets/images/small/img-1.jpg"
                             alt=""
                             className="rounded border"
                           />
-                        </a>
+                        </Link>
                       </div>
                       <div className="message-img-link">
                         <ul className="list-inline mb-0">
                           <li className="list-inline-item dropdown">
-                            <a
+                            <Link
                               className="dropdown-toggle"
-                              href="#"
+                              to="#"
                               role="button"
                               data-bs-toggle="dropdown"
                               aria-haspopup="true"
                               aria-expanded="false"
                             >
                               <i className="bx bx-dots-horizontal-rounded"></i>
-                            </a>
+                            </Link>
                             <div className="dropdown-menu">
-                              <a
+                              <Link
                                 className="dropdown-item d-flex align-items-center justify-content-between"
-                                href="#"
+                                to="#"
                               >
                                 Download{" "}
                                 <i className="bx bx-download ms-2 text-muted"></i>
-                              </a>
-                              <a
+                              </Link>
+                              <Link
                                 className="dropdown-item d-flex align-items-center justify-content-between"
-                                href="#"
+                                to="#"
                                 data-bs-toggle="collapse"
                                 data-bs-target=".replyCollapse"
                               >
                                 Reply{" "}
                                 <i className="bx bx-share ms-2 text-muted"></i>
-                              </a>
-                              <a
+                              </Link>
+                              <Link
                                 className="dropdown-item d-flex align-items-center justify-content-between"
-                                href="#"
+                                to="#"
                                 data-bs-toggle="modal"
                                 data-bs-target=".forwardModal"
                               >
                                 Forward{" "}
                                 <i className="bx bx-share-alt ms-2 text-muted"></i>
-                              </a>
-                              <a
+                              </Link>
+                              <Link
                                 className="dropdown-item d-flex align-items-center justify-content-between"
-                                href="#"
+                                to="#"
                               >
                                 Bookmark{" "}
                                 <i className="bx bx-bookmarks text-muted ms-2"></i>
-                              </a>
-                              <a
+                              </Link>
+                              <Link
                                 className="dropdown-item d-flex align-items-center justify-content-between delete-item"
-                                href="#"
+                                to="#"
                               >
                                 Delete{" "}
                                 <i className="bx bx-trash ms-2 text-muted"></i>
-                              </a>
+                              </Link>
                             </div>
                           </li>
                         </ul>
@@ -502,70 +503,70 @@ const Conversation = () => {
 
                     <div className="message-img-list">
                       <div>
-                        <a
+                        <Link
                           className="popup-img d-inline-block"
-                          href="assets/images/small/img-2.jpg"
+                          to="assets/images/small/img-2.jpg"
                         >
                           <img
                             src="assets/images/small/img-2.jpg"
                             alt=""
                             className="rounded border"
                           />
-                        </a>
+                        </Link>
                       </div>
                       <div className="message-img-link">
                         <ul className="list-inline mb-0">
                           <li className="list-inline-item dropdown">
-                            <a
+                            <Link
                               className="dropdown-toggle"
-                              href="#"
+                              to="#"
                               role="button"
                               data-bs-toggle="dropdown"
                               aria-haspopup="true"
                               aria-expanded="false"
                             >
                               <i className="bx bx-dots-horizontal-rounded"></i>
-                            </a>
+                            </Link>
                             <div className="dropdown-menu">
-                              <a
+                              <Link
                                 className="dropdown-item d-flex align-items-center justify-content-between"
-                                href="#"
+                                to="#"
                               >
                                 Download{" "}
                                 <i className="bx bx-download ms-2 text-muted"></i>
-                              </a>
-                              <a
+                              </Link>
+                              <Link
                                 className="dropdown-item d-flex align-items-center justify-content-between"
-                                href="#"
+                                to="#"
                                 data-bs-toggle="collapse"
                                 data-bs-target=".replyCollapse"
                               >
                                 Reply{" "}
                                 <i className="bx bx-share ms-2 text-muted"></i>
-                              </a>
-                              <a
+                              </Link>
+                              <Link
                                 className="dropdown-item d-flex align-items-center justify-content-between"
-                                href="#"
+                                to="#"
                                 data-bs-toggle="modal"
                                 data-bs-target=".forwardModal"
                               >
                                 Forward{" "}
                                 <i className="bx bx-share-alt ms-2 text-muted"></i>
-                              </a>
-                              <a
+                              </Link>
+                              <Link
                                 className="dropdown-item d-flex align-items-center justify-content-between"
-                                href="#"
+                                to="#"
                               >
                                 Bookmark{" "}
                                 <i className="bx bx-bookmarks text-muted ms-2"></i>
-                              </a>
-                              <a
+                              </Link>
+                              <Link
                                 className="dropdown-item d-flex align-items-center justify-content-between delete-item"
-                                href="#"
+                                to="#"
                               >
                                 Delete{" "}
                                 <i className="bx bx-trash ms-2 text-muted"></i>
-                              </a>
+                              </Link>
                             </div>
                           </li>
                         </ul>
@@ -611,9 +612,9 @@ const Conversation = () => {
                         <div className="flex-shrink-0 ms-4">
                           <div className="d-flex gap-2 font-size-20 d-flex align-items-start">
                             <div>
-                              <a href="#" className="text-muted">
+                              <Link to="#" className="text-muted">
                                 <i className="bx bxs-download"></i>
-                              </a>
+                              </Link>
                             </div>
                           </div>
                         </div>
@@ -622,60 +623,60 @@ const Conversation = () => {
                   </div>
 
                   <div className="dropdown align-self-start message-box-drop">
-                    <a
+                    <Link
                       className="dropdown-toggle"
-                      href="#"
+                      to="#"
                       role="button"
                       data-bs-toggle="dropdown"
                       aria-haspopup="true"
                       aria-expanded="false"
                     >
                       <i className="ri-more-2-fill"></i>
-                    </a>
+                    </Link>
                     <div className="dropdown-menu">
-                      <a
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                         data-bs-toggle="collapse"
                         data-bs-target=".replyCollapse"
                       >
                         Reply <i className="bx bx-share ms-2 text-muted"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                         data-bs-toggle="modal"
                         data-bs-target=".forwardModal"
                       >
                         Forward{" "}
                         <i className="bx bx-share-alt ms-2 text-muted"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                       >
                         Copy <i className="bx bx-copy text-muted ms-2"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                       >
                         Bookmark{" "}
                         <i className="bx bx-bookmarks text-muted ms-2"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between"
-                        href="#"
+                        to="#"
                       >
                         Mark as Unread{" "}
                         <i className="bx bx-message-error text-muted ms-2"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="dropdown-item d-flex align-items-center justify-content-between delete-item"
-                        href="#"
+                        to="#"
                       >
                         Delete <i className="bx bx-trash text-muted ms-2"></i>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>

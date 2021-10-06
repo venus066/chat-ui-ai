@@ -19,5 +19,5 @@ export default combineReducers({
   Contacts,
   Calls,
   Bookmarks,
-  Settings
+  Settings,
 });
