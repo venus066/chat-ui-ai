@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 // components
 import Loader from "../../../components/Loader";
 import AppSimpleBar from "../../../components/AppSimpleBar";
+import AddContactModal from "../../../components/AddContactModal";
 import ListHeader from "./ListHeader";
 import Contact from "./Contact";
 
@@ -18,9 +19,8 @@ import {
 
 //utils
 import { divideByKey, DivideByKeyResultTypes } from "../../../utils";
-import AddContactModal from "../../../components/AddContactModal";
 
-interface IndexProps {}
+interface IndexProps { }
 
 const Index = (props: IndexProps) => {
   const dispatch = useDispatch();
