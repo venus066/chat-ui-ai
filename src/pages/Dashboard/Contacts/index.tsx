@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Loader from "../../../components/Loader";
 import AppSimpleBar from "../../../components/AppSimpleBar";
 import InviteContactModal from "../../../components/InviteContactModal";
+import EmptyStateResult from "../../../components/EmptyStateResult";
 import ListHeader from "./ListHeader";
 import Contact from "./Contact";
 
@@ -94,6 +95,7 @@ const Index = (props: IndexProps) => {
     setContacts(filteredContacts);
   };
 
+  const totalC = (contacts || []).length;
   return (
     <>
       <div className="position-relative">
@@ -106,13 +108,17 @@ const Index = (props: IndexProps) => {
 
         <AppSimpleBar className="chat-message-list chat-group-list">
           <div>
-            {(contactsData || []).map(
-              (letterContacts: DivideByKeyResultTypes, key: number) => (
-                <Contact
-                  letterContacts={letterContacts}
-                  key={key}
-                  index={key}
-                />
+            {totalC === 0 ? (
+              <EmptyStateResult searchedText={search} />
+            ) : (
+              (contactsData || []).map(
+                (letterContacts: DivideByKeyResultTypes, key: number) => (
+                  <Contact
+                    letterContacts={letterContacts}
+                    key={key}
+                    index={key}
+                  />
+                )
               )
             )}
           </div>

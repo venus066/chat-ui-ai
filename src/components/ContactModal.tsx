@@ -16,7 +16,7 @@ import { useSelector } from "react-redux";
 
 // components
 import AppSimpleBar from "./AppSimpleBar";
-import EmptyStateContacts from "./EmptyStateContacts";
+import EmptyStateResult from "./EmptyStateResult";
 
 //utils
 import { DivideByKeyResultTypes, divideByKey } from "../utils";
@@ -180,7 +180,7 @@ const ContactModal = ({ isOpen, onClose, onAddContact }: ContactModalProps) => {
         </InputGroup>
 
         {totalC === 0 ? (
-          <EmptyStateContacts searchedText={search} />
+          <EmptyStateResult searchedText={search} />
         ) : (
           <>
             <div className="d-flex align-items-center px-1">

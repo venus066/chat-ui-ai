@@ -5,7 +5,7 @@ interface EmptyStateContactsProps {
 }
 const EmptyStateContacts = ({ searchedText }: EmptyStateContactsProps) => {
   return (
-    <div className="bg-soft-secondary rounded p-4 text-secondary text-center">
+    <div className="rounded p-4 text-center">
       <i className="bx bx-info-circle fs-1 mb-3" />
       <div>No results found for "{searchedText}".</div>
     </div>
