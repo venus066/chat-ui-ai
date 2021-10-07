@@ -13,4 +13,9 @@ const getDirectMessages = () => {
 const getChannels = () => {
   return api.get(url.GET_CHANNELS);
 };
-export { getFavourites, getDirectMessages, getChannels };
+
+const addContacts = (contacts: Array<string | number>) => {
+  return api.create(url.ADD_CONTACTS, contacts);
+};
+
+export { getFavourites, getDirectMessages, getChannels, addContacts };

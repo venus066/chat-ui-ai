@@ -8,8 +8,14 @@ import {
 } from "./actions";
 
 import {
-  getFavourites as getFavouritesApi, getDirectMessages as getDirectMessagesApi, getChannels as getChannelsApi
+  getFavourites as getFavouritesApi, getDirectMessages as getDirectMessagesApi, getChannels as getChannelsApi,
+  addContacts as addContactsApi
 } from "../../api/index";
+
+import {
+  showSuccessNotification,
+  showErrorNotification,
+} from "../../helpers/notifications";
 
 function* getFavourites() {
   try {
@@ -37,6 +43,7 @@ function* getDirectMessages() {
       )
     );
   } catch (error: any) {
+    console.log(error);
     yield put(
       chatsApiResponseError(ChatsActionTypes.GET_DIRECT_MESSAGES, error)
     );
@@ -59,22 +66,43 @@ function* getChannels() {
   }
 }
 
+function* addContacts({ payload: contacts }: any) {
+  try {
+    const response: Promise<any> = yield call(addContactsApi, contacts);
+    yield put(
+      chatsApiResponseSuccess(
+        ChatsActionTypes.ADD_CONTACTS,
+        response
+      )
+    );
+    yield call(showSuccessNotification, response + "");
+  } catch (error: any) {
+    yield call(showErrorNotification, error);
+    yield put(
+      chatsApiResponseError(ChatsActionTypes.ADD_CONTACTS, error)
+    );
+  }
+}
 
 export function* watchGetFavourites() {
   yield takeEvery(ChatsActionTypes.GET_FAVOURITES, getFavourites);
 }
 
 export function* watchGetDirectMessages() {
-  yield takeEvery(ChatsActionTypes.GET_FAVOURITES, getDirectMessages);
+  yield takeEvery(ChatsActionTypes.GET_DIRECT_MESSAGES, getDirectMessages);
 }
 export function* watchGetChannels() {
-  yield takeEvery(ChatsActionTypes.GET_FAVOURITES, getChannels);
+  yield takeEvery(ChatsActionTypes.GET_CHANNELS, getChannels);
+}
+export function* watchAddContacts() {
+  yield takeEvery(ChatsActionTypes.ADD_CONTACTS, addContacts);
 }
 function* chatsSaga() {
   yield all([
     fork(watchGetFavourites),
     fork(watchGetDirectMessages),
-    fork(watchGetChannels)
+    fork(watchGetChannels),
+    fork(watchAddContacts)
   ]);
 }
 

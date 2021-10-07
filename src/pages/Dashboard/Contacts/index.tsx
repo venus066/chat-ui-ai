@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 // components
 import Loader from "../../../components/Loader";
 import AppSimpleBar from "../../../components/AppSimpleBar";
-import AddContactModal from "../../../components/AddContactModal";
+import InviteContactModal from "../../../components/InviteContactModal";
 import ListHeader from "./ListHeader";
 import Contact from "./Contact";
 
@@ -118,7 +118,7 @@ const Index = (props: IndexProps) => {
           </div>
         </AppSimpleBar>
       </div>
-      <AddContactModal
+      <InviteContactModal
         isOpen={isOpen}
         onClose={closeModal}
         onInvite={onInviteContact}

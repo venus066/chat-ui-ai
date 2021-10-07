@@ -43,7 +43,7 @@ const AddGroupModal = ({ }: AddGroupModalProps) => {
                                                     <ul className="list-unstyled contact-list">
                                                         <li>
                                                             <div className="form-check">
-                                                                <input type="checkbox" className="form-check-input" id="memberCheck1" checked />
+                                                                <input type="checkbox" className="form-check-input" id="memberCheck1" />
                                                                 <label className="form-check-label" htmlFor="memberCheck1">Albert Rodarte</label>
                                                             </div>
                                                         </li>

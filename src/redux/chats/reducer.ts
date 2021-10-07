@@ -4,7 +4,7 @@ import { ChatsActionTypes, ChatsState } from "./types";
 export const INIT_STATE: ChatsState = {
   favourites: [],
   directMessages: [],
-  channels: []
+  channels: [],
 };
 
 const Chats = (state = INIT_STATE, action: any) => {
@@ -24,6 +24,7 @@ const Chats = (state = INIT_STATE, action: any) => {
             directMessages: action.payload.data,
             isDirectMessagesFetched: true,
             getDirectMessagesLoading: false,
+            isContactsAdded: false,
           };
         case ChatsActionTypes.GET_CHANNELS:
           return {
@@ -31,6 +32,12 @@ const Chats = (state = INIT_STATE, action: any) => {
             channels: action.payload.data,
             isChannelsFetched: true,
             getChannelsLoading: false,
+          };
+        case ChatsActionTypes.ADD_CONTACTS:
+          return {
+            ...state,
+            isContactsAdded: true,
+            addContactsLoading: false
           };
         default:
           return { ...state };
@@ -56,6 +63,12 @@ const Chats = (state = INIT_STATE, action: any) => {
             isChannelsFetched: false,
             getChannelsLoading: false,
           };
+        case ChatsActionTypes.ADD_CONTACTS:
+          return {
+            ...state,
+            isContactsAdded: false,
+            addContactsLoading: false
+          };
         default:
           return { ...state };
       }
@@ -78,6 +91,12 @@ const Chats = (state = INIT_STATE, action: any) => {
         ...state,
         isChannelsFetched: true,
         getChannelsLoading: false,
+      };
+    case ChatsActionTypes.ADD_CONTACTS:
+      return {
+        ...state,
+        isContactsAdded: true,
+        addContactsLoading: false
       };
 
     default:

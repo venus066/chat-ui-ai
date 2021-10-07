@@ -56,7 +56,7 @@ const favourites: Array<UserTypes> = [
     },
 ];
 
-const directMessages: Array<UserTypes> = [
+let directMessages: Array<UserTypes> = [
     {
         id: "614ecab49785656f162d67db",
         firstName: "Tonia",
@@ -106,6 +106,9 @@ const directMessages: Array<UserTypes> = [
     },
 ];
 
+const onChangeDirectMessages = (newData: Array<UserTypes>) => {
+    directMessages = newData;
+};
 export interface ChannelTypes {
     id: number,
     name: string,
@@ -137,4 +140,4 @@ const channels: Array<ChannelTypes> = [
         name: "Reporting",
     },
 ];
-export { favourites, directMessages, channels };
+export { favourites, directMessages, channels, onChangeDirectMessages };

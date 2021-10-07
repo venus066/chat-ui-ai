@@ -1,245 +1,221 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import classnames from "classnames";
 
-const ContactModal = () => {
+import {
+  Form,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Label,
+  Input,
+  InputGroup,
+} from "reactstrap";
+
+//redux
+import { useSelector, useDispatch } from "react-redux";
+
+// components
+import AppSimpleBar from "./AppSimpleBar";
+import EmptyStateContacts from "./EmptyStateContacts";
+
+//utils
+import { DivideByKeyResultTypes, divideByKey } from "../utils";
+
+// interfaaces
+import { ContactTypes } from "../data/contacts";
+import { useContacts } from "../hooks";
+
+interface ContactItemProps {
+  contact: ContactTypes;
+  selected: boolean;
+  onSelectContact: (id: string | number, selected: boolean) => void;
+}
+const ContactItem = ({ contact, selected, onSelectContact }: ContactItemProps) => {
+  const fullName = `${contact.firstName} ${contact.lastName}`;
+  const onClick = () => {
+    onSelectContact(contact.id, !selected);
+  };
+
   return (
-    <div className="modal fade contactModal" tabIndex={-1} aria-hidden="true">
-      <div className="modal-dialog modal-dialog-centered">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title">Contacts</h5>
-            <button
-              type="button"
-              className="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div className="modal-body p-4">
-            <div className="input-group mb-4">
-              <input
-                type="text"
-                className="form-control bg-light border-0 pe-0"
-                placeholder="Search here.."
-                aria-label="Example text with button addon"
-                aria-describedby="contactSearchbtn-addon"
-              />
-              <button
-                className="btn btn-light"
-                type="button"
-                id="contactSearchbtn-addon"
-              >
-                <i className="bx bx-search align-middle"></i>
-              </button>
-            </div>
-
-            <div className="d-flex align-items-center px-1">
-              <div className="flex-grow-1">
-                <h4 className=" font-size-11 text-muted text-uppercase">
-                  Contacts
-                </h4>
-              </div>
-            </div>
-            <div
-              className="contact-modal-list mx-n4 px-1"
-              data-simplebar
-              style={{ maxHeight: "200px" }}
-            >
-              <div>
-                <div className="contact-list-title">A</div>
-
-                <ul className="list-unstyled contact-list">
-                  <li>
-                    <div>
-                      <h5 className="font-size-14 m-0">Albert Rodarte</h5>
-                    </div>
-                  </li>
-
-                  <li>
-                    <div>
-                      <h5 className="font-size-14 m-0">Allison Etter</h5>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              {/* end contact list A */}
-
-              <div className="mt-3">
-                <div className="contact-list-title">C</div>
-
-                <ul className="list-unstyled contact-list">
-                  <li>
-                    <div>
-                      <h5 className="font-size-14 m-0">Craig Smiley</h5>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              {/* end contact list C */}
-
-              <div className="mt-3">
-                <div className="contact-list-title">D</div>
-
-                <ul className="list-unstyled contact-list">
-                  <li>
-                    <div>
-                      <h5 className="font-size-14 m-0">Daniel Clay</h5>
-                    </div>
-                  </li>
-
-                  <li>
-                    <div>
-                      <h5 className="font-size-14 m-0">Doris Brown</h5>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              {/* end contact list D */}
-
-              <div className="mt-3">
-                <div className="contact-list-title">I</div>
-
-                <ul className="list-unstyled contact-list">
-                  <li>
-                    <div>
-                      <h5 className="font-size-14 m-0">Iris Wells</h5>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              {/* end contact list I */}
-
-              <div className="mt-3">
-                <div className="contact-list-title">J</div>
-
-                <ul className="list-unstyled contact-list">
-                  <li>
-                    <div>
-                      <h5 className="font-size-14 m-0">Juan Flakes</h5>
-                    </div>
-                  </li>
-
-                  <li>
-                    <div>
-                      <h5 className="font-size-14 m-0">John Hall</h5>
-                    </div>
-                  </li>
-
-                  <li>
-                    <div>
-                      <h5 className="font-size-14 m-0">Joy Southern</h5>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              {/* end contact list J */}
-
-              <div className="mt-3">
-                <div className="contact-list-title">M</div>
-
-                <ul className="list-unstyled contact-list">
-                  <li>
-                    <div>
-                      <h5 className="font-size-14 m-0">Mary Farmer</h5>
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <h5 className="font-size-14 m-0">Mark Messer</h5>
-                    </div>
-                  </li>
-
-                  <li>
-                    <div>
-                      <h5 className="font-size-14 m-0">Michael Hinton</h5>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              {/* end contact list M */}
-
-              <div className="mt-3">
-                <div className="contact-list-title">O</div>
-
-                <ul className="list-unstyled contact-list">
-                  <li>
-                    <div>
-                      <h5 className="font-size-14 m-0">Ossie Wilson</h5>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              {/* end contact list O */}
-
-              <div className="mt-3">
-                <div className="contact-list-title">P</div>
-
-                <ul className="list-unstyled contact-list">
-                  <li>
-                    <div>
-                      <h5 className="font-size-14 m-0">Phillis Griffin</h5>
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <h5 className="font-size-14 m-0">Paul Haynes</h5>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              {/* end contact list P */}
-
-              <div className="mt-3">
-                <div className="contact-list-title">R</div>
-
-                <ul className="list-unstyled contact-list">
-                  <li>
-                    <div>
-                      <h5 className="font-size-14 m-0">Rocky Jackson</h5>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              {/* end contact list R */}
-
-              <div className="mt-3">
-                <div className="contact-list-title">S</div>
-
-                <ul className="list-unstyled contact-list mb-0">
-                  <li>
-                    <div>
-                      <h5 className="font-size-14 m-0">Sara Muller</h5>
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <h5 className="font-size-14 m-0">Simon Velez</h5>
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <h5 className="font-size-14 m-0">Steve Walker</h5>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              {/* end contact list S */}
-            </div>
-          </div>
-          <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-link"
-              data-bs-dismiss="modal"
-            >
-              Cancel
-            </button>
-            <button type="button" className="btn btn-primary">
-              <i className="bx bxs-send align-middle"></i>
-            </button>
-          </div>
-        </div>
+    <li className={classnames({ "selected": selected })} onClick={onClick}>
+      <div>
+        <h5 className="font-size-14 m-0">{fullName}</h5>
       </div>
+    </li>
+  );
+};
+interface CharacterItemProps {
+  letterContacts: DivideByKeyResultTypes;
+  index: number;
+  totalContacts: number;
+  selectedContacts: Array<number | string>;
+  onSelectContact: (id: string | number, selected: boolean) => void;
+}
+
+const CharacterItem = ({ letterContacts, index, totalContacts, selectedContacts, onSelectContact }: CharacterItemProps) => {
+  return (
+    <div className={classnames({ "mt-3": index !== 0 })}>
+      <div className="contact-list-title">{letterContacts.letter}</div>
+
+      <ul className={classnames("list-unstyled", "contact-list", { "mb-0": index + 1 === totalContacts })}>
+        {(letterContacts.data || []).map((contact: any, key: number) => {
+          const selected: boolean = selectedContacts.includes(contact.id);
+          return (
+            <ContactItem contact={contact} key={key} selected={selected} onSelectContact={onSelectContact} />
+          );
+        })}
+      </ul>
     </div>
+  );
+};
+interface ContactModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onAddContact: (contacts: Array<string | number>) => void;
+}
+const ContactModal = ({ isOpen, onClose, onAddContact }: ContactModalProps) => {
+
+  const { contactsList } = useSelector(
+    (state: any) => ({
+      contactsList: state.Contacts.contacts,
+    })
+  );
+
+  /*
+  contacts hook
+  */
+  const { categorizedContacts, totalContacts } = useContacts();
+  const [contacts, setContacts] = useState<any>([]);
+  useEffect(() => {
+    setContacts(categorizedContacts);
+  }, [categorizedContacts]);
+
+  /*
+  contact search
+  */
+  const [search, setSearch] = useState("");
+  const onChangeSearch = (value: string) => {
+    setSearch(value);
+    let modifiedContacts = [...contactsList];
+    let filteredContacts = (modifiedContacts || []).filter((c: any) =>
+      c["firstName"].toLowerCase().includes(value.toLowerCase())
+    );
+    const formattedContacts = divideByKey("firstName", filteredContacts);
+    setContacts(formattedContacts);
+  };
+
+  const totalC = (contacts || []).length;
+
+  /*
+  select contacts
+  */
+  const [selectedContacts, setSelectedContacts] = useState<Array<string | number>>([]);
+  const onSelectContact = (id: string | number, selected: boolean) => {
+    let modifiedList: Array<string | number> = [...selectedContacts];
+    if (selected) {
+      modifiedList = [...modifiedList, id];
+    } else {
+      modifiedList = modifiedList.filter((m) => m + '' !== id + '');
+    }
+    setSelectedContacts(modifiedList);
+  };
+
+  /*
+  disale button
+  */
+  const disabled = selectedContacts.length === 0;
+
+  /*
+  submit data
+  */
+  const onSubmit = () => {
+    onAddContact(selectedContacts);
+    // onClose();
+  };
+
+  return (
+    <Modal isOpen={isOpen} toggle={onClose} tabIndex={-1} centered className="contactModal">
+
+      <ModalHeader
+        className="modal-title-custom"
+        toggle={onClose}
+      >
+        Add Contact
+      </ModalHeader>
+      <ModalBody className="p-4">
+        <InputGroup className="mb-4">
+          <Input
+            type="text"
+            className="form-control bg-light border-0 pe-0"
+            placeholder="Search here.."
+            aria-label="Example text with button addon"
+            aria-describedby="contactSearchbtn-addon"
+            value={search || ''}
+            onChange={(e: any) => {
+              onChangeSearch(e.target.value);
+            }}
+          />
+          <Button
+            color="light"
+            type="button"
+            id="contactSearchbtn-addon"
+          >
+            <i className="bx bx-search align-middle"></i>
+          </Button>
+        </InputGroup>
+
+        {
+          totalC === 0 ?
+            <EmptyStateContacts searchedText={search} />
+            :
+            <>
+              <div className="d-flex align-items-center px-1">
+                <div className="flex-grow-1">
+                  <h4 className=" font-size-11 text-muted text-uppercase">
+                    Contacts
+                  </h4>
+                </div>
+              </div>
+              <AppSimpleBar
+                className="contact-modal-list mx-n4 px-1"
+                style={{ maxHeight: "200px" }}
+              >
+                {(contacts || []).map(
+                  (letterContacts: DivideByKeyResultTypes, key: number) => (
+                    <CharacterItem
+                      letterContacts={letterContacts}
+                      key={key}
+                      index={key}
+                      totalContacts={totalContacts}
+                      selectedContacts={selectedContacts}
+                      onSelectContact={onSelectContact}
+                    />
+                  )
+                )}
+              </AppSimpleBar>
+            </>
+        }
+
+      </ModalBody>
+      <ModalFooter>
+        <Button
+          type="button"
+          color="link"
+        >
+          Cancel
+        </Button>
+        <Button
+          type="button"
+          color="primary"
+          disabled={disabled}
+          onClick={onSubmit}
+        >
+          <i className="bx bxs-send align-middle"></i>
+        </Button>
+      </ModalFooter>
+    </Modal>
   );
 };
 

@@ -17,7 +17,7 @@ import {
   bookmarks, onChangeBookmark,
 
   // chats
-  favourites, directMessages, channels
+  favourites, directMessages, channels, onChangeDirectMessages
 } from "../data/index";
 import { settings } from "../data/settings";
 
@@ -341,6 +341,28 @@ const fakeBackend = () => {
     return new Promise((resolve, reject) => {
       if (channels) {
         resolve([200, channels]);
+      } else {
+        reject(["Some thing went wrong!"]);
+      }
+    });
+  });
+
+  mock.onPost(url.ADD_CONTACTS).reply(config => {
+    const data = JSON.parse(config["data"]);
+
+    return new Promise((resolve, reject) => {
+      if (data) {
+        let newC: Array<any> = [];
+        for (let index = 0; index < (data || []).length; index++) {
+          const contactId = data[index];
+          const contact = contacts.find((c: any) => c.id + '' === contactId);
+          if (contact) {
+            newC = [...newC, contact];
+          }
+        }
+        onChangeDirectMessages([...directMessages, ...newC]);
+        console.log(directMessages, newC);
+        resolve([200, "Contacts Added!"]);
       } else {
         reject(["Some thing went wrong!"]);
       }

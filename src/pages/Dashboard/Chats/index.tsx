@@ -9,11 +9,12 @@ import { useSelector, useDispatch } from "react-redux";
 import Loader from "../../../components/Loader";
 import AppSimpleBar from "../../../components/AppSimpleBar";
 import AddGroupModal from "../../../components/AddGroupModal";
-import AddContactModal from "../../../components/AddContactModal";
+import InviteContactModal from "../../../components/InviteContactModal";
 import Favourites from "./Favourites";
 import DirectMessages from "./DirectMessages";
 import Chanels from "./Chanels";
 import AddButton from "../../../components/AddButton";
+import ContactModal from "../../../components/ContactModal";
 
 // actions
 import {
@@ -21,18 +22,22 @@ import {
   resetContacts,
   getFavourites,
   getDirectMessages,
-  getChannels
+  getChannels,
+  addContacts
 } from "../../../redux/actions";
 
 interface IndexProps { }
 const Index = (props: IndexProps) => {
   const dispatch = useDispatch();
-  const { isContactInvited, favourites, directMessages, channels } = useSelector(
+  const { isContactInvited, favourites, directMessages, channels,
+    isContactsAdded
+  } = useSelector(
     (state: any) => ({
       isContactInvited: state.Contacts.isContactInvited,
       favourites: state.Chats.favourites,
       directMessages: state.Chats.directMessages,
       channels: state.Chats.channels,
+      isContactsAdded: state.Chats.isContactsAdded,
     })
   );
 
@@ -46,7 +51,7 @@ const Index = (props: IndexProps) => {
   }, [dispatch]);
 
   /*
-  add contact modal handeling
+  invite contact modal handeling
   */
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const openModal = () => {
@@ -71,7 +76,25 @@ const Index = (props: IndexProps) => {
     }
   }, [dispatch, isContactInvited]);
 
-
+  /*
+  contact add handeling
+  */
+  const [isOpenAddContact, setIsOpenAddContact] = useState<boolean>(false);
+  const openAddContactModal = () => {
+    setIsOpenAddContact(true);
+  };
+  const closeAddContactModal = () => {
+    setIsOpenAddContact(false);
+  };
+  const onAddContact = (contacts: Array<string | number>) => {
+    dispatch(addContacts(contacts));
+  };
+  useEffect(() => {
+    if (isContactsAdded) {
+      setIsOpenAddContact(false);
+      dispatch(getDirectMessages());
+    }
+  }, [dispatch, isContactsAdded]);
   return <>
     <div>
       <div className="px-4 pt-4">
@@ -105,7 +128,7 @@ const Index = (props: IndexProps) => {
         <Favourites users={favourites} />
 
         {/* direct messages */}
-        <DirectMessages users={directMessages} />
+        <DirectMessages users={directMessages} openAddContact={openAddContactModal} />
 
         {/* channels list */}
         <Chanels channels={channels} />
@@ -118,11 +141,23 @@ const Index = (props: IndexProps) => {
     <AddGroupModal />
 
     {/* add contact modal */}
-    <AddContactModal
-      isOpen={isOpen}
-      onClose={closeModal}
-      onInvite={onInviteContact}
-    />
+    {
+      isOpen && <InviteContactModal
+        isOpen={isOpen}
+        onClose={closeModal}
+        onInvite={onInviteContact}
+      />
+    }
+
+    {
+      isOpenAddContact &&
+      <ContactModal
+        isOpen={isOpenAddContact}
+        onClose={closeAddContactModal}
+        onAddContact={onAddContact}
+      />
+    }
+
   </>;
 };
 

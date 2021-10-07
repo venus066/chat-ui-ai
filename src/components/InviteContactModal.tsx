@@ -15,16 +15,16 @@ interface DataTypes {
   name: string | null;
   message: string | null;
 }
-interface AddContactModalProps {
+interface InviteContactModalProps {
   isOpen: boolean;
   onClose: () => void;
   onInvite: (data: any) => void;
 }
-const AddContactModal = ({
+const InviteContactModal = ({
   isOpen,
   onClose,
   onInvite,
-}: AddContactModalProps) => {
+}: InviteContactModalProps) => {
   /*
   data input handeling
   */
@@ -64,10 +64,12 @@ const AddContactModal = ({
   }, [data]);
   return (
     <Modal isOpen={isOpen} toggle={onClose} tabIndex={-1} centered scrollable>
-      <ModalHeader className="modal-title-custom" toggle={onClose}>
+      <ModalHeader className="modal-title-custom"
+        toggle={onClose}
+      >
         Add Contact
       </ModalHeader>
-      <ModalBody className=" p-4">
+      <ModalBody className="p-4">
         <Form>
           <div className="mb-3">
             <Label htmlFor="AddContactModalemail-input" className="form-label">
@@ -136,4 +138,4 @@ const AddContactModal = ({
   );
 };
 
-export default AddContactModal;
+export default InviteContactModal;

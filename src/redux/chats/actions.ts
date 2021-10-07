@@ -25,3 +25,8 @@ export const getDirectMessages = () => ({
 export const getChannels = () => ({
   type: ChatsActionTypes.GET_CHANNELS,
 });
+
+export const addContacts = (contacts: Array<string | number>) => ({
+  type: ChatsActionTypes.ADD_CONTACTS,
+  payload: contacts
+});
