@@ -35,7 +35,7 @@ const ContactItem = ({ contact }: ContactItemProps) => {
     "bg-pink",
     "bg-purple",
   ];
-  const random = Math.floor(Math.random() * colors.length);
+  const [color] = useState(Math.floor(Math.random() * colors.length));
 
   return (
     <li>
@@ -55,7 +55,7 @@ const ContactItem = ({ contact }: ContactItemProps) => {
                   "rounded-circle",
                   "font-size-10",
                   "text-uppercase",
-                  colors[random]
+                  colors[color]
                 )}
               >
                 {shortName}

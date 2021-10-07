@@ -14,8 +14,10 @@ import {
   calls,
 
   // bookmarks
-  bookmarks,
-  onChangeBookmark,
+  bookmarks, onChangeBookmark,
+
+  // chats
+  favourites, directMessages, channels
 } from "../data/index";
 import { settings } from "../data/settings";
 
@@ -308,6 +310,43 @@ const fakeBackend = () => {
       }
     });
   });
+
+  /*
+  chats
+  */
+  /*
+   settings
+   */
+  mock.onGet(url.GET_FAVOURITES).reply(config => {
+    return new Promise((resolve, reject) => {
+      if (favourites) {
+        resolve([200, favourites]);
+      } else {
+        reject(["Some thing went wrong!"]);
+      }
+    });
+  });
+
+  mock.onGet(url.GET_DIRECT_MESSAGES).reply(config => {
+    return new Promise((resolve, reject) => {
+      if (directMessages) {
+        resolve([200, directMessages]);
+      } else {
+        reject(["Some thing went wrong!"]);
+      }
+    });
+  });
+
+  mock.onGet(url.GET_CHANNELS).reply(config => {
+    return new Promise((resolve, reject) => {
+      if (channels) {
+        resolve([200, channels]);
+      } else {
+        reject(["Some thing went wrong!"]);
+      }
+    });
+  });
+
 };
 
 export default fakeBackend;

@@ -23,7 +23,7 @@ const ProfileImage = ({ call }: ProfileImageProps) => {
     "bg-pink",
     "bg-purple",
   ];
-  const random = Math.floor(Math.random() * colors.length);
+  const [color] = useState(Math.floor(Math.random() * colors.length));
   const displayNumbers =
     call.peoplesAvailableOnCall > 2 ? call.peoplesAvailableOnCall - 1 : 0;
   const displayProfile =
@@ -34,8 +34,8 @@ const ProfileImage = ({ call }: ProfileImageProps) => {
       : null;
   const groupProfile = displayProfile
     ? `${displayProfile.firstName.charAt(0)}${displayProfile.lastName.charAt(
-        0
-      )}`
+      0
+    )}`
     : "";
 
   return (
@@ -58,7 +58,7 @@ const ProfileImage = ({ call }: ProfileImageProps) => {
                       "rounded-circle",
                       "text-uppercase",
                       "text-white",
-                      colors[random]
+                      colors[color]
                     )}
                   >
                     {groupProfile}
@@ -91,7 +91,7 @@ const ProfileImage = ({ call }: ProfileImageProps) => {
               "rounded-circle",
               "text-uppercase",
               "text-white",
-              colors[random]
+              colors[color]
             )}
           >
             {shortName}

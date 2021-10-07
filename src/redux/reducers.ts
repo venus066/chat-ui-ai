@@ -9,6 +9,7 @@ import Contacts from "./contacts/reducer";
 import Calls from "./calls/reducer";
 import Bookmarks from "./bookmarks/reducer";
 import Settings from "./settings/reducer";
+import Chats from "./chats/reducer";
 
 export default combineReducers({
   ForgetPassword,
@@ -20,4 +21,5 @@ export default combineReducers({
   Calls,
   Bookmarks,
   Settings,
+  Chats
 });

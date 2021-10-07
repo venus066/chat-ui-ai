@@ -24,3 +24,8 @@ export const GET_CALLS_LIST = "/calls-list";
 export const GET_BOOKMARKS_LIST = "/bookmarks-list";
 export const DELETE_BOOKMARK = "/bookmarks-delete";
 export const UPDATE_BOOKMARK = "/bookmarks-update";
+
+// chats
+export const GET_FAVOURITES = "/get-favourites";
+export const GET_DIRECT_MESSAGES = "/get-direct-messages";
+export const GET_CHANNELS = "/get-channles";

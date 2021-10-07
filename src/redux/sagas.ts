@@ -9,6 +9,7 @@ import contactsSaga from "./contacts/saga";
 import callsSaga from "./calls/saga";
 import bookmarksSaga from "./bookmarks/saga";
 import settingsSaga from "./settings/saga";
+import chatsSaga from "./chats/saga";
 
 export default function* rootSaga() {
   yield all([
@@ -20,5 +21,6 @@ export default function* rootSaga() {
     callsSaga(),
     bookmarksSaga(),
     settingsSaga(),
+    chatsSaga()
   ]);
 }

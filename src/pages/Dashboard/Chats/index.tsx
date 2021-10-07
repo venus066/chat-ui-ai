@@ -19,19 +19,31 @@ import AddButton from "../../../components/AddButton";
 import {
   inviteContact,
   resetContacts,
+  getFavourites,
+  getDirectMessages,
+  getChannels
 } from "../../../redux/actions";
-
-// dummy data
-import { favourites } from "../../../data";
 
 interface IndexProps { }
 const Index = (props: IndexProps) => {
   const dispatch = useDispatch();
-  const { isContactInvited } = useSelector(
+  const { isContactInvited, favourites, directMessages, channels } = useSelector(
     (state: any) => ({
       isContactInvited: state.Contacts.isContactInvited,
+      favourites: state.Chats.favourites,
+      directMessages: state.Chats.directMessages,
+      channels: state.Chats.channels,
     })
   );
+
+  /*
+  get data
+  */
+  useEffect(() => {
+    dispatch(getFavourites());
+    dispatch(getDirectMessages());
+    dispatch(getChannels());
+  }, [dispatch]);
 
   /*
   add contact modal handeling
@@ -90,13 +102,13 @@ const Index = (props: IndexProps) => {
       <AppSimpleBar className="chat-room-list">
         {/* Start chat-message-list */}
         {/* favourite */}
-        <Favourites favourites={favourites} />
+        <Favourites users={favourites} />
 
         {/* direct messages */}
-        <DirectMessages />
+        <DirectMessages users={directMessages} />
 
         {/* channels list */}
-        <Chanels />
+        <Chanels channels={channels} />
         {/* End chat-message-list */}
       </AppSimpleBar>
 
