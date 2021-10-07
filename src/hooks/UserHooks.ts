@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 //redux
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 // api
 import { getLoggedinUser } from "../api/apiCore";

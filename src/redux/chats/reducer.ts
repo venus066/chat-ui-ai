@@ -32,12 +32,19 @@ const Chats = (state = INIT_STATE, action: any) => {
             channels: action.payload.data,
             isChannelsFetched: true,
             getChannelsLoading: false,
+            isChannelCreated: false,
           };
         case ChatsActionTypes.ADD_CONTACTS:
           return {
             ...state,
             isContactsAdded: true,
             addContactsLoading: false
+          };
+        case ChatsActionTypes.CREATE_CHANNEL:
+          return {
+            ...state,
+            isChannelCreated: true,
+            createChannelLoading: false
           };
         default:
           return { ...state };
@@ -69,6 +76,12 @@ const Chats = (state = INIT_STATE, action: any) => {
             isContactsAdded: false,
             addContactsLoading: false
           };
+        case ChatsActionTypes.CREATE_CHANNEL:
+          return {
+            ...state,
+            isChannelCreated: false,
+            createChannelLoading: false
+          };
         default:
           return { ...state };
       }
@@ -83,22 +96,27 @@ const Chats = (state = INIT_STATE, action: any) => {
     case ChatsActionTypes.GET_DIRECT_MESSAGES:
       return {
         ...state,
-        isDirectMessagesFetched: true,
-        getDirectMessagesLoading: false,
+        isDirectMessagesFetched: false,
+        getDirectMessagesLoading: true,
       };
     case ChatsActionTypes.GET_CHANNELS:
       return {
         ...state,
-        isChannelsFetched: true,
-        getChannelsLoading: false,
+        isChannelsFetched: false,
+        getChannelsLoading: true,
       };
     case ChatsActionTypes.ADD_CONTACTS:
       return {
         ...state,
-        isContactsAdded: true,
-        addContactsLoading: false
+        isContactsAdded: false,
+        addContactsLoading: true
       };
-
+    case ChatsActionTypes.CREATE_CHANNEL:
+      return {
+        ...state,
+        isChannelCreated: false,
+        createChannelLoading: true
+      };
     default:
       return { ...state };
   }

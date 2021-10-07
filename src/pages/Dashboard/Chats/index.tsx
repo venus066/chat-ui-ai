@@ -6,7 +6,6 @@ import { Button, Form, UncontrolledTooltip } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 
 // components
-import Loader from "../../../components/Loader";
 import AppSimpleBar from "../../../components/AppSimpleBar";
 import AddGroupModal from "../../../components/AddGroupModal";
 import InviteContactModal from "../../../components/InviteContactModal";
@@ -23,14 +22,18 @@ import {
   getFavourites,
   getDirectMessages,
   getChannels,
-  addContacts
+  addContacts,
+  createChannel
 } from "../../../redux/actions";
+
+// interfaces
+import { CreateChannelPostData } from "../../../redux/actions";
 
 interface IndexProps { }
 const Index = (props: IndexProps) => {
   const dispatch = useDispatch();
   const { isContactInvited, favourites, directMessages, channels,
-    isContactsAdded
+    isContactsAdded, isChannelCreated
   } = useSelector(
     (state: any) => ({
       isContactInvited: state.Contacts.isContactInvited,
@@ -38,6 +41,7 @@ const Index = (props: IndexProps) => {
       directMessages: state.Chats.directMessages,
       channels: state.Chats.channels,
       isContactsAdded: state.Chats.isContactsAdded,
+      isChannelCreated: state.Chats.isChannelCreated,
     })
   );
 
@@ -95,6 +99,27 @@ const Index = (props: IndexProps) => {
       dispatch(getDirectMessages());
     }
   }, [dispatch, isContactsAdded]);
+
+  /*
+  channel creation handeling
+  */
+  const [isOpenCreateChannel, setIsOpenCreateChannel] = useState<boolean>(false);
+  const openCreateChannelModal = () => {
+    setIsOpenCreateChannel(true);
+  };
+  const closeCreateChannelModal = () => {
+    setIsOpenCreateChannel(false);
+  };
+  const onCreateChannel = (channelData: CreateChannelPostData) => {
+    dispatch(createChannel(channelData));
+  };
+  useEffect(() => {
+    if (isChannelCreated) {
+      setIsOpenCreateChannel(false);
+      dispatch(getChannels());
+    }
+  }, [dispatch, isChannelCreated]);
+
   return <>
     <div>
       <div className="px-4 pt-4">
@@ -131,14 +156,20 @@ const Index = (props: IndexProps) => {
         <DirectMessages users={directMessages} openAddContact={openAddContactModal} />
 
         {/* channels list */}
-        <Chanels channels={channels} />
+        <Chanels channels={channels} openCreateChannel={openCreateChannelModal} />
         {/* End chat-message-list */}
       </AppSimpleBar>
 
     </div>
-    {/* Start chats content */}
-    {/* Start add group Modal */}
-    <AddGroupModal />
+    {/* add group Modal */}
+    {
+      isOpenCreateChannel &&
+      <AddGroupModal
+        isOpen={isOpenCreateChannel}
+        onClose={closeCreateChannelModal}
+        onCreateChannel={onCreateChannel}
+      />
+    }
 
     {/* add contact modal */}
     {
@@ -157,7 +188,6 @@ const Index = (props: IndexProps) => {
         onAddContact={onAddContact}
       />
     }
-
   </>;
 };
 

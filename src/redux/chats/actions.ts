@@ -30,3 +30,13 @@ export const addContacts = (contacts: Array<string | number>) => ({
   type: ChatsActionTypes.ADD_CONTACTS,
   payload: contacts
 });
+
+export interface CreateChannelPostData {
+  name: string;
+  members: Array<string | number>;
+  description?: string;
+}
+export const createChannel = (channelData: CreateChannelPostData) => ({
+  type: ChatsActionTypes.CREATE_CHANNEL,
+  payload: channelData
+});

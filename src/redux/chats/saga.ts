@@ -9,7 +9,8 @@ import {
 
 import {
   getFavourites as getFavouritesApi, getDirectMessages as getDirectMessagesApi, getChannels as getChannelsApi,
-  addContacts as addContactsApi
+  addContacts as addContactsApi,
+  createChannel as createChannelApi
 } from "../../api/index";
 
 import {
@@ -83,6 +84,23 @@ function* addContacts({ payload: contacts }: any) {
     );
   }
 }
+function* createChannel({ payload: channelData }: any) {
+  try {
+    const response: Promise<any> = yield call(createChannelApi, channelData);
+    yield put(
+      chatsApiResponseSuccess(
+        ChatsActionTypes.CREATE_CHANNEL,
+        response
+      )
+    );
+    yield call(showSuccessNotification, response + "");
+  } catch (error: any) {
+    yield call(showErrorNotification, error);
+    yield put(
+      chatsApiResponseError(ChatsActionTypes.CREATE_CHANNEL, error)
+    );
+  }
+}
 
 export function* watchGetFavourites() {
   yield takeEvery(ChatsActionTypes.GET_FAVOURITES, getFavourites);
@@ -97,12 +115,16 @@ export function* watchGetChannels() {
 export function* watchAddContacts() {
   yield takeEvery(ChatsActionTypes.ADD_CONTACTS, addContacts);
 }
+export function* watchCreateChannel() {
+  yield takeEvery(ChatsActionTypes.CREATE_CHANNEL, createChannel);
+}
 function* chatsSaga() {
   yield all([
     fork(watchGetFavourites),
     fork(watchGetDirectMessages),
     fork(watchGetChannels),
-    fork(watchAddContacts)
+    fork(watchAddContacts),
+    fork(watchCreateChannel)
   ]);
 }
 

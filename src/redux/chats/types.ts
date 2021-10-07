@@ -7,6 +7,7 @@ export enum ChatsActionTypes {
   GET_CHANNELS = "@@chats/GET_CHANNELS",
 
   ADD_CONTACTS = "@@chats/ADD_CONTACTS",
+  CREATE_CHANNEL = "@@chats/CREATE_CHANNEL",
 }
 export interface ChatsState {
   favourites: Array<any>;

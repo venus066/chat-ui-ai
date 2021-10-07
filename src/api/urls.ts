@@ -30,3 +30,4 @@ export const GET_FAVOURITES = "/get-favourites";
 export const GET_DIRECT_MESSAGES = "/get-direct-messages";
 export const GET_CHANNELS = "/get-channles";
 export const ADD_CONTACTS = "/add-contact";
+export const CREATE_CHANNEL = "/create-channel";

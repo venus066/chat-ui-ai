@@ -18,4 +18,8 @@ const addContacts = (contacts: Array<string | number>) => {
   return api.create(url.ADD_CONTACTS, contacts);
 };
 
-export { getFavourites, getDirectMessages, getChannels, addContacts };
+const createChannel = (data: object) => {
+  return api.create(url.CREATE_CHANNEL, data);
+};
+
+export { getFavourites, getDirectMessages, getChannels, addContacts, createChannel };

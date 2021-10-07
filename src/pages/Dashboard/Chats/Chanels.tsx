@@ -7,6 +7,7 @@ import AddButton from '../../../components/AddButton';
 
 // interface
 import { ChannelTypes } from "../../../data/chat";
+import { UncontrolledTooltip } from 'reactstrap';
 
 interface ChannelProps {
     channel: ChannelTypes;
@@ -39,8 +40,9 @@ const Channel = ({ channel }: ChannelProps) => {
 };
 interface ChanelsProps {
     channels: Array<ChannelTypes>;
+    openCreateChannel: () => void;
 }
-const Chanels = ({ channels }: ChanelsProps) => {
+const Chanels = ({ channels, openCreateChannel }: ChanelsProps) => {
     return (
         <>
             <div className="d-flex align-items-center px-4 mt-5 mb-2">
@@ -48,11 +50,13 @@ const Chanels = ({ channels }: ChanelsProps) => {
                     <h4 className="mb-0 font-size-11 text-muted text-uppercase">Channels</h4>
                 </div>
                 <div className="flex-shrink-0">
-                    <div data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="bottom" title="Create group">
-
+                    <div id="create-group">
                         {/* Button trigger modal */}
-                        <AddButton onClick={() => { }} /> {/* addgroup-exampleModal */}
+                        <AddButton onClick={openCreateChannel} /> {/* addgroup-exampleModal */}
                     </div>
+                    <UncontrolledTooltip target="create-group" placement="bottom">
+                        Create group
+                    </UncontrolledTooltip>
                 </div>
             </div>
 

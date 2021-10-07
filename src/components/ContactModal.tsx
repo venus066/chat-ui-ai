@@ -2,19 +2,17 @@ import React, { useEffect, useState } from "react";
 import classnames from "classnames";
 
 import {
-  Form,
   Button,
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Label,
   Input,
   InputGroup,
 } from "reactstrap";
 
 //redux
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 // components
 import AppSimpleBar from "./AppSimpleBar";
@@ -132,7 +130,6 @@ const ContactModal = ({ isOpen, onClose, onAddContact }: ContactModalProps) => {
   */
   const onSubmit = () => {
     onAddContact(selectedContacts);
-    // onClose();
   };
 
   return (

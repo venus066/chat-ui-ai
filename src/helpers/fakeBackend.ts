@@ -17,7 +17,7 @@ import {
   bookmarks, onChangeBookmark,
 
   // chats
-  favourites, directMessages, channels, onChangeDirectMessages
+  favourites, directMessages, channels, onChangeDirectMessages, onChangeChannels
 } from "../data/index";
 import { settings } from "../data/settings";
 
@@ -361,10 +361,27 @@ const fakeBackend = () => {
           }
         }
         onChangeDirectMessages([...directMessages, ...newC]);
-        console.log(directMessages, newC);
         resolve([200, "Contacts Added!"]);
       } else {
         reject(["Some thing went wrong!"]);
+      }
+    });
+  });
+
+  mock.onPost(url.CREATE_CHANNEL).reply(config => {
+    const data = JSON.parse(config["data"]);
+    return new Promise((resolve, reject) => {
+      if (data) {
+        const newC = {
+          id: channels[channels.length - 1].id + 1,
+          name: data.name,
+          description: data.description,
+          members: data.members
+        };
+        onChangeChannels([...channels, newC]);
+        resolve([200, "Channel Created!"]);
+      } else {
+        reject([400, "Some thing went wrong!"]);
       }
     });
   });

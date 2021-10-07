@@ -1,9 +1,6 @@
-import avatar1 from "../assets/images/users/avatar-1.jpg";
-import avatar2 from "../assets/images/users/avatar-2.jpg";
 import avatar3 from "../assets/images/users/avatar-3.jpg";
 import avatar4 from "../assets/images/users/avatar-4.jpg";
 import avatar5 from "../assets/images/users/avatar-5.jpg";
-import avatar6 from "../assets/images/users/avatar-6.jpg";
 import avatar7 from "../assets/images/users/avatar-7.jpg";
 import avatar8 from "../assets/images/users/avatar-8.jpg";
 import avatar9 from "../assets/images/users/avatar-9.jpg";
@@ -116,7 +113,7 @@ export interface ChannelTypes {
         unRead: number;
     };
 }
-const channels: Array<ChannelTypes> = [
+let channels: Array<ChannelTypes> = [
     {
         id: 1,
         name: "Landing Design",
@@ -140,4 +137,8 @@ const channels: Array<ChannelTypes> = [
         name: "Reporting",
     },
 ];
-export { favourites, directMessages, channels, onChangeDirectMessages };
+
+const onChangeChannels = (newData: Array<ChannelTypes>) => {
+    channels = newData;
+};
+export { favourites, directMessages, channels, onChangeDirectMessages, onChangeChannels };
