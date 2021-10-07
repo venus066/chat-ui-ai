@@ -21,5 +21,5 @@ export default combineReducers({
   Calls,
   Bookmarks,
   Settings,
-  Chats
+  Chats,
 });

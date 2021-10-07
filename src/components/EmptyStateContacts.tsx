@@ -1,17 +1,15 @@
-import React from 'react';
+import React from "react";
 
 interface EmptyStateContactsProps {
-    searchedText: string;
+  searchedText: string;
 }
 const EmptyStateContacts = ({ searchedText }: EmptyStateContactsProps) => {
-    return (
-        <div className="bg-soft-secondary rounded p-4 text-secondary text-center">
-            <i className="bx bx-info-circle fs-1 mb-3" />
-            <div>
-                No results found for "{searchedText}".
-            </div>
-        </div>
-    );
+  return (
+    <div className="bg-soft-secondary rounded p-4 text-secondary text-center">
+      <i className="bx bx-info-circle fs-1 mb-3" />
+      <div>No results found for "{searchedText}".</div>
+    </div>
+  );
 };
 
 export default EmptyStateContacts;

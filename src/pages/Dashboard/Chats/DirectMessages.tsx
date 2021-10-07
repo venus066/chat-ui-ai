@@ -1,8 +1,8 @@
-import React from 'react';
-import { UncontrolledTooltip } from 'reactstrap';
+import React from "react";
+import { UncontrolledTooltip } from "reactstrap";
 
 //components
-import AddButton from '../../../components/AddButton';
+import AddButton from "../../../components/AddButton";
 
 // interface
 import { UserTypes } from "../../../data/chat";
@@ -11,44 +11,41 @@ import { UserTypes } from "../../../data/chat";
 import ChatUser from "./ChatUser";
 
 interface DirectMessagesProps {
-    users: Array<UserTypes>;
-    openAddContact: () => void;
+  users: Array<UserTypes>;
+  openAddContact: () => void;
 }
 const DirectMessages = ({ users, openAddContact }: DirectMessagesProps) => {
-    /*
+  /*
     add contacts
     */
-    return (
-        <>
-            <div className="d-flex align-items-center px-4 mt-5 mb-2">
-                <div className="flex-grow-1">
-                    <h4 className="mb-0 font-size-11 text-muted text-uppercase">Direct Messages</h4>
-                </div>
-                <div className="flex-shrink-0">
-                    <div id="new-message" title="New Message">
+  return (
+    <>
+      <div className="d-flex align-items-center px-4 mt-5 mb-2">
+        <div className="flex-grow-1">
+          <h4 className="mb-0 font-size-11 text-muted text-uppercase">
+            Direct Messages
+          </h4>
+        </div>
+        <div className="flex-shrink-0">
+          <div id="new-message" title="New Message">
+            {/* Button trigger modal */}
+            <AddButton onClick={openAddContact} /> {/* contactModal */}
+          </div>
+          <UncontrolledTooltip target="new-message" placement="bottom">
+            New Message
+          </UncontrolledTooltip>
+        </div>
+      </div>
 
-                        {/* Button trigger modal */}
-                        <AddButton onClick={openAddContact} /> {/* contactModal */}
-
-                    </div>
-                    <UncontrolledTooltip target="new-message" placement="bottom">
-                        New Message
-                    </UncontrolledTooltip>
-                </div>
-            </div>
-
-            <div className="chat-message-list">
-
-                <ul className="list-unstyled chat-list chat-user-list">
-                    {
-                        (users || []).map((user: UserTypes, key: number) =>
-                            <ChatUser user={user} key={key} />
-                        )
-                    }
-                </ul>
-            </div>
-        </>
-    );
+      <div className="chat-message-list">
+        <ul className="list-unstyled chat-list chat-user-list">
+          {(users || []).map((user: UserTypes, key: number) => (
+            <ChatUser user={user} key={key} />
+          ))}
+        </ul>
+      </div>
+    </>
+  );
 };
 
 export default DirectMessages;

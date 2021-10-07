@@ -38,13 +38,13 @@ const Chats = (state = INIT_STATE, action: any) => {
           return {
             ...state,
             isContactsAdded: true,
-            addContactsLoading: false
+            addContactsLoading: false,
           };
         case ChatsActionTypes.CREATE_CHANNEL:
           return {
             ...state,
             isChannelCreated: true,
-            createChannelLoading: false
+            createChannelLoading: false,
           };
         default:
           return { ...state };
@@ -74,13 +74,13 @@ const Chats = (state = INIT_STATE, action: any) => {
           return {
             ...state,
             isContactsAdded: false,
-            addContactsLoading: false
+            addContactsLoading: false,
           };
         case ChatsActionTypes.CREATE_CHANNEL:
           return {
             ...state,
             isChannelCreated: false,
-            createChannelLoading: false
+            createChannelLoading: false,
           };
         default:
           return { ...state };
@@ -109,13 +109,13 @@ const Chats = (state = INIT_STATE, action: any) => {
       return {
         ...state,
         isContactsAdded: false,
-        addContactsLoading: true
+        addContactsLoading: true,
       };
     case ChatsActionTypes.CREATE_CHANNEL:
       return {
         ...state,
         isChannelCreated: false,
-        createChannelLoading: true
+        createChannelLoading: true,
       };
     default:
       return { ...state };

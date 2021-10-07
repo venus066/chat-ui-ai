@@ -14,10 +14,15 @@ import {
   calls,
 
   // bookmarks
-  bookmarks, onChangeBookmark,
+  bookmarks,
+  onChangeBookmark,
 
   // chats
-  favourites, directMessages, channels, onChangeDirectMessages, onChangeChannels
+  favourites,
+  directMessages,
+  channels,
+  onChangeDirectMessages,
+  onChangeChannels,
 } from "../data/index";
 import { settings } from "../data/settings";
 
@@ -355,7 +360,7 @@ const fakeBackend = () => {
         let newC: Array<any> = [];
         for (let index = 0; index < (data || []).length; index++) {
           const contactId = data[index];
-          const contact = contacts.find((c: any) => c.id + '' === contactId);
+          const contact = contacts.find((c: any) => c.id + "" === contactId);
           if (contact) {
             newC = [...newC, contact];
           }
@@ -376,7 +381,7 @@ const fakeBackend = () => {
           id: channels[channels.length - 1].id + 1,
           name: data.name,
           description: data.description,
-          members: data.members
+          members: data.members,
         };
         onChangeChannels([...channels, newC]);
         resolve([200, "Channel Created!"]);
@@ -385,7 +390,6 @@ const fakeBackend = () => {
       }
     });
   });
-
 };
 
 export default fakeBackend;

@@ -20,14 +20,14 @@ const useProfile = () => {
 };
 
 const useContacts = () => {
-  const { contactsList } = useSelector(
-    (state: any) => ({
-      contactsList: state.Contacts.contacts,
-    })
-  );
+  const { contactsList } = useSelector((state: any) => ({
+    contactsList: state.Contacts.contacts,
+  }));
 
   const [contacts, setContacts] = useState<Array<any>>([]);
-  const [categorizedContacts, setCategorizedContacts] = useState<Array<any>>([]);
+  const [categorizedContacts, setCategorizedContacts] = useState<Array<any>>(
+    []
+  );
   useEffect(() => {
     if (contactsList.length > 0) {
       setContacts(contactsList);
@@ -43,7 +43,6 @@ const useContacts = () => {
 
   const totalContacts = (categorizedContacts || []).length;
   return { categorizedContacts, totalContacts };
-
 };
 
 export { useProfile, useContacts };

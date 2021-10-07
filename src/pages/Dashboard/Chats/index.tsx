@@ -23,27 +23,30 @@ import {
   getDirectMessages,
   getChannels,
   addContacts,
-  createChannel
+  createChannel,
 } from "../../../redux/actions";
 
 // interfaces
 import { CreateChannelPostData } from "../../../redux/actions";
 
-interface IndexProps { }
+interface IndexProps {}
 const Index = (props: IndexProps) => {
   const dispatch = useDispatch();
-  const { isContactInvited, favourites, directMessages, channels,
-    isContactsAdded, isChannelCreated
-  } = useSelector(
-    (state: any) => ({
-      isContactInvited: state.Contacts.isContactInvited,
-      favourites: state.Chats.favourites,
-      directMessages: state.Chats.directMessages,
-      channels: state.Chats.channels,
-      isContactsAdded: state.Chats.isContactsAdded,
-      isChannelCreated: state.Chats.isChannelCreated,
-    })
-  );
+  const {
+    isContactInvited,
+    favourites,
+    directMessages,
+    channels,
+    isContactsAdded,
+    isChannelCreated,
+  } = useSelector((state: any) => ({
+    isContactInvited: state.Contacts.isContactInvited,
+    favourites: state.Chats.favourites,
+    directMessages: state.Chats.directMessages,
+    channels: state.Chats.channels,
+    isContactsAdded: state.Chats.isContactsAdded,
+    isChannelCreated: state.Chats.isChannelCreated,
+  }));
 
   /*
   get data
@@ -103,7 +106,8 @@ const Index = (props: IndexProps) => {
   /*
   channel creation handeling
   */
-  const [isOpenCreateChannel, setIsOpenCreateChannel] = useState<boolean>(false);
+  const [isOpenCreateChannel, setIsOpenCreateChannel] =
+    useState<boolean>(false);
   const openCreateChannelModal = () => {
     setIsOpenCreateChannel(true);
   };
@@ -120,75 +124,90 @@ const Index = (props: IndexProps) => {
     }
   }, [dispatch, isChannelCreated]);
 
-  return <>
-    <div>
-      <div className="px-4 pt-4">
-        <div className="d-flex align-items-start">
-          <div className="flex-grow-1">
-            <h4 className="mb-4">Chats</h4>
-          </div>
-          <div className="flex-shrink-0">
-            <div id="add-contact">
-
-              {/* Button trigger modal */}
-              <AddButton onClick={openModal} />
+  return (
+    <>
+      <div>
+        <div className="px-4 pt-4">
+          <div className="d-flex align-items-start">
+            <div className="flex-grow-1">
+              <h4 className="mb-4">Chats</h4>
             </div>
-            <UncontrolledTooltip target="add-contact" placement="bottom">
-              Add Contact
-            </UncontrolledTooltip>
+            <div className="flex-shrink-0">
+              <div id="add-contact">
+                {/* Button trigger modal */}
+                <AddButton onClick={openModal} />
+              </div>
+              <UncontrolledTooltip target="add-contact" placement="bottom">
+                Add Contact
+              </UncontrolledTooltip>
+            </div>
           </div>
-        </div>
-        <Form>
-          <div className="input-group mb-3">
-            <input type="text" className="form-control bg-light border-0 pe-0" placeholder="Search here.." aria-label="Example text with button addon" aria-describedby="searchbtn-addon" />
-            <Button className="btn btn-light" type="button" id="searchbtn-addon"><i className='bx bx-search align-middle'></i></Button>
-          </div>
-        </Form>
+          <Form>
+            <div className="input-group mb-3">
+              <input
+                type="text"
+                className="form-control bg-light border-0 pe-0"
+                placeholder="Search here.."
+                aria-label="Example text with button addon"
+                aria-describedby="searchbtn-addon"
+              />
+              <Button
+                className="btn btn-light"
+                type="button"
+                id="searchbtn-addon"
+              >
+                <i className="bx bx-search align-middle"></i>
+              </Button>
+            </div>
+          </Form>
+        </div>{" "}
+        {/* .p-4 */}
+        <AppSimpleBar className="chat-room-list">
+          {/* Start chat-message-list */}
+          {/* favourite */}
+          <Favourites users={favourites} />
 
-      </div> {/* .p-4 */}
+          {/* direct messages */}
+          <DirectMessages
+            users={directMessages}
+            openAddContact={openAddContactModal}
+          />
 
-      <AppSimpleBar className="chat-room-list">
-        {/* Start chat-message-list */}
-        {/* favourite */}
-        <Favourites users={favourites} />
+          {/* channels list */}
+          <Chanels
+            channels={channels}
+            openCreateChannel={openCreateChannelModal}
+          />
+          {/* End chat-message-list */}
+        </AppSimpleBar>
+      </div>
+      {/* add group Modal */}
+      {isOpenCreateChannel && (
+        <AddGroupModal
+          isOpen={isOpenCreateChannel}
+          onClose={closeCreateChannelModal}
+          onCreateChannel={onCreateChannel}
+        />
+      )}
 
-        {/* direct messages */}
-        <DirectMessages users={directMessages} openAddContact={openAddContactModal} />
+      {/* add contact modal */}
+      {isOpen && (
+        <InviteContactModal
+          isOpen={isOpen}
+          onClose={closeModal}
+          onInvite={onInviteContact}
+        />
+      )}
 
-        {/* channels list */}
-        <Chanels channels={channels} openCreateChannel={openCreateChannelModal} />
-        {/* End chat-message-list */}
-      </AppSimpleBar>
-
-    </div>
-    {/* add group Modal */}
-    {
-      isOpenCreateChannel &&
-      <AddGroupModal
-        isOpen={isOpenCreateChannel}
-        onClose={closeCreateChannelModal}
-        onCreateChannel={onCreateChannel}
-      />
-    }
-
-    {/* add contact modal */}
-    {
-      isOpen && <InviteContactModal
-        isOpen={isOpen}
-        onClose={closeModal}
-        onInvite={onInviteContact}
-      />
-    }
-
-    {
-      isOpenAddContact &&
-      <ContactModal
-        isOpen={isOpenAddContact}
-        onClose={closeAddContactModal}
-        onAddContact={onAddContact}
-      />
-    }
-  </>;
+      {isOpenAddContact && (
+        <ContactModal
+          isOpen={isOpenAddContact}
+          onClose={closeAddContactModal}
+          onAddContact={onAddContact}
+        />
+      )}
+    </>
+  );
 };
 
 export default Index;

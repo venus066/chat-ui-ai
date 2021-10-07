@@ -6,10 +6,7 @@ export const chatsApiResponseSuccess = (actionType: string, data: any) => ({
   payload: { actionType, data },
 });
 // common error
-export const chatsApiResponseError = (
-  actionType: string,
-  error: string
-) => ({
+export const chatsApiResponseError = (actionType: string, error: string) => ({
   type: ChatsActionTypes.API_RESPONSE_ERROR,
   payload: { actionType, error },
 });
@@ -28,7 +25,7 @@ export const getChannels = () => ({
 
 export const addContacts = (contacts: Array<string | number>) => ({
   type: ChatsActionTypes.ADD_CONTACTS,
-  payload: contacts
+  payload: contacts,
 });
 
 export interface CreateChannelPostData {
@@ -38,5 +35,5 @@ export interface CreateChannelPostData {
 }
 export const createChannel = (channelData: CreateChannelPostData) => ({
   type: ChatsActionTypes.CREATE_CHANNEL,
-  payload: channelData
+  payload: channelData,
 });

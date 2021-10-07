@@ -22,4 +22,10 @@ const createChannel = (data: object) => {
   return api.create(url.CREATE_CHANNEL, data);
 };
 
-export { getFavourites, getDirectMessages, getChannels, addContacts, createChannel };
+export {
+  getFavourites,
+  getDirectMessages,
+  getChannels,
+  addContacts,
+  createChannel,
+};

@@ -2,15 +2,14 @@ import { takeEvery, fork, put, all, call } from "redux-saga/effects";
 
 // Login Redux States
 import { ChatsActionTypes } from "./types";
-import {
-  chatsApiResponseSuccess,
-  chatsApiResponseError,
-} from "./actions";
+import { chatsApiResponseSuccess, chatsApiResponseError } from "./actions";
 
 import {
-  getFavourites as getFavouritesApi, getDirectMessages as getDirectMessagesApi, getChannels as getChannelsApi,
+  getFavourites as getFavouritesApi,
+  getDirectMessages as getDirectMessagesApi,
+  getChannels as getChannelsApi,
   addContacts as addContactsApi,
-  createChannel as createChannelApi
+  createChannel as createChannelApi,
 } from "../../api/index";
 
 import {
@@ -22,15 +21,10 @@ function* getFavourites() {
   try {
     const response: Promise<any> = yield call(getFavouritesApi);
     yield put(
-      chatsApiResponseSuccess(
-        ChatsActionTypes.GET_FAVOURITES,
-        response
-      )
+      chatsApiResponseSuccess(ChatsActionTypes.GET_FAVOURITES, response)
     );
   } catch (error: any) {
-    yield put(
-      chatsApiResponseError(ChatsActionTypes.GET_FAVOURITES, error)
-    );
+    yield put(chatsApiResponseError(ChatsActionTypes.GET_FAVOURITES, error));
   }
 }
 
@@ -38,10 +32,7 @@ function* getDirectMessages() {
   try {
     const response: Promise<any> = yield call(getDirectMessagesApi);
     yield put(
-      chatsApiResponseSuccess(
-        ChatsActionTypes.GET_DIRECT_MESSAGES,
-        response
-      )
+      chatsApiResponseSuccess(ChatsActionTypes.GET_DIRECT_MESSAGES, response)
     );
   } catch (error: any) {
     console.log(error);
@@ -54,51 +45,32 @@ function* getDirectMessages() {
 function* getChannels() {
   try {
     const response: Promise<any> = yield call(getChannelsApi);
-    yield put(
-      chatsApiResponseSuccess(
-        ChatsActionTypes.GET_CHANNELS,
-        response
-      )
-    );
+    yield put(chatsApiResponseSuccess(ChatsActionTypes.GET_CHANNELS, response));
   } catch (error: any) {
-    yield put(
-      chatsApiResponseError(ChatsActionTypes.GET_CHANNELS, error)
-    );
+    yield put(chatsApiResponseError(ChatsActionTypes.GET_CHANNELS, error));
   }
 }
 
 function* addContacts({ payload: contacts }: any) {
   try {
     const response: Promise<any> = yield call(addContactsApi, contacts);
-    yield put(
-      chatsApiResponseSuccess(
-        ChatsActionTypes.ADD_CONTACTS,
-        response
-      )
-    );
+    yield put(chatsApiResponseSuccess(ChatsActionTypes.ADD_CONTACTS, response));
     yield call(showSuccessNotification, response + "");
   } catch (error: any) {
     yield call(showErrorNotification, error);
-    yield put(
-      chatsApiResponseError(ChatsActionTypes.ADD_CONTACTS, error)
-    );
+    yield put(chatsApiResponseError(ChatsActionTypes.ADD_CONTACTS, error));
   }
 }
 function* createChannel({ payload: channelData }: any) {
   try {
     const response: Promise<any> = yield call(createChannelApi, channelData);
     yield put(
-      chatsApiResponseSuccess(
-        ChatsActionTypes.CREATE_CHANNEL,
-        response
-      )
+      chatsApiResponseSuccess(ChatsActionTypes.CREATE_CHANNEL, response)
     );
     yield call(showSuccessNotification, response + "");
   } catch (error: any) {
     yield call(showErrorNotification, error);
-    yield put(
-      chatsApiResponseError(ChatsActionTypes.CREATE_CHANNEL, error)
-    );
+    yield put(chatsApiResponseError(ChatsActionTypes.CREATE_CHANNEL, error));
   }
 }
 
@@ -124,7 +96,7 @@ function* chatsSaga() {
     fork(watchGetDirectMessages),
     fork(watchGetChannels),
     fork(watchAddContacts),
-    fork(watchCreateChannel)
+    fork(watchCreateChannel),
   ]);
 }
 

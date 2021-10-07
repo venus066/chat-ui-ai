@@ -20,7 +20,7 @@ import {
 //utils
 import { divideByKey, DivideByKeyResultTypes } from "../../../utils";
 
-interface IndexProps { }
+interface IndexProps {}
 
 const Index = (props: IndexProps) => {
   const dispatch = useDispatch();

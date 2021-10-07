@@ -30,14 +30,18 @@ interface ContactItemProps {
   selected: boolean;
   onSelectContact: (id: string | number, selected: boolean) => void;
 }
-const ContactItem = ({ contact, selected, onSelectContact }: ContactItemProps) => {
+const ContactItem = ({
+  contact,
+  selected,
+  onSelectContact,
+}: ContactItemProps) => {
   const fullName = `${contact.firstName} ${contact.lastName}`;
   const onClick = () => {
     onSelectContact(contact.id, !selected);
   };
 
   return (
-    <li className={classnames({ "selected": selected })} onClick={onClick}>
+    <li className={classnames({ selected: selected })} onClick={onClick}>
       <div>
         <h5 className="font-size-14 m-0">{fullName}</h5>
       </div>
@@ -52,16 +56,31 @@ interface CharacterItemProps {
   onSelectContact: (id: string | number, selected: boolean) => void;
 }
 
-const CharacterItem = ({ letterContacts, index, totalContacts, selectedContacts, onSelectContact }: CharacterItemProps) => {
+const CharacterItem = ({
+  letterContacts,
+  index,
+  totalContacts,
+  selectedContacts,
+  onSelectContact,
+}: CharacterItemProps) => {
   return (
     <div className={classnames({ "mt-3": index !== 0 })}>
       <div className="contact-list-title">{letterContacts.letter}</div>
 
-      <ul className={classnames("list-unstyled", "contact-list", { "mb-0": index + 1 === totalContacts })}>
+      <ul
+        className={classnames("list-unstyled", "contact-list", {
+          "mb-0": index + 1 === totalContacts,
+        })}
+      >
         {(letterContacts.data || []).map((contact: any, key: number) => {
           const selected: boolean = selectedContacts.includes(contact.id);
           return (
-            <ContactItem contact={contact} key={key} selected={selected} onSelectContact={onSelectContact} />
+            <ContactItem
+              contact={contact}
+              key={key}
+              selected={selected}
+              onSelectContact={onSelectContact}
+            />
           );
         })}
       </ul>
@@ -74,12 +93,9 @@ interface ContactModalProps {
   onAddContact: (contacts: Array<string | number>) => void;
 }
 const ContactModal = ({ isOpen, onClose, onAddContact }: ContactModalProps) => {
-
-  const { contactsList } = useSelector(
-    (state: any) => ({
-      contactsList: state.Contacts.contacts,
-    })
-  );
+  const { contactsList } = useSelector((state: any) => ({
+    contactsList: state.Contacts.contacts,
+  }));
 
   /*
   contacts hook
@@ -109,13 +125,15 @@ const ContactModal = ({ isOpen, onClose, onAddContact }: ContactModalProps) => {
   /*
   select contacts
   */
-  const [selectedContacts, setSelectedContacts] = useState<Array<string | number>>([]);
+  const [selectedContacts, setSelectedContacts] = useState<
+    Array<string | number>
+  >([]);
   const onSelectContact = (id: string | number, selected: boolean) => {
     let modifiedList: Array<string | number> = [...selectedContacts];
     if (selected) {
       modifiedList = [...modifiedList, id];
     } else {
-      modifiedList = modifiedList.filter((m) => m + '' !== id + '');
+      modifiedList = modifiedList.filter(m => m + "" !== id + "");
     }
     setSelectedContacts(modifiedList);
   };
@@ -133,12 +151,14 @@ const ContactModal = ({ isOpen, onClose, onAddContact }: ContactModalProps) => {
   };
 
   return (
-    <Modal isOpen={isOpen} toggle={onClose} tabIndex={-1} centered className="contactModal">
-
-      <ModalHeader
-        className="modal-title-custom"
-        toggle={onClose}
-      >
+    <Modal
+      isOpen={isOpen}
+      toggle={onClose}
+      tabIndex={-1}
+      centered
+      className="contactModal"
+    >
+      <ModalHeader className="modal-title-custom" toggle={onClose}>
         Add Contact
       </ModalHeader>
       <ModalBody className="p-4">
@@ -149,58 +169,49 @@ const ContactModal = ({ isOpen, onClose, onAddContact }: ContactModalProps) => {
             placeholder="Search here.."
             aria-label="Example text with button addon"
             aria-describedby="contactSearchbtn-addon"
-            value={search || ''}
+            value={search || ""}
             onChange={(e: any) => {
               onChangeSearch(e.target.value);
             }}
           />
-          <Button
-            color="light"
-            type="button"
-            id="contactSearchbtn-addon"
-          >
+          <Button color="light" type="button" id="contactSearchbtn-addon">
             <i className="bx bx-search align-middle"></i>
           </Button>
         </InputGroup>
 
-        {
-          totalC === 0 ?
-            <EmptyStateContacts searchedText={search} />
-            :
-            <>
-              <div className="d-flex align-items-center px-1">
-                <div className="flex-grow-1">
-                  <h4 className=" font-size-11 text-muted text-uppercase">
-                    Contacts
-                  </h4>
-                </div>
+        {totalC === 0 ? (
+          <EmptyStateContacts searchedText={search} />
+        ) : (
+          <>
+            <div className="d-flex align-items-center px-1">
+              <div className="flex-grow-1">
+                <h4 className=" font-size-11 text-muted text-uppercase">
+                  Contacts
+                </h4>
               </div>
-              <AppSimpleBar
-                className="contact-modal-list mx-n4 px-1"
-                style={{ maxHeight: "200px" }}
-              >
-                {(contacts || []).map(
-                  (letterContacts: DivideByKeyResultTypes, key: number) => (
-                    <CharacterItem
-                      letterContacts={letterContacts}
-                      key={key}
-                      index={key}
-                      totalContacts={totalContacts}
-                      selectedContacts={selectedContacts}
-                      onSelectContact={onSelectContact}
-                    />
-                  )
-                )}
-              </AppSimpleBar>
-            </>
-        }
-
+            </div>
+            <AppSimpleBar
+              className="contact-modal-list mx-n4 px-1"
+              style={{ maxHeight: "200px" }}
+            >
+              {(contacts || []).map(
+                (letterContacts: DivideByKeyResultTypes, key: number) => (
+                  <CharacterItem
+                    letterContacts={letterContacts}
+                    key={key}
+                    index={key}
+                    totalContacts={totalContacts}
+                    selectedContacts={selectedContacts}
+                    onSelectContact={onSelectContact}
+                  />
+                )
+              )}
+            </AppSimpleBar>
+          </>
+        )}
       </ModalBody>
       <ModalFooter>
-        <Button
-          type="button"
-          color="link"
-        >
+        <Button type="button" color="link">
           Cancel
         </Button>
         <Button

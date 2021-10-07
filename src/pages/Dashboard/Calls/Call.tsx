@@ -34,8 +34,8 @@ const ProfileImage = ({ call }: ProfileImageProps) => {
       : null;
   const groupProfile = displayProfile
     ? `${displayProfile.firstName.charAt(0)}${displayProfile.lastName.charAt(
-      0
-    )}`
+        0
+      )}`
     : "";
 
   return (
