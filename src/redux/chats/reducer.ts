@@ -8,6 +8,7 @@ export const INIT_STATE: ChatsState = {
   selectedChat: null,
   chatUserDetails: {},
   chatUserConversations: [],
+  isOpenUserDetails: false
 };
 
 const Chats = (state = INIT_STATE, action: any) => {
@@ -163,6 +164,11 @@ const Chats = (state = INIT_STATE, action: any) => {
         ...state,
         isUserConversationsFetched: false,
         getUserConversationsLoading: true,
+      };
+    case ChatsActionTypes.TOGGLE_USER_DETAILS_TAB:
+      return {
+        ...state,
+        isOpenUserDetails: action.payload,
       };
     default:
       return { ...state };

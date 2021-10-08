@@ -11,6 +11,7 @@ export enum ChatsActionTypes {
   CHANGE_SELECTED_CHAT = "@@chats/CHANGE_SELECTED_CHAT",
   GET_CHAT_USER_DETAILS = "@@chats/GET_CHAT_USER_DETAILS",
   GET_CHAT_USER_CONVERSATIONS = "@@chats/GET_CHAT_USER_CONVERSATIONS",
+  TOGGLE_USER_DETAILS_TAB = "@@chats/TOGGLE_USER_DETAILS_TAB",
 }
 export interface ChatsState {
   favourites: Array<any>;
@@ -19,4 +20,5 @@ export interface ChatsState {
   selectedChat: string | number | null;
   chatUserDetails: object;
   chatUserConversations: Array<any>;
+  isOpenUserDetails: boolean;
 }

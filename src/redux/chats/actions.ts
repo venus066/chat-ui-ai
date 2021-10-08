@@ -54,3 +54,10 @@ export const getChatUserConversations = (
   type: ChatsActionTypes.GET_CHAT_USER_CONVERSATIONS,
   payload: selectedChat,
 });
+
+export const toggleUserDetailsTab = (value: boolean) => ({
+  type: ChatsActionTypes.TOGGLE_USER_DETAILS_TAB,
+  payload: value,
+});
+
+

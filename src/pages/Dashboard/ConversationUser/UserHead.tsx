@@ -30,18 +30,20 @@ import { changeSelectedChat } from "../../../redux/actions";
 interface ProfileImageProps {
   chatUserDetails: any;
   onCloseConversation: () => any;
+  onOpenUserDetails: () => any;
 }
 const ProfileImage = ({
   chatUserDetails,
   onCloseConversation,
+  onOpenUserDetails
 }: ProfileImageProps) => {
   const fullName = chatUserDetails.firstName
     ? `${chatUserDetails.firstName} ${chatUserDetails.lastName}`
     : "-";
   const shortName = chatUserDetails.firstName
     ? `${chatUserDetails.firstName.charAt(0)}${chatUserDetails.lastName.charAt(
-        0
-      )}`
+      0
+    )}`
     : "-";
 
   const colors = [
@@ -95,7 +97,7 @@ const ProfileImage = ({
 
           <div className="flex-grow-1 overflow-hidden">
             <h6 className="text-truncate mb-0 font-size-18">
-              <Link to="#" className="user-profile-show text-reset">
+              <Link to="#" onClick={onOpenUserDetails} className="user-profile-show text-reset">
                 {fullName}
               </Link>
             </h6>
@@ -225,8 +227,9 @@ const PinnedAlert = ({ onOpenPinnedTab }: PinnedAlertProps) => {
 interface UserHeadProps {
   chatUserDetails: any;
   pinnedTabs: Array<PinTypes>;
+  onOpenUserDetails: () => void;
 }
-const UserHead = ({ chatUserDetails, pinnedTabs }: UserHeadProps) => {
+const UserHead = ({ chatUserDetails, pinnedTabs, onOpenUserDetails }: UserHeadProps) => {
   const dispatch = useDispatch();
   /*
     video call modal
@@ -276,6 +279,7 @@ const UserHead = ({ chatUserDetails, pinnedTabs }: UserHeadProps) => {
           <ProfileImage
             chatUserDetails={chatUserDetails}
             onCloseConversation={onCloseConversation}
+            onOpenUserDetails={onOpenUserDetails}
           />
         </Col>
         <Col sm={8} className="col-4">
@@ -307,7 +311,7 @@ const UserHead = ({ chatUserDetails, pinnedTabs }: UserHeadProps) => {
             </li>
 
             <li className="list-inline-item d-none d-lg-inline-block me-2 ms-0">
-              <button type="button" className="btn nav-btn user-profile-show">
+              <button onClick={onOpenUserDetails} type="button" className="btn nav-btn user-profile-show">
                 <i className="bx bxs-info-circle"></i>
               </button>
             </li>
