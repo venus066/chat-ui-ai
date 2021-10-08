@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 // interface
-import { MediaTypes, MediaListItemTypes } from "../../../data/myProfile";
+import { MediaTypes, MediaListItemTypes } from "../data/myProfile";
 
 interface MediaProps {
   media: MediaTypes;
+  limit: number;
 }
 
 interface MediaItemProps {
@@ -22,7 +23,7 @@ const MediaItem = ({ mediaItem, hasMore }: MediaItemProps) => {
     </div>
   );
 };
-const Media = ({ media }: MediaProps) => {
+const Media = ({ media, limit }: MediaProps) => {
   const [mediaList, setMediaList] = useState<MediaListItemTypes[]>([]);
   useEffect(() => {
     if (media && media.list) setMediaList(media.list);
@@ -41,8 +42,8 @@ const Media = ({ media }: MediaProps) => {
       </div>
       <div className="profile-media-img">
         {(mediaList || []).map((mediaItem: MediaListItemTypes, key: number) => {
-          const hasMore: boolean = key === 2;
-          if (key <= 2) {
+          const hasMore: boolean = key === limit;
+          if (key <= limit) {
             return (
               <MediaItem mediaItem={mediaItem} key={key} hasMore={hasMore} />
             );

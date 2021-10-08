@@ -8,13 +8,13 @@ import Loader from "../../../components/Loader";
 import AppSimpleBar from "../../../components/AppSimpleBar";
 import MyProfile from "./MyProfile";
 import UserDescription from "./UserDescription";
-import Media from "./Media";
-import AttachedFiles from "./AttachedFiles";
+import Media from "../../../components/Media";
+import AttachedFiles from "../../../components/AttachedFiles";
 
 // actions
 import { getProfileDetails } from "../../../redux/actions";
 
-interface IndexProps {}
+interface IndexProps { }
 const Index = (props: IndexProps) => {
   const dispatch = useDispatch();
 
@@ -40,7 +40,7 @@ const Index = (props: IndexProps) => {
         <UserDescription basicDetails={profileDetails.basicDetails} />
         <hr className="my-4" />
 
-        <Media media={profileDetails.media} />
+        <Media media={profileDetails.media} limit={2} />
 
         <hr className="my-4" />
 

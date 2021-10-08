@@ -1,10 +1,32 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
+interface GroupProps {
+    group: any;
+}
+const Group = ({ group }: GroupProps) => {
+    return (
+        <li>
+            <Link to="#">
+                <div className="d-flex align-items-center">
+                    <div className="flex-shrink-0 avatar-xs me-2">
+                        <span className="avatar-title rounded-circle bg-soft-light text-dark">
+                            #
+                        </span>
+                    </div>
+                    <div className="flex-grow-1 overflow-hidden">
+                        <p className="text-truncate mb-0">{group.name}</p>
+                    </div>
+                </div>
+            </Link>
+        </li>
+    );
+};
 interface GroupsProps {
     chatUserDetails: any;
 }
 const Groups = ({ chatUserDetails }: GroupsProps) => {
+    const groups = chatUserDetails.channels && chatUserDetails.channels.length && chatUserDetails.channels;
     return (
         <div>
             <div className="d-flex">
@@ -15,36 +37,18 @@ const Groups = ({ chatUserDetails }: GroupsProps) => {
                 </div>
             </div>
 
-            <ul className="list-unstyled chat-list mx-n4">
-                <li>
-                    <Link to="#">
-                        <div className="d-flex align-items-center">
-                            <div className="flex-shrink-0 avatar-xs me-2">
-                                <span className="avatar-title rounded-circle bg-soft-light text-dark">
-                                    #
-                                </span>
-                            </div>
-                            <div className="flex-grow-1 overflow-hidden">
-                                <p className="text-truncate mb-0">Landing Design</p>
-                            </div>
-                        </div>
-                    </Link>
-                </li>
-                <li>
-                    <Link to="#">
-                        <div className="d-flex align-items-center">
-                            <div className="flex-shrink-0 avatar-xs me-2">
-                                <span className="avatar-title rounded-circle bg-soft-light text-dark">
-                                    #
-                                </span>
-                            </div>
-                            <div className="flex-grow-1 overflow-hidden">
-                                <p className="text-truncate mb-0">Design Phase 2</p>
-                            </div>
-                        </div>
-                    </Link>
-                </li>
-            </ul>
+            {
+                groups ?
+                    <ul className="list-unstyled chat-list mx-n4">
+                        {
+                            (groups || []).map((group: any, key: number) =>
+                                <Group group={group} key={key} />
+                            )
+                        }
+                    </ul>
+                    : <p>No Groups</p>
+            }
+
         </div>
     );
 };

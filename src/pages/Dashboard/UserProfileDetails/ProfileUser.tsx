@@ -1,16 +1,29 @@
-import React from 'react';
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Button, Dropdown, DropdownMenu, DropdownToggle, DropdownItem } from 'reactstrap';
 
+//images
+import imagePlaceholder from "../../../assets/images/users/profile-placeholder.png";
 interface ProfileUserProps {
     onCloseUserDetails: () => any;
     chatUserDetails: any;
+    onOpenVideo: () => void;
+    onOpenAudio: () => void;
 }
-const ProfileUser = ({ onCloseUserDetails, chatUserDetails }: ProfileUserProps) => {
+const ProfileUser = ({ onCloseUserDetails, chatUserDetails, onOpenAudio, onOpenVideo }: ProfileUserProps) => {
+
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const toggle = () => setDropdownOpen(!dropdownOpen);
+
+    const profile = chatUserDetails.profileImage ? chatUserDetails.profileImage : imagePlaceholder;
+    const fullName = chatUserDetails.firstName
+        ? `${chatUserDetails.firstName} ${chatUserDetails.lastName}`
+        : "-";
+
     return (
         <div className="p-3 border-bottom">
             <div className="user-profile-img">
                 <img
-                    src="assets/images/users/avatar-7.jpg"
+                    src={profile}
                     className="profile-img rounded"
                     alt=""
                 />
@@ -18,80 +31,79 @@ const ProfileUser = ({ onCloseUserDetails, chatUserDetails }: ProfileUserProps) 
                     <div className="user-chat-nav p-2">
                         <div className="d-flex w-100">
                             <div className="flex-grow-1">
-                                <button
+                                <Button
+                                    color="none"
                                     type="button"
                                     className="btn nav-btn text-white user-profile-show d-none d-lg-block"
                                     onClick={onCloseUserDetails}
                                 >
                                     <i className="bx bx-x"></i>
-                                </button>
-                                <button
+                                </Button>
+                                <Button
                                     type="button"
+                                    color="none"
                                     className="btn nav-btn text-white user-profile-show d-block d-lg-none"
+                                    onClick={onCloseUserDetails}
                                 >
                                     <i className="bx bx-left-arrow-alt"></i>
-                                </button>
+                                </Button>
                             </div>
                             <div className="flex-shrink-0">
-                                <div className="dropdown">
-                                    <button
-                                        className="btn nav-btn text-white dropdown-toggle"
+                                <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+                                    <DropdownToggle
+                                        color="none"
+                                        className="btn nav-btn text-white"
                                         type="button"
-                                        data-bs-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="false"
                                     >
                                         <i className="bx bx-dots-vertical-rounded"></i>
-                                    </button>
-                                    <div className="dropdown-menu dropdown-menu-end">
-                                        <Link
-                                            className="dropdown-item d-flex justify-content-between align-items-center d-lg-none user-profile-show"
+                                    </DropdownToggle>
+                                    <DropdownMenu className="dropdown-menu-end">
+                                        <DropdownItem
+                                            className="d-flex justify-content-between align-items-center d-lg-none user-profile-show"
                                             to="#"
                                         >
                                             View Profile <i className="bx bx-user text-muted"></i>
-                                        </Link>
-                                        <Link
-                                            className="dropdown-item d-flex justify-content-between align-items-center d-lg-none"
+                                        </DropdownItem>
+                                        <DropdownItem
+                                            className="d-flex justify-content-between align-items-center d-lg-none"
                                             to="#"
-                                            data-bs-toggle="modal"
-                                            data-bs-target=".audiocallModal"
+                                            onClick={onOpenAudio}
                                         >
                                             Audio <i className="bx bxs-phone-call text-muted"></i>
-                                        </Link>
-                                        <Link
-                                            className="dropdown-item d-flex justify-content-between align-items-center d-lg-none"
+                                        </DropdownItem>
+                                        <DropdownItem
+                                            className="d-flex justify-content-between align-items-center d-lg-none"
                                             to="#"
-                                            data-bs-toggle="modal"
-                                            data-bs-target=".videocallModal"
+                                            onClick={onOpenVideo}
                                         >
                                             Video <i className="bx bx-video text-muted"></i>
-                                        </Link>
-                                        <Link
-                                            className="dropdown-item d-flex justify-content-between align-items-center"
+                                        </DropdownItem>
+                                        <DropdownItem
+                                            className="d-flex justify-content-between align-items-center"
                                             to="#"
                                         >
                                             Archive <i className="bx bx-archive text-muted"></i>
-                                        </Link>
-                                        <Link
-                                            className="dropdown-item d-flex justify-content-between align-items-center"
+                                        </DropdownItem>
+                                        <DropdownItem
+                                            className="d-flex justify-content-between align-items-center"
                                             to="#"
                                         >
                                             Muted{" "}
                                             <i className="bx bx-microphone-off text-muted"></i>
-                                        </Link>
-                                        <Link
-                                            className="dropdown-item d-flex justify-content-between align-items-center"
+                                        </DropdownItem>
+                                        <DropdownItem
+                                            className="d-flex justify-content-between align-items-center"
                                             to="#"
                                         >
                                             Delete <i className="bx bx-trash text-muted"></i>
-                                        </Link>
-                                    </div>
-                                </div>
+                                        </DropdownItem>
+                                    </DropdownMenu>
+                                </Dropdown>
                             </div>
                         </div>
                     </div>
                     <div className="mt-auto p-3">
-                        <h5 className="user-name mb-1 text-truncate">Jean Berwick</h5>
+                        <h5 className="user-name mb-1 text-truncate">{fullName}</h5>
                         <p className="font-size-14 text-truncate mb-0">
                             <i className="bx bxs-circle font-size-10 text-success me-1 ms-0"></i>{" "}
                             Online
@@ -99,7 +111,7 @@ const ProfileUser = ({ onCloseUserDetails, chatUserDetails }: ProfileUserProps) 
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

@@ -1,22 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import classnames from "classnames";
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
 
-import { Link } from "react-router-dom";
-
 // actions 
 import { toggleUserDetailsTab } from "../../../redux/actions";
 
 // components
+import AudioCallModal from "../../../components/AudioCallModal";
+import VideoCallModal from "../../../components/VideoCallModal";
+import AppSimpleBar from "../../../components/AppSimpleBar";
 import Loader from "../../../components/Loader";
 import ProfileUser from "./ProfileUser";
 import Actions from "./Actions";
 import BasicDetails from "./BasicDetails";
 import Groups from "./Groups";
-import Media from "./Media";
-import AttachedFiles from "./AttachedFiles";
+import Media from "../../../components/Media";
+import AttachedFiles from "../../../components/AttachedFiles";
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -36,28 +37,75 @@ const Index = () => {
     dispatch(toggleUserDetailsTab(false));
   };
 
+  /*
+    video call modal
+    */
+  const [isOpenVideoModal, setIsOpenVideoModal] = useState<boolean>(false);
+  const onOpenVideo = () => {
+    setIsOpenVideoModal(true);
+  };
+  const onCloseVideo = () => {
+    setIsOpenVideoModal(false);
+  };
+
+  /*
+        audio call modal
+    */
+  const [isOpenAudioModal, setIsOpenAudioModal] = useState<boolean>(false);
+  const onOpenAudio = () => {
+    setIsOpenAudioModal(true);
+  };
+  const onCloseAudio = () => {
+    setIsOpenAudioModal(false);
+  };
+
   return (
     <>
-      <div className={classnames("user-profile-sidebar", "position-relative", { "d-block": isOpenUserDetails })}>
-        {getUserDetailsLoading && <Loader />}
+      <div className={classnames("user-profile-sidebar", { "d-block": isOpenUserDetails })}>
+        <div className="position-relative">
+          {getUserDetailsLoading && <Loader />}
 
-        <ProfileUser onCloseUserDetails={onCloseUserDetails} chatUserDetails={chatUserDetails} />
-        {/* <!-- End profile user --> */}
+          <ProfileUser
+            onCloseUserDetails={onCloseUserDetails}
+            chatUserDetails={chatUserDetails}
+            onOpenVideo={onOpenVideo}
+            onOpenAudio={onOpenAudio}
+          />
+          {/* <!-- End profile user --> */}
 
-        {/* <!-- Start user-profile-desc --> */}
-        <div className="p-4 user-profile-desc">
-          {" "}
-          {/* simplebar */}
-          <Actions chatUserDetails={chatUserDetails} />
-          <BasicDetails chatUserDetails={chatUserDetails} />
-          <hr className="my-4" />
-          <Groups chatUserDetails={chatUserDetails} />
-          <hr className="my-4" />
-          <Media chatUserDetails={chatUserDetails} />
-          <hr className="my-4" />
-          <AttachedFiles chatUserDetails={chatUserDetails} />
+          {/* <!-- Start user-profile-desc --> */}
+          <AppSimpleBar className="p-4 user-profile-desc">
+            {" "}
+            {/* simplebar */}
+            <Actions
+              chatUserDetails={chatUserDetails}
+              onOpenVideo={onOpenVideo}
+              onOpenAudio={onOpenAudio}
+            />
+            <BasicDetails chatUserDetails={chatUserDetails} />
+            <hr className="my-4" />
+            <Groups chatUserDetails={chatUserDetails} />
+            <hr className="my-4" />
+            <Media media={chatUserDetails.media} limit={3} />
+            <hr className="my-4" />
+            <AttachedFiles attachedFiles={chatUserDetails.attachedFiles} />
+          </AppSimpleBar>
+          {/* <!-- end user-profile-desc --> */}
+          {isOpenAudioModal && (
+            <AudioCallModal
+              isOpen={isOpenAudioModal}
+              onClose={onCloseAudio}
+              user={chatUserDetails}
+            />
+          )}
+          {isOpenVideoModal && (
+            <VideoCallModal
+              isOpen={isOpenVideoModal}
+              onClose={onCloseVideo}
+              user={chatUserDetails}
+            />
+          )}
         </div>
-        {/* <!-- end user-profile-desc --> */}
       </div>
     </>
   );

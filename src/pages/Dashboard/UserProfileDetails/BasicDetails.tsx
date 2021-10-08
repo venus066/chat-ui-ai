@@ -4,12 +4,16 @@ interface BasicDetailsProps {
     chatUserDetails: any;
 }
 const BasicDetails = ({ chatUserDetails }: BasicDetailsProps) => {
+    const fullName = chatUserDetails.firstName
+        ? `${chatUserDetails.firstName} ${chatUserDetails.lastName}`
+        : "-";
+
     return (
         <>
             <div className="text-muted pt-4">
                 <h5 className="font-size-11 text-uppercase">Status :</h5>
                 <p className="mb-4">
-                    If several languages coalesce, the grammar of the resulting.
+                    {chatUserDetails.status ? chatUserDetails.status : "-"}
                 </p>
             </div>
             <div className="pb-2">
@@ -25,17 +29,17 @@ const BasicDetails = ({ chatUserDetails }: BasicDetailsProps) => {
                             </button>
                         </div>
                     </div>
-                    <h5 className="font-size-14">Jean Berwick</h5>
+                    <h5 className="font-size-14">{fullName}</h5>
                 </div>
 
                 <div className="mt-4">
                     <p className="text-muted font-size-14 mb-1">Email</p>
-                    <h5 className="font-size-14">adc@123.com</h5>
+                    <h5 className="font-size-14">{chatUserDetails.email ? chatUserDetails.email : "-"}</h5>
                 </div>
 
                 <div className="mt-4">
                     <p className="text-muted font-size-14 mb-1">Location</p>
-                    <h5 className="font-size-14 mb-0">California, USA</h5>
+                    <h5 className="font-size-14 mb-0">{chatUserDetails.location ? chatUserDetails.location : "-"}</h5>
                 </div>
             </div>
         </>

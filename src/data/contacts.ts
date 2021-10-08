@@ -10,6 +10,7 @@ import avatar9 from "../assets/images/users/avatar-9.jpg";
 import avatar10 from "../assets/images/users/avatar-10.jpg";
 import img1 from "../assets/images/small/img-1.jpg";
 import img2 from "../assets/images/small/img-2.jpg";
+import img3 from "../assets/images/small/img-3.jpg";
 import img4 from "../assets/images/small/img-4.jpg";
 
 // interfaces
@@ -251,11 +252,11 @@ const contacts: ContactTypes[] = [
         },
         {
           id: 3,
-          url: img4,
+          url: img3,
         },
         {
           id: 4,
-          url: img1,
+          url: img4,
         },
       ],
     },
