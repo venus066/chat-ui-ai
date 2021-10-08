@@ -1,89 +1,309 @@
-import React from "react";
+import React, { useState } from "react";
+import {
+  Row,
+  Col,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  Input,
+  Button,
+  Alert,
+  UncontrolledTooltip,
+} from "reactstrap";
 import { Link } from "react-router-dom";
+import classnames from "classnames";
 
-const UserHead = () => {
+//redux
+import { useDispatch } from "react-redux";
+
+// components
+import AudioCallModal from "../../../components/AudioCallModal";
+import VideoCallModal from "../../../components/VideoCallModal";
+import AddPinnedTabModal from "../../../components/AddPinnedTabModal";
+
+// interface
+import { PinTypes } from "../../../data/chat";
+
+// actions
+import { changeSelectedChat } from "../../../redux/actions";
+interface ProfileImageProps {
+  chatUserDetails: any;
+  onCloseConversation: () => any;
+}
+const ProfileImage = ({
+  chatUserDetails,
+  onCloseConversation,
+}: ProfileImageProps) => {
+  const fullName = chatUserDetails.firstName
+    ? `${chatUserDetails.firstName} ${chatUserDetails.lastName}`
+    : "-";
+  const shortName = chatUserDetails.firstName
+    ? `${chatUserDetails.firstName.charAt(0)}${chatUserDetails.lastName.charAt(
+        0
+      )}`
+    : "-";
+
+  const colors = [
+    "bg-primary",
+    "bg-danger",
+    "bg-info",
+    "bg-warning",
+    "bg-secondary",
+    "bg-pink",
+    "bg-purple",
+  ];
+  const [color] = useState(Math.floor(Math.random() * colors.length));
+
   return (
-    <div className="p-3 p-lg-4 user-chat-topbar">
-      <div className="row align-items-center">
-        <div className="col-sm-4 col-8">
-          <div className="d-flex align-items-center">
-            <div className="flex-shrink-0 d-block d-lg-none me-2">
-              <Link
-                to="#"
-                className="user-chat-remove text-muted font-size-24 p-2"
+    <div className="d-flex align-items-center">
+      <div className="flex-shrink-0 d-block d-lg-none me-2">
+        <Link
+          to="#"
+          onClick={onCloseConversation}
+          className="user-chat-remove text-muted font-size-24 p-2"
+        >
+          <i className="bx bx-chevron-left align-middle"></i>
+        </Link>
+      </div>
+      <div className="flex-grow-1 overflow-hidden">
+        <div className="d-flex align-items-center">
+          {chatUserDetails.profileImage ? (
+            <div className="flex-shrink-0 chat-user-img online align-self-center me-3 ms-0">
+              <img
+                src={chatUserDetails.profileImage}
+                className="rounded-circle avatar-sm"
+                alt=""
+              />
+              <span className="user-status"></span>
+            </div>
+          ) : (
+            <div className="flex-shrink-0 avatar-sm align-self-center me-3 ms-0">
+              <span
+                className={classnames(
+                  "avatar-title",
+                  "rounded-circle",
+                  "text-uppercase",
+                  "text-white",
+                  colors[color]
+                )}
               >
-                <i className="bx bx-chevron-left align-middle"></i>
+                {shortName}
+              </span>
+            </div>
+          )}
+
+          <div className="flex-grow-1 overflow-hidden">
+            <h6 className="text-truncate mb-0 font-size-18">
+              <Link to="#" className="user-profile-show text-reset">
+                {fullName}
               </Link>
-            </div>
-            <div className="flex-grow-1 overflow-hidden">
-              <div className="d-flex align-items-center">
-                <div className="flex-shrink-0 chat-user-img online align-self-center me-3 ms-0">
-                  <img
-                    src="assets/images/users/avatar-7.jpg"
-                    className="rounded-circle avatar-sm"
-                    alt=""
-                  />
-                  <span className="user-status"></span>
-                </div>
-                <div className="flex-grow-1 overflow-hidden">
-                  <h6 className="text-truncate mb-0 font-size-18">
-                    <Link to="#" className="user-profile-show text-reset">
-                      Jean Berwick
-                    </Link>
-                  </h6>
-                  <p className="text-truncate text-muted mb-0">
-                    <small>Online</small>
-                  </p>
-                </div>
-              </div>
-            </div>
+            </h6>
+            <p className="text-truncate text-muted mb-0">
+              <small>Online</small>
+            </p>
           </div>
         </div>
-        <div className="col-sm-8 col-4">
+      </div>
+    </div>
+  );
+};
+
+const Search = () => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const toggle = () => setDropdownOpen(!dropdownOpen);
+
+  return (
+    <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+      <DropdownToggle
+        color="none"
+        className="btn nav-btn dropdown-toggle"
+        type="button"
+      >
+        <i className="bx bx-search"></i>
+      </DropdownToggle>
+      <DropdownMenu className="dropdown-menu p-0 dropdown-menu-end dropdown-menu-lg">
+        <div className="search-box p-2">
+          <Input type="text" className="form-control" placeholder="Search.." />
+        </div>
+      </DropdownMenu>
+    </Dropdown>
+  );
+};
+interface MoreProps {
+  onOpenAudio: () => void;
+  onOpenVideo: () => void;
+}
+const More = ({ onOpenAudio, onOpenVideo }: MoreProps) => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggle = () => setDropdownOpen(!dropdownOpen);
+
+  return (
+    <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+      <DropdownToggle color="none" className="btn nav-btn" type="button">
+        <i className="bx bx-dots-vertical-rounded"></i>
+      </DropdownToggle>
+      <DropdownMenu className="dropdown-menu-end">
+        <DropdownItem
+          className="d-flex justify-content-between align-items-center d-lg-none user-profile-show"
+          to="#"
+        >
+          View Profile <i className="bx bx-user text-muted"></i>
+        </DropdownItem>
+        <DropdownItem
+          className="d-flex justify-content-between align-items-center d-lg-none"
+          to="#"
+          onClick={onOpenAudio}
+        >
+          Audio <i className="bx bxs-phone-call text-muted"></i>
+        </DropdownItem>
+        <DropdownItem
+          className="d-flex justify-content-between align-items-center d-lg-none"
+          to="#"
+          onClick={onOpenVideo}
+        >
+          Video <i className="bx bx-video text-muted"></i>
+        </DropdownItem>
+        <DropdownItem
+          className="d-flex justify-content-between align-items-center"
+          to="#"
+        >
+          Archive <i className="bx bx-archive text-muted"></i>
+        </DropdownItem>
+        <DropdownItem
+          className="d-flex justify-content-between align-items-center"
+          to="#"
+        >
+          Muted <i className="bx bx-microphone-off text-muted"></i>
+        </DropdownItem>
+        <DropdownItem
+          className="d-flex justify-content-between align-items-center"
+          to="#"
+        >
+          Delete <i className="bx bx-trash text-muted"></i>
+        </DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+  );
+};
+
+interface PinnedAlertProps {
+  onOpenPinnedTab: () => void;
+}
+const PinnedAlert = ({ onOpenPinnedTab }: PinnedAlertProps) => {
+  const [visible, setVisible] = useState(true);
+
+  const onDismiss = () => setVisible(false);
+
+  return (
+    <Alert
+      color="warning"
+      isOpen={visible}
+      toggle={onDismiss}
+      className="topbar-bookmark p-1 px-3 px-lg-4 pe-lg-5 pe-5 alert-dismiss-custom"
+      role="alert"
+    >
+      <div className="d-flex align-items-start bookmark-tabs">
+        <div className="tab-list-link">
+          <Link to="#" className="tab-links" onClick={onOpenPinnedTab}>
+            <i className="ri-pushpin-fill align-middle me-1"></i> 10 Pinned
+          </Link>
+        </div>
+        <div id="add-bookmark">
+          <Link to="#" className="tab-links border-0 px-3">
+            <i className="ri-add-fill align-middle"></i>
+          </Link>
+        </div>
+        <UncontrolledTooltip target="add-bookmark" placement="bottom">
+          Add Bookmark
+        </UncontrolledTooltip>
+      </div>
+    </Alert>
+  );
+};
+interface UserHeadProps {
+  chatUserDetails: any;
+  pinnedTabs: Array<PinTypes>;
+}
+const UserHead = ({ chatUserDetails, pinnedTabs }: UserHeadProps) => {
+  const dispatch = useDispatch();
+  /*
+    video call modal
+    */
+  const [isOpenVideoModal, setIsOpenVideoModal] = useState<boolean>(false);
+  const onOpenVideo = () => {
+    setIsOpenVideoModal(true);
+  };
+  const onCloseVideo = () => {
+    setIsOpenVideoModal(false);
+  };
+
+  /*
+        audio call modal
+    */
+  const [isOpenAudioModal, setIsOpenAudioModal] = useState<boolean>(false);
+  const onOpenAudio = () => {
+    setIsOpenAudioModal(true);
+  };
+  const onCloseAudio = () => {
+    setIsOpenAudioModal(false);
+  };
+
+  /*
+  pinned tab modal
+  */
+  const [isOpenPinnedTabModal, setIsOpenPinnedTabModal] =
+    useState<boolean>(false);
+  const onOpenPinnedTab = () => {
+    setIsOpenPinnedTabModal(true);
+  };
+  const onClosePinnedTab = () => {
+    setIsOpenPinnedTabModal(false);
+  };
+
+  /*
+  mobile menu chat conversation close
+  */
+  const onCloseConversation = () => {
+    dispatch(changeSelectedChat(null));
+  };
+
+  return (
+    <div className="p-3 p-lg-4 user-chat-topbar">
+      <Row className="align-items-center">
+        <Col sm={4} className="col-8">
+          <ProfileImage
+            chatUserDetails={chatUserDetails}
+            onCloseConversation={onCloseConversation}
+          />
+        </Col>
+        <Col sm={8} className="col-4">
           <ul className="list-inline user-chat-nav text-end mb-0">
             <li className="list-inline-item">
-              <div className="dropdown">
-                <button
-                  className="btn nav-btn dropdown-toggle"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <i className="bx bx-search"></i>
-                </button>
-                <div className="dropdown-menu p-0 dropdown-menu-end dropdown-menu-lg">
-                  <div className="search-box p-2">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Search.."
-                    />
-                  </div>
-                </div>
-              </div>
+              <Search />
             </li>
 
             <li className="list-inline-item d-none d-lg-inline-block me-2 ms-0">
-              <button
+              <Button
                 type="button"
+                color="none"
                 className="btn nav-btn"
-                data-bs-toggle="modal"
-                data-bs-target=".audiocallModal"
+                onClick={onOpenAudio}
               >
                 <i className="bx bxs-phone-call"></i>
-              </button>
+              </Button>
             </li>
 
             <li className="list-inline-item d-none d-lg-inline-block me-2 ms-0">
-              <button
+              <Button
                 type="button"
+                color="none"
                 className="btn nav-btn"
-                data-bs-toggle="modal"
-                data-bs-target=".videocallModal"
+                onClick={onOpenVideo}
               >
                 <i className="bx bx-video"></i>
-              </button>
+              </Button>
             </li>
 
             <li className="list-inline-item d-none d-lg-inline-block me-2 ms-0">
@@ -93,98 +313,33 @@ const UserHead = () => {
             </li>
 
             <li className="list-inline-item">
-              <div className="dropdown">
-                <button
-                  className="btn nav-btn dropdown-toggle"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <i className="bx bx-dots-vertical-rounded"></i>
-                </button>
-                <div className="dropdown-menu dropdown-menu-end">
-                  <Link
-                    className="dropdown-item d-flex justify-content-between align-items-center d-lg-none user-profile-show"
-                    to="#"
-                  >
-                    View Profile <i className="bx bx-user text-muted"></i>
-                  </Link>
-                  <Link
-                    className="dropdown-item d-flex justify-content-between align-items-center d-lg-none"
-                    to="#"
-                    data-bs-toggle="modal"
-                    data-bs-target=".audiocallModal"
-                  >
-                    Audio <i className="bx bxs-phone-call text-muted"></i>
-                  </Link>
-                  <Link
-                    className="dropdown-item d-flex justify-content-between align-items-center d-lg-none"
-                    to="#"
-                    data-bs-toggle="modal"
-                    data-bs-target=".videocallModal"
-                  >
-                    Video <i className="bx bx-video text-muted"></i>
-                  </Link>
-                  <Link
-                    className="dropdown-item d-flex justify-content-between align-items-center"
-                    to="#"
-                  >
-                    Archive <i className="bx bx-archive text-muted"></i>
-                  </Link>
-                  <Link
-                    className="dropdown-item d-flex justify-content-between align-items-center"
-                    to="#"
-                  >
-                    Muted <i className="bx bx-microphone-off text-muted"></i>
-                  </Link>
-                  <Link
-                    className="dropdown-item d-flex justify-content-between align-items-center"
-                    to="#"
-                  >
-                    Delete <i className="bx bx-trash text-muted"></i>
-                  </Link>
-                </div>
-              </div>
+              <More onOpenAudio={onOpenAudio} onOpenVideo={onOpenVideo} />
             </li>
           </ul>
-        </div>
-      </div>
-      <div
-        className="alert alert-warning alert-dismissible topbar-bookmark fade show p-1 px-3 px-lg-4 pe-lg-5 pe-5"
-        role="alert"
-      >
-        <div className="d-flex align-items-start bookmark-tabs">
-          <div className="tab-list-link">
-            <Link
-              to="#"
-              className="tab-links"
-              data-bs-toggle="modal"
-              data-bs-target=".pinnedtabModal"
-            >
-              <i className="ri-pushpin-fill align-middle me-1"></i> 10 Pinned
-            </Link>
-          </div>
-          <div>
-            <Link
-              to="#"
-              className="tab-links border-0 px-3"
-              data-bs-toggle="tooltip"
-              data-bs-trigger="hover"
-              data-bs-placement="bottom"
-              title="Add Bookmark"
-            >
-              <i className="ri-add-fill align-middle"></i>
-            </Link>
-          </div>
-        </div>
-        <button
-          type="button"
-          className="btn-close"
-          data-bs-dismiss="alert"
-          aria-label="Close"
-        ></button>
-      </div>
+        </Col>
+      </Row>
+      <PinnedAlert onOpenPinnedTab={onOpenPinnedTab} />
+      {isOpenAudioModal && (
+        <AudioCallModal
+          isOpen={isOpenAudioModal}
+          onClose={onCloseAudio}
+          user={chatUserDetails}
+        />
+      )}
+      {isOpenVideoModal && (
+        <VideoCallModal
+          isOpen={isOpenVideoModal}
+          onClose={onCloseVideo}
+          user={chatUserDetails}
+        />
+      )}
+      {isOpenPinnedTabModal && (
+        <AddPinnedTabModal
+          isOpen={isOpenPinnedTabModal}
+          onClose={onClosePinnedTab}
+          pinnedTabs={pinnedTabs}
+        />
+      )}
     </div>
   );
 };

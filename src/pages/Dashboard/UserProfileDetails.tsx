@@ -1,10 +1,22 @@
 import React from "react";
 
+//redux
+import { useSelector } from "react-redux";
+
 import { Link } from "react-router-dom";
+import Loader from "../../components/Loader";
 const UserProfileDetails = () => {
+  const { chatUserDetails, getUserDetailsLoading } = useSelector(
+    (state: any) => ({
+      chatUserDetails: state.Chats.chatUserDetails,
+      getUserDetailsLoading: state.Chats.getUserDetailsLoading,
+    })
+  );
+
   return (
     <>
-      <div className="user-profile-sidebar">
+      <div className="user-profile-sidebar position-relative">
+        {getUserDetailsLoading && <Loader />}
         <div className="p-3 border-bottom">
           <div className="user-profile-img">
             <img

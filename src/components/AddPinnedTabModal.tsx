@@ -1,90 +1,134 @@
-import React from "react";
+import React, { useState } from "react";
+import {
+  Modal,
+  ModalBody,
+  ModalHeader,
+  Dropdown,
+  DropdownMenu,
+  DropdownToggle,
+  DropdownItem,
+} from "reactstrap";
 
-const AddPinnedTabModal = () => {
+// components
+import AppSimpleBar from "./AppSimpleBar";
+
+// interface
+import { PinTypes } from "../data/chat";
+import { Link } from "react-router-dom";
+
+interface PinProps {
+  pin: PinTypes;
+}
+const Pin = ({ pin }: PinProps) => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggle = () => setDropdownOpen(!dropdownOpen);
+
   return (
-    <div
-      className="modal fade AddPinnedTabModal"
+    <li>
+      <div className="d-flex align-items-center">
+        <div className="flex-shrink-0 avatar-xs me-3">
+          <div className="avatar-title bg-soft-primary text-primary rounded-circle">
+            <i className={pin.icon}></i>
+          </div>
+        </div>
+        <div className="flex-grow-1 overflow-hidden">
+          <h5 className="font-size-14 text-truncate mb-1">
+            <Link to="#" className="p-0">
+              {pin.title}
+            </Link>
+          </h5>
+          <p className="text-muted font-size-13 mb-0">{pin.desc}</p>
+        </div>
+
+        <div className="flex-shrink-0 ms-3">
+          <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+            <DropdownToggle
+              tag="a"
+              className="font-size-18 text-muted px-1"
+              role="button"
+            >
+              <i className="bx bx-dots-horizontal-rounded"></i>
+            </DropdownToggle>
+            <DropdownMenu className="dropdown-menu-end">
+              <DropdownItem
+                className="d-flex align-items-center justify-content-between"
+                href="#"
+              >
+                Open <i className="bx bx-folder-open ms-2 text-muted"></i>
+              </DropdownItem>
+              <DropdownItem
+                className="d-flex align-items-center justify-content-between"
+                href="#"
+              >
+                Edit <i className="bx bx-pencil ms-2 text-muted"></i>
+              </DropdownItem>
+              <DropdownItem divider />
+              <DropdownItem
+                className="d-flex align-items-center justify-content-between"
+                href="#"
+              >
+                Delete <i className="bx bx-trash ms-2 text-muted"></i>
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+        </div>
+      </div>
+    </li>
+  );
+};
+interface AddPinnedTabModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  pinnedTabs: Array<PinTypes>;
+}
+const AddPinnedTabModal = ({
+  isOpen,
+  onClose,
+  pinnedTabs,
+}: AddPinnedTabModalProps) => {
+  return (
+    <Modal
+      isOpen={isOpen}
+      toggle={onClose}
+      className="pinnedtabModal"
       tabIndex={-1}
-      aria-hidden="true"
+      contentClassName="shadow-lg border-0"
+      centered
+      scrollable
     >
-      <div className="modal-dialog modal-dialog-centered">
-        <div className="modal-content shadow-lg border-0">
-          <div className="modal-body p-0">
-            <div className="text-center p-4 pb-0">
-              <div className="avatar-xl mx-auto mb-4">
-                <img
-                  src="assets/images/users/avatar-7.jpg"
-                  alt=""
-                  className="img-thumbnail rounded-circle"
-                />
+      <ModalBody className="p-0">
+        <ModalHeader className="modal-title-custom" toggle={onClose}>
+          Bookmark
+        </ModalHeader>
+        <div className="modal-body p-4">
+          <div className="d-flex align-items-center mb-3">
+            <div className="flex-grow-1">
+              <div>
+                <h5 className="font-size-16 mb-0">10 Pinned tabs</h5>
               </div>
-
-              <div className="d-flex justify-content-center align-items-center mt-4">
-                <div className="avatar-md h-auto">
-                  <button
-                    type="button"
-                    className="btn btn-light avatar-sm rounded-circle"
-                  >
-                    <span className="avatar-title bg-transparent text-muted font-size-20">
-                      <i className="bx bx-microphone-off"></i>
-                    </span>
-                  </button>
-                  <h5 className="font-size-11 text-uppercase text-muted mt-2">
-                    Mute
-                  </h5>
-                </div>
-                <div className="avatar-md h-auto">
-                  <button
-                    type="button"
-                    className="btn btn-light avatar-sm rounded-circle"
-                  >
-                    <span className="avatar-title bg-transparent text-muted font-size-20">
-                      <i className="bx bx-volume-full"></i>
-                    </span>
-                  </button>
-                  <h5 className="font-size-11 text-uppercase text-muted mt-2">
-                    Speaker
-                  </h5>
-                </div>
-                <div className="avatar-md h-auto">
-                  <button
-                    type="button"
-                    className="btn btn-light avatar-sm rounded-circle"
-                  >
-                    <span className="avatar-title bg-transparent text-muted font-size-20">
-                      <i className="bx bx-user-plus"></i>
-                    </span>
-                  </button>
-                  <h5 className="font-size-11 text-uppercase text-muted mt-2">
-                    Add New
-                  </h5>
-                </div>
-              </div>
-
-              <div className="mt-4">
-                <button
-                  type="button"
-                  className="btn btn-danger avatar-md call-close-btn rounded-circle"
-                  data-bs-dismiss="modal"
-                >
-                  <span className="avatar-title bg-transparent font-size-24">
-                    <i className="mdi mdi-phone-hangup"></i>
-                  </span>
+            </div>
+            <div className="flex-shrink-0">
+              <div>
+                <button type="button" className="btn btn-sm btn-soft-primary">
+                  <i className="bx bx-plus"></i> Pin
                 </button>
               </div>
             </div>
-
-            <div className="p-4 bg-soft-primary mt-n4">
-              <div className="mt-4 text-center">
-                <h5 className="font-size-18 mb-0 text-truncate">
-                  Jean Berwick
-                </h5>
-              </div>
-            </div>
           </div>
+          <AppSimpleBar
+            style={{ maxHeight: "299px" }}
+            className="chat-bookmark-list mx-n4"
+          >
+            <ul className="list-unstyled chat-list">
+              {(pinnedTabs || []).map((pin: PinTypes, key: number) => (
+                <Pin pin={pin} key={key} />
+              ))}
+            </ul>
+          </AppSimpleBar>
         </div>
-      </div>
-    </div>
+      </ModalBody>
+    </Modal>
   );
 };
 

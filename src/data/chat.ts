@@ -1,12 +1,6 @@
-import avatar3 from "../assets/images/users/avatar-3.jpg";
-import avatar4 from "../assets/images/users/avatar-4.jpg";
-import avatar5 from "../assets/images/users/avatar-5.jpg";
-import avatar7 from "../assets/images/users/avatar-7.jpg";
-import avatar8 from "../assets/images/users/avatar-8.jpg";
-import avatar9 from "../assets/images/users/avatar-9.jpg";
-import avatar10 from "../assets/images/users/avatar-10.jpg";
 import { STATUS_TYPES } from "../constants";
 
+import { contacts } from "./contacts";
 export interface UserTypes {
   id: string | number;
   firstName: string;
@@ -19,34 +13,23 @@ export interface UserTypes {
 }
 const favourites: Array<UserTypes> = [
   {
-    id: "614ecab4ac946a9bdafa4e3b",
-    firstName: "Marguerite",
-    lastName: "Campbell",
-    profileImage: avatar4,
+    ...contacts[4],
     meta: {
       unRead: 3,
       status: STATUS_TYPES.ACTIVE,
     },
   },
   {
-    id: "614ecab41f60c4fdffe639c8",
-    firstName: "Katrina",
-    lastName: "Winters",
-    profileImage: avatar3,
+    ...contacts[5],
     meta: {
       status: STATUS_TYPES.ACTIVE,
     },
   },
   {
-    id: "614ecab400931b0aba9d0d76",
-    firstName: "Miranda",
-    lastName: "Valentine",
+    ...contacts[6],
   },
   {
-    id: "614ecab4c2a5e35f32f78659",
-    firstName: "Faulkner",
-    lastName: "Benjamin",
-    profileImage: avatar5,
+    ...contacts[7],
     meta: {
       status: STATUS_TYPES.ACTIVE,
     },
@@ -55,51 +38,41 @@ const favourites: Array<UserTypes> = [
 
 let directMessages: Array<UserTypes> = [
   {
-    id: "614ecab49785656f162d67db",
-    firstName: "Tonia",
-    lastName: "Clay",
-    profileImage: avatar8,
+    ...contacts[16],
     meta: {
       status: STATUS_TYPES.ACTIVE,
     },
   },
   {
-    id: "614ecab4a4666b6ff5f7864f",
-    firstName: "Hendrix",
-    lastName: "Martin",
-    profileImage: avatar9,
+    ...contacts[17],
     meta: {
       status: STATUS_TYPES.ACTIVE,
     },
   },
   {
-    id: "614ecab43dbce45d6d996d9f",
-    firstName: "Donaldson",
-    lastName: "Riddle",
-    profileImage: avatar10,
+    ...contacts[8],
     meta: {
       unRead: 5,
       status: STATUS_TYPES.ACTIVE,
     },
   },
   {
-    id: "614ecab41b1f288b60a9f5c9",
-    firstName: "Daniels",
-    lastName: "Webster",
-  },
-  {
-    id: "614ecab49b13ce36ad017914",
-    firstName: "Jennifer",
-    lastName: "Ramirez",
-    profileImage: avatar7,
+    ...contacts[18],
     meta: {
       status: STATUS_TYPES.ACTIVE,
     },
   },
   {
-    id: "614ecab413673c7385945500",
-    firstName: "Shawna",
-    lastName: "Wright",
+    ...contacts[3],
+    meta: {
+      status: STATUS_TYPES.ACTIVE,
+    },
+  },
+  {
+    ...contacts[11],
+    meta: {
+      status: STATUS_TYPES.ACTIVE,
+    },
   },
 ];
 
@@ -141,10 +114,80 @@ let channels: Array<ChannelTypes> = [
 const onChangeChannels = (newData: Array<ChannelTypes>) => {
   channels = newData;
 };
+
+export interface PinTypes {
+  id: number;
+  title: string;
+  desc: string;
+  icon: string;
+}
+const pinnedTabs: Array<PinTypes> = [
+  {
+    id: 1,
+    title: "design-phase-1-approved.pdf",
+    desc: "12.5 MB",
+    icon: "bx bx-file",
+  },
+  {
+    id: 2,
+    title: "Bg Pattern",
+    desc: "https://bgpattern.com/",
+    icon: "bx bx-pin",
+  },
+  {
+    id: 3,
+    title: "Image-001.jpg",
+    desc: "4.2 MB",
+    icon: "bx bx-image",
+  },
+  {
+    id: 4,
+    title: "Images",
+    desc: "https://images123.com/",
+    icon: "bx bx-file",
+  },
+  {
+    id: 5,
+    title: "Bg Gradient",
+    desc: "https://bggradient.com/",
+    icon: "bx bx-pin",
+  },
+  {
+    id: 6,
+    title: "Image-012.jpg",
+    desc: "3.1 MB",
+    icon: "bx bx-image",
+  },
+  {
+    id: 7,
+    title: "analytics dashboard.zip",
+    desc: "6.7 MB",
+    icon: "bx bx-image",
+  },
+  {
+    id: 8,
+    title: "Bg Gradient",
+    desc: "https://bggradient.com/",
+    icon: "bx bx-file",
+  },
+  {
+    id: 9,
+    title: "Image-012.jpg",
+    desc: "3.1 MB",
+    icon: "bx bx-pin",
+  },
+  {
+    id: 10,
+    title: "analytics dashboard.zip",
+    desc: "6.7 MB",
+    icon: "bx bx-pin",
+  },
+];
 export {
   favourites,
   directMessages,
   channels,
   onChangeDirectMessages,
   onChangeChannels,
+  pinnedTabs,
 };

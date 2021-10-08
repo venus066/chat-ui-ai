@@ -22,10 +22,22 @@ const createChannel = (data: object) => {
   return api.create(url.CREATE_CHANNEL, data);
 };
 
+const getChatUserDetails = (id: string | number) => {
+  return api.get(url.GET_CHAT_USER_DETAILS + "/" + id, { params: { id } });
+};
+
+const getChatUserConversations = (id: string | number) => {
+  return api.get(url.GET_CHAT_USER_CONVERSATIONS + "/" + id, {
+    params: { id },
+  });
+};
+
 export {
   getFavourites,
   getDirectMessages,
   getChannels,
   addContacts,
   createChannel,
+  getChatUserDetails,
+  getChatUserConversations,
 };

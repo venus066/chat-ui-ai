@@ -13,8 +13,15 @@ import ChatUser from "./ChatUser";
 interface DirectMessagesProps {
   users: Array<UserTypes>;
   openAddContact: () => void;
+  selectedChat: string | number;
+  onSelectChat: (id: number | string) => void;
 }
-const DirectMessages = ({ users, openAddContact }: DirectMessagesProps) => {
+const DirectMessages = ({
+  users,
+  openAddContact,
+  selectedChat,
+  onSelectChat,
+}: DirectMessagesProps) => {
   /*
     add contacts
     */
@@ -40,7 +47,12 @@ const DirectMessages = ({ users, openAddContact }: DirectMessagesProps) => {
       <div className="chat-message-list">
         <ul className="list-unstyled chat-list chat-user-list">
           {(users || []).map((user: UserTypes, key: number) => (
-            <ChatUser user={user} key={key} />
+            <ChatUser
+              user={user}
+              key={key}
+              selectedChat={selectedChat}
+              onSelectChat={onSelectChat}
+            />
           ))}
         </ul>
       </div>

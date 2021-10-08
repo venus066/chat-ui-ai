@@ -11,11 +11,19 @@ import { UncontrolledTooltip } from "reactstrap";
 
 interface ChannelProps {
   channel: ChannelTypes;
+  selectedChat: string | number;
+  onSelectChat: (id: number | string) => void;
 }
-const Channel = ({ channel }: ChannelProps) => {
+const Channel = ({ channel, selectedChat, onSelectChat }: ChannelProps) => {
   const unRead = channel.meta && channel.meta.unRead;
+  const isSelectedChat: boolean =
+    selectedChat && selectedChat === channel.id ? true : false;
+  const onClick = () => {
+    onSelectChat(channel.id);
+  };
+
   return (
-    <li>
+    <li className={classnames({ active: isSelectedChat })} onClick={onClick}>
       <Link to="#" className={classnames({ "unread-msg-user": unRead })}>
         <div className="d-flex align-items-center">
           <div className="flex-shrink-0 avatar-xs me-2">
@@ -41,8 +49,15 @@ const Channel = ({ channel }: ChannelProps) => {
 interface ChanelsProps {
   channels: Array<ChannelTypes>;
   openCreateChannel: () => void;
+  selectedChat: string | number;
+  onSelectChat: (id: number | string) => void;
 }
-const Chanels = ({ channels, openCreateChannel }: ChanelsProps) => {
+const Chanels = ({
+  channels,
+  openCreateChannel,
+  selectedChat,
+  onSelectChat,
+}: ChanelsProps) => {
   return (
     <>
       <div className="d-flex align-items-center px-4 mt-5 mb-2">
@@ -66,7 +81,12 @@ const Chanels = ({ channels, openCreateChannel }: ChanelsProps) => {
       <div className="chat-message-list">
         <ul className="list-unstyled chat-list chat-user-list mb-3">
           {(channels || []).map((channel: ChannelTypes, key: number) => (
-            <Channel channel={channel} key={key} />
+            <Channel
+              channel={channel}
+              key={key}
+              selectedChat={selectedChat}
+              onSelectChat={onSelectChat}
+            />
           ))}
         </ul>
       </div>

@@ -8,8 +8,10 @@ import { STATUS_TYPES } from "../../../constants";
 
 interface ChatUserProps {
   user: UserTypes;
+  selectedChat: string | number;
+  onSelectChat: (id: number | string) => void;
 }
-const ChatUser = ({ user }: ChatUserProps) => {
+const ChatUser = ({ user, selectedChat, onSelectChat }: ChatUserProps) => {
   const fullName = `${user.firstName} ${user.lastName}`;
   const shortName = `${user.firstName.charAt(0)}${user.lastName.charAt(0)}`;
 
@@ -26,8 +28,13 @@ const ChatUser = ({ user }: ChatUserProps) => {
   const isOnline = user.meta && user.meta.status === STATUS_TYPES.ACTIVE;
   const unRead = user.meta && user.meta.unRead;
 
+  const isSelectedChat: boolean =
+    selectedChat && selectedChat === user.id ? true : false;
+  const onClick = () => {
+    onSelectChat(user.id);
+  };
   return (
-    <li>
+    <li className={classnames({ active: isSelectedChat })} onClick={onClick}>
       <Link to="#" className={classnames({ "unread-msg-user": unRead })}>
         <div className="d-flex align-items-center">
           {user.profileImage ? (

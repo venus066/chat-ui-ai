@@ -37,3 +37,20 @@ export const createChannel = (channelData: CreateChannelPostData) => ({
   type: ChatsActionTypes.CREATE_CHANNEL,
   payload: channelData,
 });
+
+export const changeSelectedChat = (selectedChat: string | number | null) => ({
+  type: ChatsActionTypes.CHANGE_SELECTED_CHAT,
+  payload: selectedChat,
+});
+
+export const getChatUserDetails = (selectedChat: string | number | null) => ({
+  type: ChatsActionTypes.GET_CHAT_USER_DETAILS,
+  payload: selectedChat,
+});
+
+export const getChatUserConversations = (
+  selectedChat: string | number | null
+) => ({
+  type: ChatsActionTypes.GET_CHAT_USER_CONVERSATIONS,
+  payload: selectedChat,
+});

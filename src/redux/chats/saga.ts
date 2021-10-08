@@ -10,6 +10,8 @@ import {
   getChannels as getChannelsApi,
   addContacts as addContactsApi,
   createChannel as createChannelApi,
+  getChatUserDetails as getChatUserDetailsApi,
+  getChatUserConversations as getChatUserConversationsApi,
 } from "../../api/index";
 
 import {
@@ -74,6 +76,35 @@ function* createChannel({ payload: channelData }: any) {
   }
 }
 
+function* getChatUserDetails({ payload: id }: any) {
+  try {
+    const response: Promise<any> = yield call(getChatUserDetailsApi, id);
+    yield put(
+      chatsApiResponseSuccess(ChatsActionTypes.GET_CHAT_USER_DETAILS, response)
+    );
+  } catch (error: any) {
+    yield put(
+      chatsApiResponseError(ChatsActionTypes.GET_CHAT_USER_DETAILS, error)
+    );
+  }
+}
+
+function* getChatUserConversations({ payload: id }: any) {
+  try {
+    const response: Promise<any> = yield call(getChatUserConversationsApi, id);
+    yield put(
+      chatsApiResponseSuccess(
+        ChatsActionTypes.GET_CHAT_USER_CONVERSATIONS,
+        response
+      )
+    );
+  } catch (error: any) {
+    yield put(
+      chatsApiResponseError(ChatsActionTypes.GET_CHAT_USER_CONVERSATIONS, error)
+    );
+  }
+}
+
 export function* watchGetFavourites() {
   yield takeEvery(ChatsActionTypes.GET_FAVOURITES, getFavourites);
 }
@@ -90,6 +121,15 @@ export function* watchAddContacts() {
 export function* watchCreateChannel() {
   yield takeEvery(ChatsActionTypes.CREATE_CHANNEL, createChannel);
 }
+export function* watchGetChatUserDetails() {
+  yield takeEvery(ChatsActionTypes.GET_CHAT_USER_DETAILS, getChatUserDetails);
+}
+export function* watchGetChatUserConversations() {
+  yield takeEvery(
+    ChatsActionTypes.GET_CHAT_USER_CONVERSATIONS,
+    getChatUserConversations
+  );
+}
 function* chatsSaga() {
   yield all([
     fork(watchGetFavourites),
@@ -97,6 +137,8 @@ function* chatsSaga() {
     fork(watchGetChannels),
     fork(watchAddContacts),
     fork(watchCreateChannel),
+    fork(watchGetChatUserDetails),
+    fork(watchGetChatUserConversations),
   ]);
 }
 

@@ -390,6 +390,44 @@ const fakeBackend = () => {
       }
     });
   });
+
+  mock.onGet(new RegExp(`${url.GET_CHAT_USER_DETAILS}/*`)).reply(config => {
+    const { params } = config;
+    let data: any;
+    if (params.id && contacts.length !== 0) {
+      const chat = (contacts || []).find(
+        (c: any) => c.id + "" === params.id + ""
+      );
+      if (chat) {
+        data = chat;
+      }
+    }
+
+    return new Promise((resolve, reject) => {
+      if (data) {
+        setTimeout(() => {
+          resolve([200, data]);
+        });
+      } else {
+        reject(["Your id is not found"]);
+      }
+    });
+  });
+
+  mock
+    .onGet(new RegExp(`${url.GET_CHAT_USER_CONVERSATIONS}/*`))
+    .reply(config => {
+      const { params } = config;
+
+      return new Promise((resolve, reject) => {
+        if (params.id && contacts.length !== 0) {
+          const data = {};
+          resolve([200, data]);
+        } else {
+          reject(["Your id is not found"]);
+        }
+      });
+    });
 };
 
 export default fakeBackend;

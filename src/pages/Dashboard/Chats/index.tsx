@@ -24,6 +24,9 @@ import {
   getChannels,
   addContacts,
   createChannel,
+  changeSelectedChat,
+  getChatUserDetails,
+  getChatUserConversations,
 } from "../../../redux/actions";
 
 // interfaces
@@ -39,6 +42,7 @@ const Index = (props: IndexProps) => {
     channels,
     isContactsAdded,
     isChannelCreated,
+    selectedChat,
   } = useSelector((state: any) => ({
     isContactInvited: state.Contacts.isContactInvited,
     favourites: state.Chats.favourites,
@@ -46,6 +50,7 @@ const Index = (props: IndexProps) => {
     channels: state.Chats.channels,
     isContactsAdded: state.Chats.isContactsAdded,
     isChannelCreated: state.Chats.isChannelCreated,
+    selectedChat: state.Chats.selectedChat,
   }));
 
   /*
@@ -124,6 +129,18 @@ const Index = (props: IndexProps) => {
     }
   }, [dispatch, isChannelCreated]);
 
+  /*
+  select chat handeling :
+    get conversations
+    get chat user details
+  */
+
+  const onSelectChat = (id: string | number) => {
+    dispatch(getChatUserDetails(id));
+    dispatch(getChatUserConversations(id));
+    dispatch(changeSelectedChat(id));
+  };
+
   return (
     <>
       <div>
@@ -165,18 +182,26 @@ const Index = (props: IndexProps) => {
         <AppSimpleBar className="chat-room-list">
           {/* Start chat-message-list */}
           {/* favourite */}
-          <Favourites users={favourites} />
+          <Favourites
+            users={favourites}
+            selectedChat={selectedChat}
+            onSelectChat={onSelectChat}
+          />
 
           {/* direct messages */}
           <DirectMessages
             users={directMessages}
             openAddContact={openAddContactModal}
+            selectedChat={selectedChat}
+            onSelectChat={onSelectChat}
           />
 
           {/* channels list */}
           <Chanels
             channels={channels}
             openCreateChannel={openCreateChannelModal}
+            selectedChat={selectedChat}
+            onSelectChat={onSelectChat}
           />
           {/* End chat-message-list */}
         </AppSimpleBar>

@@ -5,6 +5,9 @@ export const INIT_STATE: ChatsState = {
   favourites: [],
   directMessages: [],
   channels: [],
+  selectedChat: null,
+  chatUserDetails: {},
+  chatUserConversations: [],
 };
 
 const Chats = (state = INIT_STATE, action: any) => {
@@ -46,6 +49,21 @@ const Chats = (state = INIT_STATE, action: any) => {
             isChannelCreated: true,
             createChannelLoading: false,
           };
+        case ChatsActionTypes.GET_CHAT_USER_DETAILS:
+          return {
+            ...state,
+            chatUserDetails: action.payload.data,
+            isUserDetailsFetched: true,
+            getUserDetailsLoading: false,
+          };
+        case ChatsActionTypes.GET_CHAT_USER_CONVERSATIONS:
+          return {
+            ...state,
+            chatUserConversations: action.payload.data,
+            isUserConversationsFetched: true,
+            getUserConversationsLoading: false,
+          };
+
         default:
           return { ...state };
       }
@@ -82,6 +100,18 @@ const Chats = (state = INIT_STATE, action: any) => {
             isChannelCreated: false,
             createChannelLoading: false,
           };
+        case ChatsActionTypes.GET_CHAT_USER_DETAILS:
+          return {
+            ...state,
+            isUserDetailsFetched: false,
+            getUserDetailsLoading: false,
+          };
+        case ChatsActionTypes.GET_CHAT_USER_CONVERSATIONS:
+          return {
+            ...state,
+            isUserConversationsFetched: false,
+            getUserConversationsLoading: false,
+          };
         default:
           return { ...state };
       }
@@ -116,6 +146,23 @@ const Chats = (state = INIT_STATE, action: any) => {
         ...state,
         isChannelCreated: false,
         createChannelLoading: true,
+      };
+    case ChatsActionTypes.CHANGE_SELECTED_CHAT:
+      return {
+        ...state,
+        selectedChat: action.payload,
+      };
+    case ChatsActionTypes.GET_CHAT_USER_DETAILS:
+      return {
+        ...state,
+        isUserDetailsFetched: false,
+        getUserDetailsLoading: true,
+      };
+    case ChatsActionTypes.GET_CHAT_USER_CONVERSATIONS:
+      return {
+        ...state,
+        isUserConversationsFetched: false,
+        getUserConversationsLoading: true,
       };
     default:
       return { ...state };

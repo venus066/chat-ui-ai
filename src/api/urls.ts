@@ -31,3 +31,5 @@ export const GET_DIRECT_MESSAGES = "/get-direct-messages";
 export const GET_CHANNELS = "/get-channles";
 export const ADD_CONTACTS = "/add-contact";
 export const CREATE_CHANNEL = "/create-channel";
+export const GET_CHAT_USER_DETAILS = "/get-user-details";
+export const GET_CHAT_USER_CONVERSATIONS = "/get-user-conversations";
