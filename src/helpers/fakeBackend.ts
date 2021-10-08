@@ -5,7 +5,7 @@ import * as url from "../api/urls";
 // dummy data
 import {
   // profile
-  profileDetails,
+  profileDetails, myData,
 
   //contacts
   contacts,
@@ -23,6 +23,7 @@ import {
   channels,
   onChangeDirectMessages,
   onChangeChannels,
+  conversations
 } from "../data/index";
 import { settings } from "../data/settings";
 
@@ -30,13 +31,7 @@ const accessToken =
   "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6ImFkbWluIiwiYWRtaW4iOnRydWUsImp0aSI6ImQ2MTEwYzAxLWMwYjUtNDUzNy1iNDZhLTI0NTk5Mjc2YjY1NiIsImlhdCI6MTU5MjU2MDk2MCwiZXhwIjoxNTkyNTY0NjE5fQ.QgFSQtFaK_Ktauadttq1Is7f9w0SUtKcL8xCmkAvGLw";
 
 let users = [
-  {
-    uid: 1,
-    username: "admin",
-    role: "admin",
-    password: "123456",
-    email: "admin@themesbrand.com",
-  },
+  myData
 ];
 
 const fakeBackend = () => {
@@ -419,12 +414,25 @@ const fakeBackend = () => {
     .reply(config => {
       const { params } = config;
 
+      let data: any;
+      if (params.id && conversations.length !== 0) {
+        const chat = (conversations || []).find(
+          (c: any) => c.userId + "" === params.id + ""
+        );
+        if (chat) {
+          data = chat;
+        }
+      }
+
       return new Promise((resolve, reject) => {
-        if (params.id && contacts.length !== 0) {
-          const data = {};
-          resolve([200, data]);
+        if (data) {
+          setTimeout(() => {
+            resolve([200, data]);
+          }, 500);
         } else {
-          reject(["Your id is not found"]);
+          setTimeout(() => {
+            reject(["Your id is not found"]);
+          }, 500);
         }
       });
     });

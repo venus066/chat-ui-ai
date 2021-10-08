@@ -19,6 +19,6 @@ export interface ChatsState {
   channels: Array<any>;
   selectedChat: string | number | null;
   chatUserDetails: object;
-  chatUserConversations: Array<any>;
+  chatUserConversations: {};
   isOpenUserDetails: boolean;
 }

@@ -51,7 +51,7 @@ const profileDetails: ProfileDetailsTypes = {
     description:
       "If several languages coalesce, the grammar of the resulting language is more simple.",
     fullName: "Kathryn Swarey",
-    email: "adc@123.com",
+    email: "admin@themesbrand.com",
     location: "California, USA",
     avatar: avatar1,
     coverImage: image4,
@@ -112,4 +112,12 @@ const profileDetails: ProfileDetailsTypes = {
   },
 };
 
-export { profileDetails };
+const myData = {
+  uid: 1,
+  username: "admin",
+  role: "admin",
+  password: "123456",
+  email: profileDetails.basicDetails.email,
+};
+
+export { profileDetails, myData };

@@ -1,36 +1,182 @@
-import { directMessages } from "./chat";
+import { contacts } from "./contacts";
+import { myData } from "./myProfile";
+import img1 from "../assets/images/small/img-1.jpg";
+import img2 from "../assets/images/small/img-2.jpg";
 
-const conversation = {
-  conversationId: 1,
-  userId: directMessages[0].id,
-  messages: [
-    {
-      mId: 1,
-      text: "",
-      time: "",
-      meta: {
-        receiver: directMessages[0].id,
-        sender: directMessages[1].id,
-        sent: true,
-        received: true,
-        read: true,
+export interface AttachmentTypes {
+  id: number,
+  name: string,
+  downloadLink: string,
+  desc: string,
+}
+
+export interface ImageTypes {
+  id: number,
+  downloadLink: string,
+}
+export interface MessagesTypes {
+  mId: number,
+  text?: string,
+  time: string,
+  meta: {
+    receiver: string | number,
+    sender: string | number,
+    sent: boolean,
+    received: boolean,
+    read: boolean,
+  },
+  attachments?: AttachmentTypes[],
+  image?: ImageTypes[],
+}
+export interface ConversationTypes {
+  conversationId: string | number;
+  userId: string;
+  typingUser: string;
+  messages: MessagesTypes[];
+}
+
+export const myId = myData.uid;
+const conversations: ConversationTypes[] = [
+  {
+    conversationId: 1,
+    userId: "614ecab4ac946a9bdafa4e3b",
+    typingUser: "614ecab4ac946a9bdafa4e3b",
+    messages: [
+      {
+        mId: 1,
+        text: "Good morning 😊",
+        time: new Date().toISOString(),
+        meta: {
+          receiver: myId,
+          sender: "614ecab4ac946a9bdafa4e3b",
+          sent: true,
+          received: true,
+          read: true,
+        },
       },
-      attachments: [
-        {
-          id: 1,
-          name: "",
-          downloadLink: "",
-          desc: "",
+      {
+        mId: 2,
+        text: "Good morning, How are you? What about our next meeting?",
+        time: new Date().toISOString(),
+        meta: {
+          receiver: "614ecab4ac946a9bdafa4e3b",
+          sender: myId,
+          sent: true,
+          received: true,
+          read: true,
         },
-      ],
-      image: [
-        {
-          id: 1,
-          downloadLink: "",
+      },
+      {
+        mId: 3,
+        text: "Yeah everything is fine. Our next meeting tomorrow at 10.00 AM",
+        time: new Date().toISOString(),
+        meta: {
+          receiver: myId,
+          sender: "614ecab4ac946a9bdafa4e3b",
+          sent: true,
+          received: true,
+          read: true,
         },
-      ],
-    },
-  ],
-};
+      },
+      {
+        mId: 4,
+        text: "Hey, I'm going to meet a friend of mine at the department store. I have to buy some presents for my parents 🎁",
+        time: new Date().toISOString(),
+        meta: {
+          receiver: myId,
+          sender: "614ecab4ac946a9bdafa4e3b",
+          sent: true,
+          received: true,
+          read: true,
+        },
+      },
+      {
+        mId: 5,
+        text: "Wow that's great",
+        time: new Date().toISOString(),
+        meta: {
+          receiver: "614ecab4ac946a9bdafa4e3b",
+          sender: myId,
+          sent: true,
+          received: true,
+          read: true,
+        },
+      },
+      {
+        mId: 6,
+        time: new Date().toISOString(),
+        meta: {
+          receiver: myId,
+          sender: "614ecab4ac946a9bdafa4e3b",
+          sent: true,
+          received: true,
+          read: true,
+        },
+        image: [
+          {
+            id: 1,
+            downloadLink: img1,
+          },
+          {
+            id: 2,
+            downloadLink: img2,
+          },
+        ],
+      },
+      {
+        mId: 7,
+        time: new Date().toISOString(),
+        meta: {
+          receiver: "614ecab4ac946a9bdafa4e3b",
+          sender: myId,
+          sent: true,
+          received: true,
+          read: true,
+        },
+        attachments: [
+          {
+            id: 1,
+            name: "design-phase-1-approved.pdf",
+            downloadLink: "",
+            desc: "12.5 MB",
+          },
+        ],
+      },
+    ],
+  }
+];
 
-export { conversation };
+
+// const conversationExample = {
+//   conversationId: 1,
+//   userId: "614ecab4ac946a9bdafa4e3b",
+//   messages: [
+//     {
+//       mId: 1,
+//       text: "",
+//       time: "",
+//       meta: {
+//         receiver: directMessages[0].id,
+//         sender: directMessages[1].id,
+//         sent: true,
+//         received: true,
+//         read: true,
+//       },
+//       attachments: [
+//         {
+//           id: 1,
+//           name: "",
+//           downloadLink: "",
+//           desc: "",
+//         },
+//       ],
+//       image: [
+//         {
+//           id: 1,
+//           downloadLink: "",
+//         },
+//       ],
+//     },
+//   ],
+// };
+export { conversations };

@@ -7,7 +7,7 @@ export const INIT_STATE: ChatsState = {
   channels: [],
   selectedChat: null,
   chatUserDetails: {},
-  chatUserConversations: [],
+  chatUserConversations: {},
   isOpenUserDetails: false
 };
 
@@ -110,6 +110,7 @@ const Chats = (state = INIT_STATE, action: any) => {
         case ChatsActionTypes.GET_CHAT_USER_CONVERSATIONS:
           return {
             ...state,
+            chatUserConversations: {},
             isUserConversationsFetched: false,
             getUserConversationsLoading: false,
           };

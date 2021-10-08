@@ -16,12 +16,20 @@ import { pinnedTabs } from "../../../data/index";
 
 const Index = () => {
   const dispatch = useDispatch();
-  const { chatUserDetails } = useSelector((state: any) => ({
+  const { chatUserDetails, chatUserConversations } = useSelector((state: any) => ({
     chatUserDetails: state.Chats.chatUserDetails,
+    chatUserConversations: state.Chats.chatUserConversations
   }));
 
   const onOpenUserDetails = () => {
     dispatch(toggleUserDetailsTab(true));
+  };
+
+  /*
+  send message
+  */
+  const onSendMessage = () => {
+
   };
   return (
     <>
@@ -30,7 +38,7 @@ const Index = () => {
         pinnedTabs={pinnedTabs}
         onOpenUserDetails={onOpenUserDetails}
       />
-      <Conversation />
+      <Conversation chatUserConversations={chatUserConversations} chatUserDetails={chatUserDetails} />
       <ChatInputSection />
     </>
   );
