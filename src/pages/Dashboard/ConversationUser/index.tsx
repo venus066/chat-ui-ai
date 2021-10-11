@@ -44,13 +44,15 @@ const Index = () => {
   */
   const onSend = (data: any) => {
     const params = {
-      text: data.text ? data.text : "",
+      text: data.text && data.text,
       time: new Date().toISOString(),
+      image: data.image && data.image,
       meta: {
         receiver: chatUserDetails.id,
         sender: userProfile.uid,
       },
     };
+
     dispatch(onSendMessage(params));
     setTimeout(() => {
       dispatch(receiveMessage(chatUserDetails.id));

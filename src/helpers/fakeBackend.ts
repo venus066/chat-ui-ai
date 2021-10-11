@@ -447,12 +447,12 @@ const fakeBackend = () => {
       if (conversationIdx > -1) {
         const mid =
           conversations[conversationIdx].messages &&
-          conversations[conversationIdx].messages.length
+            conversations[conversationIdx].messages.length
             ? conversations[conversationIdx].messages.length + 1
             : 1;
-        const newM = {
+        let newM: any = {
           mId: mid,
-          text: data.text,
+          text: data.text && data.text,
           time: data.time,
           meta: {
             ...data.meta,
@@ -461,6 +461,9 @@ const fakeBackend = () => {
             read: false,
           },
         };
+        if (data.image && data.image.length) {
+          newM['image'] = data.image;
+        }
         conversations[conversationIdx].messages = [
           ...conversations[conversationIdx].messages,
           newM,
@@ -468,7 +471,7 @@ const fakeBackend = () => {
         modifiedC = [...conversations];
       } else {
         // new message first time
-        const newM = {
+        let newM: any = {
           mId: 1,
           text: data.text,
           time: data.time,
@@ -479,7 +482,9 @@ const fakeBackend = () => {
             read: false,
           },
         };
-
+        if (data.image && data.image.length) {
+          newM['image'] = data.image;
+        }
         const newC = {
           conversationId: conversations.length + 1,
           userId: data.meta.receiver,
@@ -585,12 +590,13 @@ const fakeBackend = () => {
         if (modifiedC[conversationIdx].messages) {
           const newM = {
             ...modifiedC[conversationIdx].messages[
-              modifiedC[conversationIdx].messages.length - 1
+            modifiedC[conversationIdx].messages.length - 1
             ],
           };
 
           modifiedC[conversationIdx].messages.push({
             ...newM,
+            mId: newM.mId + 1,
             meta: {
               ...newM.meta,
               receiver: newM.meta.sender,

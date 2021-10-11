@@ -68,6 +68,41 @@ class APIClient {
   delete = (url: string, config?: {}) => {
     return axios.delete(url, { ...config });
   };
+
+  /*
+   file upload update method
+   */
+  updateWithFile = (url: string, data: any) => {
+    const formData = new FormData();
+    for (const k in data) {
+      formData.append(k, data[k]);
+    }
+    const config = {
+      headers: {
+        ...axios.defaults.headers,
+        'content-type': 'multipart/form-data'
+      }
+    };
+    return axios.put(url, formData, config);
+  };
+
+  /*
+   file upload post method
+   */
+  createWithFile = (url: string, data: any) => {
+
+    const formData = new FormData();
+    for (const k in data) {
+      formData.append(k, data[k]);
+    }
+    const config = {
+      headers: {
+        ...axios.defaults.headers,
+        'content-type': 'multipart/form-data'
+      }
+    };
+    return axios.post(url, formData, config);
+  };
 }
 
 const getLoggedinUser = () => {

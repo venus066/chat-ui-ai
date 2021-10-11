@@ -20,18 +20,49 @@ const Index = ({ onSend }: IndexProps) => {
   };
 
   /*
+  disable send button
+  */
+  const [disabled, setDisabled] = useState<boolean>(false);
+
+  /*
   input text
   */
-  const [text, setText] = useState<null | string>("");
+  const [text, setText] = useState<null | string>(null);
   const onChangeText = (value: string) => {
     setText(value);
+
+    if (value)
+      setDisabled(false);
+    else {
+      setDisabled(true);
+    }
+  };
+
+  /*
+  images
+  */
+  const [images, setImages] = useState<Array<any> | null | undefined>();
+  const onSelectImages = (images: Array<any>) => {
+    setImages(images);
   };
 
   const onSubmit = () => {
-    const data = {
-      text: text,
-    };
+    let data: any = {};
+    if (text) {
+      data['text'] = text;
+    }
+    if (images && images.length) {
+      const imgs = (images || []).map((i: any, key: number) => {
+        const src = URL.createObjectURL(i);
+        return {
+          id: key,
+          downloadLink: src
+        };
+      });
+      data['image'] = imgs;
+    }
     setText("");
+    setImages(null);
     onSend(data);
   };
 
@@ -53,15 +84,15 @@ const Index = ({ onSend }: IndexProps) => {
             />
           </div>
           <div className="col">
-            <InputSection value={text} onChange={onChangeText} />
+            <InputSection value={text} onChange={onChangeText} images={images} />
           </div>
           <div className="col-auto">
-            <EndButtons onSubmit={onSubmit} />
+            <EndButtons onSubmit={onSubmit} disabled={disabled} />
           </div>
         </div>
       </Form>
 
-      <MoreMenu isOpen={isOpen} />
+      <MoreMenu isOpen={isOpen} onSelectImages={onSelectImages} onToggle={onToggle} />
       <Reply />
     </div>
   );

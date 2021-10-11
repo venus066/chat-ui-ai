@@ -3,8 +3,9 @@ import React from "react";
 import { Button, UncontrolledPopover, PopoverBody } from "reactstrap";
 interface EndButtonsProps {
   onSubmit: () => void;
+  disabled: boolean;
 }
-const EndButtons = ({ onSubmit }: EndButtonsProps) => {
+const EndButtons = ({ onSubmit, disabled }: EndButtonsProps) => {
   return (
     <div className="chat-input-links ms-2 gap-md-1">
       <div className="links-list-item d-none d-sm-block">
@@ -32,7 +33,7 @@ const EndButtons = ({ onSubmit }: EndButtonsProps) => {
         <Button
           color="primary"
           type="submit"
-          // onClick={onSubmit}
+          disabled={disabled}
           className="btn btn-primary btn-lg chat-send waves-effect waves-light"
         >
           <i className="bx bxs-send align-middle"></i>

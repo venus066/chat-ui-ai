@@ -9,8 +9,19 @@ import "swiper/swiper.min.css";
 
 interface MoreMenuProps {
   isOpen: boolean;
+  onSelectImages: (images: Array<any>) => void;
+  onToggle: () => any;
 }
-const MoreMenu = ({ isOpen }: MoreMenuProps) => {
+const MoreMenu = ({ isOpen, onSelectImages, onToggle }: MoreMenuProps) => {
+  const onSelect = (e: any) => {
+    const files = [...e.target.files];
+    if (files) {
+      // const src = URL.createObjectURL(files[0]);
+      onSelectImages(files);
+      onToggle();
+    }
+  };
+
   return (
     <Collapse
       isOpen={isOpen}
@@ -74,7 +85,7 @@ const MoreMenu = ({ isOpen }: MoreMenuProps) => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className="text-center px-2">
+              {/* <div className="text-center px-2">
                 <div className="avatar-sm mx-auto">
                   <div className="avatar-title font-size-18 bg-soft-primary text-primary rounded-circle">
                     <i className="bx bx-images"></i>
@@ -85,6 +96,29 @@ const MoreMenu = ({ isOpen }: MoreMenuProps) => {
                   <Link to="#" className="text-body stretched-link">
                     Gallery
                   </Link>
+                </h5>
+              </div> */}
+              <div className="text-center px-2 position-relative">
+                <div>
+                  <Input
+                    id="attached-image-input"
+                    type="file"
+                    className="d-none"
+                    accept="image/png, image/jpeg"
+                    onChange={(e: any) => onSelect(e)}
+                    multiple
+                  />
+                  <Label
+                    htmlFor="attached-image-input"
+                    className="avatar-sm mx-auto stretched-link cursor-pointer"
+                  >
+                    <span className="avatar-title font-size-18 bg-soft-primary text-primary rounded-circle">
+                      <i className="bx bx-images"></i>
+                    </span>
+                  </Label>
+                </div>
+                <h5 className="font-size-11 text-uppercase mt-3 mb-0 text-body text-truncate">
+                  Gallery
                 </h5>
               </div>
             </SwiperSlide>

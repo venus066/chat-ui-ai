@@ -33,6 +33,7 @@ const getChatUserConversations = (id: string | number) => {
 };
 
 const sendMessage = (data: object) => {
+  console.log(data);
   return api.create(url.SEND_MESSAGE, data);
 };
 

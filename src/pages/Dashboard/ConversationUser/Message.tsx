@@ -288,12 +288,19 @@ const Message = ({ message, chatUserDetails }: MessageProps) => {
         </div>
 
         <div className="user-chat-content">
+          {
+            hasImages && message.text && <div className="ctext-wrap"><div className="ctext-wrap-content">
+              <p className="mb-0 ctext-content">{message.text}</p>
+            </div></div>
+          }
           <div className="ctext-wrap">
             {/* text message end */}
 
             {/* image message start */}
             {hasImages ? (
-              <Images images={message.image!} />
+              <>
+                <Images images={message.image!} />
+              </>
             ) : (
               <>
                 <div className="ctext-wrap-content">
