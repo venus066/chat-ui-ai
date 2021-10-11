@@ -12,13 +12,14 @@ interface MediaProps {
 interface MediaItemProps {
   mediaItem: MediaListItemTypes;
   hasMore: boolean;
+  remainingItem: number;
 }
-const MediaItem = ({ mediaItem, hasMore }: MediaItemProps) => {
+const MediaItem = ({ mediaItem, hasMore, remainingItem }: MediaItemProps) => {
   return (
     <div className="media-img-list">
       <Link to="#">
         <img src={mediaItem.url} alt="media img" className="img-fluid" />
-        {hasMore && <div className="bg-overlay">+ 15</div>}
+        {hasMore && <div className="bg-overlay">+ {remainingItem}</div>}
       </Link>
     </div>
   );
@@ -28,6 +29,8 @@ const Media = ({ media, limit }: MediaProps) => {
   useEffect(() => {
     if (media && media.list) setMediaList(media.list);
   }, [media]);
+  const total = mediaList.length;
+  const remainingItem = total - limit;
   return (
     <div>
       <div className="d-flex">
@@ -43,9 +46,10 @@ const Media = ({ media, limit }: MediaProps) => {
       <div className="profile-media-img">
         {(mediaList || []).map((mediaItem: MediaListItemTypes, key: number) => {
           const hasMore: boolean = key === limit;
+
           if (key <= limit) {
             return (
-              <MediaItem mediaItem={mediaItem} key={key} hasMore={hasMore} />
+              <MediaItem mediaItem={mediaItem} key={key} hasMore={hasMore} remainingItem={remainingItem} />
             );
           } else return null;
         })}
