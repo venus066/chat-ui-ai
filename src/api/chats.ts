@@ -57,5 +57,8 @@ export {
   createChannel,
   getChatUserDetails,
   getChatUserConversations,
-  sendMessage, receiveMessage, readMessage, receiveMessageFromUser
+  sendMessage,
+  receiveMessage,
+  readMessage,
+  receiveMessageFromUser,
 };

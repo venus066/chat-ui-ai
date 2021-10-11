@@ -12,7 +12,10 @@ import {
   createChannel as createChannelApi,
   getChatUserDetails as getChatUserDetailsApi,
   getChatUserConversations as getChatUserConversationsApi,
-  sendMessage, receiveMessage as receiveMessageApi, readMessage as readMessageApi, receiveMessageFromUser as receiveMessageFromUserApi
+  sendMessage,
+  receiveMessage as receiveMessageApi,
+  readMessage as readMessageApi,
+  receiveMessageFromUser as receiveMessageFromUserApi,
 } from "../../api/index";
 
 import {
@@ -131,9 +134,7 @@ function* receiveMessage({ payload: id }: any) {
 function* readMessage({ payload: id }: any) {
   try {
     const response: Promise<any> = yield call(readMessageApi, id);
-    yield put(
-      chatsApiResponseSuccess(ChatsActionTypes.READ_MESSAGE, response)
-    );
+    yield put(chatsApiResponseSuccess(ChatsActionTypes.READ_MESSAGE, response));
   } catch (error: any) {
     yield put(chatsApiResponseError(ChatsActionTypes.READ_MESSAGE, error));
   }
@@ -143,10 +144,15 @@ function* receiveMessageFromUser({ payload: id }: any) {
   try {
     const response: Promise<any> = yield call(receiveMessageFromUserApi, id);
     yield put(
-      chatsApiResponseSuccess(ChatsActionTypes.RECEIVE_MESSAGE_FROM_USER, response)
+      chatsApiResponseSuccess(
+        ChatsActionTypes.RECEIVE_MESSAGE_FROM_USER,
+        response
+      )
     );
   } catch (error: any) {
-    yield put(chatsApiResponseError(ChatsActionTypes.RECEIVE_MESSAGE_FROM_USER, error));
+    yield put(
+      chatsApiResponseError(ChatsActionTypes.RECEIVE_MESSAGE_FROM_USER, error)
+    );
   }
 }
 
@@ -185,7 +191,10 @@ export function* watchReadMessage() {
   yield takeEvery(ChatsActionTypes.READ_MESSAGE, readMessage);
 }
 export function* watchReceiveMessageFromUser() {
-  yield takeEvery(ChatsActionTypes.RECEIVE_MESSAGE_FROM_USER, receiveMessageFromUser);
+  yield takeEvery(
+    ChatsActionTypes.RECEIVE_MESSAGE_FROM_USER,
+    receiveMessageFromUser
+  );
 }
 
 function* chatsSaga() {

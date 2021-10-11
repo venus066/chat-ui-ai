@@ -5,8 +5,12 @@ import { useSelector, useDispatch } from "react-redux";
 
 // actions
 import {
-  toggleUserDetailsTab, getChatUserConversations,
-  onSendMessage, receiveMessage, readMessage, receiveMessageFromUser
+  toggleUserDetailsTab,
+  getChatUserConversations,
+  onSendMessage,
+  receiveMessage,
+  readMessage,
+  receiveMessageFromUser,
 } from "../../../redux/actions";
 
 // hooks

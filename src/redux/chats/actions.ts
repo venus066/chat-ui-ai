@@ -79,4 +79,3 @@ export const receiveMessageFromUser = (id: number | string) => ({
   type: ChatsActionTypes.RECEIVE_MESSAGE_FROM_USER,
   payload: id,
 });
-
