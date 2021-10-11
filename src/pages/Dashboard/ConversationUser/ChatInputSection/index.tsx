@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // components
 import StartButtons from "./StartButtons";
@@ -22,7 +22,7 @@ const Index = ({ onSend }: IndexProps) => {
   /*
   disable send button
   */
-  const [disabled, setDisabled] = useState<boolean>(false);
+  const [disabled, setDisabled] = useState<boolean>(true);
 
   /*
   input text
@@ -30,12 +30,6 @@ const Index = ({ onSend }: IndexProps) => {
   const [text, setText] = useState<null | string>(null);
   const onChangeText = (value: string) => {
     setText(value);
-
-    if (value)
-      setDisabled(false);
-    else {
-      setDisabled(true);
-    }
   };
 
   /*
@@ -45,6 +39,21 @@ const Index = ({ onSend }: IndexProps) => {
   const onSelectImages = (images: Array<any>) => {
     setImages(images);
   };
+
+  /*
+  files
+  */
+  const [files, setFiles] = useState<Array<any> | null | undefined>();
+  const onSelectFiles = (files: Array<any>) => {
+    setFiles(files);
+  };
+  useEffect(() => {
+    if (text || images || files) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [text, images, files]);
 
   const onSubmit = () => {
     let data: any = {};
@@ -61,8 +70,23 @@ const Index = ({ onSend }: IndexProps) => {
       });
       data['image'] = imgs;
     }
+
+    if (files && files.length) {
+      const fs = (files || []).map((f: any, key: number) => {
+        const src = URL.createObjectURL(f);
+        return {
+          id: key,
+          name: f.name,
+          downloadLink: src,
+          desc: f.size,
+        };
+      });
+      data['attachments'] = fs;
+    }
+
     setText("");
     setImages(null);
+    setFiles(null);
     onSend(data);
   };
 
@@ -84,7 +108,7 @@ const Index = ({ onSend }: IndexProps) => {
             />
           </div>
           <div className="col">
-            <InputSection value={text} onChange={onChangeText} images={images} />
+            <InputSection value={text} onChange={onChangeText} images={images} files={files} />
           </div>
           <div className="col-auto">
             <EndButtons onSubmit={onSubmit} disabled={disabled} />
@@ -92,7 +116,7 @@ const Index = ({ onSend }: IndexProps) => {
         </div>
       </Form>
 
-      <MoreMenu isOpen={isOpen} onSelectImages={onSelectImages} onToggle={onToggle} />
+      <MoreMenu isOpen={isOpen} onSelectImages={onSelectImages} onSelectFiles={onSelectFiles} onToggle={onToggle} />
       <Reply />
     </div>
   );

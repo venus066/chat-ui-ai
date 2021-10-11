@@ -464,6 +464,9 @@ const fakeBackend = () => {
         if (data.image && data.image.length) {
           newM['image'] = data.image;
         }
+        if (data.attachments && data.attachments.length) {
+          newM['attachments'] = data.attachments;
+        }
         conversations[conversationIdx].messages = [
           ...conversations[conversationIdx].messages,
           newM,
@@ -484,6 +487,9 @@ const fakeBackend = () => {
         };
         if (data.image && data.image.length) {
           newM['image'] = data.image;
+        }
+        if (data.attachments && data.attachments.length) {
+          newM['attachments'] = data.attachments;
         }
         const newC = {
           conversationId: conversations.length + 1,

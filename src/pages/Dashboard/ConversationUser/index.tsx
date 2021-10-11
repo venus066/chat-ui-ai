@@ -47,6 +47,7 @@ const Index = () => {
       text: data.text && data.text,
       time: new Date().toISOString(),
       image: data.image && data.image,
+      attachments: data.attachments && data.attachments,
       meta: {
         receiver: chatUserDetails.id,
         sender: userProfile.uid,
@@ -59,7 +60,7 @@ const Index = () => {
     }, 1000);
     setTimeout(() => {
       dispatch(readMessage(chatUserDetails.id));
-    }, 1000);
+    }, 1500);
     setTimeout(() => {
       dispatch(receiveMessageFromUser(chatUserDetails.id));
     }, 1000);

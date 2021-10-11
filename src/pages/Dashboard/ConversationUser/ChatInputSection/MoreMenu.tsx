@@ -11,13 +11,22 @@ interface MoreMenuProps {
   isOpen: boolean;
   onSelectImages: (images: Array<any>) => void;
   onToggle: () => any;
+  onSelectFiles: (files: Array<any>) => void;
 }
-const MoreMenu = ({ isOpen, onSelectImages, onToggle }: MoreMenuProps) => {
+const MoreMenu = ({ isOpen, onSelectImages, onToggle, onSelectFiles }: MoreMenuProps) => {
   const onSelect = (e: any) => {
     const files = [...e.target.files];
     if (files) {
       // const src = URL.createObjectURL(files[0]);
       onSelectImages(files);
+      onToggle();
+    }
+  };
+
+  const onSelectF = (e: any) => {
+    const files = [...e.target.files];
+    if (files) {
+      onSelectFiles(files);
       onToggle();
     }
   };
@@ -55,6 +64,8 @@ const MoreMenu = ({ isOpen, onSelectImages, onToggle }: MoreMenuProps) => {
                     id="attachedfile-input"
                     type="file"
                     className="d-none"
+                    onChange={(e: any) => onSelectF(e)}
+                    multiple
                   />
                   <Label
                     htmlFor="attachedfile-input"

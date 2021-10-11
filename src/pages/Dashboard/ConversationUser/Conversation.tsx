@@ -19,10 +19,9 @@ const Conversation = ({
   chatUserDetails,
   chatUserConversations,
 }: ConversationProps) => {
-  const { getUserConversationsLoading, isUserConversationsFetched } =
+  const { getUserConversationsLoading } =
     useSelector((state: any) => ({
       getUserConversationsLoading: state.Chats.getUserConversationsLoading,
-      isUserConversationsFetched: state.Chats.isUserConversationsFetched,
     }));
 
   const messages =
@@ -52,10 +51,10 @@ const Conversation = ({
     }
   }, []);
   useEffect(() => {
-    if (isUserConversationsFetched) {
+    if (chatUserConversations.messages) {
       scrollElement();
     }
-  }, [isUserConversationsFetched, scrollElement]);
+  }, [chatUserConversations.messages, scrollElement]);
 
   return (
     <AppSimpleBar

@@ -6,13 +6,18 @@ interface InputSectionProps {
   value: null | string;
   onChange: (value: string) => void;
   images: Array<any> | null | undefined;
+  files: Array<any> | null | undefined;
 }
-const InputSection = ({ value, onChange, images }: InputSectionProps) => {
+const InputSection = ({ value, onChange, images, files }: InputSectionProps) => {
   return (
     <div className="position-relative">
       {
         images && images.length ?
           <div className="text-secondary font-size-12 mb-1">You have selected {images.length} images</div> : null
+      }
+      {
+        files && files.length ?
+          <div className="text-secondary font-size-12 mb-1">You have selected {files.length} attachments</div> : null
       }
 
       <Input

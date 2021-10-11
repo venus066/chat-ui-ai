@@ -211,7 +211,7 @@ const Attachments = ({ attachments }: AttachmentsProps) => {
         <div
           key={key}
           className={classnames("p-3", "border-primary", "border rounded-3", {
-            "pt-2": key !== 0,
+            "mt-2": key !== 0,
           })}
         >
           <div className="d-flex align-items-center attached-file">
@@ -231,7 +231,7 @@ const Attachments = ({ attachments }: AttachmentsProps) => {
             <div className="flex-shrink-0 ms-4">
               <div className="d-flex gap-2 font-size-20 d-flex align-items-start">
                 <div>
-                  <Link to={attachment.downloadLink} className="text-muted">
+                  <Link to={attachment.downloadLink ? attachment.downloadLink : "#"} className="text-muted">
                     <i className="bx bxs-download"></i>
                   </Link>
                 </div>
