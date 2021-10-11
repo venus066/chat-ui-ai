@@ -1,4 +1,3 @@
-import { contacts } from "./contacts";
 import { myData } from "./myProfile";
 import img1 from "../assets/images/small/img-1.jpg";
 import img2 from "../assets/images/small/img-2.jpg";
@@ -36,7 +35,7 @@ export interface ConversationTypes {
 }
 
 export const myId = myData.uid;
-const conversations: ConversationTypes[] = [
+let conversations: ConversationTypes[] = [
   {
     conversationId: 1,
     userId: "614ecab4ac946a9bdafa4e3b",
@@ -146,6 +145,9 @@ const conversations: ConversationTypes[] = [
   }
 ];
 
+const onChangeConversations = (newData: ConversationTypes[]) => {
+  conversations = newData;
+};
 
 // const conversationExample = {
 //   conversationId: 1,
@@ -179,4 +181,4 @@ const conversations: ConversationTypes[] = [
 //     },
 //   ],
 // };
-export { conversations };
+export { conversations, onChangeConversations };

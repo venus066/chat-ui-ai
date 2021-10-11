@@ -4,6 +4,9 @@ import classnames from "classnames";
 import { Link } from 'react-router-dom';
 import avatar7 from "../../../assets/images/users/avatar-7.jpg";
 
+// components
+import LightBox from '../../../components/LightBox';
+
 //images
 import imagePlaceholder from "../../../assets/images/users/profile-placeholder.png";
 
@@ -12,7 +15,8 @@ import { MessagesTypes, ImageTypes, AttachmentTypes } from "../../../data/messag
 
 // hooks
 import { useProfile } from '../../../hooks';
-import LightBox from '../../../components/LightBox';
+
+// utils
 import { formateDate } from '../../../utils';
 
 
@@ -276,6 +280,9 @@ const Message = ({ message, chatUserDetails }: MessageProps) => {
     const profile = chatUserDetails.profileImage ? chatUserDetails.profileImage : imagePlaceholder;
 
     const date = formateDate(message.time, "hh:mmaaa");
+    const isSent = message.meta.sent;
+    const isReceived = message.meta.received;
+    const isRead = message.meta.read;
     return (
         <li className={classnames("chat-list", { "right": isFromMe })}>
             <div className="conversation-list">
@@ -320,8 +327,8 @@ const Message = ({ message, chatUserDetails }: MessageProps) => {
                     <div className="conversation-name">
                         {
                             isFromMe ? <>
-                                <span className="text-success me-1">
-                                    <i className="bx bx-check-double"></i>
+                                <span className={(classnames("me-1", { "text-success": isRead }, { "text-muted": (isSent || isReceived) && !isRead }))}>
+                                    <i className={classnames("bx", { "bx-check-double": isRead }, { "bx-check": isSent })}></i>
                                 </span>
                                 <small className={classnames("text-muted", "mb-0", "me-2")}>{date}</small>
                                 You
@@ -332,8 +339,6 @@ const Message = ({ message, chatUserDetails }: MessageProps) => {
 
                                 </>
                         }
-
-
                     </div>
                 </div>
             </div>

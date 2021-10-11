@@ -8,10 +8,11 @@ interface AppSimpleBarProps {
   children: any;
   style?: object;
   className?: string;
+  scrollRef?: any;
 }
-const AppSimpleBar = ({ children, style, className }: AppSimpleBarProps) => {
+const AppSimpleBar = ({ children, style, className, scrollRef }: AppSimpleBarProps) => {
   return (
-    <SimpleBar style={style} className={className}>
+    <SimpleBar style={style} className={className} ref={scrollRef}>
       {children}
     </SimpleBar>
   );

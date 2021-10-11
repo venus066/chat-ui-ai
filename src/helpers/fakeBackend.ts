@@ -23,7 +23,7 @@ import {
   channels,
   onChangeDirectMessages,
   onChangeChannels,
-  conversations
+  conversations, onChangeConversations
 } from "../data/index";
 import { settings } from "../data/settings";
 
@@ -436,6 +436,39 @@ const fakeBackend = () => {
         }
       });
     });
+
+  mock.onPost(url.SEND_MESSAGE).reply(config => {
+    const data = JSON.parse(config["data"]);
+    if (data && data.meta && data.meta.receiver && data.meta.sender) {
+
+      const conversationIdx = (conversations || []).findIndex((c: any) => c.userId + '' === data.meta.receiver + '');
+      if (conversationIdx > -1) {
+        const mid = conversations[conversationIdx].messages && conversations[conversationIdx].messages.length ? conversations[conversationIdx].messages.length + 1 : 1;
+        const newM = {
+          mId: mid,
+          text: data.text,
+          time: data.time,
+          meta: {
+            ...data.meta,
+            sent: true,
+            received: false,
+            read: false,
+          }
+        };
+        conversations[conversationIdx].messages = [...conversations[conversationIdx].messages, newM];
+      }
+      onChangeConversations([...conversations]);
+    }
+
+    return new Promise((resolve, reject) => {
+      if (data && data.meta && data.meta.receiver && data.meta.sender) {
+        // onChangeConversations([...channels, newC]);
+        resolve([200, "Channel Created!"]);
+      } else {
+        reject([400, "Some thing went wrong!"]);
+      }
+    });
+  });
 };
 
 export default fakeBackend;

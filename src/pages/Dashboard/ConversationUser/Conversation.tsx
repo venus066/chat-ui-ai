@@ -1,13 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useRef, useCallback } from "react";
 //redux
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 // components
 import AppSimpleBar from "../../../components/AppSimpleBar";
 import Loader from "../../../components/Loader";
 import Message from "./Message";
-import Day from "./Day";
+// import Day from "./Day";
 
 
 // interface
@@ -18,14 +17,46 @@ interface ConversationProps {
   chatUserDetails: any;
 }
 const Conversation = ({ chatUserDetails, chatUserConversations }: ConversationProps) => {
-  const { getUserConversationsLoading } = useSelector((state: any) => ({
+  const { getUserConversationsLoading, isUserConversationsFetched } = useSelector((state: any) => ({
     getUserConversationsLoading: state.Chats.getUserConversationsLoading,
+    isUserConversationsFetched: state.Chats.isUserConversationsFetched,
   }));
 
   const messages = chatUserConversations.messages && chatUserConversations.messages.length ? chatUserConversations.messages : [];
 
+  const ref = useRef<any>();
+  const scrollElement = useCallback(
+    () => {
+      if (ref && ref.current) {
+        const listEle = document.getElementById("chat-conversation-list");
+        let offsetHeight = 0;
+        if (listEle) {
+          offsetHeight = listEle.scrollHeight -
+            window.innerHeight +
+            250;
+        }
+        if (offsetHeight) {
+          ref.current.getScrollElement().scrollTo({ top: offsetHeight, behavior: "smooth" });
+        }
+      }
+    },
+    [ref],
+  );
+
+  useEffect(() => {
+    if (ref && ref.current) {
+      ref.current.recalculate();
+    }
+  }, []);
+  useEffect(() => {
+    if (isUserConversationsFetched) {
+      scrollElement();
+    }
+  }, [isUserConversationsFetched, scrollElement]);
+
   return (
     <AppSimpleBar
+      scrollRef={ref}
       className="chat-conversation p-3 p-lg-4 positin-relative"
     >
       {
@@ -46,42 +77,7 @@ const Conversation = ({ chatUserDetails, chatUserConversations }: ConversationPr
             );
           })
         }
-        {/* <Message
-          message={{}}
-          hasText={true}
-          isFromMe={false}
-        />
-        <Message
-          message={{}}
-          isFromMe={false}
-          hasImages={true}
-        />
-        <Message
-          message={{}}
-          isFromMe={false}
-          hasAttachments={true}
-        />
-        <Message
-          message={{}}
-          isFromMe={false}
-          isTyping={true}
-        />
-        <Message
-          message={{}}
-          hasText={true}
-          isFromMe={true}
-        />
-        <Message
-          message={{}}
-          isFromMe={true}
-          hasAttachments={true}
-        />
-        <Message
-          message={{}}
-          isFromMe={true}
-          hasImages={true}
-        />
-        <Day /> */}
+        {/*  <Day /> */}
       </ul>
     </AppSimpleBar>
   );

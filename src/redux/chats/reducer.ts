@@ -63,8 +63,13 @@ const Chats = (state = INIT_STATE, action: any) => {
             chatUserConversations: action.payload.data,
             isUserConversationsFetched: true,
             getUserConversationsLoading: false,
+            isUserMessageSent: false,
           };
-
+        case ChatsActionTypes.ON_SEND_MESSAGE:
+          return {
+            ...state,
+            isUserMessageSent: true,
+          };
         default:
           return { ...state };
       }
@@ -113,6 +118,12 @@ const Chats = (state = INIT_STATE, action: any) => {
             chatUserConversations: {},
             isUserConversationsFetched: false,
             getUserConversationsLoading: false,
+            isUserMessageSent: false,
+          };
+        case ChatsActionTypes.ON_SEND_MESSAGE:
+          return {
+            ...state,
+            isUserMessageSent: false,
           };
         default:
           return { ...state };
@@ -165,11 +176,17 @@ const Chats = (state = INIT_STATE, action: any) => {
         ...state,
         isUserConversationsFetched: false,
         getUserConversationsLoading: true,
+        isUserMessageSent: false,
       };
     case ChatsActionTypes.TOGGLE_USER_DETAILS_TAB:
       return {
         ...state,
         isOpenUserDetails: action.payload,
+      };
+    case ChatsActionTypes.ON_SEND_MESSAGE:
+      return {
+        ...state,
+        isUserMessageSent: false,
       };
     default:
       return { ...state };

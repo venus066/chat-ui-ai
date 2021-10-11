@@ -33,3 +33,4 @@ export const ADD_CONTACTS = "/add-contact";
 export const CREATE_CHANNEL = "/create-channel";
 export const GET_CHAT_USER_DETAILS = "/get-user-details";
 export const GET_CHAT_USER_CONVERSATIONS = "/get-user-conversations";
+export const SEND_MESSAGE = "send-message";

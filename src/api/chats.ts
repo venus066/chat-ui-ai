@@ -32,6 +32,10 @@ const getChatUserConversations = (id: string | number) => {
   });
 };
 
+const sendMessage = (data: object) => {
+  return api.create(url.SEND_MESSAGE, data);
+};
+
 export {
   getFavourites,
   getDirectMessages,
@@ -40,4 +44,5 @@ export {
   createChannel,
   getChatUserDetails,
   getChatUserConversations,
+  sendMessage
 };

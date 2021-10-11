@@ -12,6 +12,9 @@ export enum ChatsActionTypes {
   GET_CHAT_USER_DETAILS = "@@chats/GET_CHAT_USER_DETAILS",
   GET_CHAT_USER_CONVERSATIONS = "@@chats/GET_CHAT_USER_CONVERSATIONS",
   TOGGLE_USER_DETAILS_TAB = "@@chats/TOGGLE_USER_DETAILS_TAB",
+
+  // MESSAGE
+  ON_SEND_MESSAGE = "@@chats/ON_SEND_MESSAGE",
 }
 export interface ChatsState {
   favourites: Array<any>;
