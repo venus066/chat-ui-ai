@@ -12,7 +12,7 @@ import {
   createChannel as createChannelApi,
   getChatUserDetails as getChatUserDetailsApi,
   getChatUserConversations as getChatUserConversationsApi,
-  sendMessage,
+  sendMessage, receiveMessage as receiveMessageApi, readMessage as readMessageApi, receiveMessageFromUser as receiveMessageFromUserApi
 } from "../../api/index";
 
 import {
@@ -117,6 +117,39 @@ function* onSendMessage({ payload: data }: any) {
   }
 }
 
+function* receiveMessage({ payload: id }: any) {
+  try {
+    const response: Promise<any> = yield call(receiveMessageApi, id);
+    yield put(
+      chatsApiResponseSuccess(ChatsActionTypes.RECEIVE_MESSAGE, response)
+    );
+  } catch (error: any) {
+    yield put(chatsApiResponseError(ChatsActionTypes.RECEIVE_MESSAGE, error));
+  }
+}
+
+function* readMessage({ payload: id }: any) {
+  try {
+    const response: Promise<any> = yield call(readMessageApi, id);
+    yield put(
+      chatsApiResponseSuccess(ChatsActionTypes.READ_MESSAGE, response)
+    );
+  } catch (error: any) {
+    yield put(chatsApiResponseError(ChatsActionTypes.READ_MESSAGE, error));
+  }
+}
+
+function* receiveMessageFromUser({ payload: id }: any) {
+  try {
+    const response: Promise<any> = yield call(receiveMessageFromUserApi, id);
+    yield put(
+      chatsApiResponseSuccess(ChatsActionTypes.RECEIVE_MESSAGE_FROM_USER, response)
+    );
+  } catch (error: any) {
+    yield put(chatsApiResponseError(ChatsActionTypes.RECEIVE_MESSAGE_FROM_USER, error));
+  }
+}
+
 export function* watchGetFavourites() {
   yield takeEvery(ChatsActionTypes.GET_FAVOURITES, getFavourites);
 }
@@ -145,6 +178,16 @@ export function* watchGetChatUserConversations() {
 export function* watchOnSendMessage() {
   yield takeEvery(ChatsActionTypes.ON_SEND_MESSAGE, onSendMessage);
 }
+export function* watchReceiveMessage() {
+  yield takeEvery(ChatsActionTypes.RECEIVE_MESSAGE, receiveMessage);
+}
+export function* watchReadMessage() {
+  yield takeEvery(ChatsActionTypes.READ_MESSAGE, readMessage);
+}
+export function* watchReceiveMessageFromUser() {
+  yield takeEvery(ChatsActionTypes.RECEIVE_MESSAGE_FROM_USER, receiveMessageFromUser);
+}
+
 function* chatsSaga() {
   yield all([
     fork(watchGetFavourites),
@@ -155,6 +198,9 @@ function* chatsSaga() {
     fork(watchGetChatUserDetails),
     fork(watchGetChatUserConversations),
     fork(watchOnSendMessage),
+    fork(watchReceiveMessage),
+    fork(watchReadMessage),
+    fork(watchReceiveMessageFromUser),
   ]);
 }
 

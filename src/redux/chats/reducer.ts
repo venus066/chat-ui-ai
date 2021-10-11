@@ -70,6 +70,13 @@ const Chats = (state = INIT_STATE, action: any) => {
             ...state,
             isUserMessageSent: true,
           };
+        case ChatsActionTypes.RECEIVE_MESSAGE:
+        case ChatsActionTypes.READ_MESSAGE:
+        case ChatsActionTypes.RECEIVE_MESSAGE_FROM_USER:
+          return {
+            ...state,
+            chatUserConversations: action.payload.data,
+          };
         default:
           return { ...state };
       }

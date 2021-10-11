@@ -36,6 +36,19 @@ const sendMessage = (data: object) => {
   return api.create(url.SEND_MESSAGE, data);
 };
 
+const receiveMessage = (id: string | number) => {
+  return api.update(url.RECEIVE_MESSAGE + "/" + id, { params: { id } });
+};
+
+const readMessage = (id: string | number) => {
+  return api.update(url.READ_MESSAGE + "/" + id, { params: { id } });
+};
+const receiveMessageFromUser = (id: string | number) => {
+  return api.get(url.RECEIVE_MESSAGE_FROM_USER + "/" + id, {
+    params: { id },
+  });
+};
+
 export {
   getFavourites,
   getDirectMessages,
@@ -44,5 +57,5 @@ export {
   createChannel,
   getChatUserDetails,
   getChatUserConversations,
-  sendMessage,
+  sendMessage, receiveMessage, readMessage, receiveMessageFromUser
 };

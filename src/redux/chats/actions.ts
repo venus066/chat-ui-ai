@@ -64,3 +64,19 @@ export const onSendMessage = (data: any) => ({
   type: ChatsActionTypes.ON_SEND_MESSAGE,
   payload: data,
 });
+
+export const receiveMessage = (id: number | string) => ({
+  type: ChatsActionTypes.RECEIVE_MESSAGE,
+  payload: id,
+});
+
+export const readMessage = (id: number | string) => ({
+  type: ChatsActionTypes.READ_MESSAGE,
+  payload: id,
+});
+
+export const receiveMessageFromUser = (id: number | string) => ({
+  type: ChatsActionTypes.RECEIVE_MESSAGE_FROM_USER,
+  payload: id,
+});
+

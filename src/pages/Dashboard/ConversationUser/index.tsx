@@ -5,9 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 // actions
 import {
-  toggleUserDetailsTab,
-  onSendMessage,
-  getChatUserConversations,
+  toggleUserDetailsTab, getChatUserConversations,
+  onSendMessage, receiveMessage, readMessage, receiveMessageFromUser
 } from "../../../redux/actions";
 
 // hooks
@@ -49,7 +48,17 @@ const Index = () => {
       },
     };
     dispatch(onSendMessage(params));
+    setTimeout(() => {
+      dispatch(receiveMessage(chatUserDetails.id));
+    }, 1000);
+    setTimeout(() => {
+      dispatch(readMessage(chatUserDetails.id));
+    }, 1000);
+    setTimeout(() => {
+      dispatch(receiveMessageFromUser(chatUserDetails.id));
+    }, 1000);
   };
+
   useEffect(() => {
     if (isUserMessageSent) {
       dispatch(getChatUserConversations(chatUserDetails.id));

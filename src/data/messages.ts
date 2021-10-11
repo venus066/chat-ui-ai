@@ -30,7 +30,7 @@ export interface MessagesTypes {
 export interface ConversationTypes {
   conversationId: string | number;
   userId: string;
-  typingUser: string;
+  typingUser?: string;
   messages: MessagesTypes[];
 }
 

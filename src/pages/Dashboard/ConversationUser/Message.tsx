@@ -279,6 +279,7 @@ const Message = ({ message, chatUserDetails }: MessageProps) => {
   const isSent = message.meta.sent;
   const isReceived = message.meta.received;
   const isRead = message.meta.read;
+
   return (
     <li className={classnames("chat-list", { right: isFromMe })}>
       <div className="conversation-list">
@@ -329,7 +330,7 @@ const Message = ({ message, chatUserDetails }: MessageProps) => {
                   <i
                     className={classnames(
                       "bx",
-                      { "bx-check-double": isRead },
+                      { "bx-check-double": isRead || isReceived },
                       { "bx-check": isSent }
                     )}
                   ></i>

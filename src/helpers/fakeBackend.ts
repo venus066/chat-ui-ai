@@ -440,13 +440,14 @@ const fakeBackend = () => {
   mock.onPost(url.SEND_MESSAGE).reply(config => {
     const data = JSON.parse(config["data"]);
     if (data && data.meta && data.meta.receiver && data.meta.sender) {
+      let modifiedC = [...conversations];
       const conversationIdx = (conversations || []).findIndex(
         (c: any) => c.userId + "" === data.meta.receiver + ""
       );
       if (conversationIdx > -1) {
         const mid =
           conversations[conversationIdx].messages &&
-          conversations[conversationIdx].messages.length
+            conversations[conversationIdx].messages.length
             ? conversations[conversationIdx].messages.length + 1
             : 1;
         const newM = {
@@ -464,19 +465,154 @@ const fakeBackend = () => {
           ...conversations[conversationIdx].messages,
           newM,
         ];
+        modifiedC = [...conversations];
+      } else {
+        // new message first time
+        const newM = {
+          mId: 1,
+          text: data.text,
+          time: data.time,
+          meta: {
+            ...data.meta,
+            sent: true,
+            received: false,
+            read: false,
+          },
+        };
+
+        const newC = {
+          conversationId: conversations.length + 1,
+          userId: data.meta.receiver,
+          messages: [
+            {
+              ...newM
+            }
+          ]
+        };
+        modifiedC = [...conversations, newC];
       }
-      onChangeConversations([...conversations]);
+      onChangeConversations(modifiedC);
     }
 
     return new Promise((resolve, reject) => {
       if (data && data.meta && data.meta.receiver && data.meta.sender) {
-        // onChangeConversations([...channels, newC]);
         resolve([200, "Channel Created!"]);
       } else {
         reject([400, "Some thing went wrong!"]);
       }
     });
   });
+
+  mock
+    .onPut(new RegExp(`${url.RECEIVE_MESSAGE}/*`))
+    .reply(config => {
+      const data = JSON.parse(config["data"]);
+      let updatedUserC: any;
+      if (data.params && data.params.id && conversations.length !== 0) {
+        let modifiedC = [...conversations];
+        const conversationIdx = (modifiedC || []).findIndex(
+          (c: any) => c.userId + "" === data.params.id + ""
+        );
+        if (conversationIdx > -1) {
+          if (modifiedC[conversationIdx].messages) {
+            modifiedC[conversationIdx].messages = (modifiedC[conversationIdx].messages || []).map((c: any) => {
+              return {
+                ...c,
+                meta: { ...c.meta, received: true }
+              };
+            });
+          }
+          updatedUserC = modifiedC[conversationIdx];
+          onChangeConversations(modifiedC);
+        }
+      }
+
+      return new Promise((resolve, reject) => {
+        if (updatedUserC) {
+          resolve([200, updatedUserC]);
+        } else {
+          setTimeout(() => {
+            reject(["Your id is not found"]);
+          }, 500);
+        }
+      });
+    });
+
+  mock
+    .onPut(new RegExp(`${url.READ_MESSAGE}/*`))
+    .reply(config => {
+      const data = JSON.parse(config["data"]);
+      let updatedUserC: any;
+      if (data.params && data.params.id && conversations.length !== 0) {
+        let modifiedC = [...conversations];
+        const conversationIdx = (modifiedC || []).findIndex(
+          (c: any) => c.userId + "" === data.params.id + ""
+        );
+        if (conversationIdx > -1) {
+          if (modifiedC[conversationIdx].messages) {
+            modifiedC[conversationIdx].messages = (modifiedC[conversationIdx].messages || []).map((c: any) => {
+              return {
+                ...c,
+                meta: { ...c.meta, read: true }
+              };
+            });
+          }
+          updatedUserC = modifiedC[conversationIdx];
+          onChangeConversations(modifiedC);
+        }
+      }
+
+      return new Promise((resolve, reject) => {
+        if (updatedUserC) {
+          resolve([200, updatedUserC]);
+        } else {
+          setTimeout(() => {
+            reject(["Your id is not found"]);
+          }, 500);
+        }
+      });
+    });
+
+  mock
+    .onGet(new RegExp(`${url.RECEIVE_MESSAGE_FROM_USER}/*`))
+    .reply(config => {
+      let updatedUserC: any;
+      const { params } = config;
+      if (params && params.id && conversations.length !== 0) {
+        let modifiedC = [...conversations];
+        const conversationIdx = (modifiedC || []).findIndex(
+          (c: any) => c.userId + "" === params.id + ""
+        );
+        if (conversationIdx > -1) {
+          if (modifiedC[conversationIdx].messages) {
+            const newM = { ...modifiedC[conversationIdx].messages[modifiedC[conversationIdx].messages.length - 1] };
+
+            modifiedC[conversationIdx].messages.push({
+              ...newM,
+              meta: {
+                ...newM.meta,
+                receiver: newM.meta.sender,
+                sender: newM.meta.receiver
+              }
+            });
+          }
+          updatedUserC = modifiedC[conversationIdx];
+          onChangeConversations(modifiedC);
+        }
+      }
+
+      return new Promise((resolve, reject) => {
+        if (updatedUserC) {
+          resolve([200, updatedUserC]);
+        } else {
+          setTimeout(() => {
+            reject(["Your id is not found"]);
+          }, 500);
+        }
+      });
+    });
+
+
 };
 
 export default fakeBackend;
