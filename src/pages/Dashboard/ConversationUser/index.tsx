@@ -3,11 +3,15 @@ import React, { useEffect } from "react";
 //redux
 import { useSelector, useDispatch } from "react-redux";
 
-// actions 
-import { toggleUserDetailsTab, onSendMessage, getChatUserConversations } from "../../../redux/actions";
+// actions
+import {
+  toggleUserDetailsTab,
+  onSendMessage,
+  getChatUserConversations,
+} from "../../../redux/actions";
 
 // hooks
-import { useProfile } from '../../../hooks';
+import { useProfile } from "../../../hooks";
 
 // components
 import UserHead from "./UserHead";
@@ -19,11 +23,12 @@ import { pinnedTabs } from "../../../data/index";
 
 const Index = () => {
   const dispatch = useDispatch();
-  const { chatUserDetails, chatUserConversations, isUserMessageSent } = useSelector((state: any) => ({
-    chatUserDetails: state.Chats.chatUserDetails,
-    chatUserConversations: state.Chats.chatUserConversations,
-    isUserMessageSent: state.Chats.isUserMessageSent
-  }));
+  const { chatUserDetails, chatUserConversations, isUserMessageSent } =
+    useSelector((state: any) => ({
+      chatUserDetails: state.Chats.chatUserDetails,
+      chatUserConversations: state.Chats.chatUserConversations,
+      isUserMessageSent: state.Chats.isUserMessageSent,
+    }));
 
   const onOpenUserDetails = () => {
     dispatch(toggleUserDetailsTab(true));
@@ -36,12 +41,12 @@ const Index = () => {
   */
   const onSend = (data: any) => {
     const params = {
-      text: data.text ? data.text : '',
+      text: data.text ? data.text : "",
       time: new Date().toISOString(),
       meta: {
         receiver: chatUserDetails.id,
         sender: userProfile.uid,
-      }
+      },
     };
     dispatch(onSendMessage(params));
   };
@@ -57,7 +62,10 @@ const Index = () => {
         pinnedTabs={pinnedTabs}
         onOpenUserDetails={onOpenUserDetails}
       />
-      <Conversation chatUserConversations={chatUserConversations} chatUserDetails={chatUserDetails} />
+      <Conversation
+        chatUserConversations={chatUserConversations}
+        chatUserDetails={chatUserDetails}
+      />
       <ChatInputSection onSend={onSend} />
     </>
   );

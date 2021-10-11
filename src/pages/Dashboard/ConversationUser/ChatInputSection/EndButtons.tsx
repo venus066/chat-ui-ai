@@ -1,15 +1,13 @@
 import React from "react";
 
-import { Button, UncontrolledPopover, PopoverBody } from 'reactstrap';
+import { Button, UncontrolledPopover, PopoverBody } from "reactstrap";
 interface EndButtonsProps {
   onSubmit: () => void;
 }
 const EndButtons = ({ onSubmit }: EndButtonsProps) => {
   return (
     <div className="chat-input-links ms-2 gap-md-1">
-      <div
-        className="links-list-item d-none d-sm-block"
-      >
+      <div className="links-list-item d-none d-sm-block">
         <Button
           color="none"
           type="button"
@@ -21,7 +19,13 @@ const EndButtons = ({ onSubmit }: EndButtonsProps) => {
       </div>
       <UncontrolledPopover trigger="focus" placement="top" target="audio-btn">
         <PopoverBody>
-          <div className='loader-line'><div className='line'></div><div className='line'></div><div className='line'></div><div className='line'></div><div className='line'></div></div>
+          <div className="loader-line">
+            <div className="line"></div>
+            <div className="line"></div>
+            <div className="line"></div>
+            <div className="line"></div>
+            <div className="line"></div>
+          </div>
         </PopoverBody>
       </UncontrolledPopover>
       <div className="links-list-item">
@@ -37,6 +41,5 @@ const EndButtons = ({ onSubmit }: EndButtonsProps) => {
     </div>
   );
 };
-
 
 export default EndButtons;

@@ -4,7 +4,7 @@ import classnames from "classnames";
 //redux
 import { useSelector, useDispatch } from "react-redux";
 
-// actions 
+// actions
 import { toggleUserDetailsTab } from "../../../redux/actions";
 
 // components
@@ -22,13 +22,12 @@ import AttachedFiles from "../../../components/AttachedFiles";
 const Index = () => {
   const dispatch = useDispatch();
 
-  const { chatUserDetails, getUserDetailsLoading, isOpenUserDetails } = useSelector(
-    (state: any) => ({
+  const { chatUserDetails, getUserDetailsLoading, isOpenUserDetails } =
+    useSelector((state: any) => ({
       chatUserDetails: state.Chats.chatUserDetails,
       getUserDetailsLoading: state.Chats.getUserDetailsLoading,
       isOpenUserDetails: state.Chats.isOpenUserDetails,
-    })
-  );
+    }));
 
   /*
   close tab
@@ -61,7 +60,11 @@ const Index = () => {
 
   return (
     <>
-      <div className={classnames("user-profile-sidebar", { "d-block": isOpenUserDetails })}>
+      <div
+        className={classnames("user-profile-sidebar", {
+          "d-block": isOpenUserDetails,
+        })}
+      >
         <div className="position-relative">
           {getUserDetailsLoading && <Loader />}
 

@@ -10,7 +10,7 @@ import ConversationUser from "./ConversationUser/index";
 import UserProfileDetails from "./UserProfileDetails/index";
 import Welcome from "./ConversationUser/Welcome";
 
-interface IndexProps { }
+interface IndexProps {}
 const Index = (props: IndexProps) => {
   const { selectedChat } = useSelector((state: any) => ({
     selectedChat: state.Chats.selectedChat,

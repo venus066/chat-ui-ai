@@ -12,7 +12,7 @@ import {
   createChannel as createChannelApi,
   getChatUserDetails as getChatUserDetailsApi,
   getChatUserConversations as getChatUserConversationsApi,
-  sendMessage
+  sendMessage,
 } from "../../api/index";
 
 import {
@@ -110,15 +110,10 @@ function* onSendMessage({ payload: data }: any) {
   try {
     const response: Promise<any> = yield call(sendMessage, data);
     yield put(
-      chatsApiResponseSuccess(
-        ChatsActionTypes.ON_SEND_MESSAGE,
-        response
-      )
+      chatsApiResponseSuccess(ChatsActionTypes.ON_SEND_MESSAGE, response)
     );
   } catch (error: any) {
-    yield put(
-      chatsApiResponseError(ChatsActionTypes.ON_SEND_MESSAGE, error)
-    );
+    yield put(chatsApiResponseError(ChatsActionTypes.ON_SEND_MESSAGE, error));
   }
 }
 
@@ -148,10 +143,7 @@ export function* watchGetChatUserConversations() {
   );
 }
 export function* watchOnSendMessage() {
-  yield takeEvery(
-    ChatsActionTypes.ON_SEND_MESSAGE,
-    onSendMessage
-  );
+  yield takeEvery(ChatsActionTypes.ON_SEND_MESSAGE, onSendMessage);
 }
 function* chatsSaga() {
   yield all([

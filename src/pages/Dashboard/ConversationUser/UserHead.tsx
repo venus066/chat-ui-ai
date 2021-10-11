@@ -35,15 +35,15 @@ interface ProfileImageProps {
 const ProfileImage = ({
   chatUserDetails,
   onCloseConversation,
-  onOpenUserDetails
+  onOpenUserDetails,
 }: ProfileImageProps) => {
   const fullName = chatUserDetails.firstName
     ? `${chatUserDetails.firstName} ${chatUserDetails.lastName}`
     : "-";
   const shortName = chatUserDetails.firstName
     ? `${chatUserDetails.firstName.charAt(0)}${chatUserDetails.lastName.charAt(
-      0
-    )}`
+        0
+      )}`
     : "-";
 
   const colors = [
@@ -97,7 +97,11 @@ const ProfileImage = ({
 
           <div className="flex-grow-1 overflow-hidden">
             <h6 className="text-truncate mb-0 font-size-18">
-              <Link to="#" onClick={onOpenUserDetails} className="user-profile-show text-reset">
+              <Link
+                to="#"
+                onClick={onOpenUserDetails}
+                className="user-profile-show text-reset"
+              >
                 {fullName}
               </Link>
             </h6>
@@ -229,7 +233,11 @@ interface UserHeadProps {
   pinnedTabs: Array<PinTypes>;
   onOpenUserDetails: () => void;
 }
-const UserHead = ({ chatUserDetails, pinnedTabs, onOpenUserDetails }: UserHeadProps) => {
+const UserHead = ({
+  chatUserDetails,
+  pinnedTabs,
+  onOpenUserDetails,
+}: UserHeadProps) => {
   const dispatch = useDispatch();
   /*
     video call modal
@@ -311,7 +319,11 @@ const UserHead = ({ chatUserDetails, pinnedTabs, onOpenUserDetails }: UserHeadPr
             </li>
 
             <li className="list-inline-item d-none d-lg-inline-block me-2 ms-0">
-              <button onClick={onOpenUserDetails} type="button" className="btn nav-btn user-profile-show">
+              <button
+                onClick={onOpenUserDetails}
+                type="button"
+                className="btn nav-btn user-profile-show"
+              >
                 <i className="bx bxs-info-circle"></i>
               </button>
             </li>

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Input } from 'reactstrap';
+import { Input } from "reactstrap";
 
 interface InputSectionProps {
   value: null | string;
@@ -15,7 +15,7 @@ const InputSection = ({ value, onChange }: InputSectionProps) => {
         className="form-control form-control-lg chat-input"
         id="chat-input"
         placeholder="Type your message..."
-        value={value || ''}
+        value={value || ""}
         onChange={(e: any) => {
           onChange(e.target.value);
         }}

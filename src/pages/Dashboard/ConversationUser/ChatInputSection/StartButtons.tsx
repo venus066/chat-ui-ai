@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
-import { Button, UncontrolledTooltip, PopoverBody, Popover } from 'reactstrap';
+import { Button, UncontrolledTooltip, PopoverBody, Popover } from "reactstrap";
 
 // emoji picker
-import Picker from 'emoji-picker-react';
+import Picker from "emoji-picker-react";
 
 interface StartButtonsProps {
   onToggle: () => void;
@@ -25,10 +25,7 @@ const StartButtons = ({ onToggle, onChange, text }: StartButtonsProps) => {
 
   return (
     <div className="chat-input-links me-md-2">
-      <div
-        className="links-list-item"
-        id="more-menu"
-      >
+      <div className="links-list-item" id="more-menu">
         <Button
           type="button"
           className="btn btn-link text-decoration-none btn-lg waves-effect"
@@ -41,10 +38,7 @@ const StartButtons = ({ onToggle, onChange, text }: StartButtonsProps) => {
       <UncontrolledTooltip target="more-menu" placement="top">
         More
       </UncontrolledTooltip>
-      <div
-        className="links-list-item"
-        id="emoji"
-      >
+      <div className="links-list-item" id="emoji">
         <Button
           type="button"
           className="btn btn-link text-decoration-none btn-lg waves-effect emoji-btn"

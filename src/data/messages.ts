@@ -3,29 +3,29 @@ import img1 from "../assets/images/small/img-1.jpg";
 import img2 from "../assets/images/small/img-2.jpg";
 
 export interface AttachmentTypes {
-  id: number,
-  name: string,
-  downloadLink: string,
-  desc: string,
+  id: number;
+  name: string;
+  downloadLink: string;
+  desc: string;
 }
 
 export interface ImageTypes {
-  id: number,
-  downloadLink: string,
+  id: number;
+  downloadLink: string;
 }
 export interface MessagesTypes {
-  mId: number,
-  text?: string,
-  time: string,
+  mId: number;
+  text?: string;
+  time: string;
   meta: {
-    receiver: string | number,
-    sender: string | number,
-    sent: boolean,
-    received: boolean,
-    read: boolean,
-  },
-  attachments?: AttachmentTypes[],
-  image?: ImageTypes[],
+    receiver: string | number;
+    sender: string | number;
+    sent: boolean;
+    received: boolean;
+    read: boolean;
+  };
+  attachments?: AttachmentTypes[];
+  image?: ImageTypes[];
 }
 export interface ConversationTypes {
   conversationId: string | number;
@@ -142,7 +142,7 @@ let conversations: ConversationTypes[] = [
         ],
       },
     ],
-  }
+  },
 ];
 
 const onChangeConversations = (newData: ConversationTypes[]) => {

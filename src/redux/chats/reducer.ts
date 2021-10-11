@@ -8,7 +8,7 @@ export const INIT_STATE: ChatsState = {
   selectedChat: null,
   chatUserDetails: {},
   chatUserConversations: {},
-  isOpenUserDetails: false
+  isOpenUserDetails: false,
 };
 
 const Chats = (state = INIT_STATE, action: any) => {

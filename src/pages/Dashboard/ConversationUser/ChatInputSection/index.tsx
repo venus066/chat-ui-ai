@@ -11,7 +11,6 @@ interface IndexProps {
   onSend: (data: any) => void;
 }
 const Index = ({ onSend }: IndexProps) => {
-
   /*
   more menu collapse
   */
@@ -30,7 +29,7 @@ const Index = ({ onSend }: IndexProps) => {
 
   const onSubmit = () => {
     const data = {
-      text: text
+      text: text,
     };
     setText("");
     onSend(data);
@@ -38,13 +37,20 @@ const Index = ({ onSend }: IndexProps) => {
 
   return (
     <div className="chat-input-section p-3 p-lg-4">
-      <Form id="chatinput-form" onSubmit={(e: any) => {
-        e.preventDefault();
-        onSubmit();
-      }}>
+      <Form
+        id="chatinput-form"
+        onSubmit={(e: any) => {
+          e.preventDefault();
+          onSubmit();
+        }}
+      >
         <div className="row g-0 align-items-center">
           <div className="col-auto">
-            <StartButtons onToggle={onToggle} text={text} onChange={onChangeText} />
+            <StartButtons
+              onToggle={onToggle}
+              text={text}
+              onChange={onChangeText}
+            />
           </div>
           <div className="col">
             <InputSection value={text} onChange={onChangeText} />

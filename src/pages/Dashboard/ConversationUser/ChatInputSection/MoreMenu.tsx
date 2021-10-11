@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { Collapse, Card, CardBody, Input, Label } from 'reactstrap';
+import { Collapse, Card, CardBody, Input, Label } from "reactstrap";
 
 // swiper
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -12,10 +12,13 @@ interface MoreMenuProps {
 }
 const MoreMenu = ({ isOpen }: MoreMenuProps) => {
   return (
-    <Collapse isOpen={isOpen} className="chat-input-collapse" id="chatinputmorecollapse">
+    <Collapse
+      isOpen={isOpen}
+      className="chat-input-collapse"
+      id="chatinputmorecollapse"
+    >
       <Card className="mb-0">
         <CardBody className="py-3">
-
           <Swiper
             observer
             observeParents
@@ -30,11 +33,10 @@ const MoreMenu = ({ isOpen }: MoreMenuProps) => {
               },
               1024: {
                 slidesPerView: 6,
-              }
+              },
             }}
             className="chatinput-links"
           >
-
             <SwiperSlide>
               <div className="text-center px-2 position-relative">
                 <div>
@@ -156,6 +158,5 @@ const MoreMenu = ({ isOpen }: MoreMenuProps) => {
     </Collapse>
   );
 };
-
 
 export default MoreMenu;

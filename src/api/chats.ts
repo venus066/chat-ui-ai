@@ -44,5 +44,5 @@ export {
   createChannel,
   getChatUserDetails,
   getChatUserConversations,
-  sendMessage
+  sendMessage,
 };

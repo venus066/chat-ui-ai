@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Collapse, Card, CardBody } from 'reactstrap';
+import { Collapse, Card, CardBody } from "reactstrap";
 
 const Reply = () => {
   return (
@@ -30,6 +30,5 @@ const Reply = () => {
     </Collapse>
   );
 };
-
 
 export default Reply;

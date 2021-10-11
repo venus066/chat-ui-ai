@@ -14,7 +14,7 @@ import AttachedFiles from "../../../components/AttachedFiles";
 // actions
 import { getProfileDetails } from "../../../redux/actions";
 
-interface IndexProps { }
+interface IndexProps {}
 const Index = (props: IndexProps) => {
   const dispatch = useDispatch();
 

@@ -64,4 +64,3 @@ export const onSendMessage = (data: any) => ({
   type: ChatsActionTypes.ON_SEND_MESSAGE,
   payload: data,
 });
-

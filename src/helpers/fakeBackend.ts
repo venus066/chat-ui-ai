@@ -5,7 +5,8 @@ import * as url from "../api/urls";
 // dummy data
 import {
   // profile
-  profileDetails, myData,
+  profileDetails,
+  myData,
 
   //contacts
   contacts,
@@ -23,16 +24,15 @@ import {
   channels,
   onChangeDirectMessages,
   onChangeChannels,
-  conversations, onChangeConversations
+  conversations,
+  onChangeConversations,
 } from "../data/index";
 import { settings } from "../data/settings";
 
 const accessToken =
   "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6ImFkbWluIiwiYWRtaW4iOnRydWUsImp0aSI6ImQ2MTEwYzAxLWMwYjUtNDUzNy1iNDZhLTI0NTk5Mjc2YjY1NiIsImlhdCI6MTU5MjU2MDk2MCwiZXhwIjoxNTkyNTY0NjE5fQ.QgFSQtFaK_Ktauadttq1Is7f9w0SUtKcL8xCmkAvGLw";
 
-let users = [
-  myData
-];
+let users = [myData];
 
 const fakeBackend = () => {
   // This sets the mock adapter on the default instance
@@ -440,10 +440,15 @@ const fakeBackend = () => {
   mock.onPost(url.SEND_MESSAGE).reply(config => {
     const data = JSON.parse(config["data"]);
     if (data && data.meta && data.meta.receiver && data.meta.sender) {
-
-      const conversationIdx = (conversations || []).findIndex((c: any) => c.userId + '' === data.meta.receiver + '');
+      const conversationIdx = (conversations || []).findIndex(
+        (c: any) => c.userId + "" === data.meta.receiver + ""
+      );
       if (conversationIdx > -1) {
-        const mid = conversations[conversationIdx].messages && conversations[conversationIdx].messages.length ? conversations[conversationIdx].messages.length + 1 : 1;
+        const mid =
+          conversations[conversationIdx].messages &&
+          conversations[conversationIdx].messages.length
+            ? conversations[conversationIdx].messages.length + 1
+            : 1;
         const newM = {
           mId: mid,
           text: data.text,
@@ -453,9 +458,12 @@ const fakeBackend = () => {
             sent: true,
             received: false,
             read: false,
-          }
+          },
         };
-        conversations[conversationIdx].messages = [...conversations[conversationIdx].messages, newM];
+        conversations[conversationIdx].messages = [
+          ...conversations[conversationIdx].messages,
+          newM,
+        ];
       }
       onChangeConversations([...conversations]);
     }
