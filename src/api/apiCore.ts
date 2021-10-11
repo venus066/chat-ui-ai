@@ -80,8 +80,8 @@ class APIClient {
     const config = {
       headers: {
         ...axios.defaults.headers,
-        'content-type': 'multipart/form-data'
-      }
+        "content-type": "multipart/form-data",
+      },
     };
     return axios.put(url, formData, config);
   };
@@ -90,7 +90,6 @@ class APIClient {
    file upload post method
    */
   createWithFile = (url: string, data: any) => {
-
     const formData = new FormData();
     for (const k in data) {
       formData.append(k, data[k]);
@@ -98,8 +97,8 @@ class APIClient {
     const config = {
       headers: {
         ...axios.defaults.headers,
-        'content-type': 'multipart/form-data'
-      }
+        "content-type": "multipart/form-data",
+      },
     };
     return axios.post(url, formData, config);
   };

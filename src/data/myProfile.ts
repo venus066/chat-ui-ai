@@ -118,6 +118,7 @@ const myData = {
   role: "admin",
   password: "123456",
   email: profileDetails.basicDetails.email,
+  profileImage: profileDetails.basicDetails.avatar,
 };
 
 export { profileDetails, myData };

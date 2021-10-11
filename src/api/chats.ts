@@ -33,7 +33,6 @@ const getChatUserConversations = (id: string | number) => {
 };
 
 const sendMessage = (data: object) => {
-  console.log(data);
   return api.create(url.SEND_MESSAGE, data);
 };
 
@@ -50,6 +49,12 @@ const receiveMessageFromUser = (id: string | number) => {
   });
 };
 
+const deleteMessage = (userId: number | string, messageId: number | string) => {
+  return api.delete(url.DELETE_MESSAGE + "/" + userId + "/" + messageId, {
+    params: { userId, messageId },
+  });
+};
+
 export {
   getFavourites,
   getDirectMessages,
@@ -62,4 +67,5 @@ export {
   receiveMessage,
   readMessage,
   receiveMessageFromUser,
+  deleteMessage,
 };

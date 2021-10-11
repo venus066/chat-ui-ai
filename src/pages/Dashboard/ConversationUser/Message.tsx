@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  Dropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
@@ -8,7 +7,6 @@ import {
 } from "reactstrap";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
-import avatar7 from "../../../assets/images/users/avatar-7.jpg";
 
 // components
 import LightBox from "../../../components/LightBox";
@@ -29,16 +27,13 @@ import { useProfile } from "../../../hooks";
 // utils
 import { formateDate } from "../../../utils";
 
-const Menu = () => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const toggle = () => setDropdownOpen(!dropdownOpen);
+interface MenuProps {
+  onDelete: () => any;
+}
 
+const Menu = ({ onDelete }: MenuProps) => {
   return (
-    <Dropdown
-      isOpen={dropdownOpen}
-      toggle={toggle}
-      className="align-self-start message-box-drop"
-    >
+    <UncontrolledDropdown className="align-self-start message-box-drop">
       <DropdownToggle className="btn btn-toggle" role="button" tag={"a"}>
         <i className="ri-more-2-fill"></i>
       </DropdownToggle>
@@ -79,12 +74,12 @@ const Menu = () => {
         </DropdownItem>
         <DropdownItem
           className="d-flex align-items-center justify-content-between delete-item"
-          to="#"
+          onClick={onDelete}
         >
           Delete <i className="bx bx-trash text-muted ms-2"></i>
         </DropdownItem>
       </DropdownMenu>
-    </Dropdown>
+    </UncontrolledDropdown>
   );
 };
 
@@ -231,7 +226,10 @@ const Attachments = ({ attachments }: AttachmentsProps) => {
             <div className="flex-shrink-0 ms-4">
               <div className="d-flex gap-2 font-size-20 d-flex align-items-start">
                 <div>
-                  <Link to={attachment.downloadLink ? attachment.downloadLink : "#"} className="text-muted">
+                  <Link
+                    to={attachment.downloadLink ? attachment.downloadLink : "#"}
+                    className="text-muted"
+                  >
                     <i className="bx bxs-download"></i>
                   </Link>
                 </div>
@@ -259,8 +257,9 @@ const Typing = () => {
 interface MessageProps {
   message: MessagesTypes;
   chatUserDetails: any;
+  onDelete: (messageId: string | number) => any;
 }
-const Message = ({ message, chatUserDetails }: MessageProps) => {
+const Message = ({ message, chatUserDetails, onDelete }: MessageProps) => {
   const { userProfile } = useProfile();
   const hasImages = message.image && message.image.length;
   const hasAttachments = message.attachments && message.attachments.length;
@@ -274,25 +273,32 @@ const Message = ({ message, chatUserDetails }: MessageProps) => {
   const profile = chatUserDetails.profileImage
     ? chatUserDetails.profileImage
     : imagePlaceholder;
-
+  const myProfile = userProfile.profileImage
+    ? userProfile.profileImage
+    : imagePlaceholder;
   const date = formateDate(message.time, "hh:mmaaa");
   const isSent = message.meta.sent;
   const isReceived = message.meta.received;
   const isRead = message.meta.read;
 
+  const onDeleteMessage = () => {
+    onDelete(message.mId);
+  };
   return (
     <li className={classnames("chat-list", { right: isFromMe })}>
       <div className="conversation-list">
         <div className="chat-avatar">
-          <img src={isFromMe ? avatar7 : profile} alt="" />
+          <img src={isFromMe ? myProfile : profile} alt="" />
         </div>
 
         <div className="user-chat-content">
-          {
-            hasImages && message.text && <div className="ctext-wrap"><div className="ctext-wrap-content">
-              <p className="mb-0 ctext-content">{message.text}</p>
-            </div></div>
-          }
+          {hasImages && message.text && (
+            <div className="ctext-wrap">
+              <div className="ctext-wrap-content">
+                <p className="mb-0 ctext-content">{message.text}</p>
+              </div>
+            </div>
+          )}
           <div className="ctext-wrap">
             {/* text message end */}
 
@@ -318,7 +324,7 @@ const Message = ({ message, chatUserDetails }: MessageProps) => {
                   )}
                   {/* files message end */}
                 </div>
-                <Menu />
+                <Menu onDelete={onDeleteMessage} />
               </>
             )}
 

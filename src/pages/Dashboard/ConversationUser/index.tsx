@@ -11,6 +11,7 @@ import {
   receiveMessage,
   readMessage,
   receiveMessageFromUser,
+  deleteMessage,
 } from "../../../redux/actions";
 
 // hooks
@@ -26,12 +27,17 @@ import { pinnedTabs } from "../../../data/index";
 
 const Index = () => {
   const dispatch = useDispatch();
-  const { chatUserDetails, chatUserConversations, isUserMessageSent } =
-    useSelector((state: any) => ({
-      chatUserDetails: state.Chats.chatUserDetails,
-      chatUserConversations: state.Chats.chatUserConversations,
-      isUserMessageSent: state.Chats.isUserMessageSent,
-    }));
+  const {
+    chatUserDetails,
+    chatUserConversations,
+    isUserMessageSent,
+    isMessageDeleted,
+  } = useSelector((state: any) => ({
+    chatUserDetails: state.Chats.chatUserDetails,
+    chatUserConversations: state.Chats.chatUserConversations,
+    isUserMessageSent: state.Chats.isUserMessageSent,
+    isMessageDeleted: state.Chats.isMessageDeleted,
+  }));
 
   const onOpenUserDetails = () => {
     dispatch(toggleUserDetailsTab(true));
@@ -63,14 +69,18 @@ const Index = () => {
     }, 1500);
     setTimeout(() => {
       dispatch(receiveMessageFromUser(chatUserDetails.id));
-    }, 1000);
+    }, 2000);
   };
 
   useEffect(() => {
-    if (isUserMessageSent) {
+    if (isUserMessageSent || isMessageDeleted) {
       dispatch(getChatUserConversations(chatUserDetails.id));
     }
-  }, [dispatch, isUserMessageSent, chatUserDetails]);
+  }, [dispatch, isUserMessageSent, chatUserDetails, isMessageDeleted]);
+
+  const onDeleteMessage = (messageId: string | number) => {
+    dispatch(deleteMessage(chatUserDetails.id, messageId));
+  };
   return (
     <>
       <UserHead
@@ -81,6 +91,7 @@ const Index = () => {
       <Conversation
         chatUserConversations={chatUserConversations}
         chatUserDetails={chatUserDetails}
+        onDelete={onDeleteMessage}
       />
       <ChatInputSection onSend={onSend} />
     </>

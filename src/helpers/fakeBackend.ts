@@ -447,7 +447,7 @@ const fakeBackend = () => {
       if (conversationIdx > -1) {
         const mid =
           conversations[conversationIdx].messages &&
-            conversations[conversationIdx].messages.length
+          conversations[conversationIdx].messages.length
             ? conversations[conversationIdx].messages.length + 1
             : 1;
         let newM: any = {
@@ -462,10 +462,10 @@ const fakeBackend = () => {
           },
         };
         if (data.image && data.image.length) {
-          newM['image'] = data.image;
+          newM["image"] = data.image;
         }
         if (data.attachments && data.attachments.length) {
-          newM['attachments'] = data.attachments;
+          newM["attachments"] = data.attachments;
         }
         conversations[conversationIdx].messages = [
           ...conversations[conversationIdx].messages,
@@ -486,10 +486,10 @@ const fakeBackend = () => {
           },
         };
         if (data.image && data.image.length) {
-          newM['image'] = data.image;
+          newM["image"] = data.image;
         }
         if (data.attachments && data.attachments.length) {
-          newM['attachments'] = data.attachments;
+          newM["attachments"] = data.attachments;
         }
         const newC = {
           conversationId: conversations.length + 1,
@@ -596,7 +596,7 @@ const fakeBackend = () => {
         if (modifiedC[conversationIdx].messages) {
           const newM = {
             ...modifiedC[conversationIdx].messages[
-            modifiedC[conversationIdx].messages.length - 1
+              modifiedC[conversationIdx].messages.length - 1
             ],
           };
 
@@ -622,6 +622,28 @@ const fakeBackend = () => {
         setTimeout(() => {
           reject(["Your id is not found"]);
         }, 500);
+      }
+    });
+  });
+
+  mock.onDelete(new RegExp(`${url.DELETE_MESSAGE}/*`)).reply(config => {
+    const { params } = config;
+
+    return new Promise((resolve, reject) => {
+      if (params.userId && params.messageId) {
+        let modifiedC = [...conversations];
+        const conversationIdx = (modifiedC || []).findIndex(
+          (c: any) => c.userId + "" === params.userId + ""
+        );
+        if (conversationIdx > -1) {
+          modifiedC[conversationIdx].messages = (
+            modifiedC[conversationIdx].messages || []
+          ).filter((m: any) => m.mId + "" !== params.messageId + "");
+        }
+        onChangeConversations(modifiedC);
+        resolve([200, "Message is Deleted!"]);
+      } else {
+        reject(["Your id is not found"]);
       }
     });
   });

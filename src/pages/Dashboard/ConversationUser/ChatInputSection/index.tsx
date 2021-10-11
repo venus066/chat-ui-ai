@@ -58,17 +58,17 @@ const Index = ({ onSend }: IndexProps) => {
   const onSubmit = () => {
     let data: any = {};
     if (text) {
-      data['text'] = text;
+      data["text"] = text;
     }
     if (images && images.length) {
       const imgs = (images || []).map((i: any, key: number) => {
         const src = URL.createObjectURL(i);
         return {
           id: key,
-          downloadLink: src
+          downloadLink: src,
         };
       });
-      data['image'] = imgs;
+      data["image"] = imgs;
     }
 
     if (files && files.length) {
@@ -81,7 +81,7 @@ const Index = ({ onSend }: IndexProps) => {
           desc: f.size,
         };
       });
-      data['attachments'] = fs;
+      data["attachments"] = fs;
     }
 
     setText("");
@@ -108,7 +108,12 @@ const Index = ({ onSend }: IndexProps) => {
             />
           </div>
           <div className="col">
-            <InputSection value={text} onChange={onChangeText} images={images} files={files} />
+            <InputSection
+              value={text}
+              onChange={onChangeText}
+              images={images}
+              files={files}
+            />
           </div>
           <div className="col-auto">
             <EndButtons onSubmit={onSubmit} disabled={disabled} />
@@ -116,7 +121,12 @@ const Index = ({ onSend }: IndexProps) => {
         </div>
       </Form>
 
-      <MoreMenu isOpen={isOpen} onSelectImages={onSelectImages} onSelectFiles={onSelectFiles} onToggle={onToggle} />
+      <MoreMenu
+        isOpen={isOpen}
+        onSelectImages={onSelectImages}
+        onSelectFiles={onSelectFiles}
+        onToggle={onToggle}
+      />
       <Reply />
     </div>
   );

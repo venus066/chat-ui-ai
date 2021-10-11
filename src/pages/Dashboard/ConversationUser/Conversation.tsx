@@ -14,15 +14,16 @@ import { MessagesTypes } from "../../../data/messages";
 interface ConversationProps {
   chatUserConversations: any;
   chatUserDetails: any;
+  onDelete: (messageId: string | number) => any;
 }
 const Conversation = ({
   chatUserDetails,
   chatUserConversations,
+  onDelete,
 }: ConversationProps) => {
-  const { getUserConversationsLoading } =
-    useSelector((state: any) => ({
-      getUserConversationsLoading: state.Chats.getUserConversationsLoading,
-    }));
+  const { getUserConversationsLoading } = useSelector((state: any) => ({
+    getUserConversationsLoading: state.Chats.getUserConversationsLoading,
+  }));
 
   const messages =
     chatUserConversations.messages && chatUserConversations.messages.length
@@ -72,6 +73,7 @@ const Conversation = ({
               message={message}
               key={key}
               chatUserDetails={chatUserDetails}
+              onDelete={onDelete}
             />
           );
         })}

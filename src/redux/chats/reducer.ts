@@ -64,6 +64,7 @@ const Chats = (state = INIT_STATE, action: any) => {
             isUserConversationsFetched: true,
             getUserConversationsLoading: false,
             isUserMessageSent: false,
+            isMessageDeleted: false,
           };
         case ChatsActionTypes.ON_SEND_MESSAGE:
           return {
@@ -76,6 +77,11 @@ const Chats = (state = INIT_STATE, action: any) => {
           return {
             ...state,
             chatUserConversations: action.payload.data,
+          };
+        case ChatsActionTypes.DELETE_MESSAGE:
+          return {
+            ...state,
+            isMessageDeleted: true,
           };
         default:
           return { ...state };
@@ -131,6 +137,11 @@ const Chats = (state = INIT_STATE, action: any) => {
           return {
             ...state,
             isUserMessageSent: false,
+          };
+        case ChatsActionTypes.DELETE_MESSAGE:
+          return {
+            ...state,
+            isMessageDeleted: false,
           };
         default:
           return { ...state };
@@ -194,6 +205,11 @@ const Chats = (state = INIT_STATE, action: any) => {
       return {
         ...state,
         isUserMessageSent: false,
+      };
+    case ChatsActionTypes.DELETE_MESSAGE:
+      return {
+        ...state,
+        isMessageDeleted: false,
       };
     default:
       return { ...state };

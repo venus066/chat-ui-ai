@@ -79,3 +79,11 @@ export const receiveMessageFromUser = (id: number | string) => ({
   type: ChatsActionTypes.RECEIVE_MESSAGE_FROM_USER,
   payload: id,
 });
+
+export const deleteMessage = (
+  userId: number | string,
+  messageId: number | string
+) => ({
+  type: ChatsActionTypes.DELETE_MESSAGE,
+  payload: { userId, messageId },
+});

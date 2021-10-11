@@ -13,7 +13,12 @@ interface MoreMenuProps {
   onToggle: () => any;
   onSelectFiles: (files: Array<any>) => void;
 }
-const MoreMenu = ({ isOpen, onSelectImages, onToggle, onSelectFiles }: MoreMenuProps) => {
+const MoreMenu = ({
+  isOpen,
+  onSelectImages,
+  onToggle,
+  onSelectFiles,
+}: MoreMenuProps) => {
   const onSelect = (e: any) => {
     const files = [...e.target.files];
     if (files) {
