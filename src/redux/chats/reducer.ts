@@ -89,6 +89,11 @@ const Chats = (state = INIT_STATE, action: any) => {
             ...state,
             isMessageForwarded: true,
           };
+        case ChatsActionTypes.DELETE_USER_MESSAGES:
+          return {
+            ...state,
+            isUserMessagesDeleted: true,
+          };
         default:
           return { ...state };
       }
@@ -153,6 +158,11 @@ const Chats = (state = INIT_STATE, action: any) => {
           return {
             ...state,
             isMessageForwarded: false,
+          };
+        case ChatsActionTypes.DELETE_USER_MESSAGES:
+          return {
+            ...state,
+            isUserMessagesDeleted: false,
           };
         default:
           return { ...state };
@@ -226,6 +236,11 @@ const Chats = (state = INIT_STATE, action: any) => {
       return {
         ...state,
         isMessageForwarded: false,
+      };
+    case ChatsActionTypes.DELETE_USER_MESSAGES:
+      return {
+        ...state,
+        isUserMessagesDeleted: false,
       };
     default:
       return { ...state };

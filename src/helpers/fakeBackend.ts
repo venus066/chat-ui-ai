@@ -449,7 +449,7 @@ const fakeBackend = () => {
       if (conversationIdx > -1) {
         const mid =
           conversations[conversationIdx].messages &&
-          conversations[conversationIdx].messages.length
+            conversations[conversationIdx].messages.length
             ? conversations[conversationIdx].messages.length + 1
             : 1;
         let newM: any = {
@@ -605,7 +605,7 @@ const fakeBackend = () => {
         if (modifiedC[conversationIdx].messages) {
           const newM = {
             ...modifiedC[conversationIdx].messages[
-              modifiedC[conversationIdx].messages.length - 1
+            modifiedC[conversationIdx].messages.length - 1
             ],
           };
 
@@ -670,7 +670,7 @@ const fakeBackend = () => {
         if (conversationIdx > -1) {
           const mid =
             modifiedC[conversationIdx].messages &&
-            modifiedC[conversationIdx].messages.length
+              modifiedC[conversationIdx].messages.length
               ? modifiedC[conversationIdx].messages.length + 1
               : 1;
           let newM: any = {
@@ -748,6 +748,24 @@ const fakeBackend = () => {
       }
     });
   });
+
+  mock.onDelete(new RegExp(`${url.DELETE_USER_MESSAGES}/*`)).reply(config => {
+    const { params } = config;
+
+    return new Promise((resolve, reject) => {
+      if (params.userId) {
+        let modifiedC = [...conversations];
+        modifiedC = (modifiedC || []).filter(
+          (c: any) => c.userId + "" !== params.userId + ""
+        );
+        onChangeConversations(modifiedC);
+        resolve([200, "Messages are Deleted!"]);
+      } else {
+        reject(["Your id is not found"]);
+      }
+    });
+  });
+
 };
 
 export default fakeBackend;

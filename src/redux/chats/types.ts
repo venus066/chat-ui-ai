@@ -20,6 +20,7 @@ export enum ChatsActionTypes {
   RECEIVE_MESSAGE_FROM_USER = "@@chats/RECEIVE_MESSAGE_FROM_USER",
   DELETE_MESSAGE = "@@chats/DELETE_MESSAGE",
   FORWARD_MESSAGE = "@@chats/FORWARD_MESSAGE",
+  DELETE_USER_MESSAGES = "@@chats/DELETE_USER_MESSAGES",
 }
 export interface ChatsState {
   favourites: Array<any>;

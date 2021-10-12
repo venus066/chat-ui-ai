@@ -42,8 +42,8 @@ const ProfileImage = ({
     : "-";
   const shortName = chatUserDetails.firstName
     ? `${chatUserDetails.firstName.charAt(0)}${chatUserDetails.lastName.charAt(
-        0
-      )}`
+      0
+    )}`
     : "-";
 
   const colors = [
@@ -139,10 +139,10 @@ const Search = () => {
 interface MoreProps {
   onOpenAudio: () => void;
   onOpenVideo: () => void;
+  onDelete: () => void;
 }
-const More = ({ onOpenAudio, onOpenVideo }: MoreProps) => {
+const More = ({ onOpenAudio, onOpenVideo, onDelete }: MoreProps) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
   const toggle = () => setDropdownOpen(!dropdownOpen);
 
   return (
@@ -186,6 +186,7 @@ const More = ({ onOpenAudio, onOpenVideo }: MoreProps) => {
         <DropdownItem
           className="d-flex justify-content-between align-items-center"
           to="#"
+          onClick={onDelete}
         >
           Delete <i className="bx bx-trash text-muted"></i>
         </DropdownItem>
@@ -232,11 +233,13 @@ interface UserHeadProps {
   chatUserDetails: any;
   pinnedTabs: Array<PinTypes>;
   onOpenUserDetails: () => void;
+  onDelete: () => void;
 }
 const UserHead = ({
   chatUserDetails,
   pinnedTabs,
   onOpenUserDetails,
+  onDelete
 }: UserHeadProps) => {
   const dispatch = useDispatch();
   /*
@@ -329,7 +332,7 @@ const UserHead = ({
             </li>
 
             <li className="list-inline-item">
-              <More onOpenAudio={onOpenAudio} onOpenVideo={onOpenVideo} />
+              <More onOpenAudio={onOpenAudio} onOpenVideo={onOpenVideo} onDelete={onDelete} />
             </li>
           </ul>
         </Col>
