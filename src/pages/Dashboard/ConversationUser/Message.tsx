@@ -31,9 +31,10 @@ import RepliedMessage from "./RepliedMessage";
 interface MenuProps {
   onDelete: () => any;
   onReply: () => any;
+  onForward: () => void;
 }
 
-const Menu = ({ onDelete, onReply }: MenuProps) => {
+const Menu = ({ onDelete, onReply, onForward }: MenuProps) => {
   return (
     <UncontrolledDropdown className="align-self-start message-box-drop">
       <DropdownToggle className="btn btn-toggle" role="button" tag={"a"}>
@@ -50,8 +51,7 @@ const Menu = ({ onDelete, onReply }: MenuProps) => {
         <DropdownItem
           className="d-flex align-items-center justify-content-between"
           to="#"
-          data-bs-toggle="modal"
-          data-bs-target=".forwardModal"
+          onClick={onForward}
         >
           Forward <i className="bx bx-share-alt ms-2 text-muted"></i>
         </DropdownItem>
@@ -261,6 +261,7 @@ interface MessageProps {
   onDelete: (messageId: string | number) => any;
   onSetReplyData: (reply: null | MessagesTypes | undefined) => void;
   isFromMe: boolean;
+  onOpenForward: (message: MessagesTypes) => void;
 }
 const Message = ({
   message,
@@ -268,6 +269,7 @@ const Message = ({
   onDelete,
   onSetReplyData,
   isFromMe,
+  onOpenForward,
 }: MessageProps) => {
   const { userProfile } = useProfile();
   const hasImages = message.image && message.image.length;
@@ -288,6 +290,7 @@ const Message = ({
   const isSent = message.meta.sent;
   const isReceived = message.meta.received;
   const isRead = message.meta.read;
+  const isForwarded = message.meta.isForwarded;
 
   const onDeleteMessage = () => {
     onDelete(message.mId);
@@ -297,6 +300,10 @@ const Message = ({
     onSetReplyData(message);
   };
   const isRepliedMessage = message.replyOf;
+
+  const onForwardMessage = () => {
+    onOpenForward(message);
+  };
   return (
     <li
       className={classnames(
@@ -318,6 +325,28 @@ const Message = ({
               </div>
             </div>
           )}
+          {isForwarded && (
+            <span
+              className={classnames(
+                "me-1",
+                "text-muted",
+                "font-size-13",
+                "mb-1",
+                "d-block"
+              )}
+            >
+              <i
+                className={classnames(
+                  "ri",
+                  "ri-share-forward-line",
+                  "align-middle",
+                  "me-1"
+                )}
+              ></i>
+              Forwarded
+            </span>
+          )}
+
           <div className="ctext-wrap">
             {/* text message end */}
 
@@ -351,7 +380,11 @@ const Message = ({
                   )}
                   {/* files message end */}
                 </div>
-                <Menu onDelete={onDeleteMessage} onReply={onClickReply} />
+                <Menu
+                  onForward={onForwardMessage}
+                  onDelete={onDeleteMessage}
+                  onReply={onClickReply}
+                />
               </>
             )}
 

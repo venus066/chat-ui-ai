@@ -23,6 +23,7 @@ export interface MessagesTypes {
     sent: boolean;
     received: boolean;
     read: boolean;
+    isForwarded?: boolean;
   };
   attachments?: AttachmentTypes[];
   image?: ImageTypes[];

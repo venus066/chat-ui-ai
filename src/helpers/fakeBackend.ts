@@ -656,6 +656,98 @@ const fakeBackend = () => {
       }
     });
   });
+
+  mock.onPost(url.FORWARD_MESSAGE).reply(config => {
+    const data = JSON.parse(config["data"]);
+    let modifiedC = [...conversations];
+    if (data && data.contacts) {
+      for (let index = 0; index < data.contacts.length; index++) {
+        const c = data.contacts[index];
+        const conversationIdx = (modifiedC || []).findIndex(
+          (con: any) => con.userId + "" === c + ""
+        );
+
+        if (conversationIdx > -1) {
+          const mid =
+            modifiedC[conversationIdx].messages &&
+            modifiedC[conversationIdx].messages.length
+              ? modifiedC[conversationIdx].messages.length + 1
+              : 1;
+          let newM: any = {
+            mId: mid,
+            text: data.message && data.message,
+            time: new Date().toISOString(),
+            meta: {
+              receiver: c,
+              sender: users[0].uid,
+              sent: true,
+              received: false,
+              read: false,
+              isForwarded: true,
+            },
+          };
+          if (data.image && data.image.length) {
+            newM["image"] = data.image;
+          }
+          if (data.attachments && data.attachments.length) {
+            newM["attachments"] = data.attachments;
+          }
+          if (data.forwardedMessage) {
+            newM["replyOf"] = data.forwardedMessage;
+          }
+
+          modifiedC[conversationIdx].messages = [
+            ...modifiedC[conversationIdx].messages,
+            newM,
+          ];
+          modifiedC = [...modifiedC];
+        } else {
+          // new message first time
+          let newM: any = {
+            mId: 1,
+            text: data.message && data.message,
+            time: new Date().toISOString(),
+            meta: {
+              receiver: "614ecab4ac946a9bdafa4e3b",
+              sender: users[0].uid,
+              sent: true,
+              received: false,
+              read: false,
+              isForwarded: true,
+            },
+          };
+          if (data.image && data.image.length) {
+            newM["image"] = data.image;
+          }
+          if (data.attachments && data.attachments.length) {
+            newM["attachments"] = data.attachments;
+          }
+          if (data.forwardedMessage) {
+            newM["replyOf"] = data.forwardedMessage;
+          }
+          const newC = {
+            conversationId: modifiedC.length + 1,
+            userId: c,
+            messages: [
+              {
+                ...newM,
+              },
+            ],
+          };
+          modifiedC = [...modifiedC, newC];
+        }
+      }
+    }
+
+    onChangeConversations(modifiedC);
+    return new Promise((resolve, reject) => {
+      if (data) {
+        resolve([200, "Message is Forwarded!"]);
+      } else {
+        reject(["Your id is not found"]);
+      }
+    });
+  });
 };
 
 export default fakeBackend;

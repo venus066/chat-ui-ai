@@ -23,6 +23,8 @@ import { DivideByKeyResultTypes, divideByKey } from "../utils";
 
 // interfaaces
 import { ContactTypes } from "../data/contacts";
+
+// hooks
 import { useContacts } from "../hooks";
 
 interface ContactItemProps {

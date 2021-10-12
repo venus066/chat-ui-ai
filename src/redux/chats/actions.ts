@@ -87,3 +87,8 @@ export const deleteMessage = (
   type: ChatsActionTypes.DELETE_MESSAGE,
   payload: { userId, messageId },
 });
+
+export const forwardMessage = (data: object) => ({
+  type: ChatsActionTypes.FORWARD_MESSAGE,
+  payload: data,
+});

@@ -17,6 +17,7 @@ import {
   readMessage as readMessageApi,
   receiveMessageFromUser as receiveMessageFromUserApi,
   deleteMessage as deleteMessageApi,
+  forwardMessage as forwardMessageApi,
 } from "../../api/index";
 
 import {
@@ -172,6 +173,19 @@ function* deleteMessage({ payload: { userId, messageId } }: any) {
   }
 }
 
+function* forwardMessage({ payload: data }: any) {
+  try {
+    const response: Promise<any> = yield call(forwardMessageApi, data);
+    yield put(
+      chatsApiResponseSuccess(ChatsActionTypes.FORWARD_MESSAGE, response)
+    );
+    yield call(showSuccessNotification, response + "");
+  } catch (error: any) {
+    yield call(showErrorNotification, error + "");
+    yield put(chatsApiResponseError(ChatsActionTypes.FORWARD_MESSAGE, error));
+  }
+}
+
 export function* watchGetFavourites() {
   yield takeEvery(ChatsActionTypes.GET_FAVOURITES, getFavourites);
 }
@@ -215,6 +229,9 @@ export function* watchReceiveMessageFromUser() {
 export function* watchDeleteMessage() {
   yield takeEvery(ChatsActionTypes.DELETE_MESSAGE, deleteMessage);
 }
+export function* watchForwardMessage() {
+  yield takeEvery(ChatsActionTypes.FORWARD_MESSAGE, forwardMessage);
+}
 
 function* chatsSaga() {
   yield all([
@@ -230,6 +247,7 @@ function* chatsSaga() {
     fork(watchReadMessage),
     fork(watchReceiveMessageFromUser),
     fork(watchDeleteMessage),
+    fork(watchForwardMessage),
   ]);
 }
 

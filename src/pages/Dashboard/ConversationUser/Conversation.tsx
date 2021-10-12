@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useCallback } from "react";
+import React, { useEffect, useRef, useCallback, useState } from "react";
 //redux
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // hooks
 import { useProfile } from "../../../hooks";
@@ -13,6 +13,10 @@ import Message from "./Message";
 
 // interface
 import { MessagesTypes } from "../../../data/messages";
+import ForwardModal from "../../../components/ForwardModal";
+
+// actions
+import { forwardMessage } from "../../../redux/actions";
 interface ConversationProps {
   chatUserConversations: any;
   chatUserDetails: any;
@@ -25,11 +29,15 @@ const Conversation = ({
   onDelete,
   onSetReplyData,
 }: ConversationProps) => {
+  const dispatch = useDispatch();
   const { userProfile } = useProfile();
 
-  const { getUserConversationsLoading } = useSelector((state: any) => ({
-    getUserConversationsLoading: state.Chats.getUserConversationsLoading,
-  }));
+  const { getUserConversationsLoading, isMessageForwarded } = useSelector(
+    (state: any) => ({
+      getUserConversationsLoading: state.Chats.getUserConversationsLoading,
+      isMessageForwarded: state.Chats.isMessageForwarded,
+    })
+  );
 
   const messages =
     chatUserConversations.messages && chatUserConversations.messages.length
@@ -63,6 +71,34 @@ const Conversation = ({
     }
   }, [chatUserConversations.messages, scrollElement]);
 
+  /*
+  forward message
+  */
+  const [forwardData, setForwardData] = useState<
+    null | MessagesTypes | undefined
+  >();
+  const [isOpenForward, setIsOpenForward] = useState<boolean>(false);
+  const onOpenForward = (message: MessagesTypes) => {
+    setForwardData(message);
+    setIsOpenForward(true);
+  };
+  const onCloseForward = () => {
+    setIsOpenForward(false);
+  };
+
+  const onForwardMessage = (data: any) => {
+    const params = {
+      contacts: data.contacts,
+      message: data.message,
+      forwardedMessage: forwardData,
+    };
+    dispatch(forwardMessage(params));
+  };
+  useEffect(() => {
+    if (isMessageForwarded) {
+      setIsOpenForward(false);
+    }
+  }, [isMessageForwarded]);
   return (
     <AppSimpleBar
       scrollRef={ref}
@@ -83,11 +119,21 @@ const Conversation = ({
               onDelete={onDelete}
               onSetReplyData={onSetReplyData}
               isFromMe={isFromMe}
+              onOpenForward={onOpenForward}
             />
           );
         })}
         {/*  <Day /> */}
       </ul>
+      {isOpenForward && (
+        <ForwardModal
+          isOpen={isOpenForward}
+          onClose={onCloseForward}
+          forwardData={forwardData}
+          chatUserDetails={chatUserDetails}
+          onForward={onForwardMessage}
+        />
+      )}
     </AppSimpleBar>
   );
 };

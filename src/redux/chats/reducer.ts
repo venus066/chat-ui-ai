@@ -65,6 +65,7 @@ const Chats = (state = INIT_STATE, action: any) => {
             getUserConversationsLoading: false,
             isUserMessageSent: false,
             isMessageDeleted: false,
+            isMessageForwarded: false,
           };
         case ChatsActionTypes.ON_SEND_MESSAGE:
           return {
@@ -82,6 +83,11 @@ const Chats = (state = INIT_STATE, action: any) => {
           return {
             ...state,
             isMessageDeleted: true,
+          };
+        case ChatsActionTypes.FORWARD_MESSAGE:
+          return {
+            ...state,
+            isMessageForwarded: true,
           };
         default:
           return { ...state };
@@ -142,6 +148,11 @@ const Chats = (state = INIT_STATE, action: any) => {
           return {
             ...state,
             isMessageDeleted: false,
+          };
+        case ChatsActionTypes.FORWARD_MESSAGE:
+          return {
+            ...state,
+            isMessageForwarded: false,
           };
         default:
           return { ...state };
@@ -210,6 +221,11 @@ const Chats = (state = INIT_STATE, action: any) => {
       return {
         ...state,
         isMessageDeleted: false,
+      };
+    case ChatsActionTypes.FORWARD_MESSAGE:
+      return {
+        ...state,
+        isMessageForwarded: false,
       };
     default:
       return { ...state };

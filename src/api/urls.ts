@@ -38,3 +38,4 @@ export const RECEIVE_MESSAGE = "/receive-message";
 export const READ_MESSAGE = "/read-message";
 export const RECEIVE_MESSAGE_FROM_USER = "/receive-message-from-user";
 export const DELETE_MESSAGE = "/delete-message";
+export const FORWARD_MESSAGE = "/forward-message";

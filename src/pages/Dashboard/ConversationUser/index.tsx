@@ -35,11 +35,13 @@ const Index = () => {
     chatUserConversations,
     isUserMessageSent,
     isMessageDeleted,
+    isMessageForwarded,
   } = useSelector((state: any) => ({
     chatUserDetails: state.Chats.chatUserDetails,
     chatUserConversations: state.Chats.chatUserConversations,
     isUserMessageSent: state.Chats.isUserMessageSent,
     isMessageDeleted: state.Chats.isMessageDeleted,
+    isMessageForwarded: state.Chats.isMessageForwarded,
   }));
 
   const onOpenUserDetails = () => {
@@ -90,10 +92,16 @@ const Index = () => {
   };
 
   useEffect(() => {
-    if (isUserMessageSent || isMessageDeleted) {
+    if (isUserMessageSent || isMessageDeleted || isMessageForwarded) {
       dispatch(getChatUserConversations(chatUserDetails.id));
     }
-  }, [dispatch, isUserMessageSent, chatUserDetails, isMessageDeleted]);
+  }, [
+    dispatch,
+    isUserMessageSent,
+    chatUserDetails,
+    isMessageDeleted,
+    isMessageForwarded,
+  ]);
 
   const onDeleteMessage = (messageId: string | number) => {
     dispatch(deleteMessage(chatUserDetails.id, messageId));

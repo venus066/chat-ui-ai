@@ -55,6 +55,9 @@ const deleteMessage = (userId: number | string, messageId: number | string) => {
   });
 };
 
+const forwardMessage = (data: object) => {
+  return api.create(url.FORWARD_MESSAGE, data);
+};
 export {
   getFavourites,
   getDirectMessages,
@@ -68,4 +71,5 @@ export {
   readMessage,
   receiveMessageFromUser,
   deleteMessage,
+  forwardMessage,
 };
