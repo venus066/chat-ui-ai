@@ -49,7 +49,12 @@ const Media = ({ media, limit }: MediaProps) => {
 
           if (key <= limit) {
             return (
-              <MediaItem mediaItem={mediaItem} key={key} hasMore={hasMore} remainingItem={remainingItem} />
+              <MediaItem
+                mediaItem={mediaItem}
+                key={key}
+                hasMore={hasMore}
+                remainingItem={remainingItem}
+              />
             );
           } else return null;
         })}

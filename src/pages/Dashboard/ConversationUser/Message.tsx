@@ -26,12 +26,14 @@ import { useProfile } from "../../../hooks";
 
 // utils
 import { formateDate } from "../../../utils";
+import RepliedMessage from "./RepliedMessage";
 
 interface MenuProps {
   onDelete: () => any;
+  onReply: () => any;
 }
 
-const Menu = ({ onDelete }: MenuProps) => {
+const Menu = ({ onDelete, onReply }: MenuProps) => {
   return (
     <UncontrolledDropdown className="align-self-start message-box-drop">
       <DropdownToggle className="btn btn-toggle" role="button" tag={"a"}>
@@ -41,8 +43,7 @@ const Menu = ({ onDelete }: MenuProps) => {
         <DropdownItem
           className="d-flex align-items-center justify-content-between"
           to="#"
-          data-bs-toggle="collapse"
-          data-bs-target=".replyCollapse"
+          onClick={onReply}
         >
           Reply <i className="bx bx-share ms-2 text-muted"></i>
         </DropdownItem>
@@ -258,14 +259,21 @@ interface MessageProps {
   message: MessagesTypes;
   chatUserDetails: any;
   onDelete: (messageId: string | number) => any;
+  onSetReplyData: (reply: null | MessagesTypes | undefined) => void;
+  isFromMe: boolean;
 }
-const Message = ({ message, chatUserDetails, onDelete }: MessageProps) => {
+const Message = ({
+  message,
+  chatUserDetails,
+  onDelete,
+  onSetReplyData,
+  isFromMe,
+}: MessageProps) => {
   const { userProfile } = useProfile();
   const hasImages = message.image && message.image.length;
   const hasAttachments = message.attachments && message.attachments.length;
   const hasText = message.text;
   const isTyping = false;
-  const isFromMe = message.meta.sender + "" === userProfile.uid + "";
 
   const fullName = chatUserDetails.firstName
     ? `${chatUserDetails.firstName} ${chatUserDetails.lastName}`
@@ -284,8 +292,19 @@ const Message = ({ message, chatUserDetails, onDelete }: MessageProps) => {
   const onDeleteMessage = () => {
     onDelete(message.mId);
   };
+
+  const onClickReply = () => {
+    onSetReplyData(message);
+  };
+  const isRepliedMessage = message.replyOf;
   return (
-    <li className={classnames("chat-list", { right: isFromMe })}>
+    <li
+      className={classnames(
+        "chat-list",
+        { right: isFromMe },
+        { reply: isRepliedMessage }
+      )}
+    >
       <div className="conversation-list">
         <div className="chat-avatar">
           <img src={isFromMe ? myProfile : profile} alt="" />
@@ -310,6 +329,14 @@ const Message = ({ message, chatUserDetails, onDelete }: MessageProps) => {
             ) : (
               <>
                 <div className="ctext-wrap-content">
+                  {isRepliedMessage && (
+                    <RepliedMessage
+                      fullName={fullName}
+                      message={message}
+                      isFromMe={isFromMe}
+                    />
+                  )}
+
                   {hasText && (
                     <p className="mb-0 ctext-content">{message.text}</p>
                   )}
@@ -324,7 +351,7 @@ const Message = ({ message, chatUserDetails, onDelete }: MessageProps) => {
                   )}
                   {/* files message end */}
                 </div>
-                <Menu onDelete={onDeleteMessage} />
+                <Menu onDelete={onDeleteMessage} onReply={onClickReply} />
               </>
             )}
 

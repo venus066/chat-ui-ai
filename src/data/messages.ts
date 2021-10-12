@@ -26,6 +26,7 @@ export interface MessagesTypes {
   };
   attachments?: AttachmentTypes[];
   image?: ImageTypes[];
+  replyOf?: MessagesTypes;
 }
 export interface ConversationTypes {
   conversationId: string | number;

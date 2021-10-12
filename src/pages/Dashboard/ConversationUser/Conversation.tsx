@@ -2,6 +2,9 @@ import React, { useEffect, useRef, useCallback } from "react";
 //redux
 import { useSelector } from "react-redux";
 
+// hooks
+import { useProfile } from "../../../hooks";
+
 // components
 import AppSimpleBar from "../../../components/AppSimpleBar";
 import Loader from "../../../components/Loader";
@@ -10,17 +13,20 @@ import Message from "./Message";
 
 // interface
 import { MessagesTypes } from "../../../data/messages";
-
 interface ConversationProps {
   chatUserConversations: any;
   chatUserDetails: any;
   onDelete: (messageId: string | number) => any;
+  onSetReplyData: (reply: null | MessagesTypes | undefined) => void;
 }
 const Conversation = ({
   chatUserDetails,
   chatUserConversations,
   onDelete,
+  onSetReplyData,
 }: ConversationProps) => {
+  const { userProfile } = useProfile();
+
   const { getUserConversationsLoading } = useSelector((state: any) => ({
     getUserConversationsLoading: state.Chats.getUserConversationsLoading,
   }));
@@ -68,12 +74,15 @@ const Conversation = ({
         id="chat-conversation-list"
       >
         {(messages || []).map((message: MessagesTypes, key: number) => {
+          const isFromMe = message.meta.sender + "" === userProfile.uid + "";
           return (
             <Message
               message={message}
               key={key}
               chatUserDetails={chatUserDetails}
               onDelete={onDelete}
+              onSetReplyData={onSetReplyData}
+              isFromMe={isFromMe}
             />
           );
         })}

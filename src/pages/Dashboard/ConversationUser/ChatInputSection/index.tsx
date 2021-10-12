@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Alert, Form } from "reactstrap";
 
 // components
 import StartButtons from "./StartButtons";
@@ -6,11 +7,22 @@ import InputSection from "./InputSection";
 import EndButtons from "./EndButtons";
 import MoreMenu from "./MoreMenu";
 import Reply from "./Reply";
-import { Form } from "reactstrap";
+
+// interface
+import { MessagesTypes } from "../../../../data/messages";
+
 interface IndexProps {
   onSend: (data: any) => void;
+  replyData: null | MessagesTypes | undefined;
+  onSetReplyData: (reply: null | MessagesTypes | undefined) => void;
+  chatUserDetails: any;
 }
-const Index = ({ onSend }: IndexProps) => {
+const Index = ({
+  onSend,
+  replyData,
+  onSetReplyData,
+  chatUserDetails,
+}: IndexProps) => {
   /*
   more menu collapse
   */
@@ -90,6 +102,10 @@ const Index = ({ onSend }: IndexProps) => {
     onSend(data);
   };
 
+  const onClearMedia = () => {
+    setImages(null);
+    setFiles(null);
+  };
   return (
     <div className="chat-input-section p-3 p-lg-4">
       <Form
@@ -108,12 +124,7 @@ const Index = ({ onSend }: IndexProps) => {
             />
           </div>
           <div className="col">
-            <InputSection
-              value={text}
-              onChange={onChangeText}
-              images={images}
-              files={files}
-            />
+            <InputSection value={text} onChange={onChangeText} />
           </div>
           <div className="col-auto">
             <EndButtons onSubmit={onSubmit} disabled={disabled} />
@@ -121,13 +132,37 @@ const Index = ({ onSend }: IndexProps) => {
         </div>
       </Form>
 
+      {(images && images.length) || (files && files.length) ? (
+        <Alert
+          isOpen={true}
+          toggle={onClearMedia}
+          color="secondary"
+          className="alert-dismiss-custom 
+        rounded-pill font-size-12 mb-1 selected-media"
+          closeClassName="selected-media-close"
+        >
+          <p className="me-2 mb-0">
+            {images && !files && ` You have selected ${images.length} images`}
+            {files && !images && ` You have selected ${files.length} files`}
+            {files &&
+              images &&
+              ` You have selected ${files.length} files & ${images.length} images.`}
+          </p>
+        </Alert>
+      ) : null}
+
       <MoreMenu
         isOpen={isOpen}
         onSelectImages={onSelectImages}
         onSelectFiles={onSelectFiles}
         onToggle={onToggle}
       />
-      <Reply />
+
+      <Reply
+        reply={replyData}
+        onSetReplyData={onSetReplyData}
+        chatUserDetails={chatUserDetails}
+      />
     </div>
   );
 };

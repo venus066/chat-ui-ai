@@ -447,6 +447,25 @@
   .replyCollapse {
     z-index: 1;
   }
+
+  /*
+  react
+  */
+  .selected-media {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    color: $secondary;
+
+    .selected-media-close {
+      top: 34% !important;
+      right: 4px;
+    }
+  }
 }
 
 .contact-modal-list {

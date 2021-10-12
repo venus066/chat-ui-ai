@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
@@ -21,6 +21,9 @@ import { useProfile } from "../../../hooks";
 import UserHead from "./UserHead";
 import Conversation from "./Conversation";
 import ChatInputSection from "./ChatInputSection/index";
+
+// interface
+import { MessagesTypes } from "../../../data/messages";
 
 // dummy data
 import { pinnedTabs } from "../../../data/index";
@@ -46,10 +49,20 @@ const Index = () => {
   const { userProfile } = useProfile();
 
   /*
+  reply handeling
+  */
+  const [replyData, setReplyData] = useState<
+    null | MessagesTypes | undefined
+  >();
+  const onSetReplyData = (reply: null | MessagesTypes | undefined) => {
+    setReplyData(reply);
+  };
+
+  /*
   send message
   */
   const onSend = (data: any) => {
-    const params = {
+    let params: any = {
       text: data.text && data.text,
       time: new Date().toISOString(),
       image: data.image && data.image,
@@ -59,6 +72,9 @@ const Index = () => {
         sender: userProfile.uid,
       },
     };
+    if (replyData && replyData !== null) {
+      params["replyOf"] = replyData;
+    }
 
     dispatch(onSendMessage(params));
     setTimeout(() => {
@@ -70,6 +86,7 @@ const Index = () => {
     setTimeout(() => {
       dispatch(receiveMessageFromUser(chatUserDetails.id));
     }, 2000);
+    setReplyData(null);
   };
 
   useEffect(() => {
@@ -81,6 +98,7 @@ const Index = () => {
   const onDeleteMessage = (messageId: string | number) => {
     dispatch(deleteMessage(chatUserDetails.id, messageId));
   };
+
   return (
     <>
       <UserHead
@@ -92,8 +110,14 @@ const Index = () => {
         chatUserConversations={chatUserConversations}
         chatUserDetails={chatUserDetails}
         onDelete={onDeleteMessage}
+        onSetReplyData={onSetReplyData}
       />
-      <ChatInputSection onSend={onSend} />
+      <ChatInputSection
+        onSend={onSend}
+        replyData={replyData}
+        onSetReplyData={onSetReplyData}
+        chatUserDetails={chatUserDetails}
+      />
     </>
   );
 };

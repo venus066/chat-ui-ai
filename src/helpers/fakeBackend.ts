@@ -57,7 +57,9 @@ const fakeBackend = () => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if (validUser["length"] === 1) {
-          resolve([200, validUser[0]]);
+          setTimeout(() => {
+            resolve([200, validUser[0]]);
+          }, 1000);
         } else {
           reject([
             "Username and password are invalid. Please enter correct username and password",
@@ -467,6 +469,10 @@ const fakeBackend = () => {
         if (data.attachments && data.attachments.length) {
           newM["attachments"] = data.attachments;
         }
+        if (data.replyOf) {
+          newM["replyOf"] = data.replyOf;
+        }
+
         conversations[conversationIdx].messages = [
           ...conversations[conversationIdx].messages,
           newM,
@@ -490,6 +496,9 @@ const fakeBackend = () => {
         }
         if (data.attachments && data.attachments.length) {
           newM["attachments"] = data.attachments;
+        }
+        if (data.replyOf) {
+          newM["replyOf"] = data.replyOf;
         }
         const newC = {
           conversationId: conversations.length + 1,
