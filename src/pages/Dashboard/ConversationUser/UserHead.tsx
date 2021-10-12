@@ -27,6 +27,9 @@ import { PinTypes } from "../../../data/chat";
 
 // actions
 import { changeSelectedChat } from "../../../redux/actions";
+
+// constants
+import { STATUS_TYPES } from "../../../constants";
 interface ProfileImageProps {
   chatUserDetails: any;
   onCloseConversation: () => any;
@@ -57,6 +60,8 @@ const ProfileImage = ({
   ];
   const [color] = useState(Math.floor(Math.random() * colors.length));
 
+  const isOnline = chatUserDetails.status && chatUserDetails.status === STATUS_TYPES.ACTIVE;
+
   return (
     <div className="d-flex align-items-center">
       <div className="flex-shrink-0 d-block d-lg-none me-2">
@@ -71,13 +76,17 @@ const ProfileImage = ({
       <div className="flex-grow-1 overflow-hidden">
         <div className="d-flex align-items-center">
           {chatUserDetails.profileImage ? (
-            <div className="flex-shrink-0 chat-user-img online align-self-center me-3 ms-0">
+            <div className={classnames("flex-shrink-0", "chat-user-img", "align-self-center", "me-3", "ms-0", { "online": isOnline })}>
               <img
                 src={chatUserDetails.profileImage}
                 className="rounded-circle avatar-sm"
                 alt=""
               />
-              <span className="user-status"></span>
+              <span className={classnames("user-status",
+                { "bg-success": chatUserDetails.status === STATUS_TYPES.ACTIVE },
+                { "bg-warning": chatUserDetails.status === STATUS_TYPES.AWAY },
+                { "bg-danger": chatUserDetails.status === STATUS_TYPES.DO_NOT_DISTURB }
+              )}></span>
             </div>
           ) : (
             <div className="flex-shrink-0 avatar-sm align-self-center me-3 ms-0">
@@ -106,7 +115,7 @@ const ProfileImage = ({
               </Link>
             </h6>
             <p className="text-truncate text-muted mb-0">
-              <small>Online</small>
+              <small>{chatUserDetails.status}</small>
             </p>
           </div>
         </div>

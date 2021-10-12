@@ -6,6 +6,7 @@ export interface UserTypes {
   firstName: string;
   lastName: string;
   profileImage?: any;
+  status?: STATUS_TYPES;
   meta?: {
     unRead?: number;
     status?: STATUS_TYPES;
@@ -39,40 +40,24 @@ const favourites: Array<UserTypes> = [
 let directMessages: Array<UserTypes> = [
   {
     ...contacts[16],
-    meta: {
-      status: STATUS_TYPES.ACTIVE,
-    },
   },
   {
     ...contacts[17],
-    meta: {
-      status: STATUS_TYPES.ACTIVE,
-    },
   },
   {
     ...contacts[8],
     meta: {
       unRead: 5,
-      status: STATUS_TYPES.ACTIVE,
     },
   },
   {
     ...contacts[18],
-    meta: {
-      status: STATUS_TYPES.ACTIVE,
-    },
   },
   {
     ...contacts[3],
-    meta: {
-      status: STATUS_TYPES.ACTIVE,
-    },
   },
   {
     ...contacts[11],
-    meta: {
-      status: STATUS_TYPES.ACTIVE,
-    },
   },
 ];
 

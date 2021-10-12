@@ -13,7 +13,7 @@ const BasicDetails = ({ chatUserDetails }: BasicDetailsProps) => {
       <div className="text-muted pt-4">
         <h5 className="font-size-11 text-uppercase">Status :</h5>
         <p className="mb-4">
-          {chatUserDetails.status ? chatUserDetails.status : "-"}
+          {chatUserDetails.about ? chatUserDetails.about : "-"}
         </p>
       </div>
       <div className="pb-2">

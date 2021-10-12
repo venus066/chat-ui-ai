@@ -25,7 +25,7 @@ const ChatUser = ({ user, selectedChat, onSelectChat }: ChatUserProps) => {
     "bg-purple",
   ];
   const [color] = useState(Math.floor(Math.random() * colors.length));
-  const isOnline = user.meta && user.meta.status === STATUS_TYPES.ACTIVE;
+  const isOnline = user.status && user.status === STATUS_TYPES.ACTIVE;
   const unRead = user.meta && user.meta.unRead;
 
   const isSelectedChat: boolean =

@@ -16,26 +16,29 @@ import img4 from "../assets/images/small/img-4.jpg";
 // interfaces
 import { ChannelTypes } from "./chat";
 import { MediaTypes, AttachedfileTypes } from "./myProfile";
+import { STATUS_TYPES } from "../constants";
 export interface ContactTypes {
   id: string | number;
   firstName: string;
   lastName: string;
   profileImage?: any;
-  status?: string;
+  about?: string;
   email: string;
   location: string;
   channels?: Array<ChannelTypes>;
   media?: MediaTypes;
   attachedFiles?: AttachedfileTypes;
+  status?: STATUS_TYPES;
 }
 const contacts: ContactTypes[] = [
   {
     id: "614ecab426f59ce2863e106e",
     firstName: "Sanford",
     lastName: "Phelps",
-    status: "If several languages coalesce, the grammar of the resulting.",
+    about: "If several languages coalesce, the grammar of the resulting.",
     email: "adc@123.com",
     location: "California, USA",
+    status: STATUS_TYPES.ACTIVE,
     channels: [
       {
         id: 1,
@@ -84,9 +87,10 @@ const contacts: ContactTypes[] = [
     firstName: "Carla",
     lastName: "Serrano",
     profileImage: avatar1,
-    status: "If several languages coalesce, the grammar of the resulting.",
+    about: "If several languages coalesce, the grammar of the resulting.",
     email: "adc@123.com",
     location: "California, USA",
+    status: STATUS_TYPES.ACTIVE,
     channels: [
       {
         id: 1,
@@ -131,9 +135,10 @@ const contacts: ContactTypes[] = [
     id: "614ecab44abffd0867521196",
     firstName: "Alvarez",
     lastName: "Luna",
-    status: "If several languages coalesce, the grammar of the resulting.",
+    about: "If several languages coalesce, the grammar of the resulting.",
     email: "adc@123.com",
     location: "California, USA",
+    status: STATUS_TYPES.ACTIVE,
     channels: [
       {
         id: 1,
@@ -179,9 +184,10 @@ const contacts: ContactTypes[] = [
     firstName: "Norris",
     lastName: "Decker",
     profileImage: avatar2,
-    status: "If several languages coalesce, the grammar of the resulting.",
+    about: "If several languages coalesce, the grammar of the resulting.",
     email: "adc@123.com",
     location: "California, USA",
+    status: STATUS_TYPES.ACTIVE,
     channels: [
       {
         id: 1,
@@ -230,9 +236,10 @@ const contacts: ContactTypes[] = [
     firstName: "Marguerite",
     lastName: "Campbell",
     profileImage: avatar4,
-    status: "If several languages coalesce, the grammar of the resulting.",
+    about: "If several languages coalesce, the grammar of the resulting.",
     email: "Marguerite@Campbell.com",
     location: "California, USA",
+    status: STATUS_TYPES.ACTIVE,
     channels: [
       {
         id: 1,
@@ -299,9 +306,10 @@ const contacts: ContactTypes[] = [
     firstName: "Katrina",
     lastName: "Winters",
     profileImage: avatar3,
-    status: "If several languages coalesce, the grammar of the resulting.",
+    about: "If several languages coalesce, the grammar of the resulting.",
     email: "adc@123.com",
     location: "California, USA",
+    status: STATUS_TYPES.AWAY,
     channels: [
       {
         id: 1,
@@ -371,9 +379,10 @@ const contacts: ContactTypes[] = [
     id: "614ecab400931b0aba9d0d76",
     firstName: "Miranda",
     lastName: "Valentine",
-    status: "If several languages coalesce, the grammar of the resulting.",
+    about: "If several languages coalesce, the grammar of the resulting.",
     email: "adc@123.com",
     location: "California, USA",
+    status: STATUS_TYPES.ACTIVE,
     channels: [
       {
         id: 1,
@@ -444,9 +453,10 @@ const contacts: ContactTypes[] = [
     firstName: "Faulkner",
     lastName: "Benjamin",
     profileImage: avatar5,
-    status: "If several languages coalesce, the grammar of the resulting.",
+    about: "If several languages coalesce, the grammar of the resulting.",
     email: "adc@123.com",
     location: "California, USA",
+    status: STATUS_TYPES.ACTIVE,
     channels: [
       {
         id: 1,
@@ -516,9 +526,10 @@ const contacts: ContactTypes[] = [
     id: "614ecab4fd445a537e2bb2b5",
     firstName: "Dean",
     lastName: "Vargas",
-    status: "If several languages coalesce, the grammar of the resulting.",
+    about: "If several languages coalesce, the grammar of the resulting.",
     email: "adc@123.com",
     location: "California, USA",
+    status: STATUS_TYPES.ACTIVE,
     channels: [
       {
         id: 1,
@@ -589,9 +600,10 @@ const contacts: ContactTypes[] = [
     firstName: "Earnestine",
     lastName: "Sears",
     profileImage: avatar5,
-    status: "If several languages coalesce, the grammar of the resulting.",
+    about: "If several languages coalesce, the grammar of the resulting.",
     email: "adc@123.com",
     location: "California, USA",
+    status: STATUS_TYPES.ACTIVE,
     channels: [
       {
         id: 1,
@@ -661,9 +673,10 @@ const contacts: ContactTypes[] = [
     id: "614ecab4fec7ab1ffb2a497d",
     firstName: "Melody",
     lastName: "Montoya",
-    status: "If several languages coalesce, the grammar of the resulting.",
+    about: "If several languages coalesce, the grammar of the resulting.",
     email: "adc@123.com",
     location: "California, USA",
+    status: STATUS_TYPES.ACTIVE,
     channels: [
       {
         id: 1,
@@ -733,9 +746,10 @@ const contacts: ContactTypes[] = [
     id: "614ecab4363b167c147a422b",
     firstName: "Zimmerman",
     lastName: "Langley",
-    status: "If several languages coalesce, the grammar of the resulting.",
+    about: "If several languages coalesce, the grammar of the resulting.",
     email: "adc@123.com",
     location: "California, USA",
+    status: STATUS_TYPES.ACTIVE,
     channels: [
       {
         id: 1,
@@ -806,9 +820,10 @@ const contacts: ContactTypes[] = [
     firstName: "Wallace",
     lastName: "Lane",
     profileImage: avatar6,
-    status: "If several languages coalesce, the grammar of the resulting.",
+    about: "If several languages coalesce, the grammar of the resulting.",
     email: "adc@123.com",
     location: "California, USA",
+    status: STATUS_TYPES.ACTIVE,
     channels: [
       {
         id: 1,
@@ -879,9 +894,10 @@ const contacts: ContactTypes[] = [
     firstName: "Jennifer",
     lastName: "Ramirez",
     profileImage: avatar7,
-    status: "If several languages coalesce, the grammar of the resulting.",
+    about: "If several languages coalesce, the grammar of the resulting.",
     email: "adc@123.com",
     location: "California, USA",
+    status: STATUS_TYPES.ACTIVE,
     channels: [
       {
         id: 1,
@@ -951,9 +967,10 @@ const contacts: ContactTypes[] = [
     id: "614ecab48c8cc404a0604fc4",
     firstName: "Heath",
     lastName: "Jarvis",
-    status: "If several languages coalesce, the grammar of the resulting.",
+    about: "If several languages coalesce, the grammar of the resulting.",
     email: "adc@123.com",
     location: "California, USA",
+    status: STATUS_TYPES.ACTIVE,
     channels: [
       {
         id: 1,
@@ -1023,9 +1040,10 @@ const contacts: ContactTypes[] = [
     id: "614ecab45f5f3e45d25d5bbd",
     firstName: "Kitty",
     lastName: "Cannon",
-    status: "If several languages coalesce, the grammar of the resulting.",
+    about: "If several languages coalesce, the grammar of the resulting.",
     email: "adc@123.com",
     location: "California, USA",
+    status: STATUS_TYPES.ACTIVE,
     channels: [
       {
         id: 1,
@@ -1096,9 +1114,10 @@ const contacts: ContactTypes[] = [
     firstName: "Tonia",
     lastName: "Clay",
     profileImage: avatar8,
-    status: "If several languages coalesce, the grammar of the resulting.",
+    about: "If several languages coalesce, the grammar of the resulting.",
     email: "adc@123.com",
     location: "California, USA",
+    status: STATUS_TYPES.ACTIVE,
     channels: [
       {
         id: 1,
@@ -1169,9 +1188,10 @@ const contacts: ContactTypes[] = [
     firstName: "Hendrix",
     lastName: "Martin",
     profileImage: avatar9,
-    status: "If several languages coalesce, the grammar of the resulting.",
+    about: "If several languages coalesce, the grammar of the resulting.",
     email: "adc@123.com",
     location: "California, USA",
+    status: STATUS_TYPES.DO_NOT_DISTURB,
     channels: [
       {
         id: 1,
@@ -1242,9 +1262,10 @@ const contacts: ContactTypes[] = [
     firstName: "Donaldson",
     lastName: "Riddle",
     profileImage: avatar10,
-    status: "If several languages coalesce, the grammar of the resulting.",
+    about: "If several languages coalesce, the grammar of the resulting.",
     email: "adc@123.com",
     location: "California, USA",
+    status: STATUS_TYPES.ACTIVE,
     channels: [
       {
         id: 1,
@@ -1314,9 +1335,10 @@ const contacts: ContactTypes[] = [
     id: "614ecab41b1f288b60a9f5c9",
     firstName: "Daniels",
     lastName: "Webster",
-    status: "If several languages coalesce, the grammar of the resulting.",
+    about: "If several languages coalesce, the grammar of the resulting.",
     email: "adc@123.com",
     location: "California, USA",
+    status: STATUS_TYPES.ACTIVE,
     channels: [
       {
         id: 1,
@@ -1386,9 +1408,10 @@ const contacts: ContactTypes[] = [
     id: "614ecab413673c7385945500",
     firstName: "Shawna",
     lastName: "Wright",
-    status: "Nothind to Display!",
+    about: "Nothind to Display!",
     email: "ShawnaWright@123.com",
     location: "California, USA",
+    status: STATUS_TYPES.ACTIVE,
     channels: [
       {
         id: 1,
