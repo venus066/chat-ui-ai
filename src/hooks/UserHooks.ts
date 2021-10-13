@@ -45,4 +45,18 @@ const useContacts = () => {
   return { categorizedContacts, totalContacts };
 };
 
-export { useProfile, useContacts };
+const useConversationUserType = () => {
+  const {
+    chatUserDetails,
+  } = useSelector((state: any) => ({
+    chatUserDetails: state.Chats.chatUserDetails,
+  }));
+
+  const [isChannel, setIsChannel] = useState<boolean>(false);
+  useEffect(() => {
+    setIsChannel(chatUserDetails.isChannel ? true : false);
+  }, [chatUserDetails]);
+
+  return { isChannel };
+};
+export { useProfile, useContacts, useConversationUserType };

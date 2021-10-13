@@ -14,6 +14,9 @@ import {
   // calls
   calls,
 
+  // channels
+  userChannels,
+
   // bookmarks
   bookmarks,
   onChangeBookmark,
@@ -375,7 +378,7 @@ const fakeBackend = () => {
     return new Promise((resolve, reject) => {
       if (data) {
         const newC = {
-          id: channels[channels.length - 1].id + 1,
+          id: channels[channels.length - 1].id + new Date().getTime().toString(),
           name: data.name,
           description: data.description,
           members: data.members,
@@ -762,6 +765,29 @@ const fakeBackend = () => {
         resolve([200, "Messages are Deleted!"]);
       } else {
         reject(["Your id is not found"]);
+      }
+    });
+  });
+
+  mock.onGet(new RegExp(`${url.GET_CHANNEL_DETAILS}/*`)).reply(config => {
+    const { params } = config;
+    let data: any;
+    if (params.id && contacts.length !== 0) {
+      const chat = (userChannels || []).find(
+        (c: any) => c.id + "" === params.id + ""
+      );
+      if (chat) {
+        data = chat;
+      }
+    }
+
+    return new Promise((resolve, reject) => {
+      if (data) {
+        setTimeout(() => {
+          resolve([200, data]);
+        });
+      } else {
+        reject(["The channel is not found"]);
       }
     });
   });

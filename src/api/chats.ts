@@ -64,6 +64,10 @@ const deleteUserMessages = (userId: number | string) => {
   });
 };
 
+const getChannelDetails = (id: string | number) => {
+  return api.get(url.GET_CHANNEL_DETAILS + "/" + id, { params: { id } });
+};
+
 export {
   getFavourites,
   getDirectMessages,
@@ -78,5 +82,7 @@ export {
   receiveMessageFromUser,
   deleteMessage,
   forwardMessage,
-  deleteUserMessages
+  deleteUserMessages,
+  getChannelDetails
+
 };

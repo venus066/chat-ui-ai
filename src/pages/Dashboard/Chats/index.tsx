@@ -27,12 +27,13 @@ import {
   changeSelectedChat,
   getChatUserDetails,
   getChatUserConversations,
+  getChannelDetails
 } from "../../../redux/actions";
 
 // interfaces
 import { CreateChannelPostData } from "../../../redux/actions";
 
-interface IndexProps {}
+interface IndexProps { }
 const Index = (props: IndexProps) => {
   const dispatch = useDispatch();
   const {
@@ -135,8 +136,13 @@ const Index = (props: IndexProps) => {
     get chat user details
   */
 
-  const onSelectChat = (id: string | number) => {
-    dispatch(getChatUserDetails(id));
+  const onSelectChat = (id: string | number, isChannel?: boolean) => {
+
+    if (isChannel) {
+      dispatch(getChannelDetails(id));
+    } else {
+      dispatch(getChatUserDetails(id));
+    }
     dispatch(getChatUserConversations(id));
     dispatch(changeSelectedChat(id));
   };

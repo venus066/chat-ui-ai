@@ -18,7 +18,8 @@ import {
   receiveMessageFromUser as receiveMessageFromUserApi,
   deleteMessage as deleteMessageApi,
   forwardMessage as forwardMessageApi,
-  deleteUserMessages as deleteUserMessagesApi
+  deleteUserMessages as deleteUserMessagesApi,
+  getChannelDetails as getChannelDetailsApi
 } from "../../api/index";
 
 import {
@@ -200,6 +201,17 @@ function* deleteUserMessages({ payload: userId }: any) {
   }
 }
 
+function* getChannelDetails({ payload: id }: any) {
+  try {
+    const response: Promise<any> = yield call(getChannelDetailsApi, id);
+    yield put(
+      chatsApiResponseSuccess(ChatsActionTypes.GET_CHANNEL_DETAILS, response)
+    );
+  } catch (error: any) {
+    yield put(chatsApiResponseError(ChatsActionTypes.GET_CHANNEL_DETAILS, error));
+  }
+}
+
 
 export function* watchGetFavourites() {
   yield takeEvery(ChatsActionTypes.GET_FAVOURITES, getFavourites);
@@ -251,6 +263,10 @@ export function* watchDeleteUserMessages() {
   yield takeEvery(ChatsActionTypes.DELETE_USER_MESSAGES, deleteUserMessages);
 }
 
+export function* watchGetChannelDetails() {
+  yield takeEvery(ChatsActionTypes.GET_CHANNEL_DETAILS, getChannelDetails);
+}
+
 function* chatsSaga() {
   yield all([
     fork(watchGetFavourites),
@@ -267,6 +283,7 @@ function* chatsSaga() {
     fork(watchDeleteMessage),
     fork(watchForwardMessage),
     fork(watchDeleteUserMessages),
+    fork(watchGetChannelDetails),
   ]);
 }
 

@@ -97,3 +97,8 @@ export const deleteUserMessages = (userId: number | string) => ({
   type: ChatsActionTypes.DELETE_USER_MESSAGES,
   payload: userId,
 });
+
+export const getChannelDetails = (id: number | string) => ({
+  type: ChatsActionTypes.GET_CHANNEL_DETAILS,
+  payload: id,
+});

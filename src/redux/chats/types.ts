@@ -21,6 +21,7 @@ export enum ChatsActionTypes {
   DELETE_MESSAGE = "@@chats/DELETE_MESSAGE",
   FORWARD_MESSAGE = "@@chats/FORWARD_MESSAGE",
   DELETE_USER_MESSAGES = "@@chats/DELETE_USER_MESSAGES",
+  GET_CHANNEL_DETAILS = "@@chats/GET_CHANNEL_DETAILS",
 }
 export interface ChatsState {
   favourites: Array<any>;
@@ -30,4 +31,5 @@ export interface ChatsState {
   chatUserDetails: object;
   chatUserConversations: {};
   isOpenUserDetails: boolean;
+  channelDetails: object;
 }

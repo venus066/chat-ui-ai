@@ -18,8 +18,13 @@ import BasicDetails from "./BasicDetails";
 import Groups from "./Groups";
 import Media from "../../../components/Media";
 import AttachedFiles from "../../../components/AttachedFiles";
+import Status from "./Status";
+import Members from "./Members";
 
-const Index = () => {
+interface IndexProps {
+  isChannel: boolean;
+}
+const Index = ({ isChannel }: IndexProps) => {
   const dispatch = useDispatch();
 
   const { chatUserDetails, getUserDetailsLoading, isOpenUserDetails } =
@@ -85,10 +90,23 @@ const Index = () => {
               onOpenVideo={onOpenVideo}
               onOpenAudio={onOpenAudio}
             />
-            <BasicDetails chatUserDetails={chatUserDetails} />
-            <hr className="my-4" />
-            <Groups chatUserDetails={chatUserDetails} />
-            <hr className="my-4" />
+            <Status about={chatUserDetails.about} />
+            {
+              !isChannel ?
+                <>
+                  <BasicDetails chatUserDetails={chatUserDetails} />
+                  <hr className="my-4" />
+                  <Groups chatUserDetails={chatUserDetails} />
+                  <hr className="my-4" />
+                </>
+                :
+                <>
+                  <Members chatUserDetails={chatUserDetails} />
+                  <hr className="my-4" />
+                </>
+
+            }
+
             <Media media={chatUserDetails.media} limit={3} />
             <hr className="my-4" />
             <AttachedFiles attachedFiles={chatUserDetails.attachedFiles} />

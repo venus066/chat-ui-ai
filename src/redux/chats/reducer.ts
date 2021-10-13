@@ -9,6 +9,7 @@ export const INIT_STATE: ChatsState = {
   chatUserDetails: {},
   chatUserConversations: {},
   isOpenUserDetails: false,
+  channelDetails: {}
 };
 
 const Chats = (state = INIT_STATE, action: any) => {
@@ -94,6 +95,13 @@ const Chats = (state = INIT_STATE, action: any) => {
             ...state,
             isUserMessagesDeleted: true,
           };
+        case ChatsActionTypes.GET_CHANNEL_DETAILS:
+          return {
+            ...state,
+            chatUserDetails: { ...action.payload.data, isChannel: true },
+            isChannelDetailsFetched: true,
+            getUserDetailsLoading: false,
+          };
         default:
           return { ...state };
       }
@@ -163,6 +171,12 @@ const Chats = (state = INIT_STATE, action: any) => {
           return {
             ...state,
             isUserMessagesDeleted: false,
+          };
+        case ChatsActionTypes.GET_CHANNEL_DETAILS:
+          return {
+            ...state,
+            isChannelDetailsFetched: false,
+            getUserDetailsLoading: false,
           };
         default:
           return { ...state };
@@ -241,6 +255,12 @@ const Chats = (state = INIT_STATE, action: any) => {
       return {
         ...state,
         isUserMessagesDeleted: false,
+      };
+    case ChatsActionTypes.GET_CHANNEL_DETAILS:
+      return {
+        ...state,
+        isChannelDetailsFetched: false,
+        getUserDetailsLoading: true,
       };
     default:
       return { ...state };

@@ -1,3 +1,4 @@
+import { contacts, ContactTypes } from "./contacts";
 import { myData } from "./myProfile";
 import img1 from "../assets/images/small/img-1.jpg";
 import img2 from "../assets/images/small/img-2.jpg";
@@ -20,6 +21,7 @@ export interface MessagesTypes {
   meta: {
     receiver: string | number;
     sender: string | number;
+    senderData?: ContactTypes;
     sent: boolean;
     received: boolean;
     read: boolean;
@@ -32,7 +34,8 @@ export interface MessagesTypes {
 export interface ConversationTypes {
   conversationId: string | number;
   userId: string;
-  typingUser?: string;
+  isGroupConversation?: boolean;
+  typingUser?: string | number;
   messages: MessagesTypes[];
 }
 
@@ -145,6 +148,27 @@ let conversations: ConversationTypes[] = [
       },
     ],
   },
+  {
+    conversationId: 2,
+    userId: "61665bcb9a456823e282afa7",
+    typingUser: contacts[0].id,
+    isGroupConversation: true,
+    messages: [
+      {
+        mId: 1,
+        text: "Good morning 😊",
+        time: new Date().toISOString(),
+        meta: {
+          receiver: myId,
+          sender: contacts[0].id,
+          senderData: contacts[0],
+          sent: true,
+          received: true,
+          read: true,
+        },
+      },
+    ]
+  }
 ];
 
 const onChangeConversations = (newData: ConversationTypes[]) => {

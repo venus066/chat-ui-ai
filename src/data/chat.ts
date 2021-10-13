@@ -1,6 +1,7 @@
 import { STATUS_TYPES } from "../constants";
 
 import { contacts } from "./contacts";
+import { userChannels } from "./channels";
 export interface UserTypes {
   id: string | number;
   firstName: string;
@@ -65,7 +66,7 @@ const onChangeDirectMessages = (newData: Array<UserTypes>) => {
   directMessages = newData;
 };
 export interface ChannelTypes {
-  id: number;
+  id: number | string;
   name: string;
   meta?: {
     unRead: number;
@@ -73,26 +74,22 @@ export interface ChannelTypes {
 }
 let channels: Array<ChannelTypes> = [
   {
-    id: 1,
-    name: "Landing Design",
+    ...userChannels[0],
     meta: {
       unRead: 12,
     },
   },
   {
-    id: 2,
-    name: "Design Phase 2",
+    ...userChannels[1],
   },
   {
-    id: 3,
-    name: "Brand Suggestion",
+    ...userChannels[2],
     meta: {
       unRead: 85,
     },
   },
   {
-    id: 4,
-    name: "Reporting",
+    ...userChannels[3],
   },
 ];
 

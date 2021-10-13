@@ -28,8 +28,12 @@ import { MessagesTypes } from "../../../data/messages";
 
 // dummy data
 import { pinnedTabs } from "../../../data/index";
+import { boolean } from "yup/lib/locale";
 
-const Index = () => {
+interface IndexProps {
+  isChannel: boolean;
+}
+const Index = ({ isChannel }: IndexProps) => {
   const dispatch = useDispatch();
   const {
     chatUserDetails,
@@ -51,6 +55,9 @@ const Index = () => {
     dispatch(toggleUserDetailsTab(true));
   };
 
+  /*
+  hooks
+  */
   const { userProfile } = useProfile();
 
   /*
@@ -122,6 +129,7 @@ const Index = () => {
         pinnedTabs={pinnedTabs}
         onOpenUserDetails={onOpenUserDetails}
         onDelete={onDeleteUserMessages}
+        isChannel={isChannel}
       />
       <Conversation
         chatUserConversations={chatUserConversations}

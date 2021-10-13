@@ -12,14 +12,14 @@ import { UncontrolledTooltip } from "reactstrap";
 interface ChannelProps {
   channel: ChannelTypes;
   selectedChat: string | number;
-  onSelectChat: (id: number | string) => void;
+  onSelectChat: (id: number | string, isChannel?: boolean) => void;
 }
 const Channel = ({ channel, selectedChat, onSelectChat }: ChannelProps) => {
   const unRead = channel.meta && channel.meta.unRead;
   const isSelectedChat: boolean =
     selectedChat && selectedChat === channel.id ? true : false;
   const onClick = () => {
-    onSelectChat(channel.id);
+    onSelectChat(channel.id, true);
   };
 
   return (
@@ -50,7 +50,7 @@ interface ChanelsProps {
   channels: Array<ChannelTypes>;
   openCreateChannel: () => void;
   selectedChat: string | number;
-  onSelectChat: (id: number | string) => void;
+  onSelectChat: (id: number | string, isChannel?: boolean) => void;
 }
 const Chanels = ({
   channels,

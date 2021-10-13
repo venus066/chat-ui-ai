@@ -4,17 +4,22 @@ import classnames from "classnames";
 //redux
 import { useSelector } from "react-redux";
 
+// hooks
+import { useConversationUserType } from "../../hooks/index";
+
 // component
 import Leftbar from "./Leftbar";
 import ConversationUser from "./ConversationUser/index";
 import UserProfileDetails from "./UserProfileDetails/index";
 import Welcome from "./ConversationUser/Welcome";
 
-interface IndexProps {}
+interface IndexProps { }
 const Index = (props: IndexProps) => {
   const { selectedChat } = useSelector((state: any) => ({
     selectedChat: state.Chats.selectedChat,
   }));
+
+  const { isChannel } = useConversationUserType();
 
   return (
     <>
@@ -30,9 +35,9 @@ const Index = (props: IndexProps) => {
         {selectedChat !== null ? (
           <div className="chat-content d-lg-flex">
             <div className="w-100 overflow-hidden position-relative">
-              <ConversationUser />
+              <ConversationUser isChannel={isChannel} />
             </div>
-            <UserProfileDetails />
+            <UserProfileDetails isChannel={isChannel} />
           </div>
         ) : (
           <Welcome />

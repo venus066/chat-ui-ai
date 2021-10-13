@@ -34,20 +34,22 @@ interface ProfileImageProps {
   chatUserDetails: any;
   onCloseConversation: () => any;
   onOpenUserDetails: () => any;
+  isChannel: boolean;
 }
 const ProfileImage = ({
   chatUserDetails,
   onCloseConversation,
   onOpenUserDetails,
+  isChannel
 }: ProfileImageProps) => {
-  const fullName = chatUserDetails.firstName
+  const fullName = !isChannel ? chatUserDetails.firstName
     ? `${chatUserDetails.firstName} ${chatUserDetails.lastName}`
-    : "-";
-  const shortName = chatUserDetails.firstName
+    : "-" : chatUserDetails.name;
+  const shortName = !isChannel ? chatUserDetails.firstName
     ? `${chatUserDetails.firstName.charAt(0)}${chatUserDetails.lastName.charAt(
       0
     )}`
-    : "-";
+    : "-" : "#";
 
   const colors = [
     "bg-primary",
@@ -62,6 +64,7 @@ const ProfileImage = ({
 
   const isOnline = chatUserDetails.status && chatUserDetails.status === STATUS_TYPES.ACTIVE;
 
+  const members = (chatUserDetails.members || []).length;
   return (
     <div className="d-flex align-items-center">
       <div className="flex-shrink-0 d-block d-lg-none me-2">
@@ -115,7 +118,11 @@ const ProfileImage = ({
               </Link>
             </h6>
             <p className="text-truncate text-muted mb-0">
-              <small>{chatUserDetails.status}</small>
+              {
+                isChannel ? <small>{members} Members</small>
+                  :
+                  <small>{chatUserDetails.status}</small>
+              }
             </p>
           </div>
         </div>
@@ -243,12 +250,14 @@ interface UserHeadProps {
   pinnedTabs: Array<PinTypes>;
   onOpenUserDetails: () => void;
   onDelete: () => void;
+  isChannel: boolean;
 }
 const UserHead = ({
   chatUserDetails,
   pinnedTabs,
   onOpenUserDetails,
-  onDelete
+  onDelete,
+  isChannel
 }: UserHeadProps) => {
   const dispatch = useDispatch();
   /*
@@ -300,6 +309,7 @@ const UserHead = ({
             chatUserDetails={chatUserDetails}
             onCloseConversation={onCloseConversation}
             onOpenUserDetails={onOpenUserDetails}
+            isChannel={isChannel}
           />
         </Col>
         <Col sm={8} className="col-4">
