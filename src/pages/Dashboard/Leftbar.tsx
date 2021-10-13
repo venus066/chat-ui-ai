@@ -15,7 +15,7 @@ import Calls from "./Calls/index";
 import Bookmark from "./Bookmark/index";
 import Settings from "./Settings/index";
 
-interface LeftbarProps {}
+interface LeftbarProps { }
 const Leftbar = (props: LeftbarProps) => {
   const { activeTab } = useSelector((state: any) => ({
     activeTab: state.Layout.activeTab,

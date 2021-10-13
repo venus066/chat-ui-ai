@@ -320,27 +320,32 @@ const UserHead = ({
               <Search />
             </li>
 
-            <li className="list-inline-item d-none d-lg-inline-block me-2 ms-0">
-              <Button
-                type="button"
-                color="none"
-                className="btn nav-btn"
-                onClick={onOpenAudio}
-              >
-                <i className="bx bxs-phone-call"></i>
-              </Button>
-            </li>
+            {
+              !isChannel &&
+              <>
+                <li className="list-inline-item d-none d-lg-inline-block me-2 ms-0">
+                  <Button
+                    type="button"
+                    color="none"
+                    className="btn nav-btn"
+                    onClick={onOpenAudio}
+                  >
+                    <i className="bx bxs-phone-call"></i>
+                  </Button>
+                </li>
 
-            <li className="list-inline-item d-none d-lg-inline-block me-2 ms-0">
-              <Button
-                type="button"
-                color="none"
-                className="btn nav-btn"
-                onClick={onOpenVideo}
-              >
-                <i className="bx bx-video"></i>
-              </Button>
-            </li>
+                <li className="list-inline-item d-none d-lg-inline-block me-2 ms-0">
+                  <Button
+                    type="button"
+                    color="none"
+                    className="btn nav-btn"
+                    onClick={onOpenVideo}
+                  >
+                    <i className="bx bx-video"></i>
+                  </Button>
+                </li>
+              </>
+            }
 
             <li className="list-inline-item d-none d-lg-inline-block me-2 ms-0">
               <button

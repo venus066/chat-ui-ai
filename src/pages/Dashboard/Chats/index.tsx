@@ -1,19 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 import { Button, Form, UncontrolledTooltip } from "reactstrap";
-
+import { Link } from "react-router-dom";
 //redux
 import { useSelector, useDispatch } from "react-redux";
-
-// components
-import AppSimpleBar from "../../../components/AppSimpleBar";
-import AddGroupModal from "../../../components/AddGroupModal";
-import InviteContactModal from "../../../components/InviteContactModal";
-import Favourites from "./Favourites";
-import DirectMessages from "./DirectMessages";
-import Chanels from "./Chanels";
-import AddButton from "../../../components/AddButton";
-import ContactModal from "../../../components/ContactModal";
 
 // actions
 import {
@@ -32,6 +22,18 @@ import {
 
 // interfaces
 import { CreateChannelPostData } from "../../../redux/actions";
+
+// components
+import AppSimpleBar from "../../../components/AppSimpleBar";
+import AddGroupModal from "../../../components/AddGroupModal";
+import InviteContactModal from "../../../components/InviteContactModal";
+import AddButton from "../../../components/AddButton";
+import ContactModal from "../../../components/ContactModal";
+
+import Favourites from "./Favourites";
+import DirectMessages from "./DirectMessages";
+import Chanels from "./Chanels";
+import Archive from "./Archive";
 
 interface IndexProps { }
 const Index = (props: IndexProps) => {
@@ -155,6 +157,14 @@ const Index = (props: IndexProps) => {
     dispatch(changeSelectedChat(id));
   };
 
+  /*
+  tab handeling
+  */
+  const [active, setActive] = useState("acrhive");
+  const onChangeTab = (tab: string) => {
+    setActive(tab);
+  };
+
   return (
     <>
       <div>
@@ -195,28 +205,52 @@ const Index = (props: IndexProps) => {
         {/* .p-4 */}
         <AppSimpleBar className="chat-room-list">
           {/* Start chat-message-list */}
-          {/* favourite */}
-          <Favourites
-            users={favourites}
-            selectedChat={selectedChat}
-            onSelectChat={onSelectChat}
-          />
+          {
+            active === "chats" &&
+            <>
+              {/* favourite */}
+              <Favourites
+                users={favourites}
+                selectedChat={selectedChat}
+                onSelectChat={onSelectChat}
+              />
 
-          {/* direct messages */}
-          <DirectMessages
-            users={directMessages}
-            openAddContact={openAddContactModal}
-            selectedChat={selectedChat}
-            onSelectChat={onSelectChat}
-          />
+              {/* direct messages */}
+              <DirectMessages
+                users={directMessages}
+                openAddContact={openAddContactModal}
+                selectedChat={selectedChat}
+                onSelectChat={onSelectChat}
+              />
 
-          {/* channels list */}
-          <Chanels
-            channels={channels}
-            openCreateChannel={openCreateChannelModal}
-            selectedChat={selectedChat}
-            onSelectChat={onSelectChat}
-          />
+              {/* channels list */}
+              <Chanels
+                channels={channels}
+                openCreateChannel={openCreateChannelModal}
+                selectedChat={selectedChat}
+                onSelectChat={onSelectChat}
+              />
+              <h5 className="text-center mb-2">
+                <Link to="#" className="mb-3 px-4 mt-4 font-size-11 text-primary" onClick={() => onChangeTab("acrhive")}>
+                  Archived Contacts <i className="bx bxs-archive-in align-middle" />
+                </Link>
+              </h5>
+            </>
+          }
+          {
+            active === "acrhive" &&
+            <>
+              <Archive />
+              <h5 className="text-center mb-2">
+                <Link to="#" className="mb-3 px-4 mt-4 font-size-11 text-primary" onClick={() => onChangeTab("chats")}>
+                  Chats <i className="bx bxs-archive-out align-middle" />
+                </Link>
+              </h5>
+            </>
+          }
+
+
+
           {/* End chat-message-list */}
         </AppSimpleBar>
       </div>
