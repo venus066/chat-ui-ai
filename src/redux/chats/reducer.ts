@@ -102,6 +102,11 @@ const Chats = (state = INIT_STATE, action: any) => {
             isChannelDetailsFetched: true,
             getUserDetailsLoading: false,
           };
+        case ChatsActionTypes.TOGGLE_FAVOURITE_CONTACT:
+          return {
+            ...state,
+            isFavouriteContactToggled: true
+          };
         default:
           return { ...state };
       }
@@ -177,6 +182,11 @@ const Chats = (state = INIT_STATE, action: any) => {
             ...state,
             isChannelDetailsFetched: false,
             getUserDetailsLoading: false,
+          };
+        case ChatsActionTypes.TOGGLE_FAVOURITE_CONTACT:
+          return {
+            ...state,
+            isFavouriteContactToggled: false
           };
         default:
           return { ...state };
@@ -261,6 +271,11 @@ const Chats = (state = INIT_STATE, action: any) => {
         ...state,
         isChannelDetailsFetched: false,
         getUserDetailsLoading: true,
+      };
+    case ChatsActionTypes.TOGGLE_FAVOURITE_CONTACT:
+      return {
+        ...state,
+        isFavouriteContactToggled: false
       };
     default:
       return { ...state };

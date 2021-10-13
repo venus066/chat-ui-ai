@@ -19,7 +19,8 @@ import {
   deleteMessage as deleteMessageApi,
   forwardMessage as forwardMessageApi,
   deleteUserMessages as deleteUserMessagesApi,
-  getChannelDetails as getChannelDetailsApi
+  getChannelDetails as getChannelDetailsApi,
+  toggleFavouriteContact as toggleFavouriteContactApi
 } from "../../api/index";
 
 import {
@@ -212,6 +213,16 @@ function* getChannelDetails({ payload: id }: any) {
   }
 }
 
+function* toggleFavouriteContact({ payload: id }: any) {
+  try {
+    const response: Promise<any> = yield call(toggleFavouriteContactApi, id);
+    yield put(
+      chatsApiResponseSuccess(ChatsActionTypes.TOGGLE_FAVOURITE_CONTACT, response)
+    );
+  } catch (error: any) {
+    yield put(chatsApiResponseError(ChatsActionTypes.TOGGLE_FAVOURITE_CONTACT, error));
+  }
+}
 
 export function* watchGetFavourites() {
   yield takeEvery(ChatsActionTypes.GET_FAVOURITES, getFavourites);
@@ -262,11 +273,12 @@ export function* watchForwardMessage() {
 export function* watchDeleteUserMessages() {
   yield takeEvery(ChatsActionTypes.DELETE_USER_MESSAGES, deleteUserMessages);
 }
-
 export function* watchGetChannelDetails() {
   yield takeEvery(ChatsActionTypes.GET_CHANNEL_DETAILS, getChannelDetails);
 }
-
+export function* watchToggleFavouriteContact() {
+  yield takeEvery(ChatsActionTypes.TOGGLE_FAVOURITE_CONTACT, toggleFavouriteContact);
+}
 function* chatsSaga() {
   yield all([
     fork(watchGetFavourites),
@@ -284,6 +296,7 @@ function* chatsSaga() {
     fork(watchForwardMessage),
     fork(watchDeleteUserMessages),
     fork(watchGetChannelDetails),
+    fork(watchToggleFavouriteContact),
   ]);
 }
 

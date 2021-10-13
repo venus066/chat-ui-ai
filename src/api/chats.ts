@@ -68,6 +68,10 @@ const getChannelDetails = (id: string | number) => {
   return api.get(url.GET_CHANNEL_DETAILS + "/" + id, { params: { id } });
 };
 
+const toggleFavouriteContact = (id: string | number) => {
+  return api.update(url.TOGGLE_FAVOURITE_CONTACT + "/" + id, { params: { id } });
+};
+
 export {
   getFavourites,
   getDirectMessages,
@@ -83,6 +87,6 @@ export {
   deleteMessage,
   forwardMessage,
   deleteUserMessages,
-  getChannelDetails
-
+  getChannelDetails,
+  toggleFavouriteContact
 };

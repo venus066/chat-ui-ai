@@ -44,6 +44,7 @@ const Index = (props: IndexProps) => {
     isContactsAdded,
     isChannelCreated,
     selectedChat,
+    isFavouriteContactToggled
   } = useSelector((state: any) => ({
     isContactInvited: state.Contacts.isContactInvited,
     favourites: state.Chats.favourites,
@@ -52,6 +53,7 @@ const Index = (props: IndexProps) => {
     isContactsAdded: state.Chats.isContactsAdded,
     isChannelCreated: state.Chats.isChannelCreated,
     selectedChat: state.Chats.selectedChat,
+    isFavouriteContactToggled: state.Chats.isFavouriteContactToggled
   }));
 
   /*
@@ -62,6 +64,12 @@ const Index = (props: IndexProps) => {
     dispatch(getDirectMessages());
     dispatch(getChannels());
   }, [dispatch]);
+  useEffect(() => {
+    if (isFavouriteContactToggled) {
+      dispatch(getFavourites());
+      dispatch(getDirectMessages());
+    }
+  }, [dispatch, isFavouriteContactToggled]);
 
   /*
   invite contact modal handeling

@@ -6,16 +6,18 @@ import {
   DropdownToggle,
   DropdownItem,
 } from "reactstrap";
-
+import classnames from "classnames";
 interface AttachedFilesProps {
   chatUserDetails: any;
   onOpenVideo: () => void;
   onOpenAudio: () => void;
+  onToggleFavourite: () => void;
 }
 const AttachedFiles = ({
   chatUserDetails,
   onOpenVideo,
   onOpenAudio,
+  onToggleFavourite
 }: AttachedFilesProps) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen(!dropdownOpen);
@@ -36,7 +38,11 @@ const AttachedFiles = ({
         </div>
         <div className="col-sm col-4">
           <div className="mb-4">
-            <Button color="none" className="btn avatar-sm p-0 favourite-btn">
+            <Button
+              color="none"
+              className={classnames("btn", "avatar-sm", "p-0", "favourite-btn", { "active": chatUserDetails.isFavourite })}
+              onClick={onToggleFavourite}
+            >
               <span className="avatar-title rounded bg-light text-body">
                 <i className="bx bx-heart"></i>
               </span>

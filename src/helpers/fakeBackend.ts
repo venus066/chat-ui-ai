@@ -9,7 +9,7 @@ import {
   myData,
 
   //contacts
-  contacts,
+  contacts, onChangeContacts,
 
   // calls
   calls,
@@ -22,7 +22,7 @@ import {
   onChangeBookmark,
 
   // chats
-  favourites,
+  favourites, onChangeFavourite,
   directMessages,
   channels,
   onChangeDirectMessages,
@@ -786,6 +786,46 @@ const fakeBackend = () => {
         setTimeout(() => {
           resolve([200, data]);
         });
+      } else {
+        reject(["The channel is not found"]);
+      }
+    });
+  });
+
+  mock.onPut(new RegExp(`${url.TOGGLE_FAVOURITE_CONTACT}/*`)).reply(config => {
+    const data = JSON.parse(config["data"]);
+
+    let message = "User has been added to your favourite";
+    let modifiedC = [...contacts];
+    let modifiedF = [...favourites];
+    let modifiedD = [...directMessages];
+    if (data.params.id && contacts.length !== 0) {
+      const contactIdx = (modifiedC || []).findIndex(
+        (c: any) => c.id + "" === data.params.id + ""
+      );
+      if (contactIdx > -1) {
+        if (contacts[contactIdx].isFavourite) {
+          contacts[contactIdx].isFavourite = false;
+          modifiedF = modifiedF.filter((f: any) => f.id !== data.params.id);
+          message = "User has been removed to your favourite";
+        }
+        else {
+          contacts[contactIdx].isFavourite = true;
+          modifiedF = [...modifiedF, contacts[contactIdx]];
+          modifiedD = modifiedD.filter((c: any) => c.id !== data.params.id);
+        }
+      }
+    }
+    onChangeContacts(contacts);
+    onChangeFavourite(modifiedF);
+    onChangeDirectMessages(modifiedD);
+
+    return new Promise((resolve, reject) => {
+      if (data.params.id) {
+        setTimeout(() => {
+          resolve([200, message]);
+        });
+
       } else {
         reject(["The channel is not found"]);
       }

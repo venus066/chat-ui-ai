@@ -13,7 +13,7 @@ export interface UserTypes {
     status?: STATUS_TYPES;
   };
 }
-const favourites: Array<UserTypes> = [
+let favourites: Array<UserTypes> = [
   {
     ...contacts[4],
     meta: {
@@ -165,11 +165,17 @@ const pinnedTabs: Array<PinTypes> = [
     icon: "bx bx-pin",
   },
 ];
+
+
+const onChangeFavourite = (newData: Array<UserTypes>) => {
+  favourites = newData;
+};
 export {
   favourites,
   directMessages,
   channels,
   onChangeDirectMessages,
   onChangeChannels,
+  onChangeFavourite,
   pinnedTabs,
 };

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classnames from "classnames";
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
 
 // actions
-import { toggleUserDetailsTab } from "../../../redux/actions";
+import { toggleUserDetailsTab, toggleFavouriteContact, getChatUserDetails } from "../../../redux/actions";
 
 // components
 import AudioCallModal from "../../../components/AudioCallModal";
@@ -27,12 +27,19 @@ interface IndexProps {
 const Index = ({ isChannel }: IndexProps) => {
   const dispatch = useDispatch();
 
-  const { chatUserDetails, getUserDetailsLoading, isOpenUserDetails } =
+  const { chatUserDetails, getUserDetailsLoading, isOpenUserDetails, isFavouriteContactToggled } =
     useSelector((state: any) => ({
       chatUserDetails: state.Chats.chatUserDetails,
       getUserDetailsLoading: state.Chats.getUserDetailsLoading,
       isOpenUserDetails: state.Chats.isOpenUserDetails,
+      isFavouriteContactToggled: state.Chats.isFavouriteContactToggled
     }));
+
+  useEffect(() => {
+    if (isFavouriteContactToggled) {
+      dispatch(getChatUserDetails(chatUserDetails.id));
+    }
+  }, [dispatch, isFavouriteContactToggled, chatUserDetails.id]);
 
   /*
   close tab
@@ -63,6 +70,13 @@ const Index = ({ isChannel }: IndexProps) => {
     setIsOpenAudioModal(false);
   };
 
+  /*
+  favourite
+  */
+  const onToggleFavourite = () => {
+    dispatch(toggleFavouriteContact(chatUserDetails.id));
+  };
+
   return (
     <>
       <div
@@ -89,6 +103,7 @@ const Index = ({ isChannel }: IndexProps) => {
               chatUserDetails={chatUserDetails}
               onOpenVideo={onOpenVideo}
               onOpenAudio={onOpenAudio}
+              onToggleFavourite={onToggleFavourite}
             />
             <Status about={chatUserDetails.about} />
             {

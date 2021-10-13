@@ -102,3 +102,9 @@ export const getChannelDetails = (id: number | string) => ({
   type: ChatsActionTypes.GET_CHANNEL_DETAILS,
   payload: id,
 });
+
+export const toggleFavouriteContact = (id: number | string) => ({
+  type: ChatsActionTypes.TOGGLE_FAVOURITE_CONTACT,
+  payload: id,
+});
+

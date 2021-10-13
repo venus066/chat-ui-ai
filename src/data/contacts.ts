@@ -29,8 +29,9 @@ export interface ContactTypes {
   media?: MediaTypes;
   attachedFiles?: AttachedfileTypes;
   status?: STATUS_TYPES;
+  isFavourite?: boolean;
 }
-const contacts: ContactTypes[] = [
+let contacts: ContactTypes[] = [
   {
     id: "614ecab426f59ce2863e106e",
     firstName: "Sanford",
@@ -233,6 +234,7 @@ const contacts: ContactTypes[] = [
   },
   {
     id: "614ecab4ac946a9bdafa4e3b",
+    isFavourite: true,
     firstName: "Marguerite",
     lastName: "Campbell",
     profileImage: avatar4,
@@ -310,6 +312,7 @@ const contacts: ContactTypes[] = [
     email: "adc@123.com",
     location: "California, USA",
     status: STATUS_TYPES.AWAY,
+    isFavourite: true,
     channels: [
       {
         id: 1,
@@ -383,6 +386,7 @@ const contacts: ContactTypes[] = [
     email: "adc@123.com",
     location: "California, USA",
     status: STATUS_TYPES.ACTIVE,
+    isFavourite: true,
     channels: [
       {
         id: 1,
@@ -457,6 +461,7 @@ const contacts: ContactTypes[] = [
     email: "adc@123.com",
     location: "California, USA",
     status: STATUS_TYPES.ACTIVE,
+    isFavourite: true,
     channels: [
       {
         id: 1,
@@ -1482,4 +1487,8 @@ const contacts: ContactTypes[] = [
     },
   },
 ];
-export { contacts };
+
+const onChangeContacts = (newData: Array<ContactTypes>) => {
+  contacts = newData;
+};
+export { contacts, onChangeContacts };
