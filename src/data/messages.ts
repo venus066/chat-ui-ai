@@ -21,7 +21,7 @@ export interface MessagesTypes {
   meta: {
     receiver: string | number;
     sender: string | number;
-    senderData?: ContactTypes;
+    userData?: ContactTypes;
     sent: boolean;
     received: boolean;
     read: boolean;
@@ -156,12 +156,77 @@ let conversations: ConversationTypes[] = [
     messages: [
       {
         mId: 1,
-        text: "Good morning 😊",
+        text: "Good morning Everyone",
         time: new Date().toISOString(),
         meta: {
           receiver: myId,
           sender: contacts[0].id,
-          senderData: contacts[0],
+          userData: contacts[0],
+          sent: true,
+          received: true,
+          read: true,
+        },
+      },
+      {
+        mId: 2,
+        text: "Good morning, How are you? What about our next meeting?",
+        time: new Date().toISOString(),
+        meta: {
+          receiver: contacts[0].id,
+          sender: myId,
+          userData: contacts[0],
+          sent: true,
+          received: true,
+          read: true,
+        },
+      },
+      {
+        mId: 3,
+        text: "Yeah everything is fine, Our next meeting tomorrow at 10.00 am AM",
+        time: new Date().toISOString(),
+        meta: {
+          receiver: myId,
+          sender: contacts[1].id,
+          userData: contacts[1],
+          sent: true,
+          received: true,
+          read: true,
+        },
+      },
+      {
+        mId: 4,
+        text: "Wow that's great",
+        time: new Date().toISOString(),
+        meta: {
+          receiver: myId,
+          sender: contacts[2].id,
+          userData: contacts[2],
+          sent: true,
+          received: true,
+          read: true,
+        },
+      },
+      {
+        mId: 5,
+        text: "@Jean Berwick, Please Assign AB-123 to me",
+        time: new Date().toISOString(),
+        meta: {
+          receiver: contacts[0].id,
+          sender: myId,
+          userData: contacts[0],
+          sent: true,
+          received: true,
+          read: true,
+        },
+      },
+      {
+        mId: 6,
+        text: "Okay, Sure",
+        time: new Date().toISOString(),
+        meta: {
+          receiver: myId,
+          sender: contacts[3].id,
+          userData: contacts[3],
           sent: true,
           received: true,
           read: true,

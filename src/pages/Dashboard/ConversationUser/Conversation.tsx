@@ -22,12 +22,14 @@ interface ConversationProps {
   chatUserDetails: any;
   onDelete: (messageId: string | number) => any;
   onSetReplyData: (reply: null | MessagesTypes | undefined) => void;
+  isChannel: boolean;
 }
 const Conversation = ({
   chatUserDetails,
   chatUserConversations,
   onDelete,
   onSetReplyData,
+  isChannel
 }: ConversationProps) => {
   const dispatch = useDispatch();
   const { userProfile } = useProfile();
@@ -120,6 +122,7 @@ const Conversation = ({
               onSetReplyData={onSetReplyData}
               isFromMe={isFromMe}
               onOpenForward={onOpenForward}
+              isChannel={isChannel}
             />
           );
         })}

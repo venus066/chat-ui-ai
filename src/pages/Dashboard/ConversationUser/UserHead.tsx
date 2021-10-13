@@ -78,35 +78,37 @@ const ProfileImage = ({
       </div>
       <div className="flex-grow-1 overflow-hidden">
         <div className="d-flex align-items-center">
-          {chatUserDetails.profileImage ? (
-            <div className={classnames("flex-shrink-0", "chat-user-img", "align-self-center", "me-3", "ms-0", { "online": isOnline })}>
-              <img
-                src={chatUserDetails.profileImage}
-                className="rounded-circle avatar-sm"
-                alt=""
-              />
-              <span className={classnames("user-status",
-                { "bg-success": chatUserDetails.status === STATUS_TYPES.ACTIVE },
-                { "bg-warning": chatUserDetails.status === STATUS_TYPES.AWAY },
-                { "bg-danger": chatUserDetails.status === STATUS_TYPES.DO_NOT_DISTURB }
-              )}></span>
-            </div>
-          ) : (
-            <div className="flex-shrink-0 avatar-sm align-self-center me-3 ms-0">
-              <span
-                className={classnames(
-                  "avatar-title",
-                  "rounded-circle",
-                  "text-uppercase",
-                  "text-white",
-                  colors[color]
-                )}
-              >
-                {shortName}
-              </span>
-            </div>
-          )}
-
+          <div className={classnames("flex-shrink-0", "chat-user-img", "align-self-center", "me-3", "ms-0", { "online": isOnline })}>
+            {chatUserDetails.profileImage ? (
+              <>
+                <img
+                  src={chatUserDetails.profileImage}
+                  className="rounded-circle avatar-sm"
+                  alt=""
+                />
+                <span className={classnames("user-status",
+                  { "bg-success": chatUserDetails.status === STATUS_TYPES.ACTIVE },
+                  { "bg-warning": chatUserDetails.status === STATUS_TYPES.AWAY },
+                  { "bg-danger": chatUserDetails.status === STATUS_TYPES.DO_NOT_DISTURB }
+                )}></span>
+              </>
+            ) : (
+              <div className="flex-shrink-0 avatar-sm align-self-center ms-0">
+                <span
+                  className={classnames(
+                    "avatar-title",
+                    "rounded-circle",
+                    "text-uppercase",
+                    "text-white",
+                    colors[color]
+                  )}
+                >
+                  <span className="username"> {shortName}</span>
+                  <span className="user-status"></span>
+                </span>
+              </div>
+            )}
+          </div>
           <div className="flex-grow-1 overflow-hidden">
             <h6 className="text-truncate mb-0 font-size-18">
               <Link

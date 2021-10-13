@@ -262,6 +262,7 @@ interface MessageProps {
   onSetReplyData: (reply: null | MessagesTypes | undefined) => void;
   isFromMe: boolean;
   onOpenForward: (message: MessagesTypes) => void;
+  isChannel: boolean;
 }
 const Message = ({
   message,
@@ -270,6 +271,7 @@ const Message = ({
   onSetReplyData,
   isFromMe,
   onOpenForward,
+  isChannel
 }: MessageProps) => {
   const { userProfile } = useProfile();
   const hasImages = message.image && message.image.length;
@@ -277,21 +279,27 @@ const Message = ({
   const hasText = message.text;
   const isTyping = false;
 
-  const fullName = chatUserDetails.firstName
+  const chatUserFullName = chatUserDetails.firstName
     ? `${chatUserDetails.firstName} ${chatUserDetails.lastName}`
     : "-";
-  const profile = chatUserDetails.profileImage
-    ? chatUserDetails.profileImage
-    : imagePlaceholder;
+
   const myProfile = userProfile.profileImage
     ? userProfile.profileImage
     : imagePlaceholder;
+  const channeluserProfile = message.meta.userData && message.meta.userData.profileImage
+    ? message.meta.userData.profileImage
+    : imagePlaceholder;
+  const chatUserprofile = chatUserDetails.profileImage
+    ? chatUserDetails.profileImage
+    : imagePlaceholder;
+  const profile = isChannel ? channeluserProfile : chatUserprofile;
   const date = formateDate(message.time, "hh:mmaaa");
   const isSent = message.meta.sent;
   const isReceived = message.meta.received;
   const isRead = message.meta.read;
   const isForwarded = message.meta.isForwarded;
-
+  const channdelSenderFullname = message.meta.userData ? `${message.meta.userData.firstName} ${message.meta.userData.lastName}` : "-";
+  const fullName = isChannel ? channdelSenderFullname : chatUserFullName;
   const onDeleteMessage = () => {
     onDelete(message.mId);
   };

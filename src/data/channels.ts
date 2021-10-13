@@ -4,8 +4,6 @@ import { MediaTypes, AttachedfileTypes } from "./myProfile";
 
 import img1 from "../assets/images/small/img-1.jpg";
 import img2 from "../assets/images/small/img-2.jpg";
-import img3 from "../assets/images/small/img-3.jpg";
-import img4 from "../assets/images/small/img-4.jpg";
 
 // interface
 import { ContactTypes } from "./contacts";

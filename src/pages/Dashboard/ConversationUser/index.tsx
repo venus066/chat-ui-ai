@@ -28,7 +28,6 @@ import { MessagesTypes } from "../../../data/messages";
 
 // dummy data
 import { pinnedTabs } from "../../../data/index";
-import { boolean } from "yup/lib/locale";
 
 interface IndexProps {
   isChannel: boolean;
@@ -89,15 +88,17 @@ const Index = ({ isChannel }: IndexProps) => {
     }
 
     dispatch(onSendMessage(params));
-    setTimeout(() => {
-      dispatch(receiveMessage(chatUserDetails.id));
-    }, 1000);
-    setTimeout(() => {
-      dispatch(readMessage(chatUserDetails.id));
-    }, 1500);
-    setTimeout(() => {
-      dispatch(receiveMessageFromUser(chatUserDetails.id));
-    }, 2000);
+    if (!isChannel) {
+      setTimeout(() => {
+        dispatch(receiveMessage(chatUserDetails.id));
+      }, 1000);
+      setTimeout(() => {
+        dispatch(readMessage(chatUserDetails.id));
+      }, 1500);
+      setTimeout(() => {
+        dispatch(receiveMessageFromUser(chatUserDetails.id));
+      }, 2000);
+    }
     setReplyData(null);
   };
 
@@ -136,6 +137,7 @@ const Index = ({ isChannel }: IndexProps) => {
         chatUserDetails={chatUserDetails}
         onDelete={onDeleteMessage}
         onSetReplyData={onSetReplyData}
+        isChannel={isChannel}
       />
       <ChatInputSection
         onSend={onSend}

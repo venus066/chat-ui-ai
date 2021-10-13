@@ -35,40 +35,45 @@ const ChatUser = ({ user, selectedChat, onSelectChat }: ChatUserProps) => {
   };
   return (
     <li className={classnames({ active: isSelectedChat })} onClick={onClick}>
-      <Link to="#" className={classnames({ "unread-msg-user": unRead })}>
+      <Link to="#"
+        className={classnames({ "unread-msg-user": unRead })}>
         <div className="d-flex align-items-center">
-          {user.profileImage ? (
-            <div
-              className={classnames(
-                "chat-user-img",
-                "align-self-center",
-                "me-2",
-                "ms-0",
-                { online: isOnline }
-              )}
-            >
-              <img
-                src={user.profileImage}
-                className="rounded-circle avatar-xs"
-                alt=""
-              />
-              {isOnline && <span className="user-status"></span>}
-            </div>
-          ) : (
-            <div className="avatar-xs me-2">
-              <span
-                className={classnames(
-                  "avatar-title",
-                  "rounded-circle",
-                  "text-uppercase",
-                  "text-white",
-                  colors[color]
-                )}
-              >
-                {shortName}
-              </span>
-            </div>
-          )}
+          <div
+            className={classnames(
+              "chat-user-img",
+              "align-self-center",
+              "me-2",
+              "ms-0",
+              { online: isOnline }
+            )}
+          >
+            {user.profileImage ? (
+
+              <>
+                <img
+                  src={user.profileImage}
+                  className="rounded-circle avatar-xs"
+                  alt=""
+                />
+                {isOnline && <span className="user-status"></span>}
+              </>
+            ) : (
+              <div className="avatar-xs">
+                <span
+                  className={classnames(
+                    "avatar-title",
+                    "rounded-circle",
+                    "text-uppercase",
+                    "text-white",
+                    colors[color]
+                  )}
+                >
+                  <span className="username"> {shortName}</span>
+                  <span className="user-status"></span>
+                </span>
+              </div>
+            )}
+          </div>
           <div className="overflow-hidden">
             <p className="text-truncate mb-0">{fullName}</p>
           </div>
