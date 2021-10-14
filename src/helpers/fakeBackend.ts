@@ -46,7 +46,7 @@ let users = [myData];
 
 const fakeBackend = () => {
   // This sets the mock adapter on the default instance
-  const mock = new MockAdapter(axios);
+  const mock = new MockAdapter(axios, { onNoMatch: "passthrough" });
 
   mock.onPost(url.POST_FAKE_REGISTER).reply(config => {
     const user = JSON.parse(config["data"]);
@@ -460,7 +460,7 @@ const fakeBackend = () => {
       if (conversationIdx > -1) {
         const mid =
           conversations[conversationIdx].messages &&
-          conversations[conversationIdx].messages.length
+            conversations[conversationIdx].messages.length
             ? conversations[conversationIdx].messages.length + 1
             : 1;
         let newM: any = {
@@ -616,7 +616,7 @@ const fakeBackend = () => {
         if (modifiedC[conversationIdx].messages) {
           const newM = {
             ...modifiedC[conversationIdx].messages[
-              modifiedC[conversationIdx].messages.length - 1
+            modifiedC[conversationIdx].messages.length - 1
             ],
           };
 
@@ -681,7 +681,7 @@ const fakeBackend = () => {
         if (conversationIdx > -1) {
           const mid =
             modifiedC[conversationIdx].messages &&
-            modifiedC[conversationIdx].messages.length
+              modifiedC[conversationIdx].messages.length
               ? modifiedC[conversationIdx].messages.length + 1
               : 1;
           let newM: any = {
