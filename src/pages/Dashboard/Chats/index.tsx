@@ -19,6 +19,7 @@ import {
   getChatUserConversations,
   getChannelDetails,
   getArchiveContact,
+  readConversation,
 } from "../../../redux/actions";
 
 // interfaces
@@ -160,6 +161,7 @@ const Index = (props: IndexProps) => {
     } else {
       dispatch(getChatUserDetails(id));
     }
+    dispatch(readConversation(id));
     dispatch(getChatUserConversations(id));
     dispatch(changeSelectedChat(id));
   };

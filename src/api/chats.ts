@@ -43,6 +43,7 @@ const receiveMessage = (id: string | number) => {
 const readMessage = (id: string | number) => {
   return api.update(url.READ_MESSAGE + "/" + id, { params: { id } });
 };
+
 const receiveMessageFromUser = (id: string | number) => {
   return api.get(url.RECEIVE_MESSAGE_FROM_USER + "/" + id, {
     params: { id },
@@ -58,6 +59,7 @@ const deleteMessage = (userId: number | string, messageId: number | string) => {
 const forwardMessage = (data: object) => {
   return api.create(url.FORWARD_MESSAGE, data);
 };
+
 const deleteUserMessages = (userId: number | string) => {
   return api.delete(url.DELETE_USER_MESSAGES + "/" + userId, {
     params: { userId },
@@ -85,6 +87,10 @@ const toggleArchiveContact = (id: string | number) => {
   return api.update(url.TOGGLE_ARCHIVE_CONTACT + "/" + id, { params: { id } });
 };
 
+const readConversation = (id: string | number) => {
+  return api.update(url.READ_CONVERSATION + "/" + id, { params: { id } });
+};
+
 export {
   getFavourites,
   getDirectMessages,
@@ -104,4 +110,5 @@ export {
   toggleFavouriteContact,
   getArchiveContact,
   toggleArchiveContact,
+  readConversation,
 };

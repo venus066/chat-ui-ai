@@ -75,13 +75,13 @@ const ChatUser = ({ user, selectedChat, onSelectChat }: ChatUserProps) => {
           <div className="overflow-hidden">
             <p className="text-truncate mb-0">{fullName}</p>
           </div>
-          {unRead && (
+          {unRead && unRead !== 0 ? (
             <div className="ms-auto">
               <span className="badge badge-soft-dark rounded p-1">
                 {unRead}
               </span>
             </div>
-          )}
+          ) : null}
         </div>
       </Link>
     </li>

@@ -25,6 +25,7 @@ export enum ChatsActionTypes {
   TOGGLE_FAVOURITE_CONTACT = "@@chats/TOGGLE_FAVOURITE_CONTACT",
   GET_ARCHIVE_CONTACT = "@@chats/GET_ARCHIVE_CONTACT",
   TOGGLE_ARCHIVE_CONTACT = "@@chats/TOGGLE_ARCHIVE_CONTACT",
+  READ_CONVERSATION = "@@chats/READ_CONVERSATION",
 }
 export interface ChatsState {
   favourites: Array<any>;

@@ -30,13 +30,13 @@ const ChatChannel = ({ channel, selectedChat, onSelectChat }: ChannelProps) => {
           <div className="flex-grow-1 overflow-hidden">
             <p className="text-truncate mb-0">{channel.name}</p>
           </div>
-          {unRead && (
+          {unRead && unRead !== 0 ? (
             <div className="flex-shrink-0 ms-2">
               <span className="badge badge-soft-dark rounded p-1">
                 {unRead}
               </span>
             </div>
-          )}
+          ) : null}
         </div>
       </Link>
     </li>

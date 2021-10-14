@@ -173,9 +173,6 @@ let archiveChats: Array<any> = [
   {
     ...userChannels[1],
     isChannel: true,
-    meta: {
-      unRead: 85,
-    },
   },
 ];
 const onChangeFavourite = (newData: Array<UserTypes>) => {

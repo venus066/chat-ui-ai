@@ -75,10 +75,15 @@ const Chats = (state = INIT_STATE, action: any) => {
             isUserMessageSent: true,
           };
         case ChatsActionTypes.RECEIVE_MESSAGE:
-        case ChatsActionTypes.READ_MESSAGE:
         case ChatsActionTypes.RECEIVE_MESSAGE_FROM_USER:
           return {
             ...state,
+            chatUserConversations: action.payload.data,
+          };
+        case ChatsActionTypes.READ_MESSAGE:
+          return {
+            ...state,
+            isMessageRead: true,
             chatUserConversations: action.payload.data,
           };
         case ChatsActionTypes.DELETE_MESSAGE:
@@ -210,6 +215,11 @@ const Chats = (state = INIT_STATE, action: any) => {
           return {
             ...state,
             isContactArchiveToggled: false,
+          };
+        case ChatsActionTypes.READ_CONVERSATION:
+          return {
+            ...state,
+            isRead: true,
           };
         default:
           return { ...state };

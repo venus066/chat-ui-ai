@@ -43,6 +43,7 @@ export const DELETE_USER_MESSAGES = "/delete-user-messages";
 export const TOGGLE_FAVOURITE_CONTACT = "/toggle-favourite-contact";
 export const GET_ARCHIVE_CONTACT = "/get-archive-contacts";
 export const TOGGLE_ARCHIVE_CONTACT = "/toggle-archive-contact";
+export const READ_CONVERSATION = "/read-conversation";
 
 // groups
 export const GET_CHANNEL_DETAILS = "/get-channel-details";

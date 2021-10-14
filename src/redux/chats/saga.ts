@@ -23,12 +23,20 @@ import {
   toggleFavouriteContact as toggleFavouriteContactApi,
   getArchiveContact as getArchiveContactApi,
   toggleArchiveContact as toggleArchiveContactApi,
+  readConversation as readConversationApi,
 } from "../../api/index";
 
 import {
   showSuccessNotification,
   showErrorNotification,
 } from "../../helpers/notifications";
+
+//actions
+import {
+  getDirectMessages as getDirectMessagesAction,
+  getFavourites as getFavouritesAction,
+  getChannels as getChannelsAction,
+} from "./actions";
 
 function* getFavourites() {
   try {
@@ -265,6 +273,20 @@ function* toggleArchiveContact({ payload: id }: any) {
   }
 }
 
+function* readConversation({ payload: id }: any) {
+  try {
+    const response: Promise<any> = yield call(readConversationApi, id);
+    yield put(
+      chatsApiResponseSuccess(ChatsActionTypes.READ_CONVERSATION, response)
+    );
+    yield put(getDirectMessagesAction());
+    yield put(getFavouritesAction());
+    yield put(getChannelsAction());
+  } catch (error: any) {
+    yield put(chatsApiResponseError(ChatsActionTypes.READ_CONVERSATION, error));
+  }
+}
+
 export function* watchGetFavourites() {
   yield takeEvery(ChatsActionTypes.GET_FAVOURITES, getFavourites);
 }
@@ -332,6 +354,10 @@ export function* watchToggleArchiveContact() {
     toggleArchiveContact
   );
 }
+export function* watchReadConversation() {
+  yield takeEvery(ChatsActionTypes.READ_CONVERSATION, readConversation);
+}
+
 function* chatsSaga() {
   yield all([
     fork(watchGetFavourites),
@@ -352,6 +378,7 @@ function* chatsSaga() {
     fork(watchToggleFavouriteContact),
     fork(watchGetArchiveContact),
     fork(watchToggleArchiveContact),
+    fork(watchReadConversation),
   ]);
 }
 

@@ -116,3 +116,8 @@ export const toggleArchiveContact = (id: number | string) => ({
   type: ChatsActionTypes.TOGGLE_ARCHIVE_CONTACT,
   payload: id,
 });
+
+export const readConversation = (id: number | string) => ({
+  type: ChatsActionTypes.READ_CONVERSATION,
+  payload: id,
+});

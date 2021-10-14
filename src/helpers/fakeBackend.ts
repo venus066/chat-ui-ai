@@ -912,6 +912,50 @@ const fakeBackend = () => {
       }
     });
   });
+
+  mock.onPut(new RegExp(`${url.READ_CONVERSATION}/*`)).reply(config => {
+    const data = JSON.parse(config["data"]);
+    let modifiedD = [...directMessages];
+    let modifiedF = [...favourites];
+    let modifiedC = [...channels];
+    if (data.params && data.params.id && conversations.length !== 0) {
+      /*
+     for chat conversations
+     */
+
+      const contactIdx = (modifiedD || []).findIndex(
+        (c: any) => c.id + "" === data.params.id + ""
+      );
+      const contactFIdx = (modifiedF || []).findIndex(
+        (c: any) => c.id + "" === data.params.id + ""
+      );
+      const contactCIdx = (modifiedC || []).findIndex(
+        (c: any) => c.id + "" === data.params.id + ""
+      );
+      if (contactIdx > -1 && modifiedD[contactIdx]["meta"]) {
+        modifiedD[contactIdx].meta!.unRead = 0;
+        onChangeDirectMessages(modifiedD);
+      }
+      if (contactFIdx > -1 && modifiedF[contactFIdx]["meta"]) {
+        modifiedF[contactFIdx].meta!.unRead = 0;
+        onChangeFavourite(modifiedF);
+      }
+      if (contactCIdx > -1 && modifiedC[contactCIdx]["meta"]) {
+        modifiedC[contactCIdx].meta!.unRead = 0;
+        onChangeChannels(modifiedC);
+      }
+    }
+
+    return new Promise((resolve, reject) => {
+      if (modifiedD) {
+        resolve([200, "true"]);
+      } else {
+        setTimeout(() => {
+          reject(["Your id is not found"]);
+        }, 500);
+      }
+    });
+  });
 };
 
 export default fakeBackend;
