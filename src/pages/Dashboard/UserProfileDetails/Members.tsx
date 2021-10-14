@@ -3,10 +3,23 @@ import { Link } from "react-router-dom";
 import classnames from "classnames";
 import { Badge } from "reactstrap";
 
+//redux
+import { useDispatch } from "react-redux";
+
+// actions
+import {
+  getChannelDetails,
+  getChatUserDetails,
+  getChatUserConversations,
+  changeSelectedChat,
+} from "../../../redux/actions";
+
 interface GroupProps {
   member: any;
 }
 const Member = ({ member }: GroupProps) => {
+  const dispatch = useDispatch();
+
   const fullName = `${member.firstName} ${member.lastName}`;
   const shortName = `${member.firstName.charAt(0)}${member.lastName.charAt(0)}`;
 
@@ -21,9 +34,19 @@ const Member = ({ member }: GroupProps) => {
   ];
   const [color] = useState(Math.floor(Math.random() * colors.length));
 
+  const onSelectChat = (id: string | number, isChannel?: boolean) => {
+    if (isChannel) {
+      dispatch(getChannelDetails(id));
+    } else {
+      dispatch(getChatUserDetails(id));
+    }
+    dispatch(getChatUserConversations(id));
+    dispatch(changeSelectedChat(id));
+  };
+
   return (
     <li>
-      <Link to="#">
+      <Link to="#" onClick={() => onSelectChat(member.id)}>
         <div className="d-flex align-items-center">
           <div className="flex-shrink-0 avatar-xs me-2">
             {member.profileImage ? (

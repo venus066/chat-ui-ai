@@ -137,7 +137,7 @@ const Index = (props: IndexProps) => {
     | SETTINGS_COLLAPSES.PRIVACY
     | SETTINGS_COLLAPSES.SECURITY
     | SETTINGS_COLLAPSES.THEME
-  >(SETTINGS_COLLAPSES.THEME);
+  >(null);
 
   const collapseItems: CollapseItemTypes[] = [
     {

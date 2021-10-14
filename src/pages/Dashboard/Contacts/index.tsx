@@ -16,6 +16,10 @@ import {
   getContacts,
   inviteContact,
   resetContacts,
+  getChannelDetails,
+  getChatUserDetails,
+  getChatUserConversations,
+  changeSelectedChat,
 } from "../../../redux/actions";
 
 //utils
@@ -96,6 +100,16 @@ const Index = (props: IndexProps) => {
   };
 
   const totalC = (contacts || []).length;
+  const onSelectChat = (id: string | number, isChannel?: boolean) => {
+    if (isChannel) {
+      dispatch(getChannelDetails(id));
+    } else {
+      dispatch(getChatUserDetails(id));
+    }
+    dispatch(getChatUserConversations(id));
+    dispatch(changeSelectedChat(id));
+  };
+
   return (
     <>
       <div className="position-relative">
@@ -117,6 +131,7 @@ const Index = (props: IndexProps) => {
                     letterContacts={letterContacts}
                     key={key}
                     index={key}
+                    onSelectChat={onSelectChat}
                   />
                 )
               )

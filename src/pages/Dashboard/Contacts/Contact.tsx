@@ -16,8 +16,9 @@ import { ContactTypes } from "../../../data/contacts";
 
 interface ContactItemProps {
   contact: ContactTypes;
+  onSelectChat: (id: string | number, isChannel?: boolean) => void;
 }
-const ContactItem = ({ contact }: ContactItemProps) => {
+const ContactItem = ({ contact, onSelectChat }: ContactItemProps) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggle = () => setDropdownOpen(!dropdownOpen);
@@ -38,7 +39,7 @@ const ContactItem = ({ contact }: ContactItemProps) => {
   const [color] = useState(Math.floor(Math.random() * colors.length));
 
   return (
-    <li>
+    <li onClick={() => onSelectChat(contact.id)}>
       <div className="d-flex align-items-center">
         <div className="flex-shrink-0 me-2">
           <div className="avatar-xs">
@@ -100,15 +101,24 @@ const ContactItem = ({ contact }: ContactItemProps) => {
 interface CharacterItemProps {
   letterContacts: DivideByKeyResultTypes;
   index: number;
+  onSelectChat: (id: string | number, isChannel?: boolean) => void;
 }
-const CharacterItem = ({ letterContacts, index }: CharacterItemProps) => {
+const CharacterItem = ({
+  letterContacts,
+  index,
+  onSelectChat,
+}: CharacterItemProps) => {
   return (
     <div className={classnames({ "mt-3": index !== 0 })}>
       <div className="contact-list-title">{letterContacts.letter}</div>
 
       <ul className="list-unstyled contact-list">
         {(letterContacts.data || []).map((contact: any, key: number) => (
-          <ContactItem contact={contact} key={key} />
+          <ContactItem
+            contact={contact}
+            key={key}
+            onSelectChat={onSelectChat}
+          />
         ))}
       </ul>
     </div>

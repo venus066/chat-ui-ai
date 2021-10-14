@@ -1,13 +1,36 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+//redux
+import { useDispatch } from "react-redux";
+
+// actions
+import {
+  getChannelDetails,
+  getChatUserDetails,
+  getChatUserConversations,
+  changeSelectedChat,
+} from "../../../redux/actions";
+
 interface GroupProps {
   group: any;
 }
 const Group = ({ group }: GroupProps) => {
+  const dispatch = useDispatch();
+
+  const onSelectChat = (id: string | number, isChannel?: boolean) => {
+    if (isChannel) {
+      dispatch(getChannelDetails(id));
+    } else {
+      dispatch(getChatUserDetails(id));
+    }
+    dispatch(getChatUserConversations(id));
+    dispatch(changeSelectedChat(id));
+  };
+
   return (
     <li>
-      <Link to="#">
+      <Link to="#" onClick={() => onSelectChat(group.id, true)}>
         <div className="d-flex align-items-center">
           <div className="flex-shrink-0 avatar-xs me-2">
             <span className="avatar-title rounded-circle bg-soft-light text-dark">

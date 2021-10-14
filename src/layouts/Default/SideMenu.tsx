@@ -137,9 +137,19 @@ const ThemeModeChanger = ({
   );
 };
 
-const ProfileDropdownMenu = () => {
+interface ProfileDropdownMenuProps {
+  onChangeTab: (
+    id:
+      | TABS.BOOKMARK
+      | TABS.CALLS
+      | TABS.CHAT
+      | TABS.CONTACTS
+      | TABS.SETTINGS
+      | TABS.USERS
+  ) => void;
+}
+const ProfileDropdownMenu = ({ onChangeTab }: ProfileDropdownMenuProps) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
   const toggle = () => setDropdownOpen(!dropdownOpen);
 
   return (
@@ -153,10 +163,16 @@ const ProfileDropdownMenu = () => {
         <img src={avatar1} alt="" className="profile-user rounded-circle" />
       </DropdownToggle>
       <DropdownMenu>
-        <DropdownItem className="d-flex align-items-center justify-content-between">
+        <DropdownItem
+          className="d-flex align-items-center justify-content-between"
+          onClick={() => onChangeTab(TABS.USERS)}
+        >
           Profile <i className="bx bx-user-circle text-muted ms-1"></i>
         </DropdownItem>
-        <DropdownItem className="d-flex align-items-center justify-content-between">
+        <DropdownItem
+          className="d-flex align-items-center justify-content-between"
+          onClick={() => onChangeTab(TABS.SETTINGS)}
+        >
           Setting <i className="bx bx-cog text-muted ms-1"></i>
         </DropdownItem>
         <DropdownItem
@@ -238,7 +254,7 @@ const SideMenu = ({ themeMode, onChangeMode }: SideMenuProps) => {
           <ThemeModeChanger themeMode={themeMode} onChangeMode={onChangeMode} />
 
           {/* profile menu dropdown */}
-          <ProfileDropdownMenu />
+          <ProfileDropdownMenu onChangeTab={onChangeTab} />
         </Nav>
       </div>
       {/* end side-menu nav */}
