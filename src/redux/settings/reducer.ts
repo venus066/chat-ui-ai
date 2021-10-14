@@ -15,6 +15,12 @@ const Settings = (state = INIT_STATE, action: any) => {
             settings: action.payload.data,
             isSettingsFetched: true,
             getSettingsLoading: false,
+            isSettingsUpdated: false,
+          };
+        case SettingsActionTypes.UPDATE_USER_SETTINGS:
+          return {
+            ...state,
+            isSettingsUpdated: true,
           };
         default:
           return { ...state };
@@ -28,7 +34,11 @@ const Settings = (state = INIT_STATE, action: any) => {
             isSettingsFetched: false,
             getSettingsLoading: false,
           };
-
+        case SettingsActionTypes.UPDATE_USER_SETTINGS:
+          return {
+            ...state,
+            isSettingsUpdated: false,
+          };
         default:
           return { ...state };
       }
@@ -40,6 +50,11 @@ const Settings = (state = INIT_STATE, action: any) => {
         isSettingsFetched: false,
       };
     }
+    case SettingsActionTypes.UPDATE_USER_SETTINGS:
+      return {
+        ...state,
+        isSettingsUpdated: false,
+      };
 
     default:
       return { ...state };

@@ -5,13 +5,19 @@ import classnames from "classnames";
 //redux
 import { useSelector, useDispatch } from "react-redux";
 
+// actions
+import { getSettings, updateSettings } from "../../../redux/actions";
+
+// constants
+import { SETTINGS_COLLAPSES } from "../../../constants";
+
+// interface
+import { SettingsTypes } from "../../../data/settings";
+
 // components
 import Loader from "../../../components/Loader";
 import AppSimpleBar from "../../../components/AppSimpleBar";
 import UserCoverImage from "./UserCoverImage";
-
-// actions
-import { getSettings } from "../../../redux/actions";
 import UserProfile from "./UserProfile";
 import PersonalInfo from "./PersonalInfo";
 import ThemeSettings from "./ThemeSettings";
@@ -19,11 +25,6 @@ import Privacy from "./Privacy";
 import Security from "./Security";
 import Help from "./Help";
 
-// constants
-import { SETTINGS_COLLAPSES } from "../../../constants";
-
-// interface
-import { SettingsTypes } from "../../../data/settings";
 interface CollapseItemTypes {
   value:
     | SETTINGS_COLLAPSES.PROFILE
@@ -122,9 +123,9 @@ const Index = (props: IndexProps) => {
   /*
   api calling
   */
-  // const onChangeData = (field: string, value: string | boolean) => {
-
-  // };
+  const onChangeData = (field: string, value: any) => {
+    dispatch(updateSettings(field, value));
+  };
 
   /*
   collapse handeling
@@ -149,19 +150,28 @@ const Index = (props: IndexProps) => {
       value: SETTINGS_COLLAPSES.THEME,
       label: "Themes",
       icon: "bx bxs-adjust-alt",
-      component: <ThemeSettings theme={settings.theme} />,
+      component: (
+        <ThemeSettings theme={settings.theme} onChangeData={onChangeData} />
+      ),
     },
     {
       value: SETTINGS_COLLAPSES.PRIVACY,
       label: "Privacy",
       icon: "bx bxs-lock",
-      component: <Privacy privacy={settings.privacy} />,
+      component: (
+        <Privacy privacy={settings.privacy} onChangeSettings={onChangeData} />
+      ),
     },
     {
       value: SETTINGS_COLLAPSES.SECURITY,
       label: "Security",
       icon: "bx bxs-check-shield",
-      component: <Security security={settings.security} />,
+      component: (
+        <Security
+          security={settings.security}
+          onChangeSettings={onChangeData}
+        />
+      ),
     },
     {
       value: SETTINGS_COLLAPSES.HELP,

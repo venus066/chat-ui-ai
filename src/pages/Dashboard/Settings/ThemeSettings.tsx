@@ -9,13 +9,14 @@ import ThemeImage from "./ThemeImage";
 
 interface ThemeSettingsProps {
   theme: ThemeTypes;
+  onChangeData: (field: string, value: any) => void;
 }
-const ThemeSettings = ({ theme }: ThemeSettingsProps) => {
+const ThemeSettings = ({ theme, onChangeData }: ThemeSettingsProps) => {
   return (
     <div className="accordion-body">
-      <ThemeColor theme={theme} />
+      <ThemeColor theme={theme} onChangeData={onChangeData} />
 
-      <ThemeImage theme={theme} />
+      <ThemeImage theme={theme} onChangeData={onChangeData} />
     </div>
   );
 };

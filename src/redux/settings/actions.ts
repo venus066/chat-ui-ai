@@ -17,3 +17,8 @@ export const settingsApiResponseError = (
 export const getSettings = () => ({
   type: SettingsActionTypes.GET_USER_SETTINGS,
 });
+
+export const updateSettings = (field: string, value: any) => ({
+  type: SettingsActionTypes.UPDATE_USER_SETTINGS,
+  payload: { field, value },
+});

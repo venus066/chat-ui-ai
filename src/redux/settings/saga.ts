@@ -7,7 +7,10 @@ import {
   settingsApiResponseError,
 } from "./actions";
 
-import { getSettings as getSettingsApi } from "../../api/index";
+import {
+  getSettings as getSettingsApi,
+  updateSettings as updateSettingsApi,
+} from "../../api/index";
 
 function* getSettings() {
   try {
@@ -25,12 +28,31 @@ function* getSettings() {
   }
 }
 
+function* updateSettings({ payload: { field, value } }: any) {
+  try {
+    const response: Promise<any> = yield call(updateSettingsApi, field, value);
+    yield put(
+      settingsApiResponseSuccess(
+        SettingsActionTypes.UPDATE_USER_SETTINGS,
+        response
+      )
+    );
+  } catch (error: any) {
+    yield put(
+      settingsApiResponseError(SettingsActionTypes.UPDATE_USER_SETTINGS, error)
+    );
+  }
+}
+
 export function* watchGetSettings() {
   yield takeEvery(SettingsActionTypes.GET_USER_SETTINGS, getSettings);
 }
+export function* watchUpdateSettings() {
+  yield takeEvery(SettingsActionTypes.UPDATE_USER_SETTINGS, updateSettings);
+}
 
 function* settingsSaga() {
-  yield all([fork(watchGetSettings)]);
+  yield all([fork(watchGetSettings), fork(watchUpdateSettings)]);
 }
 
 export default settingsSaga;

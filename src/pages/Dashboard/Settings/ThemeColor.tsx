@@ -64,9 +64,10 @@ const FormCheck = ({ color, selected, onChange }: FormCheckProps) => {
 
 interface ThemeColorProps {
   theme: ThemeTypes;
+  onChangeData: (field: string, value: any) => void;
 }
 
-const ThemeColor = ({ theme }: ThemeColorProps) => {
+const ThemeColor = ({ theme, onChangeData }: ThemeColorProps) => {
   const [themeColors] = useState<ThemeColorTypes[]>([
     {
       id: "bgcolor-radio1",
@@ -96,6 +97,7 @@ const ThemeColor = ({ theme }: ThemeColorProps) => {
   const [selected, setSelected] = useState<ThemeColorTypes | null>(null);
   const onChangeThemeColor = (color: ThemeColorTypes) => {
     setSelected(color);
+    onChangeData("theme", { ...theme, color: color.id });
   };
   useEffect(() => {
     if (theme && theme.color) {

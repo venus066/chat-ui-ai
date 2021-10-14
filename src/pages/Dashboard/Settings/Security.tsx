@@ -5,11 +5,16 @@ import { SecurityTypes } from "../../../data/settings";
 
 interface SecurityProps {
   security: SecurityTypes;
+  onChangeSettings: (field: string, value: any) => void;
 }
-const Security = ({ security }: SecurityProps) => {
+const Security = ({ security, onChangeSettings }: SecurityProps) => {
   const [show, setShow] = useState<boolean>(false);
   const onChange = (checked: boolean) => {
     setShow(checked);
+    onChangeSettings("security", {
+      ...security,
+      securityNotification: checked,
+    });
   };
 
   useEffect(() => {

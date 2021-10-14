@@ -10,8 +10,9 @@ import { DISPLAY_TYPES } from "../../../constants/index";
 import DisplaySelect from "./DisplaySelect";
 interface PrivacyProps {
   privacy: PrivacyTypes;
+  onChangeSettings: (field: string, value: any) => void;
 }
-const Privacy = ({ privacy }: PrivacyProps) => {
+const Privacy = ({ privacy, onChangeSettings }: PrivacyProps) => {
   const [data, setData] = useState<PrivacyTypes>({
     displayprofilePhoto: "selected",
     displayLastSeen: true,
@@ -43,6 +44,7 @@ const Privacy = ({ privacy }: PrivacyProps) => {
     let modifiedData: any = { ...data };
     modifiedData[field] = value;
     setData(modifiedData);
+    onChangeSettings("privacy", modifiedData);
   };
 
   return (

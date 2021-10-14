@@ -59,9 +59,10 @@ const FormCheck = ({ image, selected, onChange }: FormCheckProps) => {
 
 interface ThemeImageProps {
   theme: ThemeTypes;
+  onChangeData: (field: string, value: any) => void;
 }
 
-const ThemeImage = ({ theme }: ThemeImageProps) => {
+const ThemeImage = ({ theme, onChangeData }: ThemeImageProps) => {
   const [themeImages] = useState<ThemeImageTypes[]>([
     {
       id: "bgimg-radio1",
@@ -102,8 +103,9 @@ const ThemeImage = ({ theme }: ThemeImageProps) => {
   ]);
 
   const [selected, setSelected] = useState<ThemeImageTypes | null>(null);
-  const onChangeThemeColor = (color: ThemeImageTypes) => {
-    setSelected(color);
+  const onChangeThemeColor = (image: ThemeImageTypes) => {
+    setSelected(image);
+    onChangeData("theme", { ...theme, image: image.id });
   };
   useEffect(() => {
     if (theme && theme.image) {
