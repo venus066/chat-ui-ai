@@ -12,12 +12,14 @@ interface AttachedFilesProps {
   onOpenVideo: () => void;
   onOpenAudio: () => void;
   onToggleFavourite: () => void;
+  onToggleArchive: () => void;
 }
 const AttachedFiles = ({
   chatUserDetails,
   onOpenVideo,
   onOpenAudio,
-  onToggleFavourite
+  onToggleFavourite,
+  onToggleArchive
 }: AttachedFilesProps) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen(!dropdownOpen);
@@ -102,8 +104,11 @@ const AttachedFiles = ({
                 <DropdownItem
                   className=" d-flex justify-content-between align-items-center"
                   to="#"
+                  onClick={onToggleArchive}
                 >
-                  Archive <i className="bx bx-archive text-muted"></i>
+                  {
+                    chatUserDetails.isArchived ? <>Un-Archive <i className="bx bx-archive-out text-muted"></i></> : <>Archive <i className="bx bx-archive text-muted"></i></>
+                  }
                 </DropdownItem>
                 <DropdownItem
                   className=" d-flex justify-content-between align-items-center"

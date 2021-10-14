@@ -166,10 +166,26 @@ const pinnedTabs: Array<PinTypes> = [
   },
 ];
 
+const archiveContacts = (contacts || []).filter((cn: any) => cn.isArchived);
 
+let archiveChats: Array<any> = [
+  ...archiveContacts,
+  {
+    ...userChannels[1],
+    isChannel: true,
+    meta: {
+      unRead: 85,
+    },
+  },
+];
 const onChangeFavourite = (newData: Array<UserTypes>) => {
   favourites = newData;
 };
+const onChangeArchives = (newData: Array<any>) => {
+  archiveChats = newData;
+};
+
+
 export {
   favourites,
   directMessages,
@@ -178,4 +194,5 @@ export {
   onChangeChannels,
   onChangeFavourite,
   pinnedTabs,
+  archiveChats, onChangeArchives
 };

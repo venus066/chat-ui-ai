@@ -15,7 +15,7 @@ import {
   calls,
 
   // channels
-  userChannels,
+  userChannels, onChangeUserChannels,
 
   // bookmarks
   bookmarks,
@@ -29,6 +29,9 @@ import {
   onChangeChannels,
   conversations,
   onChangeConversations,
+
+  // archive
+  archiveChats, onChangeArchives
 } from "../data/index";
 import { settings } from "../data/settings";
 
@@ -828,6 +831,77 @@ const fakeBackend = () => {
 
       } else {
         reject(["The channel is not found"]);
+      }
+    });
+  });
+
+  mock.onGet(url.GET_ARCHIVE_CONTACT).reply(config => {
+    return new Promise((resolve, reject) => {
+      if (archiveChats) {
+        setTimeout(() => {
+          resolve([200, archiveChats]);
+        });
+      } else {
+        reject(["The archive chat is not found"]);
+      }
+    });
+  });
+
+  mock.onPut(new RegExp(`${url.TOGGLE_ARCHIVE_CONTACT}/*`)).reply(config => {
+    const data = JSON.parse(config["data"]);
+
+    let message = "User has been added to your archives";
+    let modifiedC = [...contacts];
+    let modifiedA = [...archiveChats];
+    let modifiedD = [...directMessages];
+    let modifiedChannels = [...userChannels];
+    let modifiedChatChannels = [...channels];
+    if (data.params.id && contacts.length !== 0) {
+      const contactIdx = (modifiedC || []).findIndex(
+        (c: any) => c.id + "" === data.params.id + ""
+      );
+      const channelIdx = (modifiedChannels || []).findIndex(
+        (c: any) => c.id + "" === data.params.id + ""
+      );
+      if (contactIdx > -1) {
+        if (contacts[contactIdx].isArchived) {
+          contacts[contactIdx].isArchived = false;
+          modifiedA = modifiedA.filter((f: any) => f.id !== data.params.id);
+          message = "User has been removed to your archives";
+        }
+        else {
+          contacts[contactIdx].isArchived = true;
+          modifiedA = [...modifiedA, contacts[contactIdx]];
+          modifiedD = modifiedD.filter((c: any) => c.id !== data.params.id);
+        }
+      } else if (channelIdx > -1) {
+        if (userChannels[channelIdx].isArchived) {
+          userChannels[channelIdx].isArchived = false;
+          modifiedA = modifiedA.filter((f: any) => f.id !== data.params.id);
+          message = "User has been removed to your archives";
+        }
+        else {
+          userChannels[channelIdx].isArchived = true;
+          modifiedA = [...modifiedA, { ...userChannels[channelIdx], isChannel: true }];
+          modifiedChannels = modifiedChannels.filter((c: any) => c.id !== data.params.id);
+          modifiedChatChannels = modifiedChatChannels.filter((c: any) => c.id !== data.params.id);
+        }
+      }
+    }
+    onChangeContacts(contacts);
+    onChangeArchives(modifiedA);
+    onChangeDirectMessages(modifiedD);
+    onChangeUserChannels(modifiedChannels);
+    onChangeChannels(modifiedChatChannels);
+
+    return new Promise((resolve, reject) => {
+      if (data.params.id) {
+        setTimeout(() => {
+          resolve([200, message]);
+        });
+
+      } else {
+        reject(["Internal Error!"]);
       }
     });
   });

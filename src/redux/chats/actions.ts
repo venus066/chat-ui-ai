@@ -108,3 +108,11 @@ export const toggleFavouriteContact = (id: number | string) => ({
   payload: id,
 });
 
+export const getArchiveContact = () => ({
+  type: ChatsActionTypes.GET_ARCHIVE_CONTACT,
+});
+
+export const toggleArchiveContact = (id: number | string) => ({
+  type: ChatsActionTypes.TOGGLE_ARCHIVE_CONTACT,
+  payload: id,
+});

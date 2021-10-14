@@ -158,8 +158,10 @@ interface MoreProps {
   onOpenAudio: () => void;
   onOpenVideo: () => void;
   onDelete: () => void;
+  isArchive: boolean;
+  onToggleArchive: () => void;
 }
-const More = ({ onOpenAudio, onOpenVideo, onDelete }: MoreProps) => {
+const More = ({ onOpenAudio, onOpenVideo, onDelete, isArchive, onToggleArchive }: MoreProps) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen(!dropdownOpen);
 
@@ -192,8 +194,11 @@ const More = ({ onOpenAudio, onOpenVideo, onDelete }: MoreProps) => {
         <DropdownItem
           className="d-flex justify-content-between align-items-center"
           to="#"
+          onClick={onToggleArchive}
         >
-          Archive <i className="bx bx-archive text-muted"></i>
+          {
+            isArchive ? <>Un-Archive <i className="bx bx-archive-out text-muted"></i></> : <>Archive <i className="bx bx-archive text-muted"></i></>
+          }
         </DropdownItem>
         <DropdownItem
           className="d-flex justify-content-between align-items-center"
@@ -253,13 +258,15 @@ interface UserHeadProps {
   onOpenUserDetails: () => void;
   onDelete: () => void;
   isChannel: boolean;
+  onToggleArchive: () => void;
 }
 const UserHead = ({
   chatUserDetails,
   pinnedTabs,
   onOpenUserDetails,
   onDelete,
-  isChannel
+  isChannel,
+  onToggleArchive
 }: UserHeadProps) => {
   const dispatch = useDispatch();
   /*
@@ -358,7 +365,13 @@ const UserHead = ({
             </li>
 
             <li className="list-inline-item">
-              <More onOpenAudio={onOpenAudio} onOpenVideo={onOpenVideo} onDelete={onDelete} />
+              <More
+                onOpenAudio={onOpenAudio}
+                onOpenVideo={onOpenVideo}
+                onDelete={onDelete}
+                isArchive={chatUserDetails.isArchived}
+                onToggleArchive={onToggleArchive}
+              />
             </li>
           </ul>
         </Col>

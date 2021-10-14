@@ -9,7 +9,8 @@ export const INIT_STATE: ChatsState = {
   chatUserDetails: {},
   chatUserConversations: {},
   isOpenUserDetails: false,
-  channelDetails: {}
+  channelDetails: {},
+  archiveContacts: []
 };
 
 const Chats = (state = INIT_STATE, action: any) => {
@@ -107,6 +108,18 @@ const Chats = (state = INIT_STATE, action: any) => {
             ...state,
             isFavouriteContactToggled: true
           };
+        case ChatsActionTypes.GET_ARCHIVE_CONTACT:
+          return {
+            ...state,
+            archiveContacts: action.payload.data,
+            isArchiveContactFetched: true,
+            isContactArchiveToggled: false
+          };
+        case ChatsActionTypes.TOGGLE_ARCHIVE_CONTACT:
+          return {
+            ...state,
+            isContactArchiveToggled: true
+          };
         default:
           return { ...state };
       }
@@ -187,6 +200,16 @@ const Chats = (state = INIT_STATE, action: any) => {
           return {
             ...state,
             isFavouriteContactToggled: false
+          };
+        case ChatsActionTypes.GET_ARCHIVE_CONTACT:
+          return {
+            ...state,
+            isArchiveContactFetched: false
+          };
+        case ChatsActionTypes.TOGGLE_ARCHIVE_CONTACT:
+          return {
+            ...state,
+            isContactArchiveToggled: false
           };
         default:
           return { ...state };
@@ -276,6 +299,16 @@ const Chats = (state = INIT_STATE, action: any) => {
       return {
         ...state,
         isFavouriteContactToggled: false
+      };
+    case ChatsActionTypes.GET_ARCHIVE_CONTACT:
+      return {
+        ...state,
+        isArchiveContactFetched: false
+      };
+    case ChatsActionTypes.TOGGLE_ARCHIVE_CONTACT:
+      return {
+        ...state,
+        isContactArchiveToggled: false
       };
     default:
       return { ...state };

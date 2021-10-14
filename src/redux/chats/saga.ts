@@ -20,7 +20,9 @@ import {
   forwardMessage as forwardMessageApi,
   deleteUserMessages as deleteUserMessagesApi,
   getChannelDetails as getChannelDetailsApi,
-  toggleFavouriteContact as toggleFavouriteContactApi
+  toggleFavouriteContact as toggleFavouriteContactApi,
+  getArchiveContact as getArchiveContactApi,
+  toggleArchiveContact as toggleArchiveContactApi
 } from "../../api/index";
 
 import {
@@ -219,8 +221,36 @@ function* toggleFavouriteContact({ payload: id }: any) {
     yield put(
       chatsApiResponseSuccess(ChatsActionTypes.TOGGLE_FAVOURITE_CONTACT, response)
     );
+    yield call(showSuccessNotification, response + "");
   } catch (error: any) {
+    yield call(showErrorNotification, error + "");
     yield put(chatsApiResponseError(ChatsActionTypes.TOGGLE_FAVOURITE_CONTACT, error));
+  }
+}
+
+
+function* getArchiveContact() {
+  try {
+    const response: Promise<any> = yield call(getArchiveContactApi);
+    yield put(
+      chatsApiResponseSuccess(ChatsActionTypes.GET_ARCHIVE_CONTACT, response)
+    );
+  } catch (error: any) {
+    yield put(chatsApiResponseError(ChatsActionTypes.GET_ARCHIVE_CONTACT, error));
+  }
+}
+
+
+function* toggleArchiveContact({ payload: id }: any) {
+  try {
+    const response: Promise<any> = yield call(toggleArchiveContactApi, id);
+    yield put(
+      chatsApiResponseSuccess(ChatsActionTypes.TOGGLE_ARCHIVE_CONTACT, response)
+    );
+    yield call(showSuccessNotification, response + "");
+  } catch (error: any) {
+    yield call(showErrorNotification, error + "");
+    yield put(chatsApiResponseError(ChatsActionTypes.TOGGLE_ARCHIVE_CONTACT, error));
   }
 }
 
@@ -279,6 +309,12 @@ export function* watchGetChannelDetails() {
 export function* watchToggleFavouriteContact() {
   yield takeEvery(ChatsActionTypes.TOGGLE_FAVOURITE_CONTACT, toggleFavouriteContact);
 }
+export function* watchGetArchiveContact() {
+  yield takeEvery(ChatsActionTypes.GET_ARCHIVE_CONTACT, getArchiveContact);
+}
+export function* watchToggleArchiveContact() {
+  yield takeEvery(ChatsActionTypes.TOGGLE_ARCHIVE_CONTACT, toggleArchiveContact);
+}
 function* chatsSaga() {
   yield all([
     fork(watchGetFavourites),
@@ -297,6 +333,8 @@ function* chatsSaga() {
     fork(watchDeleteUserMessages),
     fork(watchGetChannelDetails),
     fork(watchToggleFavouriteContact),
+    fork(watchGetArchiveContact),
+    fork(watchToggleArchiveContact),
   ]);
 }
 

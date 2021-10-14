@@ -5,7 +5,7 @@ import classnames from "classnames";
 import { useSelector, useDispatch } from "react-redux";
 
 // actions
-import { toggleUserDetailsTab, toggleFavouriteContact, getChatUserDetails } from "../../../redux/actions";
+import { toggleUserDetailsTab, toggleFavouriteContact, getChatUserDetails, toggleArchiveContact } from "../../../redux/actions";
 
 // components
 import AudioCallModal from "../../../components/AudioCallModal";
@@ -32,7 +32,7 @@ const Index = ({ isChannel }: IndexProps) => {
       chatUserDetails: state.Chats.chatUserDetails,
       getUserDetailsLoading: state.Chats.getUserDetailsLoading,
       isOpenUserDetails: state.Chats.isOpenUserDetails,
-      isFavouriteContactToggled: state.Chats.isFavouriteContactToggled
+      isFavouriteContactToggled: state.Chats.isFavouriteContactToggled,
     }));
 
   useEffect(() => {
@@ -77,6 +77,13 @@ const Index = ({ isChannel }: IndexProps) => {
     dispatch(toggleFavouriteContact(chatUserDetails.id));
   };
 
+  /*
+  archive
+  */
+  const onToggleArchive = () => {
+    dispatch(toggleArchiveContact(chatUserDetails.id));
+  };
+
   return (
     <>
       <div
@@ -104,6 +111,7 @@ const Index = ({ isChannel }: IndexProps) => {
               onOpenVideo={onOpenVideo}
               onOpenAudio={onOpenAudio}
               onToggleFavourite={onToggleFavourite}
+              onToggleArchive={onToggleArchive}
             />
             <Status about={chatUserDetails.about} />
             {

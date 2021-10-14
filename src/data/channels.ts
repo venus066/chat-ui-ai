@@ -17,8 +17,9 @@ interface ChannelDataTypes {
   members: Array<MemberTypes>;
   media?: MediaTypes;
   attachedFiles?: AttachedfileTypes;
+  isArchived?: boolean;
 }
-const userChannels: ChannelDataTypes[] = [
+let userChannels: ChannelDataTypes[] = [
   {
     "id": "61665bcb9a456823e282afa7",
     "name": "Landing Design",
@@ -63,6 +64,7 @@ const userChannels: ChannelDataTypes[] = [
   {
     "id": "61665bcb9a41b4e8352ba610",
     "name": "Design Phase 2",
+    isArchived: true,
     members: [
       { ...contacts[0] },
       { ...contacts[1] }
@@ -85,4 +87,9 @@ const userChannels: ChannelDataTypes[] = [
     ]
   },
 ];
-export { userChannels };
+
+const onChangeUserChannels = (newData: Array<ChannelDataTypes>) => {
+  userChannels = newData;
+};
+
+export { userChannels, onChangeUserChannels };

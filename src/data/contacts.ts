@@ -30,6 +30,7 @@ export interface ContactTypes {
   attachedFiles?: AttachedfileTypes;
   status?: STATUS_TYPES;
   isFavourite?: boolean;
+  isArchived?: boolean;
 }
 let contacts: ContactTypes[] = [
   {
@@ -386,6 +387,7 @@ let contacts: ContactTypes[] = [
     email: "adc@123.com",
     location: "California, USA",
     status: STATUS_TYPES.ACTIVE,
+    isArchived: true,
     isFavourite: true,
     channels: [
       {
@@ -535,6 +537,7 @@ let contacts: ContactTypes[] = [
     email: "adc@123.com",
     location: "California, USA",
     status: STATUS_TYPES.ACTIVE,
+    isArchived: true,
     channels: [
       {
         id: 1,
@@ -682,6 +685,7 @@ let contacts: ContactTypes[] = [
     email: "adc@123.com",
     location: "California, USA",
     status: STATUS_TYPES.ACTIVE,
+    isArchived: true,
     channels: [
       {
         id: 1,
@@ -1049,6 +1053,7 @@ let contacts: ContactTypes[] = [
     email: "adc@123.com",
     location: "California, USA",
     status: STATUS_TYPES.ACTIVE,
+
     channels: [
       {
         id: 1,
@@ -1123,6 +1128,7 @@ let contacts: ContactTypes[] = [
     email: "adc@123.com",
     location: "California, USA",
     status: STATUS_TYPES.ACTIVE,
+
     channels: [
       {
         id: 1,
@@ -1197,6 +1203,7 @@ let contacts: ContactTypes[] = [
     email: "adc@123.com",
     location: "California, USA",
     status: STATUS_TYPES.DO_NOT_DISTURB,
+
     channels: [
       {
         id: 1,

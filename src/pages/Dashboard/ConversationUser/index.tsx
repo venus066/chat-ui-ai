@@ -12,7 +12,8 @@ import {
   readMessage,
   receiveMessageFromUser,
   deleteMessage,
-  deleteUserMessages
+  deleteUserMessages,
+  toggleArchiveContact
 } from "../../../redux/actions";
 
 // hooks
@@ -123,6 +124,10 @@ const Index = ({ isChannel }: IndexProps) => {
     dispatch(deleteUserMessages(chatUserDetails.id));
   };
 
+  const onToggleArchive = () => {
+    dispatch(toggleArchiveContact(chatUserDetails.id));
+  };
+
   return (
     <>
       <UserHead
@@ -131,6 +136,7 @@ const Index = ({ isChannel }: IndexProps) => {
         onOpenUserDetails={onOpenUserDetails}
         onDelete={onDeleteUserMessages}
         isChannel={isChannel}
+        onToggleArchive={onToggleArchive}
       />
       <Conversation
         chatUserConversations={chatUserConversations}

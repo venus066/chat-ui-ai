@@ -17,7 +17,8 @@ import {
   changeSelectedChat,
   getChatUserDetails,
   getChatUserConversations,
-  getChannelDetails
+  getChannelDetails,
+  getArchiveContact
 } from "../../../redux/actions";
 
 // interfaces
@@ -34,6 +35,7 @@ import Favourites from "./Favourites";
 import DirectMessages from "./DirectMessages";
 import Chanels from "./Chanels";
 import Archive from "./Archive";
+import { CHATS_TABS } from "../../../constants";
 
 interface IndexProps { }
 const Index = (props: IndexProps) => {
@@ -46,7 +48,8 @@ const Index = (props: IndexProps) => {
     isContactsAdded,
     isChannelCreated,
     selectedChat,
-    isFavouriteContactToggled
+    isFavouriteContactToggled,
+    archiveContacts, isContactArchiveToggled, chatUserDetails
   } = useSelector((state: any) => ({
     isContactInvited: state.Contacts.isContactInvited,
     favourites: state.Chats.favourites,
@@ -55,7 +58,10 @@ const Index = (props: IndexProps) => {
     isContactsAdded: state.Chats.isContactsAdded,
     isChannelCreated: state.Chats.isChannelCreated,
     selectedChat: state.Chats.selectedChat,
-    isFavouriteContactToggled: state.Chats.isFavouriteContactToggled
+    isFavouriteContactToggled: state.Chats.isFavouriteContactToggled,
+    archiveContacts: state.Chats.archiveContacts,
+    isContactArchiveToggled: state.Chats.isContactArchiveToggled,
+    chatUserDetails: state.Chats.chatUserDetails,
   }));
 
   /*
@@ -160,10 +166,26 @@ const Index = (props: IndexProps) => {
   /*
   tab handeling
   */
-  const [active, setActive] = useState("acrhive");
-  const onChangeTab = (tab: string) => {
+  const [active, setActive] = useState(CHATS_TABS.DEFAULT);
+  const onChangeTab = (tab: CHATS_TABS) => {
     setActive(tab);
   };
+
+  /*
+  archive contacts
+  */
+  useEffect(() => {
+    dispatch(getArchiveContact());
+  }, [dispatch]);
+  useEffect(() => {
+    if (isContactArchiveToggled) {
+      dispatch(getArchiveContact());
+      dispatch(getFavourites());
+      dispatch(getDirectMessages());
+      dispatch(getChannels());
+      dispatch(getChatUserDetails(chatUserDetails.id));
+    }
+  }, [dispatch, isContactArchiveToggled, chatUserDetails.id]);
 
   return (
     <>
@@ -206,7 +228,7 @@ const Index = (props: IndexProps) => {
         <AppSimpleBar className="chat-room-list">
           {/* Start chat-message-list */}
           {
-            active === "chats" &&
+            active === CHATS_TABS.DEFAULT &&
             <>
               {/* favourite */}
               <Favourites
@@ -231,25 +253,27 @@ const Index = (props: IndexProps) => {
                 onSelectChat={onSelectChat}
               />
               <h5 className="text-center mb-2">
-                <Link to="#" className="mb-3 px-4 mt-4 font-size-11 text-primary" onClick={() => onChangeTab("acrhive")}>
+                <Link to="#" className="mb-3 px-4 mt-4 font-size-11 text-primary" onClick={() => onChangeTab(CHATS_TABS.ARCHIVE)}>
                   Archived Contacts <i className="bx bxs-archive-in align-middle" />
                 </Link>
               </h5>
             </>
           }
           {
-            active === "acrhive" &&
+            active === CHATS_TABS.ARCHIVE &&
             <>
-              <Archive />
+              <Archive
+                archiveContacts={archiveContacts}
+                selectedChat={selectedChat}
+                onSelectChat={onSelectChat}
+              />
               <h5 className="text-center mb-2">
-                <Link to="#" className="mb-3 px-4 mt-4 font-size-11 text-primary" onClick={() => onChangeTab("chats")}>
+                <Link to="#" className="mb-3 px-4 mt-4 font-size-11 text-primary" onClick={() => onChangeTab(CHATS_TABS.DEFAULT)}>
                   Chats <i className="bx bxs-archive-out align-middle" />
                 </Link>
               </h5>
             </>
           }
-
-
 
           {/* End chat-message-list */}
         </AppSimpleBar>

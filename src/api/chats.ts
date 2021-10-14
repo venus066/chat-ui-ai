@@ -72,6 +72,17 @@ const toggleFavouriteContact = (id: string | number) => {
   return api.update(url.TOGGLE_FAVOURITE_CONTACT + "/" + id, { params: { id } });
 };
 
+/*
+archive
+*/
+const getArchiveContact = () => {
+  return api.get(url.GET_ARCHIVE_CONTACT);
+};
+
+const toggleArchiveContact = (id: string | number) => {
+  return api.update(url.TOGGLE_ARCHIVE_CONTACT + "/" + id, { params: { id } });
+};
+
 export {
   getFavourites,
   getDirectMessages,
@@ -88,5 +99,7 @@ export {
   forwardMessage,
   deleteUserMessages,
   getChannelDetails,
-  toggleFavouriteContact
+  toggleFavouriteContact,
+  getArchiveContact,
+  toggleArchiveContact
 };
