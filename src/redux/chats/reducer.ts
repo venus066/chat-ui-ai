@@ -125,6 +125,11 @@ const Chats = (state = INIT_STATE, action: any) => {
             ...state,
             isContactArchiveToggled: true,
           };
+        case ChatsActionTypes.DELETE_IMAGE:
+          return {
+            ...state,
+            isImageDeleted: true,
+          };
         default:
           return { ...state };
       }
@@ -219,7 +224,12 @@ const Chats = (state = INIT_STATE, action: any) => {
         case ChatsActionTypes.READ_CONVERSATION:
           return {
             ...state,
-            isRead: true,
+            isRead: false,
+          };
+        case ChatsActionTypes.DELETE_IMAGE:
+          return {
+            ...state,
+            isImageDeleted: true,
           };
         default:
           return { ...state };
@@ -319,6 +329,11 @@ const Chats = (state = INIT_STATE, action: any) => {
       return {
         ...state,
         isContactArchiveToggled: false,
+      };
+    case ChatsActionTypes.DELETE_IMAGE:
+      return {
+        ...state,
+        isImageDeleted: false,
       };
     default:
       return { ...state };

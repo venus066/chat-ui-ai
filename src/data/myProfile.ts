@@ -112,8 +112,11 @@ const profileDetails: ProfileDetailsTypes = {
   },
 };
 
+let user: any = localStorage.getItem("authUser");
+user = JSON.parse(user);
+
 const myData = {
-  uid: 1,
+  uid: user && user.uid ? user.uid : 1,
   username: "admin",
   role: "admin",
   password: "123456",

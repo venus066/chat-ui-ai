@@ -622,7 +622,7 @@ const fakeBackend = () => {
 
           modifiedC[conversationIdx].messages.push({
             ...newM,
-            mId: newM.mId + 1,
+            mId: newM.mId + new Date().getTime(),
             meta: {
               ...newM.meta,
               receiver: newM.meta.sender,
@@ -953,6 +953,45 @@ const fakeBackend = () => {
         setTimeout(() => {
           reject(["Your id is not found"]);
         }, 500);
+      }
+    });
+  });
+
+  mock.onDelete(new RegExp(`${url.DELETE_IMAGE}/*`)).reply(config => {
+    const { params } = config;
+
+    return new Promise((resolve, reject) => {
+      if (params.userId && params.messageId && params.imageId) {
+        let modifiedC = [...conversations];
+        const conversationIdx = (modifiedC || []).findIndex(
+          (c: any) => c.userId + "" === params.userId + ""
+        );
+        if (conversationIdx > -1 && modifiedC[conversationIdx].messages) {
+          const mIdx = (modifiedC[conversationIdx].messages || []).findIndex(
+            (c: any) => c.mId + "" === params.messageId + ""
+          );
+          if (
+            mIdx > -1 &&
+            modifiedC[conversationIdx].messages[mIdx] &&
+            modifiedC[conversationIdx].messages[mIdx].image
+          ) {
+            if (modifiedC[conversationIdx].messages[mIdx].image?.length === 1) {
+              modifiedC[conversationIdx].messages = (
+                modifiedC[conversationIdx].messages || []
+              ).filter((m: any) => m.mId + "" !== params.messageId + "");
+            } else {
+              modifiedC[conversationIdx].messages[mIdx].image = modifiedC[
+                conversationIdx
+              ].messages[mIdx].image?.filter(
+                (m: any) => m.id + "" !== params.imageId + ""
+              );
+            }
+          }
+        }
+        onChangeConversations(modifiedC);
+        resolve([200, "Message is Deleted!"]);
+      } else {
+        reject(["Your id is not found"]);
       }
     });
   });

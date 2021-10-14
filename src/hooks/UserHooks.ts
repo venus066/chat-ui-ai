@@ -10,10 +10,14 @@ import { getLoggedinUser } from "../api/apiCore";
 import { divideByKey } from "../utils";
 
 const useProfile = () => {
+  const { settings } = useSelector((state: any) => ({
+    settings: state.Settings.settings,
+  }));
+  const image = settings.basicDetails && settings.basicDetails.profile;
   const userProfileSession = getLoggedinUser();
   const [loading] = useState(userProfileSession ? false : true);
   const [userProfile] = useState(
-    userProfileSession ? userProfileSession : null
+    userProfileSession ? { ...userProfileSession, profileImage: image } : null
   );
 
   return { userProfile, loading };

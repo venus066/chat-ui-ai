@@ -121,3 +121,12 @@ export const readConversation = (id: number | string) => ({
   type: ChatsActionTypes.READ_CONVERSATION,
   payload: id,
 });
+
+export const deleteImage = (
+  userId: number | string,
+  messageId: number | string,
+  imageId: number | string
+) => ({
+  type: ChatsActionTypes.DELETE_IMAGE,
+  payload: { userId, messageId, imageId },
+});

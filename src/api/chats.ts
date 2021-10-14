@@ -91,6 +91,16 @@ const readConversation = (id: string | number) => {
   return api.update(url.READ_CONVERSATION + "/" + id, { params: { id } });
 };
 
+const deleteImage = (
+  userId: number | string,
+  messageId: number | string,
+  imageId: number | string
+) => {
+  return api.delete(url.DELETE_IMAGE + "/" + userId + "/" + messageId, {
+    params: { userId, messageId, imageId },
+  });
+};
+
 export {
   getFavourites,
   getDirectMessages,
@@ -111,4 +121,5 @@ export {
   getArchiveContact,
   toggleArchiveContact,
   readConversation,
+  deleteImage,
 };

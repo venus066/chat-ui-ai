@@ -16,7 +16,7 @@ import { MessagesTypes } from "../../../data/messages";
 import ForwardModal from "../../../components/ForwardModal";
 
 // actions
-import { forwardMessage } from "../../../redux/actions";
+import { forwardMessage, deleteImage } from "../../../redux/actions";
 interface ConversationProps {
   chatUserConversations: any;
   chatUserDetails: any;
@@ -101,6 +101,16 @@ const Conversation = ({
       setIsOpenForward(false);
     }
   }, [isMessageForwarded]);
+
+  /*
+  image delete
+  */
+  const onDeleteImage = (
+    messageId: string | number,
+    imageId: string | number
+  ) => {
+    dispatch(deleteImage(chatUserDetails.id, messageId, imageId));
+  };
   return (
     <AppSimpleBar
       scrollRef={ref}
@@ -123,6 +133,7 @@ const Conversation = ({
               isFromMe={isFromMe}
               onOpenForward={onOpenForward}
               isChannel={isChannel}
+              onDeleteImage={onDeleteImage}
             />
           );
         })}

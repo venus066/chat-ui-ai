@@ -83,8 +83,10 @@ const Menu = ({ onDelete, onReply, onForward }: MenuProps) => {
     </UncontrolledDropdown>
   );
 };
-
-const ImageMoreMenu = () => {
+interface ImageMoreMenuProps {
+  onDelete: () => void;
+}
+const ImageMoreMenu = ({ onDelete }: ImageMoreMenuProps) => {
   return (
     <div className="message-img-link">
       <ul className="list-inline mb-0">
@@ -128,6 +130,7 @@ const ImageMoreMenu = () => {
             <DropdownItem
               className=" d-flex align-items-center justify-content-between delete-item"
               to="#"
+              onClick={onDelete}
             >
               Delete <i className="bx bx-trash ms-2 text-muted"></i>
             </DropdownItem>
@@ -142,8 +145,12 @@ interface ImageProps {
   image: ImageTypes;
   onImageClick: (id: number) => void;
   index: number;
+  onDeleteImg: (imageId: string | number) => void;
 }
-const Image = ({ image, onImageClick, index }: ImageProps) => {
+const Image = ({ image, onImageClick, index, onDeleteImg }: ImageProps) => {
+  const onDelete = () => {
+    onDeleteImg(image.id);
+  };
   return (
     <div className="message-img-list">
       <div>
@@ -155,14 +162,15 @@ const Image = ({ image, onImageClick, index }: ImageProps) => {
           <img src={image.downloadLink} alt="" className="rounded border" />
         </Link>
       </div>
-      <ImageMoreMenu />
+      <ImageMoreMenu onDelete={onDelete} />
     </div>
   );
 };
 interface ImagesProps {
   images: ImageTypes[];
+  onDeleteImg: (imageId: string | number) => void;
 }
-const Images = ({ images }: ImagesProps) => {
+const Images = ({ images, onDeleteImg }: ImagesProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(0);
   const onImageClick = (id: number) => {
@@ -182,6 +190,7 @@ const Images = ({ images }: ImagesProps) => {
             key={key}
             index={key}
             onImageClick={onImageClick}
+            onDeleteImg={onDeleteImg}
           />
         ))}
       </div>
@@ -263,6 +272,7 @@ interface MessageProps {
   isFromMe: boolean;
   onOpenForward: (message: MessagesTypes) => void;
   isChannel: boolean;
+  onDeleteImage: (messageId: string | number, imageId: string | number) => void;
 }
 const Message = ({
   message,
@@ -272,6 +282,7 @@ const Message = ({
   isFromMe,
   onOpenForward,
   isChannel,
+  onDeleteImage,
 }: MessageProps) => {
   const { userProfile } = useProfile();
   const hasImages = message.image && message.image.length;
@@ -314,6 +325,10 @@ const Message = ({
 
   const onForwardMessage = () => {
     onOpenForward(message);
+  };
+
+  const onDeleteImg = (imageId: number | string) => {
+    onDeleteImage(message.mId, imageId);
   };
   return (
     <li
@@ -364,7 +379,7 @@ const Message = ({
             {/* image message start */}
             {hasImages ? (
               <>
-                <Images images={message.image!} />
+                <Images images={message.image!} onDeleteImg={onDeleteImg} />
               </>
             ) : (
               <>

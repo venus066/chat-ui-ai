@@ -44,6 +44,7 @@ export const TOGGLE_FAVOURITE_CONTACT = "/toggle-favourite-contact";
 export const GET_ARCHIVE_CONTACT = "/get-archive-contacts";
 export const TOGGLE_ARCHIVE_CONTACT = "/toggle-archive-contact";
 export const READ_CONVERSATION = "/read-conversation";
+export const DELETE_IMAGE = "/user-delete-img";
 
 // groups
 export const GET_CHANNEL_DETAILS = "/get-channel-details";

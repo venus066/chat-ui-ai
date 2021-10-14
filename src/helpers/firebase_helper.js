@@ -11,7 +11,7 @@ class FirebaseAuthBackend {
       firebase.initializeApp(firebaseConfig);
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
-          localStorage.setItem("authUser", JSON.stringify(user));
+          setLoggeedInUser(user);
         } else {
           localStorage.removeItem("authUser");
         }
@@ -67,7 +67,8 @@ class FirebaseAuthBackend {
         .signInWithEmailAndPassword(email, password)
         .then(
           user => {
-            resolve(firebase.auth().currentUser);
+            const currentUser = JSON.stringify(firebase.auth().currentUser);
+            resolve(currentUser);
           },
           error => {
             reject(this._handleError(error));
@@ -159,10 +160,6 @@ class FirebaseAuthBackend {
     return { user, details };
   };
 
-  setLoggeedInUser = user => {
-    localStorage.setItem("authUser", JSON.stringify(user));
-  };
-
   /**
    * Returns the authenticated user
    */
@@ -184,6 +181,10 @@ class FirebaseAuthBackend {
 
 let _fireBaseBackend = null;
 
+const setLoggeedInUser = user => {
+  localStorage.setItem("authUser", JSON.stringify(user));
+};
+
 /**
  * Initilize the backend
  * @param {*} config
@@ -202,4 +203,4 @@ const getFirebaseBackend = () => {
   return _fireBaseBackend;
 };
 
-export { initFirebaseBackend, getFirebaseBackend };
+export { initFirebaseBackend, getFirebaseBackend, setLoggeedInUser };

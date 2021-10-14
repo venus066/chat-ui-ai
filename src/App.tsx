@@ -3,11 +3,11 @@ import React from "react";
 // scss
 import "./assets/scss/theme.scss";
 
-// // Import Firebase Configuration file
+// Import Firebase Configuration file
 // import { initFirebaseBackend } from "./helpers/firebase_helper";
 
 //api config
-import config from "./config";
+// import config from "./config";
 import fakeBackend from "./helpers/fakeBackend";
 import Routes from "./routes";
 
@@ -25,7 +25,7 @@ fakeBackend();
 //   measurementId: config.FIRE_BASE.MEASUREMENTID,
 // };
 
-// // init firebase backend
+// init firebase backend
 // initFirebaseBackend(firebaseConfig);
 
 const App = () => {

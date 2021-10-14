@@ -42,6 +42,7 @@ const Index = ({ isChannel }: IndexProps) => {
     isMessageDeleted,
     isMessageForwarded,
     isUserMessagesDeleted,
+    isImageDeleted,
   } = useSelector((state: any) => ({
     chatUserDetails: state.Chats.chatUserDetails,
     chatUserConversations: state.Chats.chatUserConversations,
@@ -49,6 +50,7 @@ const Index = ({ isChannel }: IndexProps) => {
     isMessageDeleted: state.Chats.isMessageDeleted,
     isMessageForwarded: state.Chats.isMessageForwarded,
     isUserMessagesDeleted: state.Chats.isUserMessagesDeleted,
+    isImageDeleted: state.Chats.isImageDeleted,
   }));
 
   const onOpenUserDetails = () => {
@@ -108,7 +110,8 @@ const Index = ({ isChannel }: IndexProps) => {
       isUserMessageSent ||
       isMessageDeleted ||
       isMessageForwarded ||
-      isUserMessagesDeleted
+      isUserMessagesDeleted ||
+      isImageDeleted
     ) {
       dispatch(getChatUserConversations(chatUserDetails.id));
     }
@@ -119,6 +122,7 @@ const Index = ({ isChannel }: IndexProps) => {
     isMessageDeleted,
     isMessageForwarded,
     isUserMessagesDeleted,
+    isImageDeleted,
   ]);
 
   const onDeleteMessage = (messageId: string | number) => {

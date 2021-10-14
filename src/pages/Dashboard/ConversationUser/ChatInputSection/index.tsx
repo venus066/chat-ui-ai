@@ -76,7 +76,7 @@ const Index = ({
       const imgs = (images || []).map((i: any, key: number) => {
         const src = URL.createObjectURL(i);
         return {
-          id: key,
+          id: key + 1,
           downloadLink: src,
         };
       });
@@ -87,7 +87,7 @@ const Index = ({
       const fs = (files || []).map((f: any, key: number) => {
         const src = URL.createObjectURL(f);
         return {
-          id: key,
+          id: key + 1,
           name: f.name,
           downloadLink: src,
           desc: f.size,

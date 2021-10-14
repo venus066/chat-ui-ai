@@ -8,7 +8,10 @@ import {
 } from "./actions";
 
 //Include Both Helper File with needed methods
-import { getFirebaseBackend } from "../../../helpers/firebase_helper";
+import {
+  getFirebaseBackend,
+  setLoggeedInUser,
+} from "../../../helpers/firebase_helper";
 import { postFakeLogin, postJwtLogin } from "../../../api/index";
 
 const fireBaseBackend = getFirebaseBackend();
@@ -21,6 +24,7 @@ function* loginUser({ payload: { user } }: any) {
         user.email,
         user.password
       );
+      // myData
       yield put(
         authLoginApiResponseSuccess(AuthLoginActionTypes.LOGIN_USER, response)
       );
@@ -29,7 +33,7 @@ function* loginUser({ payload: { user } }: any) {
         email: user.email,
         password: user.password,
       });
-      localStorage.setItem("authUser", JSON.stringify(response));
+      setLoggeedInUser(response);
       yield put(
         authLoginApiResponseSuccess(AuthLoginActionTypes.LOGIN_USER, response)
       );
@@ -38,15 +42,16 @@ function* loginUser({ payload: { user } }: any) {
         email: user.email,
         password: user.password,
       });
-      localStorage.setItem("authUser", JSON.stringify(response));
+      setLoggeedInUser(response);
       yield put(
         authLoginApiResponseSuccess(AuthLoginActionTypes.LOGIN_USER, response)
       );
     }
   } catch (error: any) {
-    yield put(
-      authLoginApiResponseError(AuthLoginActionTypes.LOGIN_USER, error)
-    );
+    console.log(error);
+    // yield put(
+    //   authLoginApiResponseError(AuthLoginActionTypes.LOGIN_USER, error)
+    // );
   }
 }
 
