@@ -5,7 +5,12 @@ import classnames from "classnames";
 import { useSelector, useDispatch } from "react-redux";
 
 // actions
-import { toggleUserDetailsTab, toggleFavouriteContact, getChatUserDetails, toggleArchiveContact } from "../../../redux/actions";
+import {
+  toggleUserDetailsTab,
+  toggleFavouriteContact,
+  getChatUserDetails,
+  toggleArchiveContact,
+} from "../../../redux/actions";
 
 // components
 import AudioCallModal from "../../../components/AudioCallModal";
@@ -27,13 +32,17 @@ interface IndexProps {
 const Index = ({ isChannel }: IndexProps) => {
   const dispatch = useDispatch();
 
-  const { chatUserDetails, getUserDetailsLoading, isOpenUserDetails, isFavouriteContactToggled } =
-    useSelector((state: any) => ({
-      chatUserDetails: state.Chats.chatUserDetails,
-      getUserDetailsLoading: state.Chats.getUserDetailsLoading,
-      isOpenUserDetails: state.Chats.isOpenUserDetails,
-      isFavouriteContactToggled: state.Chats.isFavouriteContactToggled,
-    }));
+  const {
+    chatUserDetails,
+    getUserDetailsLoading,
+    isOpenUserDetails,
+    isFavouriteContactToggled,
+  } = useSelector((state: any) => ({
+    chatUserDetails: state.Chats.chatUserDetails,
+    getUserDetailsLoading: state.Chats.getUserDetailsLoading,
+    isOpenUserDetails: state.Chats.isOpenUserDetails,
+    isFavouriteContactToggled: state.Chats.isFavouriteContactToggled,
+  }));
 
   useEffect(() => {
     if (isFavouriteContactToggled) {
@@ -114,22 +123,19 @@ const Index = ({ isChannel }: IndexProps) => {
               onToggleArchive={onToggleArchive}
             />
             <Status about={chatUserDetails.about} />
-            {
-              !isChannel ?
-                <>
-                  <BasicDetails chatUserDetails={chatUserDetails} />
-                  <hr className="my-4" />
-                  <Groups chatUserDetails={chatUserDetails} />
-                  <hr className="my-4" />
-                </>
-                :
-                <>
-                  <Members chatUserDetails={chatUserDetails} />
-                  <hr className="my-4" />
-                </>
-
-            }
-
+            {!isChannel ? (
+              <>
+                <BasicDetails chatUserDetails={chatUserDetails} />
+                <hr className="my-4" />
+                <Groups chatUserDetails={chatUserDetails} />
+                <hr className="my-4" />
+              </>
+            ) : (
+              <>
+                <Members chatUserDetails={chatUserDetails} />
+                <hr className="my-4" />
+              </>
+            )}
             <Media media={chatUserDetails.media} limit={3} />
             <hr className="my-4" />
             <AttachedFiles attachedFiles={chatUserDetails.attachedFiles} />

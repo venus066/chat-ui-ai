@@ -22,7 +22,7 @@ import {
   getChannelDetails as getChannelDetailsApi,
   toggleFavouriteContact as toggleFavouriteContactApi,
   getArchiveContact as getArchiveContactApi,
-  toggleArchiveContact as toggleArchiveContactApi
+  toggleArchiveContact as toggleArchiveContactApi,
 } from "../../api/index";
 
 import {
@@ -200,7 +200,9 @@ function* deleteUserMessages({ payload: userId }: any) {
     yield call(showSuccessNotification, response + "");
   } catch (error: any) {
     yield call(showErrorNotification, error + "");
-    yield put(chatsApiResponseError(ChatsActionTypes.DELETE_USER_MESSAGES, error));
+    yield put(
+      chatsApiResponseError(ChatsActionTypes.DELETE_USER_MESSAGES, error)
+    );
   }
 }
 
@@ -211,7 +213,9 @@ function* getChannelDetails({ payload: id }: any) {
       chatsApiResponseSuccess(ChatsActionTypes.GET_CHANNEL_DETAILS, response)
     );
   } catch (error: any) {
-    yield put(chatsApiResponseError(ChatsActionTypes.GET_CHANNEL_DETAILS, error));
+    yield put(
+      chatsApiResponseError(ChatsActionTypes.GET_CHANNEL_DETAILS, error)
+    );
   }
 }
 
@@ -219,15 +223,19 @@ function* toggleFavouriteContact({ payload: id }: any) {
   try {
     const response: Promise<any> = yield call(toggleFavouriteContactApi, id);
     yield put(
-      chatsApiResponseSuccess(ChatsActionTypes.TOGGLE_FAVOURITE_CONTACT, response)
+      chatsApiResponseSuccess(
+        ChatsActionTypes.TOGGLE_FAVOURITE_CONTACT,
+        response
+      )
     );
     yield call(showSuccessNotification, response + "");
   } catch (error: any) {
     yield call(showErrorNotification, error + "");
-    yield put(chatsApiResponseError(ChatsActionTypes.TOGGLE_FAVOURITE_CONTACT, error));
+    yield put(
+      chatsApiResponseError(ChatsActionTypes.TOGGLE_FAVOURITE_CONTACT, error)
+    );
   }
 }
-
 
 function* getArchiveContact() {
   try {
@@ -236,10 +244,11 @@ function* getArchiveContact() {
       chatsApiResponseSuccess(ChatsActionTypes.GET_ARCHIVE_CONTACT, response)
     );
   } catch (error: any) {
-    yield put(chatsApiResponseError(ChatsActionTypes.GET_ARCHIVE_CONTACT, error));
+    yield put(
+      chatsApiResponseError(ChatsActionTypes.GET_ARCHIVE_CONTACT, error)
+    );
   }
 }
-
 
 function* toggleArchiveContact({ payload: id }: any) {
   try {
@@ -250,7 +259,9 @@ function* toggleArchiveContact({ payload: id }: any) {
     yield call(showSuccessNotification, response + "");
   } catch (error: any) {
     yield call(showErrorNotification, error + "");
-    yield put(chatsApiResponseError(ChatsActionTypes.TOGGLE_ARCHIVE_CONTACT, error));
+    yield put(
+      chatsApiResponseError(ChatsActionTypes.TOGGLE_ARCHIVE_CONTACT, error)
+    );
   }
 }
 
@@ -307,13 +318,19 @@ export function* watchGetChannelDetails() {
   yield takeEvery(ChatsActionTypes.GET_CHANNEL_DETAILS, getChannelDetails);
 }
 export function* watchToggleFavouriteContact() {
-  yield takeEvery(ChatsActionTypes.TOGGLE_FAVOURITE_CONTACT, toggleFavouriteContact);
+  yield takeEvery(
+    ChatsActionTypes.TOGGLE_FAVOURITE_CONTACT,
+    toggleFavouriteContact
+  );
 }
 export function* watchGetArchiveContact() {
   yield takeEvery(ChatsActionTypes.GET_ARCHIVE_CONTACT, getArchiveContact);
 }
 export function* watchToggleArchiveContact() {
-  yield takeEvery(ChatsActionTypes.TOGGLE_ARCHIVE_CONTACT, toggleArchiveContact);
+  yield takeEvery(
+    ChatsActionTypes.TOGGLE_ARCHIVE_CONTACT,
+    toggleArchiveContact
+  );
 }
 function* chatsSaga() {
   yield all([

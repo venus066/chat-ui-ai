@@ -185,7 +185,6 @@ const onChangeArchives = (newData: Array<any>) => {
   archiveChats = newData;
 };
 
-
 export {
   favourites,
   directMessages,
@@ -194,5 +193,6 @@ export {
   onChangeChannels,
   onChangeFavourite,
   pinnedTabs,
-  archiveChats, onChangeArchives
+  archiveChats,
+  onChangeArchives,
 };

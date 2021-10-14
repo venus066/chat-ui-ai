@@ -4,7 +4,7 @@ export enum LAYOUT_MODES {
 }
 export enum CHATS_TABS {
   ARCHIVE = "acrhive",
-  DEFAULT = "default"
+  DEFAULT = "default",
 }
 
 export enum TABS {

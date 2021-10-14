@@ -35,8 +35,7 @@ const ChatUser = ({ user, selectedChat, onSelectChat }: ChatUserProps) => {
   };
   return (
     <li className={classnames({ active: isSelectedChat })} onClick={onClick}>
-      <Link to="#"
-        className={classnames({ "unread-msg-user": unRead })}>
+      <Link to="#" className={classnames({ "unread-msg-user": unRead })}>
         <div className="d-flex align-items-center">
           <div
             className={classnames(
@@ -48,7 +47,6 @@ const ChatUser = ({ user, selectedChat, onSelectChat }: ChatUserProps) => {
             )}
           >
             {user.profileImage ? (
-
               <>
                 <img
                   src={user.profileImage}

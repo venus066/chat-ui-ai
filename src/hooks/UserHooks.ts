@@ -46,9 +46,7 @@ const useContacts = () => {
 };
 
 const useConversationUserType = () => {
-  const {
-    chatUserDetails,
-  } = useSelector((state: any) => ({
+  const { chatUserDetails } = useSelector((state: any) => ({
     chatUserDetails: state.Chats.chatUserDetails,
   }));
 

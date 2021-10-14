@@ -29,7 +29,7 @@ const Conversation = ({
   chatUserConversations,
   onDelete,
   onSetReplyData,
-  isChannel
+  isChannel,
 }: ConversationProps) => {
   const dispatch = useDispatch();
   const { userProfile } = useProfile();

@@ -19,7 +19,7 @@ const AttachedFiles = ({
   onOpenVideo,
   onOpenAudio,
   onToggleFavourite,
-  onToggleArchive
+  onToggleArchive,
 }: AttachedFilesProps) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen(!dropdownOpen);
@@ -42,7 +42,13 @@ const AttachedFiles = ({
           <div className="mb-4">
             <Button
               color="none"
-              className={classnames("btn", "avatar-sm", "p-0", "favourite-btn", { "active": chatUserDetails.isFavourite })}
+              className={classnames(
+                "btn",
+                "avatar-sm",
+                "p-0",
+                "favourite-btn",
+                { active: chatUserDetails.isFavourite }
+              )}
               onClick={onToggleFavourite}
             >
               <span className="avatar-title rounded bg-light text-body">
@@ -106,9 +112,16 @@ const AttachedFiles = ({
                   to="#"
                   onClick={onToggleArchive}
                 >
-                  {
-                    chatUserDetails.isArchived ? <>Un-Archive <i className="bx bx-archive-out text-muted"></i></> : <>Archive <i className="bx bx-archive text-muted"></i></>
-                  }
+                  {chatUserDetails.isArchived ? (
+                    <>
+                      Un-Archive{" "}
+                      <i className="bx bx-archive-out text-muted"></i>
+                    </>
+                  ) : (
+                    <>
+                      Archive <i className="bx bx-archive text-muted"></i>
+                    </>
+                  )}
                 </DropdownItem>
                 <DropdownItem
                   className=" d-flex justify-content-between align-items-center"

@@ -18,7 +18,7 @@ import {
   getChatUserDetails,
   getChatUserConversations,
   getChannelDetails,
-  getArchiveContact
+  getArchiveContact,
 } from "../../../redux/actions";
 
 // interfaces
@@ -37,7 +37,7 @@ import Chanels from "./Chanels";
 import Archive from "./Archive";
 import { CHATS_TABS } from "../../../constants";
 
-interface IndexProps { }
+interface IndexProps {}
 const Index = (props: IndexProps) => {
   const dispatch = useDispatch();
   const {
@@ -49,7 +49,9 @@ const Index = (props: IndexProps) => {
     isChannelCreated,
     selectedChat,
     isFavouriteContactToggled,
-    archiveContacts, isContactArchiveToggled, chatUserDetails
+    archiveContacts,
+    isContactArchiveToggled,
+    chatUserDetails,
   } = useSelector((state: any) => ({
     isContactInvited: state.Contacts.isContactInvited,
     favourites: state.Chats.favourites,
@@ -153,7 +155,6 @@ const Index = (props: IndexProps) => {
   */
 
   const onSelectChat = (id: string | number, isChannel?: boolean) => {
-
     if (isChannel) {
       dispatch(getChannelDetails(id));
     } else {
@@ -227,8 +228,7 @@ const Index = (props: IndexProps) => {
         {/* .p-4 */}
         <AppSimpleBar className="chat-room-list">
           {/* Start chat-message-list */}
-          {
-            active === CHATS_TABS.DEFAULT &&
+          {active === CHATS_TABS.DEFAULT && (
             <>
               {/* favourite */}
               <Favourites
@@ -253,14 +253,18 @@ const Index = (props: IndexProps) => {
                 onSelectChat={onSelectChat}
               />
               <h5 className="text-center mb-2">
-                <Link to="#" className="mb-3 px-4 mt-4 font-size-11 text-primary" onClick={() => onChangeTab(CHATS_TABS.ARCHIVE)}>
-                  Archived Contacts <i className="bx bxs-archive-in align-middle" />
+                <Link
+                  to="#"
+                  className="mb-3 px-4 mt-4 font-size-11 text-primary"
+                  onClick={() => onChangeTab(CHATS_TABS.ARCHIVE)}
+                >
+                  Archived Contacts{" "}
+                  <i className="bx bxs-archive-in align-middle" />
                 </Link>
               </h5>
             </>
-          }
-          {
-            active === CHATS_TABS.ARCHIVE &&
+          )}
+          {active === CHATS_TABS.ARCHIVE && (
             <>
               <Archive
                 archiveContacts={archiveContacts}
@@ -268,12 +272,16 @@ const Index = (props: IndexProps) => {
                 onSelectChat={onSelectChat}
               />
               <h5 className="text-center mb-2">
-                <Link to="#" className="mb-3 px-4 mt-4 font-size-11 text-primary" onClick={() => onChangeTab(CHATS_TABS.DEFAULT)}>
+                <Link
+                  to="#"
+                  className="mb-3 px-4 mt-4 font-size-11 text-primary"
+                  onClick={() => onChangeTab(CHATS_TABS.DEFAULT)}
+                >
                   Chats <i className="bx bxs-archive-out align-middle" />
                 </Link>
               </h5>
             </>
-          }
+          )}
 
           {/* End chat-message-list */}
         </AppSimpleBar>

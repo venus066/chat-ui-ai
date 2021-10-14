@@ -26,48 +26,45 @@ const Member = ({ member }: GroupProps) => {
       <Link to="#">
         <div className="d-flex align-items-center">
           <div className="flex-shrink-0 avatar-xs me-2">
-            {
-              member.profileImage ?
-                <div
-                  className={classnames(
-                    "chat-user-img",
-                    "align-self-center",
-                    "me-2",
-                    "ms-0",
-                  )}
-                >
-                  <img
-                    src={member.profileImage}
-                    className="rounded-circle avatar-xs"
-                    alt=""
-                  />
-                </div>
-                :
-                <span
-                  className={classnames(
-                    "avatar-title",
-                    "rounded-circle",
-                    "text-uppercase",
-                    "text-white",
-                    colors[color]
-                  )}
-                >
-                  {shortName}
-                </span>
-            }
-
+            {member.profileImage ? (
+              <div
+                className={classnames(
+                  "chat-user-img",
+                  "align-self-center",
+                  "me-2",
+                  "ms-0"
+                )}
+              >
+                <img
+                  src={member.profileImage}
+                  className="rounded-circle avatar-xs"
+                  alt=""
+                />
+              </div>
+            ) : (
+              <span
+                className={classnames(
+                  "avatar-title",
+                  "rounded-circle",
+                  "text-uppercase",
+                  "text-white",
+                  colors[color]
+                )}
+              >
+                {shortName}
+              </span>
+            )}
           </div>
           <div className="flex-grow-1 overflow-hidden">
             <p className="text-truncate mb-0">{fullName}</p>
           </div>
-          {
-            member.isAdmin &&
+          {member.isAdmin && (
             <div className="ms-auto">
               <Badge className="badge badge-soft-primary rounded p-1">
                 Admin
               </Badge>
             </div>
-          }
+          )}
         </div>
       </Link>
     </li>
@@ -85,9 +82,7 @@ const Members = ({ chatUserDetails }: GroupsProps) => {
     <div>
       <div className="d-flex">
         <div className="flex-grow-1">
-          <h5 className="font-size-11 text-muted text-uppercase">
-            Members
-          </h5>
+          <h5 className="font-size-11 text-muted text-uppercase">Members</h5>
         </div>
       </div>
 

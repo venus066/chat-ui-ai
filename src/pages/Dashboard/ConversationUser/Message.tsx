@@ -271,7 +271,7 @@ const Message = ({
   onSetReplyData,
   isFromMe,
   onOpenForward,
-  isChannel
+  isChannel,
 }: MessageProps) => {
   const { userProfile } = useProfile();
   const hasImages = message.image && message.image.length;
@@ -286,9 +286,10 @@ const Message = ({
   const myProfile = userProfile.profileImage
     ? userProfile.profileImage
     : imagePlaceholder;
-  const channeluserProfile = message.meta.userData && message.meta.userData.profileImage
-    ? message.meta.userData.profileImage
-    : imagePlaceholder;
+  const channeluserProfile =
+    message.meta.userData && message.meta.userData.profileImage
+      ? message.meta.userData.profileImage
+      : imagePlaceholder;
   const chatUserprofile = chatUserDetails.profileImage
     ? chatUserDetails.profileImage
     : imagePlaceholder;
@@ -298,7 +299,9 @@ const Message = ({
   const isReceived = message.meta.received;
   const isRead = message.meta.read;
   const isForwarded = message.meta.isForwarded;
-  const channdelSenderFullname = message.meta.userData ? `${message.meta.userData.firstName} ${message.meta.userData.lastName}` : "-";
+  const channdelSenderFullname = message.meta.userData
+    ? `${message.meta.userData.firstName} ${message.meta.userData.lastName}`
+    : "-";
   const fullName = isChannel ? channdelSenderFullname : chatUserFullName;
   const onDeleteMessage = () => {
     onDelete(message.mId);

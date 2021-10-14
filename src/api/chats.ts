@@ -69,7 +69,9 @@ const getChannelDetails = (id: string | number) => {
 };
 
 const toggleFavouriteContact = (id: string | number) => {
-  return api.update(url.TOGGLE_FAVOURITE_CONTACT + "/" + id, { params: { id } });
+  return api.update(url.TOGGLE_FAVOURITE_CONTACT + "/" + id, {
+    params: { id },
+  });
 };
 
 /*
@@ -101,5 +103,5 @@ export {
   getChannelDetails,
   toggleFavouriteContact,
   getArchiveContact,
-  toggleArchiveContact
+  toggleArchiveContact,
 };

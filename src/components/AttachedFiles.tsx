@@ -96,9 +96,11 @@ const AttachedFiles = ({ attachedFiles }: AttachedFilesProps) => {
       <SectionTitle title="Attached Files" />
 
       <div>
-        {attachedFiles ? files.map((attachedFile: AttachedfileItemTypes, key: number) => (
-          <AttachedFileItem attachedFile={attachedFile} key={key} />
-        )) : "No Files."}
+        {attachedFiles
+          ? files.map((attachedFile: AttachedfileItemTypes, key: number) => (
+              <AttachedFileItem attachedFile={attachedFile} key={key} />
+            ))
+          : "No Files."}
       </div>
     </div>
   );

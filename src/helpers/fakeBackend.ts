@@ -9,20 +9,23 @@ import {
   myData,
 
   //contacts
-  contacts, onChangeContacts,
+  contacts,
+  onChangeContacts,
 
   // calls
   calls,
 
   // channels
-  userChannels, onChangeUserChannels,
+  userChannels,
+  onChangeUserChannels,
 
   // bookmarks
   bookmarks,
   onChangeBookmark,
 
   // chats
-  favourites, onChangeFavourite,
+  favourites,
+  onChangeFavourite,
   directMessages,
   channels,
   onChangeDirectMessages,
@@ -31,7 +34,8 @@ import {
   onChangeConversations,
 
   // archive
-  archiveChats, onChangeArchives
+  archiveChats,
+  onChangeArchives,
 } from "../data/index";
 import { settings } from "../data/settings";
 
@@ -381,7 +385,8 @@ const fakeBackend = () => {
     return new Promise((resolve, reject) => {
       if (data) {
         const newC = {
-          id: channels[channels.length - 1].id + new Date().getTime().toString(),
+          id:
+            channels[channels.length - 1].id + new Date().getTime().toString(),
           name: data.name,
           description: data.description,
           members: data.members,
@@ -455,7 +460,7 @@ const fakeBackend = () => {
       if (conversationIdx > -1) {
         const mid =
           conversations[conversationIdx].messages &&
-            conversations[conversationIdx].messages.length
+          conversations[conversationIdx].messages.length
             ? conversations[conversationIdx].messages.length + 1
             : 1;
         let newM: any = {
@@ -611,7 +616,7 @@ const fakeBackend = () => {
         if (modifiedC[conversationIdx].messages) {
           const newM = {
             ...modifiedC[conversationIdx].messages[
-            modifiedC[conversationIdx].messages.length - 1
+              modifiedC[conversationIdx].messages.length - 1
             ],
           };
 
@@ -676,7 +681,7 @@ const fakeBackend = () => {
         if (conversationIdx > -1) {
           const mid =
             modifiedC[conversationIdx].messages &&
-              modifiedC[conversationIdx].messages.length
+            modifiedC[conversationIdx].messages.length
               ? modifiedC[conversationIdx].messages.length + 1
               : 1;
           let newM: any = {
@@ -811,8 +816,7 @@ const fakeBackend = () => {
           contacts[contactIdx].isFavourite = false;
           modifiedF = modifiedF.filter((f: any) => f.id !== data.params.id);
           message = "User has been removed to your favourite";
-        }
-        else {
+        } else {
           contacts[contactIdx].isFavourite = true;
           modifiedF = [...modifiedF, contacts[contactIdx]];
           modifiedD = modifiedD.filter((c: any) => c.id !== data.params.id);
@@ -828,7 +832,6 @@ const fakeBackend = () => {
         setTimeout(() => {
           resolve([200, message]);
         });
-
       } else {
         reject(["The channel is not found"]);
       }
@@ -868,8 +871,7 @@ const fakeBackend = () => {
           contacts[contactIdx].isArchived = false;
           modifiedA = modifiedA.filter((f: any) => f.id !== data.params.id);
           message = "User has been removed to your archives";
-        }
-        else {
+        } else {
           contacts[contactIdx].isArchived = true;
           modifiedA = [...modifiedA, contacts[contactIdx]];
           modifiedD = modifiedD.filter((c: any) => c.id !== data.params.id);
@@ -879,12 +881,18 @@ const fakeBackend = () => {
           userChannels[channelIdx].isArchived = false;
           modifiedA = modifiedA.filter((f: any) => f.id !== data.params.id);
           message = "User has been removed to your archives";
-        }
-        else {
+        } else {
           userChannels[channelIdx].isArchived = true;
-          modifiedA = [...modifiedA, { ...userChannels[channelIdx], isChannel: true }];
-          modifiedChannels = modifiedChannels.filter((c: any) => c.id !== data.params.id);
-          modifiedChatChannels = modifiedChatChannels.filter((c: any) => c.id !== data.params.id);
+          modifiedA = [
+            ...modifiedA,
+            { ...userChannels[channelIdx], isChannel: true },
+          ];
+          modifiedChannels = modifiedChannels.filter(
+            (c: any) => c.id !== data.params.id
+          );
+          modifiedChatChannels = modifiedChatChannels.filter(
+            (c: any) => c.id !== data.params.id
+          );
         }
       }
     }
@@ -899,13 +907,11 @@ const fakeBackend = () => {
         setTimeout(() => {
           resolve([200, message]);
         });
-
       } else {
         reject(["Internal Error!"]);
       }
     });
   });
-
 };
 
 export default fakeBackend;

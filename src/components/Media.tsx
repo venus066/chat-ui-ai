@@ -44,24 +44,24 @@ const Media = ({ media, limit }: MediaProps) => {
         </div>
       </div>
       <div className="profile-media-img">
-        {
-          media ?
-            (mediaList || []).map((mediaItem: MediaListItemTypes, key: number) => {
-              const hasMore: boolean = key === limit;
+        {media
+          ? (mediaList || []).map(
+              (mediaItem: MediaListItemTypes, key: number) => {
+                const hasMore: boolean = key === limit;
 
-              if (key <= limit) {
-                return (
-                  <MediaItem
-                    mediaItem={mediaItem}
-                    key={key}
-                    hasMore={hasMore}
-                    remainingItem={remainingItem}
-                  />
-                );
-              } else return null;
-            })
-            : "No Media Files."
-        }
+                if (key <= limit) {
+                  return (
+                    <MediaItem
+                      mediaItem={mediaItem}
+                      key={key}
+                      hasMore={hasMore}
+                      remainingItem={remainingItem}
+                    />
+                  );
+                } else return null;
+              }
+            )
+          : "No Media Files."}
       </div>
     </div>
   );

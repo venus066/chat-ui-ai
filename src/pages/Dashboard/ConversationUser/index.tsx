@@ -13,7 +13,7 @@ import {
   receiveMessageFromUser,
   deleteMessage,
   deleteUserMessages,
-  toggleArchiveContact
+  toggleArchiveContact,
 } from "../../../redux/actions";
 
 // hooks
@@ -41,14 +41,14 @@ const Index = ({ isChannel }: IndexProps) => {
     isUserMessageSent,
     isMessageDeleted,
     isMessageForwarded,
-    isUserMessagesDeleted
+    isUserMessagesDeleted,
   } = useSelector((state: any) => ({
     chatUserDetails: state.Chats.chatUserDetails,
     chatUserConversations: state.Chats.chatUserConversations,
     isUserMessageSent: state.Chats.isUserMessageSent,
     isMessageDeleted: state.Chats.isMessageDeleted,
     isMessageForwarded: state.Chats.isMessageForwarded,
-    isUserMessagesDeleted: state.Chats.isUserMessagesDeleted
+    isUserMessagesDeleted: state.Chats.isUserMessagesDeleted,
   }));
 
   const onOpenUserDetails = () => {
@@ -104,7 +104,12 @@ const Index = ({ isChannel }: IndexProps) => {
   };
 
   useEffect(() => {
-    if (isUserMessageSent || isMessageDeleted || isMessageForwarded || isUserMessagesDeleted) {
+    if (
+      isUserMessageSent ||
+      isMessageDeleted ||
+      isMessageForwarded ||
+      isUserMessagesDeleted
+    ) {
       dispatch(getChatUserConversations(chatUserDetails.id));
     }
   }, [
@@ -113,7 +118,7 @@ const Index = ({ isChannel }: IndexProps) => {
     chatUserDetails,
     isMessageDeleted,
     isMessageForwarded,
-    isUserMessagesDeleted
+    isUserMessagesDeleted,
   ]);
 
   const onDeleteMessage = (messageId: string | number) => {

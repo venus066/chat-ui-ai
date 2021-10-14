@@ -232,8 +232,8 @@ let conversations: ConversationTypes[] = [
           read: true,
         },
       },
-    ]
-  }
+    ],
+  },
 ];
 
 const onChangeConversations = (newData: ConversationTypes[]) => {

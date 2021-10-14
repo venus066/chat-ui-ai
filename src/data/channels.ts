@@ -21,13 +21,10 @@ interface ChannelDataTypes {
 }
 let userChannels: ChannelDataTypes[] = [
   {
-    "id": "61665bcb9a456823e282afa7",
-    "name": "Landing Design",
+    id: "61665bcb9a456823e282afa7",
+    name: "Landing Design",
     about: "The Channel Created For Designers.",
-    members: [
-      { ...contacts[0], isAdmin: true },
-      { ...contacts[1] }
-    ],
+    members: [{ ...contacts[0], isAdmin: true }, { ...contacts[1] }],
     media: {
       total: 17,
       list: [
@@ -62,29 +59,20 @@ let userChannels: ChannelDataTypes[] = [
     },
   },
   {
-    "id": "61665bcb9a41b4e8352ba610",
-    "name": "Design Phase 2",
+    id: "61665bcb9a41b4e8352ba610",
+    name: "Design Phase 2",
     isArchived: true,
-    members: [
-      { ...contacts[0] },
-      { ...contacts[1] }
-    ]
+    members: [{ ...contacts[0] }, { ...contacts[1] }],
   },
   {
-    "id": "61665bcbd226d0502768b6f3",
-    "name": "Brand Suggestion",
-    members: [
-      { ...contacts[0] },
-      { ...contacts[1] }
-    ]
+    id: "61665bcbd226d0502768b6f3",
+    name: "Brand Suggestion",
+    members: [{ ...contacts[0] }, { ...contacts[1] }],
   },
   {
-    "id": "61665bcbc0f86d33164365c8",
-    "name": "Reporting",
-    members: [
-      { ...contacts[0] },
-      { ...contacts[1] }
-    ]
+    id: "61665bcbc0f86d33164365c8",
+    name: "Reporting",
+    members: [{ ...contacts[0] }, { ...contacts[1] }],
   },
 ];
 

@@ -10,7 +10,7 @@ export const INIT_STATE: ChatsState = {
   chatUserConversations: {},
   isOpenUserDetails: false,
   channelDetails: {},
-  archiveContacts: []
+  archiveContacts: [],
 };
 
 const Chats = (state = INIT_STATE, action: any) => {
@@ -106,19 +106,19 @@ const Chats = (state = INIT_STATE, action: any) => {
         case ChatsActionTypes.TOGGLE_FAVOURITE_CONTACT:
           return {
             ...state,
-            isFavouriteContactToggled: true
+            isFavouriteContactToggled: true,
           };
         case ChatsActionTypes.GET_ARCHIVE_CONTACT:
           return {
             ...state,
             archiveContacts: action.payload.data,
             isArchiveContactFetched: true,
-            isContactArchiveToggled: false
+            isContactArchiveToggled: false,
           };
         case ChatsActionTypes.TOGGLE_ARCHIVE_CONTACT:
           return {
             ...state,
-            isContactArchiveToggled: true
+            isContactArchiveToggled: true,
           };
         default:
           return { ...state };
@@ -199,17 +199,17 @@ const Chats = (state = INIT_STATE, action: any) => {
         case ChatsActionTypes.TOGGLE_FAVOURITE_CONTACT:
           return {
             ...state,
-            isFavouriteContactToggled: false
+            isFavouriteContactToggled: false,
           };
         case ChatsActionTypes.GET_ARCHIVE_CONTACT:
           return {
             ...state,
-            isArchiveContactFetched: false
+            isArchiveContactFetched: false,
           };
         case ChatsActionTypes.TOGGLE_ARCHIVE_CONTACT:
           return {
             ...state,
-            isContactArchiveToggled: false
+            isContactArchiveToggled: false,
           };
         default:
           return { ...state };
@@ -298,17 +298,17 @@ const Chats = (state = INIT_STATE, action: any) => {
     case ChatsActionTypes.TOGGLE_FAVOURITE_CONTACT:
       return {
         ...state,
-        isFavouriteContactToggled: false
+        isFavouriteContactToggled: false,
       };
     case ChatsActionTypes.GET_ARCHIVE_CONTACT:
       return {
         ...state,
-        isArchiveContactFetched: false
+        isArchiveContactFetched: false,
       };
     case ChatsActionTypes.TOGGLE_ARCHIVE_CONTACT:
       return {
         ...state,
-        isContactArchiveToggled: false
+        isContactArchiveToggled: false,
       };
     default:
       return { ...state };

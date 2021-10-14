@@ -40,16 +40,20 @@ const ProfileImage = ({
   chatUserDetails,
   onCloseConversation,
   onOpenUserDetails,
-  isChannel
+  isChannel,
 }: ProfileImageProps) => {
-  const fullName = !isChannel ? chatUserDetails.firstName
-    ? `${chatUserDetails.firstName} ${chatUserDetails.lastName}`
-    : "-" : chatUserDetails.name;
-  const shortName = !isChannel ? chatUserDetails.firstName
-    ? `${chatUserDetails.firstName.charAt(0)}${chatUserDetails.lastName.charAt(
-      0
-    )}`
-    : "-" : "#";
+  const fullName = !isChannel
+    ? chatUserDetails.firstName
+      ? `${chatUserDetails.firstName} ${chatUserDetails.lastName}`
+      : "-"
+    : chatUserDetails.name;
+  const shortName = !isChannel
+    ? chatUserDetails.firstName
+      ? `${chatUserDetails.firstName.charAt(
+          0
+        )}${chatUserDetails.lastName.charAt(0)}`
+      : "-"
+    : "#";
 
   const colors = [
     "bg-primary",
@@ -62,7 +66,8 @@ const ProfileImage = ({
   ];
   const [color] = useState(Math.floor(Math.random() * colors.length));
 
-  const isOnline = chatUserDetails.status && chatUserDetails.status === STATUS_TYPES.ACTIVE;
+  const isOnline =
+    chatUserDetails.status && chatUserDetails.status === STATUS_TYPES.ACTIVE;
 
   const members = (chatUserDetails.members || []).length;
   return (
@@ -78,7 +83,16 @@ const ProfileImage = ({
       </div>
       <div className="flex-grow-1 overflow-hidden">
         <div className="d-flex align-items-center">
-          <div className={classnames("flex-shrink-0", "chat-user-img", "align-self-center", "me-3", "ms-0", { "online": isOnline })}>
+          <div
+            className={classnames(
+              "flex-shrink-0",
+              "chat-user-img",
+              "align-self-center",
+              "me-3",
+              "ms-0",
+              { online: isOnline }
+            )}
+          >
             {chatUserDetails.profileImage ? (
               <>
                 <img
@@ -86,11 +100,23 @@ const ProfileImage = ({
                   className="rounded-circle avatar-sm"
                   alt=""
                 />
-                <span className={classnames("user-status",
-                  { "bg-success": chatUserDetails.status === STATUS_TYPES.ACTIVE },
-                  { "bg-warning": chatUserDetails.status === STATUS_TYPES.AWAY },
-                  { "bg-danger": chatUserDetails.status === STATUS_TYPES.DO_NOT_DISTURB }
-                )}></span>
+                <span
+                  className={classnames(
+                    "user-status",
+                    {
+                      "bg-success":
+                        chatUserDetails.status === STATUS_TYPES.ACTIVE,
+                    },
+                    {
+                      "bg-warning":
+                        chatUserDetails.status === STATUS_TYPES.AWAY,
+                    },
+                    {
+                      "bg-danger":
+                        chatUserDetails.status === STATUS_TYPES.DO_NOT_DISTURB,
+                    }
+                  )}
+                ></span>
               </>
             ) : (
               <div className="flex-shrink-0 avatar-sm align-self-center ms-0">
@@ -120,11 +146,11 @@ const ProfileImage = ({
               </Link>
             </h6>
             <p className="text-truncate text-muted mb-0">
-              {
-                isChannel ? <small>{members} Members</small>
-                  :
-                  <small>{chatUserDetails.status}</small>
-              }
+              {isChannel ? (
+                <small>{members} Members</small>
+              ) : (
+                <small>{chatUserDetails.status}</small>
+              )}
             </p>
           </div>
         </div>
@@ -161,7 +187,13 @@ interface MoreProps {
   isArchive: boolean;
   onToggleArchive: () => void;
 }
-const More = ({ onOpenAudio, onOpenVideo, onDelete, isArchive, onToggleArchive }: MoreProps) => {
+const More = ({
+  onOpenAudio,
+  onOpenVideo,
+  onDelete,
+  isArchive,
+  onToggleArchive,
+}: MoreProps) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen(!dropdownOpen);
 
@@ -196,9 +228,15 @@ const More = ({ onOpenAudio, onOpenVideo, onDelete, isArchive, onToggleArchive }
           to="#"
           onClick={onToggleArchive}
         >
-          {
-            isArchive ? <>Un-Archive <i className="bx bx-archive-out text-muted"></i></> : <>Archive <i className="bx bx-archive text-muted"></i></>
-          }
+          {isArchive ? (
+            <>
+              Un-Archive <i className="bx bx-archive-out text-muted"></i>
+            </>
+          ) : (
+            <>
+              Archive <i className="bx bx-archive text-muted"></i>
+            </>
+          )}
         </DropdownItem>
         <DropdownItem
           className="d-flex justify-content-between align-items-center"
@@ -266,7 +304,7 @@ const UserHead = ({
   onOpenUserDetails,
   onDelete,
   isChannel,
-  onToggleArchive
+  onToggleArchive,
 }: UserHeadProps) => {
   const dispatch = useDispatch();
   /*
@@ -327,8 +365,7 @@ const UserHead = ({
               <Search />
             </li>
 
-            {
-              !isChannel &&
+            {!isChannel && (
               <>
                 <li className="list-inline-item d-none d-lg-inline-block me-2 ms-0">
                   <Button
@@ -352,7 +389,7 @@ const UserHead = ({
                   </Button>
                 </li>
               </>
-            }
+            )}
 
             <li className="list-inline-item d-none d-lg-inline-block me-2 ms-0">
               <button

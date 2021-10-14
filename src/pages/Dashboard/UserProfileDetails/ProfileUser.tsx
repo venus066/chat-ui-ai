@@ -116,11 +116,27 @@ const ProfileUser = ({
           <div className="mt-auto p-3">
             <h5 className="user-name mb-1 text-truncate">{fullName}</h5>
             <p className="font-size-14 text-truncate mb-0">
-              <i className={classnames("bx", "bxs-circle", "font-size-10", "me-1", "ms-0",
-                { "text-success": chatUserDetails.status === STATUS_TYPES.ACTIVE },
-                { "text-warning": chatUserDetails.status === STATUS_TYPES.AWAY },
-                { "text-danger": chatUserDetails.status === STATUS_TYPES.DO_NOT_DISTURB }
-              )}></i>{" "}
+              <i
+                className={classnames(
+                  "bx",
+                  "bxs-circle",
+                  "font-size-10",
+                  "me-1",
+                  "ms-0",
+                  {
+                    "text-success":
+                      chatUserDetails.status === STATUS_TYPES.ACTIVE,
+                  },
+                  {
+                    "text-warning":
+                      chatUserDetails.status === STATUS_TYPES.AWAY,
+                  },
+                  {
+                    "text-danger":
+                      chatUserDetails.status === STATUS_TYPES.DO_NOT_DISTURB,
+                  }
+                )}
+              ></i>{" "}
               {chatUserDetails.status}
             </p>
           </div>
