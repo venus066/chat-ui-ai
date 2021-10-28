@@ -13,9 +13,7 @@ const AuthProtected = (props: any) => {
   const location = useLocation();
   if (!userProfile && loading) {
     return (
-      <Redirect
-        to={{ pathname: "/auth-login", state: { from: location } }}
-      />
+      <Redirect to={{ pathname: "/auth-login", state: { from: location } }} />
     );
   }
 

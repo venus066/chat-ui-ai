@@ -24,7 +24,9 @@ const useProfile = () => {
   );
   useEffect(() => {
     const userProfileSession = getLoggedinUser();
-    setUserProfile(userProfileSession ? { ...userProfileSession, profileImage: image } : null);
+    setUserProfile(
+      userProfileSession ? { ...userProfileSession, profileImage: image } : null
+    );
   }, [image]);
 
   return { userProfile, loading };

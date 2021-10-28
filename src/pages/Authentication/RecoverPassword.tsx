@@ -24,7 +24,7 @@ import AuthHeader from "../../components/AuthHeader";
 import FormInput from "../../components/FormInput";
 import Loader from "../../components/Loader";
 
-interface RecoverPasswordProps { }
+interface RecoverPasswordProps {}
 const RecoverPassword = (props: RecoverPasswordProps) => {
   // global store
   const { dispatch, useAppSelector } = useRedux();

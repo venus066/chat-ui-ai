@@ -39,7 +39,7 @@ import Loader from "../../components/Loader";
 interface LocationTypes {
   from?: Location;
 }
-interface LoginProps { }
+interface LoginProps {}
 const Login = (props: LoginProps) => {
   // global store
   const { dispatch, useAppSelector } = useRedux();
@@ -57,7 +57,10 @@ const Login = (props: LoginProps) => {
   const location = useLocation<LocationTypes>();
   const [redirectUrl, setRedirectUrl] = useState("/");
   useEffect(() => {
-    const url = location.state && location.state.from ? location.state.from.pathname : "/";
+    const url =
+      location.state && location.state.from
+        ? location.state.from.pathname
+        : "/";
     setRedirectUrl(url);
   }, [location]);
   useEffect(() => {
@@ -247,7 +250,7 @@ const Login = (props: LoginProps) => {
                           </button>
                         )}
                         onSuccess={googleResponse}
-                        onFailure={() => { }}
+                        onFailure={() => {}}
                       />
                     </div>
                     <UncontrolledTooltip placement="top" target="google">
