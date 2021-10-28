@@ -86,6 +86,7 @@ function* socialLogin({ payload: { data, type } }: any) {
 
 function* logoutUser() {
   try {
+    localStorage.removeItem("authUser");
     if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
       const response: Promise<any> = yield call(fireBaseBackend.logout);
       yield put(

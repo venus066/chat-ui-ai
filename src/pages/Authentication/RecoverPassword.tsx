@@ -5,15 +5,15 @@ import { Alert, Row, Col, Form, Button } from "reactstrap";
 import { useRedux } from "../../hooks/index";
 
 // router
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 // validations
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 
-// // hooks
-// import { useProfile } from "../../hooks";
+// hooks
+import { useProfile } from "../../hooks";
 
 //actions
 import { userForgetPassword } from "../../redux/actions";
@@ -24,7 +24,7 @@ import AuthHeader from "../../components/AuthHeader";
 import FormInput from "../../components/FormInput";
 import Loader from "../../components/Loader";
 
-interface RecoverPasswordProps {}
+interface RecoverPasswordProps { }
 const RecoverPassword = (props: RecoverPasswordProps) => {
   // global store
   const { dispatch, useAppSelector } = useRedux();
@@ -60,7 +60,10 @@ const RecoverPassword = (props: RecoverPasswordProps) => {
     dispatch(userForgetPassword(values));
   };
 
-  // const { userProfile, loading } = useProfile();
+  const { userProfile, loading } = useProfile();
+  if (userProfile && !loading) {
+    return <Redirect to={{ pathname: "/dashboard" }} />;
+  }
 
   return (
     <NonAuthLayoutWrapper>

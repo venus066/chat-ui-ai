@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Alert,
   Row,
@@ -11,11 +11,10 @@ import {
 
 //Social Media Imports
 import { GoogleLogin } from "react-google-login";
-// import TwitterLogin from "react-twitter-auth"
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
 // router
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
 
 // validations
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -37,7 +36,10 @@ import AuthHeader from "../../components/AuthHeader";
 import FormInput from "../../components/FormInput";
 import Loader from "../../components/Loader";
 
-interface LoginProps {}
+interface LocationTypes {
+  from?: Location;
+}
+interface LoginProps { }
 const Login = (props: LoginProps) => {
   // global store
   const { dispatch, useAppSelector } = useRedux();
@@ -52,12 +54,17 @@ const Login = (props: LoginProps) => {
   );
 
   const history: any = useHistory();
-
+  const location = useLocation<LocationTypes>();
+  const [redirectUrl, setRedirectUrl] = useState("/");
+  useEffect(() => {
+    const url = location.state && location.state.from ? location.state.from.pathname : "/";
+    setRedirectUrl(url);
+  }, [location]);
   useEffect(() => {
     if (isUserLogin && !loginLoading && !isUserLogout) {
-      history.push("/dashboard");
+      history.push(redirectUrl);
     }
-  }, [isUserLogin, history, loginLoading, isUserLogout]);
+  }, [isUserLogin, history, loginLoading, isUserLogout, redirectUrl]);
 
   const resolver = yupResolver(
     yup.object().shape({
@@ -86,7 +93,7 @@ const Login = (props: LoginProps) => {
   const { userProfile, loading } = useProfile();
 
   if (userProfile && !loading) {
-    return <Redirect to={{ pathname: "/dashboard" }} />;
+    return <Redirect to={{ pathname: redirectUrl }} />;
   }
 
   const signIn = (res: any, type: "google" | "facebook") => {
@@ -99,12 +106,11 @@ const Login = (props: LoginProps) => {
       };
       dispatch(socialLogin(postData, type));
     } else if (type === "facebook" && res) {
-      // const postData = {
-      //   name: res.name,
-      //   token: res.accessToken,
-      // };
-      console.log(res);
-      // dispatch(socialLogin(postData, type));
+      const postData = {
+        name: res.name,
+        token: res.accessToken,
+      };
+      dispatch(socialLogin(postData, type));
     }
   };
 
@@ -241,7 +247,7 @@ const Login = (props: LoginProps) => {
                           </button>
                         )}
                         onSuccess={googleResponse}
-                        onFailure={() => {}}
+                        onFailure={() => { }}
                       />
                     </div>
                     <UncontrolledTooltip placement="top" target="google">

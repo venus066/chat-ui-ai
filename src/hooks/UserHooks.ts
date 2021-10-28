@@ -19,9 +19,13 @@ const useProfile = () => {
   const image = settings.basicDetails && settings.basicDetails.profile;
   const userProfileSession = getLoggedinUser();
   const [loading] = useState(userProfileSession ? false : true);
-  const [userProfile] = useState(
+  const [userProfile, setUserProfile] = useState(
     userProfileSession ? { ...userProfileSession, profileImage: image } : null
   );
+  useEffect(() => {
+    const userProfileSession = getLoggedinUser();
+    setUserProfile(userProfileSession ? { ...userProfileSession, profileImage: image } : null);
+  }, [image]);
 
   return { userProfile, loading };
 };
