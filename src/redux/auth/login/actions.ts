@@ -27,3 +27,10 @@ export const logoutUser = () => {
     type: AuthLoginActionTypes.LOGOUT_USER,
   };
 };
+
+export const socialLogin = (data: any, type: "facebook" | "google") => {
+  return {
+    type: AuthLoginActionTypes.SOCIAL_LOGIN,
+    payload: { data, type },
+  };
+};

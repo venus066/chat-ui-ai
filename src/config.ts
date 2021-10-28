@@ -11,6 +11,14 @@ const config = {
     APPID: process.env.REACT_APP_APPID,
     MEASUREMENTID: process.env.REACT_APP_MEASUREMENTID,
   },
+  GOOGLE: {
+    API_KEY: process.env.REACT_APP_GOOGLE_API_KEY,
+    CLIENT_ID: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+    SECRET: process.env.REACT_APP_GOOGLE_SECRET_KEY,
+  },
+  FACEBOOK: {
+    APP_ID: process.env.REACT_APP_FACEBOOK_APP_ID,
+  },
 };
 
 export default config;

@@ -4,6 +4,7 @@ export enum AuthLoginActionTypes {
 
   LOGIN_USER = "@@auth/login/LOGIN_USER",
   LOGOUT_USER = "@@auth/login/LOGOUT_USER",
+  SOCIAL_LOGIN = "@@auth/login/SOCIAL_LOGIN",
 }
 export interface AuthLoginState {
   error: string;

@@ -133,7 +133,9 @@ class FirebaseAuthBackend {
           .auth()
           .signInWithCredential(credential)
           .then(user => {
-            resolve(this.addNewUserToFirestore(user));
+            let userL = this.addNewUserToFirestore(user);
+            userL = JSON.stringify(userL);
+            resolve(userL);
           })
           .catch(error => {
             reject(this._handleError(error));

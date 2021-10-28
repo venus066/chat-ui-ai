@@ -9,8 +9,10 @@ import {
   UncontrolledTooltip,
 } from "reactstrap";
 
-// hooks
-import { useRedux } from "../../hooks/index";
+//Social Media Imports
+import { GoogleLogin } from "react-google-login";
+// import TwitterLogin from "react-twitter-auth"
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
 // router
 import { Link, Redirect, useHistory } from "react-router-dom";
@@ -20,11 +22,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 
+// config
+import config from "../../config";
+
 // hooks
-import { useProfile } from "../../hooks/";
+import { useProfile, useRedux } from "../../hooks/index";
 
 //actions
-import { loginUser } from "../../redux/actions";
+import { loginUser, socialLogin } from "../../redux/actions";
 
 // components
 import NonAuthLayoutWrapper from "../../components/NonAutnLayoutWrapper";
@@ -83,6 +88,35 @@ const Login = (props: LoginProps) => {
   if (userProfile && !loading) {
     return <Redirect to={{ pathname: "/dashboard" }} />;
   }
+
+  const signIn = (res: any, type: "google" | "facebook") => {
+    if (type === "google" && res) {
+      const postData = {
+        name: res.profileObj.name,
+        email: res.profileObj.email,
+        token: res.tokenObj.access_token,
+        idToken: res.tokenId,
+      };
+      dispatch(socialLogin(postData, type));
+    } else if (type === "facebook" && res) {
+      // const postData = {
+      //   name: res.name,
+      //   token: res.accessToken,
+      // };
+      console.log(res);
+      // dispatch(socialLogin(postData, type));
+    }
+  };
+
+  //handleFacebookLoginResponse
+  const facebookResponse = (response: object) => {
+    signIn(response, "facebook");
+  };
+
+  //handleGoogleLoginResponse
+  const googleResponse = (response: object) => {
+    signIn(response, "google");
+  };
 
   return (
     <NonAuthLayoutWrapper>
@@ -156,13 +190,21 @@ const Login = (props: LoginProps) => {
                 <Row className="">
                   <div className="col-4">
                     <div>
-                      <button
-                        type="button"
-                        className="btn btn-light w-100"
-                        id="facebook"
-                      >
-                        <i className="mdi mdi-facebook text-indigo"></i>
-                      </button>
+                      <FacebookLogin
+                        appId={config.FACEBOOK.APP_ID}
+                        autoLoad={false}
+                        callback={facebookResponse}
+                        render={(renderProps: any) => (
+                          <button
+                            type="button"
+                            className="btn btn-light w-100"
+                            id="facebook"
+                            onClick={renderProps.onClick}
+                          >
+                            <i className="mdi mdi-facebook text-indigo"></i>
+                          </button>
+                        )}
+                      />
                     </div>
                     <UncontrolledTooltip placement="top" target="facebook">
                       Facebook
@@ -184,13 +226,23 @@ const Login = (props: LoginProps) => {
                   </div>
                   <div className="col-4">
                     <div>
-                      <button
-                        type="button"
-                        className="btn btn-light w-100"
-                        id="google"
-                      >
-                        <i className="mdi mdi-google text-danger"></i>
-                      </button>
+                      <GoogleLogin
+                        clientId={
+                          config.GOOGLE.CLIENT_ID ? config.GOOGLE.CLIENT_ID : ""
+                        }
+                        render={renderProps => (
+                          <button
+                            type="button"
+                            className="btn btn-light w-100"
+                            id="google"
+                            onClick={renderProps.onClick}
+                          >
+                            <i className="mdi mdi-google text-danger"></i>
+                          </button>
+                        )}
+                        onSuccess={googleResponse}
+                        onFailure={() => {}}
+                      />
                     </div>
                     <UncontrolledTooltip placement="top" target="google">
                       Google

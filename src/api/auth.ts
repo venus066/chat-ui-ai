@@ -28,6 +28,9 @@ const changePassword = (data: object) => {
   return api.update(url.USER_CHANGE_PASSWORD, data);
 };
 
+// postSocialLogin
+const postSocialLogin = (data: any) => api.create(url.SOCIAL_LOGIN, data);
+
 export {
   postFakeForgetPwd,
   postJwtForgetPwd,
@@ -36,4 +39,5 @@ export {
   postFakeRegister,
   postJwtRegister,
   changePassword,
+  postSocialLogin,
 };
