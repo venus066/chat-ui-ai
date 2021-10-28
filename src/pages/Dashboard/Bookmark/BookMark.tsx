@@ -9,8 +9,8 @@ import {
 
 import { Link } from "react-router-dom";
 
-//redux
-import { useSelector } from "react-redux";
+// hooks
+import { useRedux } from "../../../hooks/index";
 
 // interface
 import { BookMarkTypes } from "../../../data/bookmarks";
@@ -22,7 +22,10 @@ interface BookMarkProps {
   onDelete: (id: number) => void;
 }
 const BookMark = ({ bookmark, onUpdate, onDelete }: BookMarkProps) => {
-  const { isBookmarkUpdated } = useSelector((state: any) => ({
+  // global store
+  const { useAppSelector } = useRedux();
+
+  const { isBookmarkUpdated } = useAppSelector(state => ({
     isBookmarkUpdated: state.Bookmarks.isBookmarkUpdated,
   }));
 

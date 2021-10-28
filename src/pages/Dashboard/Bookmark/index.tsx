@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-//redux
-import { useSelector, useDispatch } from "react-redux";
+// hooks
+import { useRedux } from "../../../hooks/index";
 
 // actions
 import {
@@ -21,14 +21,15 @@ import { BookMarkTypes } from "../../../data/bookmarks";
 
 interface IndexProps {}
 const Index = (props: IndexProps) => {
-  const dispatch = useDispatch();
+  // global store
+  const { dispatch, useAppSelector } = useRedux();
 
   const {
     bookmarksList,
     getBookmarksLoading,
     isBookmarkDeleted,
     isBookmarkUpdated,
-  } = useSelector((state: any) => ({
+  } = useAppSelector(state => ({
     bookmarksList: state.Bookmarks.bookmarks,
     getBookmarksLoading: state.Bookmarks.getBookmarksLoading,
     isBookmarkDeleted: state.Bookmarks.isBookmarkDeleted,

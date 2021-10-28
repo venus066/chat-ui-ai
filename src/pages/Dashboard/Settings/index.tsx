@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Button, Collapse } from "reactstrap";
 import classnames from "classnames";
 
-//redux
-import { useSelector, useDispatch } from "react-redux";
+// hooks
+import { useRedux } from "../../../hooks/index";
 
 // actions
 import { getSettings, updateSettings } from "../../../redux/actions";
@@ -102,9 +102,10 @@ const AccordianItem = ({
 };
 interface IndexProps {}
 const Index = (props: IndexProps) => {
-  const dispatch = useDispatch();
+  // global store
+  const { dispatch, useAppSelector } = useRedux();
 
-  const { settingsData, getSettingsLoading } = useSelector((state: any) => ({
+  const { settingsData, getSettingsLoading } = useAppSelector(state => ({
     settingsData: state.Settings.settings,
     getSettingsLoading: state.Profile.getSettingsLoading,
     isSettingsFetched: state.Profile.isSettingsFetched,

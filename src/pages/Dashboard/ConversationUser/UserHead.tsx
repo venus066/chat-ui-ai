@@ -14,8 +14,8 @@ import {
 import { Link } from "react-router-dom";
 import classnames from "classnames";
 
-//redux
-import { useDispatch } from "react-redux";
+// hooks
+import { useRedux } from "../../../hooks/index";
 
 // components
 import AudioCallModal from "../../../components/AudioCallModal";
@@ -306,7 +306,8 @@ const UserHead = ({
   isChannel,
   onToggleArchive,
 }: UserHeadProps) => {
-  const dispatch = useDispatch();
+  // global store
+  const { dispatch } = useRedux();
   /*
     video call modal
     */

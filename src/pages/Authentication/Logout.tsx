@@ -1,10 +1,9 @@
-import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Row, Col } from "reactstrap";
 
-//redux
-import { useDispatch } from "react-redux";
+// hooks
+import { useRedux } from "../../hooks/index";
 
 // components
 import NonAuthLayoutWrapper from "../../components/NonAutnLayoutWrapper";
@@ -13,7 +12,8 @@ import NonAuthLayoutWrapper from "../../components/NonAutnLayoutWrapper";
 import { logoutUser } from "../../redux/actions";
 
 const Logout = (props: any) => {
-  const dispatch = useDispatch();
+  // global store
+  const { dispatch } = useRedux();
 
   useEffect(() => {
     dispatch(logoutUser());
@@ -53,10 +53,6 @@ const Logout = (props: any) => {
       </Row>
     </NonAuthLayoutWrapper>
   );
-};
-
-Logout.propTypes = {
-  history: PropTypes.object,
 };
 
 export default withRouter(Logout);

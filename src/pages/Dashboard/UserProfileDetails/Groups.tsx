@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-//redux
-import { useDispatch } from "react-redux";
+// hooks
+import { useRedux } from "../../../hooks/index";
 
 // actions
 import {
@@ -16,7 +16,8 @@ interface GroupProps {
   group: any;
 }
 const Group = ({ group }: GroupProps) => {
-  const dispatch = useDispatch();
+  // global store
+  const { dispatch } = useRedux();
 
   const onSelectChat = (id: string | number, isChannel?: boolean) => {
     if (isChannel) {

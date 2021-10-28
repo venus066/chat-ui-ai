@@ -1,8 +1,8 @@
 import React from "react";
 import { Alert, Row, Col, Form } from "reactstrap";
 
-// redux
-import { useSelector, useDispatch } from "react-redux";
+// hooks
+import { useRedux } from "../../hooks/index";
 
 // validations
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -26,8 +26,11 @@ import avatar1 from "../../assets/images/users/avatar-1.jpg";
 
 interface ChangePasswordProps {}
 const ChangePassword = (props: ChangePasswordProps) => {
+  // global store
+  const { dispatch, useAppSelector } = useRedux();
+
   const { changepasswordError, passwordChanged, changePassLoading } =
-    useSelector((state: any) => ({
+    useAppSelector(state => ({
       passwordChanged: state.ForgetPassword.passwordChanged,
       changepasswordError: state.ForgetPassword.changepasswordError,
       changePassLoading: state.ForgetPassword.loading,
@@ -53,7 +56,6 @@ const ChangePassword = (props: ChangePasswordProps) => {
     control,
     formState: { errors },
   } = methods;
-  const dispatch = useDispatch();
 
   const onSubmitForm = (values: object) => {
     dispatch(userChangePassword(values));

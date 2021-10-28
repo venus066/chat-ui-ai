@@ -1,8 +1,8 @@
 import React from "react";
 import classnames from "classnames";
 
-//redux
-import { useSelector } from "react-redux";
+// hooks
+import { useRedux } from "../../hooks/index";
 
 // hooks
 import { useConversationUserType } from "../../hooks/index";
@@ -15,7 +15,10 @@ import Welcome from "./ConversationUser/Welcome";
 
 interface IndexProps {}
 const Index = (props: IndexProps) => {
-  const { selectedChat } = useSelector((state: any) => ({
+  // global store
+  const { useAppSelector } = useRedux();
+
+  const { selectedChat } = useAppSelector(state => ({
     selectedChat: state.Chats.selectedChat,
   }));
 

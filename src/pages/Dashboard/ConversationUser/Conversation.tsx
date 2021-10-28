@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useCallback, useState } from "react";
-//redux
-import { useDispatch, useSelector } from "react-redux";
+
+// hooks
+import { useRedux } from "../../../hooks/index";
 
 // hooks
 import { useProfile } from "../../../hooks";
@@ -31,10 +32,12 @@ const Conversation = ({
   onSetReplyData,
   isChannel,
 }: ConversationProps) => {
-  const dispatch = useDispatch();
+  // global store
+  const { dispatch, useAppSelector } = useRedux();
+
   const { userProfile } = useProfile();
 
-  const { getUserConversationsLoading, isMessageForwarded } = useSelector(
+  const { getUserConversationsLoading, isMessageForwarded } = useAppSelector(
     (state: any) => ({
       getUserConversationsLoading: state.Chats.getUserConversationsLoading,
       isMessageForwarded: state.Chats.isMessageForwarded,

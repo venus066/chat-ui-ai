@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
 import classnames from "classnames";
 
-//redux
-import { useSelector } from "react-redux";
+// hooks
+import { useRedux } from "../hooks/index";
 
 // components
 import AppSimpleBar from "./AppSimpleBar";
@@ -155,7 +155,10 @@ const ForwardModal = ({
   chatUserDetails,
   onForward,
 }: ForwardModalProps) => {
-  const { contactsList } = useSelector((state: any) => ({
+  // global store
+  const { useAppSelector } = useRedux();
+
+  const { contactsList } = useAppSelector(state => ({
     contactsList: state.Contacts.contacts,
   }));
 

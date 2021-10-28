@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import { Button, Form, UncontrolledTooltip } from "reactstrap";
 import { Link } from "react-router-dom";
-//redux
-import { useSelector, useDispatch } from "react-redux";
+// hooks
+import { useRedux } from "../../../hooks/index";
 
 // actions
 import {
@@ -40,7 +40,9 @@ import { CHATS_TABS } from "../../../constants";
 
 interface IndexProps {}
 const Index = (props: IndexProps) => {
-  const dispatch = useDispatch();
+  // global store
+  const { dispatch, useAppSelector } = useRedux();
+
   const {
     isContactInvited,
     favourites,
@@ -53,7 +55,7 @@ const Index = (props: IndexProps) => {
     archiveContacts,
     isContactArchiveToggled,
     chatUserDetails,
-  } = useSelector((state: any) => ({
+  } = useAppSelector(state => ({
     isContactInvited: state.Contacts.isContactInvited,
     favourites: state.Chats.favourites,
     directMessages: state.Chats.directMessages,

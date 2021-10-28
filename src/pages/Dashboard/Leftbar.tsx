@@ -1,8 +1,8 @@
 import React from "react";
 import { TabContent, TabPane } from "reactstrap";
 
-// redux
-import { useSelector } from "react-redux";
+// hooks
+import { useRedux } from "../../hooks/index";
 
 // constants
 import { TABS } from "../../constants/index";
@@ -17,7 +17,10 @@ import Settings from "./Settings/index";
 
 interface LeftbarProps {}
 const Leftbar = (props: LeftbarProps) => {
-  const { activeTab } = useSelector((state: any) => ({
+  // global store
+  const { useAppSelector } = useRedux();
+
+  const { activeTab } = useAppSelector(state => ({
     activeTab: state.Layout.activeTab,
   }));
 

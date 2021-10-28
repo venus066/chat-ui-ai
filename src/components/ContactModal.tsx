@@ -11,8 +11,8 @@ import {
   InputGroup,
 } from "reactstrap";
 
-//redux
-import { useSelector } from "react-redux";
+// hooks
+import { useRedux } from "../hooks/index";
 
 // components
 import AppSimpleBar from "./AppSimpleBar";
@@ -95,7 +95,10 @@ interface ContactModalProps {
   onAddContact: (contacts: Array<string | number>) => void;
 }
 const ContactModal = ({ isOpen, onClose, onAddContact }: ContactModalProps) => {
-  const { contactsList } = useSelector((state: any) => ({
+  // global store
+  const { useAppSelector } = useRedux();
+
+  const { contactsList } = useAppSelector(state => ({
     contactsList: state.Contacts.contacts,
   }));
 

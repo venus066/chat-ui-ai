@@ -1,8 +1,8 @@
 import React from "react";
 import { Alert, Row, Col, Form, Button } from "reactstrap";
 
-// redux
-import { useSelector, useDispatch } from "react-redux";
+// hooks
+import { useRedux } from "../../hooks/index";
 
 // router
 import { Link } from "react-router-dom";
@@ -26,8 +26,11 @@ import Loader from "../../components/Loader";
 
 interface RecoverPasswordProps {}
 const RecoverPassword = (props: RecoverPasswordProps) => {
-  const { forgetError, forgetSuccessMsg, forgetPassLoading } = useSelector(
-    (state: any) => ({
+  // global store
+  const { dispatch, useAppSelector } = useRedux();
+
+  const { forgetError, forgetSuccessMsg, forgetPassLoading } = useAppSelector(
+    state => ({
       forgetError: state.ForgetPassword.forgetError,
       forgetSuccessMsg: state.ForgetPassword.forgetSuccessMsg,
       forgetPassLoading: state.ForgetPassword.loading,
@@ -52,7 +55,6 @@ const RecoverPassword = (props: RecoverPasswordProps) => {
     control,
     formState: { errors },
   } = methods;
-  const dispatch = useDispatch();
 
   const onSubmitForm = (values: object) => {
     dispatch(userForgetPassword(values));

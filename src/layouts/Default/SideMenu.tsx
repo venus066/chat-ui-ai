@@ -12,8 +12,8 @@ import {
   UncontrolledTooltip,
 } from "reactstrap";
 
-// redux
-import { useSelector, useDispatch } from "react-redux";
+// hooks
+import { useRedux } from "../../hooks/index";
 
 // actions
 import { changeTab } from "../../redux/actions";
@@ -198,9 +198,11 @@ interface SideMenuProps {
   onChangeMode: () => void;
 }
 const SideMenu = ({ themeMode, onChangeMode }: SideMenuProps) => {
-  const dispatch = useDispatch();
+  // global store
+  const { dispatch, useAppSelector } = useRedux();
+
   const menuItems: MenuItemType[] = MENU_ITEMS;
-  const { activeTab } = useSelector((state: any) => ({
+  const { activeTab } = useAppSelector(state => ({
     activeTab: state.Layout.activeTab,
   }));
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-//redux
-import { useSelector } from "react-redux";
+// hooks
+import { useRedux } from "../hooks/index";
 
 // api
 import { getLoggedinUser } from "../api/apiCore";
@@ -10,7 +10,10 @@ import { getLoggedinUser } from "../api/apiCore";
 import { divideByKey } from "../utils";
 
 const useProfile = () => {
-  const { settings } = useSelector((state: any) => ({
+  // global store
+  const { useAppSelector } = useRedux();
+
+  const { settings } = useAppSelector(state => ({
     settings: state.Settings.settings,
   }));
   const image = settings.basicDetails && settings.basicDetails.profile;
@@ -24,7 +27,10 @@ const useProfile = () => {
 };
 
 const useContacts = () => {
-  const { contactsList } = useSelector((state: any) => ({
+  // global store
+  const { useAppSelector } = useRedux();
+
+  const { contactsList } = useAppSelector(state => ({
     contactsList: state.Contacts.contacts,
   }));
 
@@ -50,7 +56,10 @@ const useContacts = () => {
 };
 
 const useConversationUserType = () => {
-  const { chatUserDetails } = useSelector((state: any) => ({
+  // global store
+  const { useAppSelector } = useRedux();
+
+  const { chatUserDetails } = useAppSelector(state => ({
     chatUserDetails: state.Chats.chatUserDetails,
   }));
 

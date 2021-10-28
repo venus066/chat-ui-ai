@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import classnames from "classnames";
 
-//redux
-import { useSelector, useDispatch } from "react-redux";
+// hooks
+import { useRedux } from "../../../hooks/index";
 
 // actions
 import {
@@ -30,14 +30,15 @@ interface IndexProps {
   isChannel: boolean;
 }
 const Index = ({ isChannel }: IndexProps) => {
-  const dispatch = useDispatch();
+  // global store
+  const { dispatch, useAppSelector } = useRedux();
 
   const {
     chatUserDetails,
     getUserDetailsLoading,
     isOpenUserDetails,
     isFavouriteContactToggled,
-  } = useSelector((state: any) => ({
+  } = useAppSelector(state => ({
     chatUserDetails: state.Chats.chatUserDetails,
     getUserDetailsLoading: state.Chats.getUserDetailsLoading,
     isOpenUserDetails: state.Chats.isOpenUserDetails,

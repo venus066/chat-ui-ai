@@ -9,8 +9,8 @@ import {
   UncontrolledTooltip,
 } from "reactstrap";
 
-// redux
-import { useSelector, useDispatch } from "react-redux";
+// hooks
+import { useRedux } from "../../hooks/index";
 
 // router
 import { Link, Redirect, useHistory } from "react-router-dom";
@@ -34,8 +34,11 @@ import Loader from "../../components/Loader";
 
 interface LoginProps {}
 const Login = (props: LoginProps) => {
-  const { isUserLogin, error, loginLoading, isUserLogout } = useSelector(
-    (state: any) => ({
+  // global store
+  const { dispatch, useAppSelector } = useRedux();
+
+  const { isUserLogin, error, loginLoading, isUserLogout } = useAppSelector(
+    state => ({
       isUserLogin: state.Login.isUserLogin,
       error: state.Login.error,
       loginLoading: state.Login.loading,
@@ -70,7 +73,6 @@ const Login = (props: LoginProps) => {
     control,
     formState: { errors },
   } = methods;
-  const dispatch = useDispatch();
 
   const onSubmitForm = (values: object) => {
     dispatch(loginUser(values));

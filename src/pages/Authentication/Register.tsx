@@ -1,8 +1,8 @@
 import React from "react";
 import { Alert, Row, Col, Form, Button, UncontrolledTooltip } from "reactstrap";
 
-// redux
-import { useSelector, useDispatch } from "react-redux";
+// hooks
+import { useRedux } from "../../hooks/index";
 
 // router
 import { Link, Redirect } from "react-router-dom";
@@ -26,7 +26,10 @@ import Loader from "../../components/Loader";
 
 interface RegisterProps {}
 const Register = (props: RegisterProps) => {
-  const { user, registrationError, regLoading } = useSelector((state: any) => ({
+  // global store
+  const { dispatch, useAppSelector } = useRedux();
+
+  const { user, registrationError, regLoading } = useAppSelector(state => ({
     user: state.Register.user,
     registrationError: state.Register.registrationError,
     regLoading: state.Register.loading,
@@ -53,7 +56,6 @@ const Register = (props: RegisterProps) => {
     control,
     formState: { errors },
   } = methods;
-  const dispatch = useDispatch();
 
   const onSubmitForm = (values: object) => {
     dispatch(registerUser(values));

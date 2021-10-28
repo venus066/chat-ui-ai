@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-//redux
-import { useSelector, useDispatch } from "react-redux";
+// hooks
+import { useRedux } from "../../../hooks/index";
 
 // components
 import Loader from "../../../components/Loader";
@@ -28,10 +28,11 @@ import { divideByKey, DivideByKeyResultTypes } from "../../../utils";
 interface IndexProps {}
 
 const Index = (props: IndexProps) => {
-  const dispatch = useDispatch();
+  // global store
+  const { dispatch, useAppSelector } = useRedux();
 
-  const { contactsList, getContactsLoading, isContactInvited } = useSelector(
-    (state: any) => ({
+  const { contactsList, getContactsLoading, isContactInvited } = useAppSelector(
+    state => ({
       contactsList: state.Contacts.contacts,
       getContactsLoading: state.Contacts.getContactsLoading,
       isContactInvited: state.Contacts.isContactInvited,

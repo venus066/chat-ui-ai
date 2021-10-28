@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import classnames from "classnames";
 import { Badge } from "reactstrap";
 
-//redux
-import { useDispatch } from "react-redux";
+// hooks
+import { useRedux } from "../../../hooks/index";
 
 // actions
 import {
@@ -18,7 +18,8 @@ interface GroupProps {
   member: any;
 }
 const Member = ({ member }: GroupProps) => {
-  const dispatch = useDispatch();
+  // global store
+  const { dispatch } = useRedux();
 
   const fullName = `${member.firstName} ${member.lastName}`;
   const shortName = `${member.firstName.charAt(0)}${member.lastName.charAt(0)}`;

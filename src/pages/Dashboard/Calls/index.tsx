@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-//redux
-import { useSelector, useDispatch } from "react-redux";
+// hooks
+import { useRedux } from "../../../hooks/index";
 
 // components
 import Loader from "../../../components/Loader";
@@ -17,9 +17,10 @@ import { CallItem } from "../../../data/calls";
 
 interface IndexProps {}
 const Index = (props: IndexProps) => {
-  const dispatch = useDispatch();
+  // global store
+  const { dispatch, useAppSelector } = useRedux();
 
-  const { calls, getCallsLoading } = useSelector((state: any) => ({
+  const { calls, getCallsLoading } = useAppSelector((state: any) => ({
     calls: state.Calls.calls,
     getCallsLoading: state.Calls.getCallsLoading,
   }));

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
-//redux
-import { useSelector, useDispatch } from "react-redux";
+// hooks
+import { useRedux } from "../../../hooks/index";
 
 // components
 import Loader from "../../../components/Loader";
@@ -16,15 +16,15 @@ import { getProfileDetails } from "../../../redux/actions";
 
 interface IndexProps {}
 const Index = (props: IndexProps) => {
-  const dispatch = useDispatch();
+  // global store
+  const { dispatch, useAppSelector } = useRedux();
 
-  const { profileDetails, getProfileLoading, isProfileFetched } = useSelector(
-    (state: any) => ({
+  const { profileDetails, getProfileLoading, isProfileFetched } =
+    useAppSelector(state => ({
       profileDetails: state.Profile.profileDetails,
       getProfileLoading: state.Profile.getProfileLoading,
       isProfileFetched: state.Profile.isProfileFetched,
-    })
-  );
+    }));
 
   // get user profile details
   useEffect(() => {
