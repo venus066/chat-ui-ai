@@ -1,23 +1,17 @@
 import React from "react";
-import { Alert, Row, Col, Form, Button, UncontrolledTooltip } from "reactstrap";
-
+import { Alert, Button, Col, Form, Row, UncontrolledTooltip } from "reactstrap";
 // hooks
 import { useRedux } from "../../hooks/index";
-
 // router
 import { Link, Redirect } from "react-router-dom";
-
 // validations
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-
 // hooks
 import { useProfile } from "../../hooks";
-
 //actions
 import { registerUser } from "../../redux/actions";
-
 // components
 import NonAuthLayoutWrapper from "../../components/NonAutnLayoutWrapper";
 import AuthHeader from "../../components/AuthHeader";

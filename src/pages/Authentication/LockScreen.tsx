@@ -1,24 +1,20 @@
 import React from "react";
-import { Row, Col, Form, Button } from "reactstrap";
-
+import { Button, Col, Form, Row } from "reactstrap";
 // router
 import { Link } from "react-router-dom";
-
 // validations
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-
-// hooks
-// import { useProfile } from "../../hooks";
-
 // components
 import NonAuthLayoutWrapper from "../../components/NonAutnLayoutWrapper";
 import AuthHeader from "../../components/AuthHeader";
 import FormInput from "../../components/FormInput";
-
 // images
 import avatar1 from "../../assets/images/users/avatar-1.jpg";
+
+// hooks
+// import { useProfile } from "../../hooks";
 
 interface LockScreenProps {}
 const LockScreen = (props: LockScreenProps) => {

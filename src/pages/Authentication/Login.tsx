@@ -1,35 +1,20 @@
 import React, { useEffect, useState } from "react";
-import {
-  Alert,
-  Row,
-  Col,
-  Form,
-  Label,
-  Button,
-  UncontrolledTooltip,
-} from "reactstrap";
-
+import { Alert, Button, Col, Form, Label, Row, UncontrolledTooltip } from "reactstrap";
 //Social Media Imports
 import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
-
 // router
 import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
-
 // validations
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-
 // config
 import config from "../../config";
-
 // hooks
 import { useProfile, useRedux } from "../../hooks/index";
-
 //actions
 import { loginUser, socialLogin } from "../../redux/actions";
-
 // components
 import NonAuthLayoutWrapper from "../../components/NonAutnLayoutWrapper";
 import AuthHeader from "../../components/AuthHeader";

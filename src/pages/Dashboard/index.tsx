@@ -1,12 +1,8 @@
 import React from "react";
 import classnames from "classnames";
-
 // hooks
-import { useRedux } from "../../hooks/index";
-
 // hooks
-import { useConversationUserType } from "../../hooks/index";
-
+import { useConversationUserType, useRedux } from "../../hooks/index";
 // component
 import Leftbar from "./Leftbar";
 import ConversationUser from "./ConversationUser/index";

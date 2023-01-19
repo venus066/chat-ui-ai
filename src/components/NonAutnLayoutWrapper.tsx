@@ -1,14 +1,14 @@
 import React from "react";
-import { Container, Row, Col } from "reactstrap";
+import { Col, Container, Row } from "reactstrap";
 
 import { Link } from "react-router-dom";
-
 // images
 import authImage from "../assets/images/auth-img.png";
 
 interface NonAuthLayoutWrapperProps {
   children: any;
 }
+
 const NonAuthLayoutWrapper = (props: NonAuthLayoutWrapperProps) => {
   return (
     <>
@@ -45,7 +45,7 @@ const NonAuthLayoutWrapper = (props: NonAuthLayoutWrapperProps) => {
                         <p className="mb-0">
                           &copy; {new Date().getFullYear()} Doot. Crafted with{" "}
                           <i className="mdi mdi-heart text-danger"></i> by
-                          Pichforest
+                          Themesbrand
                         </p>
                       </div>
                     </Col>

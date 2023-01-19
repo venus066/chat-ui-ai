@@ -1,35 +1,31 @@
 import React, { useState } from "react";
 import {
-  Row,
+  Alert,
+  Button,
   Col,
   Dropdown,
-  DropdownToggle,
-  DropdownMenu,
   DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
   Input,
-  Button,
-  Alert,
-  UncontrolledTooltip,
+  Row,
+  UncontrolledTooltip
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import classnames from "classnames";
-
 // hooks
 import { useRedux } from "../../../hooks/index";
-
 // components
 import AudioCallModal from "../../../components/AudioCallModal";
 import VideoCallModal from "../../../components/VideoCallModal";
 import AddPinnedTabModal from "../../../components/AddPinnedTabModal";
-
 // interface
 import { PinTypes } from "../../../data/chat";
-
 // actions
 import { changeSelectedChat } from "../../../redux/actions";
-
 // constants
 import { STATUS_TYPES } from "../../../constants";
+
 interface ProfileImageProps {
   chatUserDetails: any;
   onCloseConversation: () => any;
@@ -119,7 +115,7 @@ const ProfileImage = ({
                 ></span>
               </>
             ) : (
-              <div className="flex-shrink-0 avatar-sm align-self-center ms-0">
+              <div className="avatar-sm align-self-center">
                 <span
                   className={classnames(
                     "avatar-title",

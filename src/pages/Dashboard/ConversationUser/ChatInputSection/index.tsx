@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Alert, Form } from "reactstrap";
-
 // components
 import StartButtons from "./StartButtons";
 import InputSection from "./InputSection";
 import EndButtons from "./EndButtons";
 import MoreMenu from "./MoreMenu";
 import Reply from "./Reply";
-
 // interface
 import { MessagesTypes } from "../../../../data/messages";
 

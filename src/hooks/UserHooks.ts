@@ -1,11 +1,8 @@
-import { useState, useEffect } from "react";
-
+import { useEffect, useState } from "react";
 // hooks
 import { useRedux } from "../hooks/index";
-
 // api
 import { getLoggedinUser } from "../api/apiCore";
-
 //utils
 import { divideByKey } from "../utils";
 

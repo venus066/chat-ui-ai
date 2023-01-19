@@ -1,13 +1,10 @@
 import React, { useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
-import { Row, Col } from "reactstrap";
-
+import { Col, Row } from "reactstrap";
 // hooks
 import { useRedux } from "../../hooks/index";
-
 // components
 import NonAuthLayoutWrapper from "../../components/NonAutnLayoutWrapper";
-
 // actions
 import { logoutUser } from "../../redux/actions";
 

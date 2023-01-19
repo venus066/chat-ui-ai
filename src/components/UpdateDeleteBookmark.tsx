@@ -1,16 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-} from "reactstrap";
-
+import React, { useEffect, useState } from "react";
+import { Button, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 // interface
 import { BookMarkTypes } from "../data/bookmarks";
 

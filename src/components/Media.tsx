@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
 // interface
-import { MediaTypes, MediaListItemTypes } from "../data/myProfile";
+import { MediaListItemTypes, MediaTypes } from "../data/myProfile";
 
 interface MediaProps {
   media: MediaTypes;

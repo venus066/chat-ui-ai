@@ -1,10 +1,11 @@
 // constants
-import { TABS } from "../../constants/index";
+import { LAYOUT_MODES, TABS } from "../../constants/index";
 
 import { LayoutActionTypes, LayoutState } from "./types";
 
 export const INIT_STATE: LayoutState = {
   activeTab: TABS.CHAT,
+  layoutMode: LAYOUT_MODES.DARK,
 };
 
 const Layout = (state = INIT_STATE, action: any) => {
@@ -14,6 +15,12 @@ const Layout = (state = INIT_STATE, action: any) => {
         ...state,
         activeTab: action.payload,
       };
+
+      case LayoutActionTypes.CHANGE_LAYOUT_MODE:
+      return {
+        ...state,
+        layoutMode: action.payload.layoutMode,
+      }
     default:
       return { ...state };
   }

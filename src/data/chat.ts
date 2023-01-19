@@ -2,6 +2,7 @@ import { STATUS_TYPES } from "../constants";
 
 import { contacts } from "./contacts";
 import { userChannels } from "./channels";
+
 export interface UserTypes {
   id: string | number;
   firstName: string;
@@ -17,22 +18,7 @@ let favourites: Array<UserTypes> = [
   {
     ...contacts[4],
     meta: {
-      unRead: 3,
-      status: STATUS_TYPES.ACTIVE,
-    },
-  },
-  {
-    ...contacts[5],
-    meta: {
-      status: STATUS_TYPES.ACTIVE,
-    },
-  },
-  {
-    ...contacts[6],
-  },
-  {
-    ...contacts[7],
-    meta: {
+      unRead: 0,
       status: STATUS_TYPES.ACTIVE,
     },
   },

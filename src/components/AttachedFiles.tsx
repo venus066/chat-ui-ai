@@ -1,19 +1,12 @@
 import React, { useEffect, useState } from "react";
-import {
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-} from "reactstrap";
+import { Card, Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from "reactstrap";
 
 import { Link } from "react-router-dom";
-
 // components
 import SectionTitle from "../pages/Dashboard/Profile/SectionTitle";
-
 // interface
-import { AttachedfileTypes, AttachedfileItemTypes } from "../data/myProfile";
-import { Card } from "reactstrap";
+import { AttachedfileItemTypes, AttachedfileTypes } from "../data/myProfile";
+
 interface AttachedFileItemProps {
   attachedFile: AttachedfileItemTypes;
 }

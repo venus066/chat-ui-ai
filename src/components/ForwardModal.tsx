@@ -1,22 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
+import React, { useEffect, useState } from "react";
+import { Button, Modal, ModalBody, ModalHeader } from "reactstrap";
 import classnames from "classnames";
-
 // hooks
 import { useRedux } from "../hooks/index";
-
 // components
 import AppSimpleBar from "./AppSimpleBar";
-
 // interfaces
-import { MessagesTypes, ContactTypes } from "../data";
-
+import { ContactTypes, MessagesTypes } from "../data";
 // hooks
-import { useProfile, useContacts } from "../hooks";
-
+import { useContacts, useProfile } from "../hooks";
 //utils
-import { DivideByKeyResultTypes, divideByKey } from "../utils";
+import { divideByKey, DivideByKeyResultTypes } from "../utils";
 import EmptyStateContacts from "./EmptyStateResult";
+
 interface ForwardMessageProps {
   forwardData: null | MessagesTypes | undefined;
   chatUserDetails: any;
@@ -186,7 +182,7 @@ const ForwardModal = ({
   };
 
   const totalC = (contacts || []).length;
-
+  
   /*
   select contacts
   */

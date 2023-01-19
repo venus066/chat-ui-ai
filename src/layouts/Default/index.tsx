@@ -1,42 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-// costants
-import { LAYOUT_MODES } from "../../constants/index";
-
-// utils
-import { changeBodyAttribute } from "../../utils/index";
-
+// actions
+import { changelayoutMode } from "../../redux/actions";
 // components
-import SideMenu from "./SideMenu";
+import { useDispatch } from "react-redux";
 
 interface IndexProps {
   children: any;
 }
 const Index = (props: IndexProps) => {
-  // theme mode handeling
-  const [themeMode, setThemeMode] = useState<
-    LAYOUT_MODES.DARK | LAYOUT_MODES.LIGHT
-  >(LAYOUT_MODES.LIGHT);
-  const onChangeMode = () => {
-    let mode = themeMode;
-    if (mode === LAYOUT_MODES.LIGHT) {
-      setThemeMode(LAYOUT_MODES.DARK);
-    }
-    if (mode === LAYOUT_MODES.DARK) {
-      setThemeMode(LAYOUT_MODES.LIGHT);
+  const dispatch = useDispatch();
+
+  /*
+  call dark/light mode
+  */
+  const onChangeLayoutMode = (value: any) => {
+    if (changelayoutMode) {
+      dispatch(changelayoutMode(value));
     }
   };
-  useEffect(() => {
-    changeBodyAttribute("data-layout-mode", themeMode);
-  }, [themeMode]);
 
   return (
     <div className="layout-wrapper d-lg-flex">
       {/* side menu */}
-      <SideMenu themeMode={themeMode} onChangeMode={onChangeMode} />
+      {/*<SideMenu onChangeLayoutMode={onChangeLayoutMode} />*/}
 
       {props.children}
       <ToastContainer autoClose={2000} />

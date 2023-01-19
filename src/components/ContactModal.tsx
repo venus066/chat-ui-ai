@@ -1,29 +1,16 @@
 import React, { useEffect, useState } from "react";
 import classnames from "classnames";
 
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Input,
-  InputGroup,
-} from "reactstrap";
-
+import { Button, Input, InputGroup, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 // hooks
 import { useRedux } from "../hooks/index";
-
 // components
 import AppSimpleBar from "./AppSimpleBar";
 import EmptyStateResult from "./EmptyStateResult";
-
 //utils
-import { DivideByKeyResultTypes, divideByKey } from "../utils";
-
+import { divideByKey, DivideByKeyResultTypes } from "../utils";
 // interfaaces
 import { ContactTypes } from "../data/contacts";
-
 // hooks
 import { useContacts } from "../hooks";
 
@@ -216,7 +203,7 @@ const ContactModal = ({ isOpen, onClose, onAddContact }: ContactModalProps) => {
         )}
       </ModalBody>
       <ModalFooter>
-        <Button type="button" color="link">
+        <Button type="button" color="link" onClick={onClose}>
           Cancel
         </Button>
         <Button

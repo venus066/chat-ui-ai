@@ -1,11 +1,10 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
-
+import { Route, Switch } from "react-router-dom";
 // layouts
 import NonAuthLayout from "../layouts/NonAuth/index";
-import { AuthProtected, AccessRoute } from "./AuthProtected";
+import { AccessRoute, AuthProtected } from "./AuthProtected";
 
-import { publicRoutes, privateRoutes } from "./allRoutes";
+import { privateRoutes, publicRoutes } from "./allRoutes";
 
 const Index = (props: any) => {
   const availablePublicRoutesPaths = publicRoutes.map(r => r.path);

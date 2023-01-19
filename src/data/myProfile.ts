@@ -1,8 +1,8 @@
 import image4 from "../assets/images/small/img-4.jpg";
+import img4 from "../assets/images/small/img-4.jpg";
 import avatar1 from "../assets/images/users/avatar-1.jpg";
 import img1 from "../assets/images/small/img-1.jpg";
 import img2 from "../assets/images/small/img-2.jpg";
-import img4 from "../assets/images/small/img-4.jpg";
 
 export interface BasicDetailsTypes {
   firstName: string;

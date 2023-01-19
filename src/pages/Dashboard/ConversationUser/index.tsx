@@ -1,32 +1,25 @@
 import React, { useEffect, useState } from "react";
-
 // hooks
 import { useRedux } from "../../../hooks/index";
-
 // actions
 import {
-  toggleUserDetailsTab,
-  getChatUserConversations,
-  onSendMessage,
-  receiveMessage,
-  readMessage,
-  receiveMessageFromUser,
   deleteMessage,
   deleteUserMessages,
+  getChatUserConversations,
+  onSendMessage,
+  readMessage,
+  receiveMessage,
   toggleArchiveContact,
+  toggleUserDetailsTab
 } from "../../../redux/actions";
-
 // hooks
 import { useProfile } from "../../../hooks";
-
 // components
 import UserHead from "./UserHead";
 import Conversation from "./Conversation";
 import ChatInputSection from "./ChatInputSection/index";
-
 // interface
 import { MessagesTypes } from "../../../data/messages";
-
 // dummy data
 import { pinnedTabs } from "../../../data/index";
 
@@ -101,7 +94,8 @@ const Index = ({ isChannel }: IndexProps) => {
         dispatch(readMessage(chatUserDetails.id));
       }, 1500);
       setTimeout(() => {
-        dispatch(receiveMessageFromUser(chatUserDetails.id));
+        // dispatch(receiveMessageFromUser(chatUserDetails.id));
+        // dispatch(receiveMessageFromUser(chatUserDetails.id, params.text));
       }, 2000);
     }
     setReplyData(null);

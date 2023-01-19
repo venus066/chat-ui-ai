@@ -1,6 +1,6 @@
 // @flow
 import React from "react";
-import { useForm, Resolver, SubmitHandler } from "react-hook-form";
+import { Resolver, SubmitHandler, useForm } from "react-hook-form";
 import { Form } from "reactstrap";
 
 interface VerticalFromProps<TFormValues> {

@@ -1,17 +1,7 @@
 import React, { useState } from "react";
-import {
-  Modal,
-  ModalBody,
-  ModalHeader,
-  Dropdown,
-  DropdownMenu,
-  DropdownToggle,
-  DropdownItem,
-} from "reactstrap";
-
+import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Modal, ModalBody, ModalHeader } from "reactstrap";
 // components
 import AppSimpleBar from "./AppSimpleBar";
-
 // interface
 import { PinTypes } from "../data/chat";
 import { Link } from "react-router-dom";

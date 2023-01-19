@@ -1,14 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Form,
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Label,
-  Input,
-} from "reactstrap";
+import { Button, Form, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 
 interface DataTypes {
   email: string | null;

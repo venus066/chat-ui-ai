@@ -1,26 +1,13 @@
 import React, { useEffect, useState } from "react";
 import classnames from "classnames";
 
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Label,
-  Input,
-  Collapse,
-  Form,
-} from "reactstrap";
-
+import { Button, Collapse, Form, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 //utils
 import { DivideByKeyResultTypes } from "../utils";
-
 // interfaaces
 import { ContactTypes } from "../data/contacts";
 import { useContacts } from "../hooks";
 import { CreateChannelPostData } from "../redux/actions";
-
 // components
 import AppSimpleBar from "./AppSimpleBar";
 
@@ -265,7 +252,7 @@ const AddGroupModal = ({
         </Form>
       </ModalBody>
       <ModalFooter>
-        <Button color="link" type="button">
+        <Button color="link" type="button" onClick={onClose}>
           Close
         </Button>
         <Button

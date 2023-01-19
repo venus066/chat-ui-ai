@@ -4,27 +4,24 @@ import { Button, Form, UncontrolledTooltip } from "reactstrap";
 import { Link } from "react-router-dom";
 // hooks
 import { useRedux } from "../../../hooks/index";
-
 // actions
-import {
-  inviteContact,
-  resetContacts,
-  getFavourites,
-  getDirectMessages,
-  getChannels,
-  addContacts,
-  createChannel,
-  changeSelectedChat,
-  getChatUserDetails,
-  getChatUserConversations,
-  getChannelDetails,
-  getArchiveContact,
-  readConversation,
-} from "../../../redux/actions";
-
 // interfaces
-import { CreateChannelPostData } from "../../../redux/actions";
-
+import {
+  addContacts,
+  changeSelectedChat,
+  createChannel,
+  CreateChannelPostData,
+  getArchiveContact,
+  getChannelDetails,
+  getChannels,
+  getChatUserConversations,
+  getChatUserDetails,
+  getDirectMessages,
+  getFavourites,
+  inviteContact,
+  readConversation,
+  resetContacts
+} from "../../../redux/actions";
 // components
 import AppSimpleBar from "../../../components/AppSimpleBar";
 import AddGroupModal from "../../../components/AddGroupModal";

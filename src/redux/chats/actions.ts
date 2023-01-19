@@ -65,6 +65,11 @@ export const onSendMessage = (data: any) => ({
   payload: data,
 });
 
+export const onSendMessageBackend = (data: any) => ({
+  type: ChatsActionTypes.ON_SEND_MESSAGE_BACKEND,
+  payload: data,
+});
+
 export const receiveMessage = (id: number | string) => ({
   type: ChatsActionTypes.RECEIVE_MESSAGE,
   payload: id,
@@ -75,9 +80,9 @@ export const readMessage = (id: number | string) => ({
   payload: id,
 });
 
-export const receiveMessageFromUser = (id: number | string) => ({
+export const receiveMessageFromUser = (payload: { id: number | string, text: string }) => ({
   type: ChatsActionTypes.RECEIVE_MESSAGE_FROM_USER,
-  payload: id,
+  payload: payload,
 });
 
 export const deleteMessage = (

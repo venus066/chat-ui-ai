@@ -1,20 +1,11 @@
-import { takeEvery, fork, put, all, call } from "redux-saga/effects";
-
+import { all, call, fork, put, takeEvery } from "redux-saga/effects";
 // Login Redux States
 import { AuthForgetPassActionTypes } from "./types";
-import {
-  authForgetPassApiResponseSuccess,
-  authForgetPassApiResponseError,
-} from "./actions";
-
+import { authForgetPassApiResponseError, authForgetPassApiResponseSuccess } from "./actions";
 //Include Both Helper File with needed methods
 import { getFirebaseBackend } from "../../../helpers/firebase_helper";
 
-import {
-  postFakeForgetPwd,
-  postJwtForgetPwd,
-  changePassword as changePasswordApi,
-} from "../../../api/index";
+import { changePassword as changePasswordApi, postFakeForgetPwd, postJwtForgetPwd } from "../../../api/index";
 
 const fireBaseBackend: any = getFirebaseBackend();
 

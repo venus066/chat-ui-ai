@@ -1,43 +1,40 @@
-import { takeEvery, fork, put, all, call } from "redux-saga/effects";
-
+import { all, call, fork, put, takeEvery } from "redux-saga/effects";
 // Login Redux States
 import { ChatsActionTypes } from "./types";
-import { chatsApiResponseSuccess, chatsApiResponseError } from "./actions";
-
-import {
-  getFavourites as getFavouritesApi,
-  getDirectMessages as getDirectMessagesApi,
-  getChannels as getChannelsApi,
-  addContacts as addContactsApi,
-  createChannel as createChannelApi,
-  getChatUserDetails as getChatUserDetailsApi,
-  getChatUserConversations as getChatUserConversationsApi,
-  sendMessage,
-  receiveMessage as receiveMessageApi,
-  readMessage as readMessageApi,
-  receiveMessageFromUser as receiveMessageFromUserApi,
-  deleteMessage as deleteMessageApi,
-  forwardMessage as forwardMessageApi,
-  deleteUserMessages as deleteUserMessagesApi,
-  getChannelDetails as getChannelDetailsApi,
-  toggleFavouriteContact as toggleFavouriteContactApi,
-  getArchiveContact as getArchiveContactApi,
-  toggleArchiveContact as toggleArchiveContactApi,
-  readConversation as readConversationApi,
-  deleteImage as deleteImageApi,
-} from "../../api/index";
-
-import {
-  showSuccessNotification,
-  showErrorNotification,
-} from "../../helpers/notifications";
-
 //actions
 import {
-  getDirectMessages as getDirectMessagesAction,
-  getFavourites as getFavouritesAction,
+  chatsApiResponseError,
+  chatsApiResponseSuccess,
   getChannels as getChannelsAction,
+  getDirectMessages as getDirectMessagesAction,
+  getFavourites as getFavouritesAction
 } from "./actions";
+
+import {
+  addContacts as addContactsApi,
+  createChannel as createChannelApi,
+  deleteImage as deleteImageApi,
+  deleteMessage as deleteMessageApi,
+  deleteUserMessages as deleteUserMessagesApi,
+  forwardMessage as forwardMessageApi,
+  getArchiveContact as getArchiveContactApi,
+  getChannelDetails as getChannelDetailsApi,
+  getChannels as getChannelsApi,
+  getChatUserConversations as getChatUserConversationsApi,
+  getChatUserDetails as getChatUserDetailsApi,
+  getDirectMessages as getDirectMessagesApi,
+  getFavourites as getFavouritesApi,
+  readConversation as readConversationApi,
+  readMessage as readMessageApi,
+  receiveMessage as receiveMessageApi,
+  receiveMessageFromUser as receiveMessageFromUserApi,
+  sendMessage,
+  sendMessageBackend,
+  toggleArchiveContact as toggleArchiveContactApi,
+  toggleFavouriteContact as toggleFavouriteContactApi
+} from "../../api/index";
+
+import { showErrorNotification, showSuccessNotification } from "../../helpers/notifications";
 
 function* getFavourites() {
   try {
@@ -57,7 +54,6 @@ function* getDirectMessages() {
       chatsApiResponseSuccess(ChatsActionTypes.GET_DIRECT_MESSAGES, response)
     );
   } catch (error: any) {
-    console.log(error);
     yield put(
       chatsApiResponseError(ChatsActionTypes.GET_DIRECT_MESSAGES, error)
     );
@@ -132,6 +128,21 @@ function* onSendMessage({ payload: data }: any) {
       chatsApiResponseSuccess(ChatsActionTypes.ON_SEND_MESSAGE, response)
     );
   } catch (error: any) {
+    console.log('error:', error);
+    yield put(chatsApiResponseError(ChatsActionTypes.ON_SEND_MESSAGE, error));
+  }
+}
+
+function* onSendMessageBackend({ payload: data }: any) {
+  try {
+    console.log(data);
+    const response: string = yield call(sendMessageBackend, { prompt: data.text });
+    console.log('onSendMessageBackend:', response);
+    yield put(
+      chatsApiResponseSuccess(ChatsActionTypes.ON_SEND_MESSAGE, response)
+    );
+  } catch (error: any) {
+    console.log('error:', error);
     yield put(chatsApiResponseError(ChatsActionTypes.ON_SEND_MESSAGE, error));
   }
 }
@@ -156,9 +167,10 @@ function* readMessage({ payload: id }: any) {
   }
 }
 
-function* receiveMessageFromUser({ payload: id }: any) {
+function* receiveMessageFromUser({ payload: { id, text } }: any) {
   try {
-    const response: Promise<any> = yield call(receiveMessageFromUserApi, id);
+    const { bot } = yield call(sendMessageBackend, { prompt: text });
+    const response: Promise<any> = yield call(receiveMessageFromUserApi, id, bot);
     yield put(
       chatsApiResponseSuccess(
         ChatsActionTypes.RECEIVE_MESSAGE_FROM_USER,
@@ -330,6 +342,11 @@ export function* watchGetChatUserConversations() {
 export function* watchOnSendMessage() {
   yield takeEvery(ChatsActionTypes.ON_SEND_MESSAGE, onSendMessage);
 }
+
+export function* watchOnSendMessageBackend() {
+  yield takeEvery(ChatsActionTypes.ON_SEND_MESSAGE_BACKEND, onSendMessageBackend);
+}
+
 export function* watchReceiveMessage() {
   yield takeEvery(ChatsActionTypes.RECEIVE_MESSAGE, receiveMessage);
 }
@@ -386,6 +403,7 @@ function* chatsSaga() {
     fork(watchGetChatUserDetails),
     fork(watchGetChatUserConversations),
     fork(watchOnSendMessage),
+    fork(watchOnSendMessageBackend),
     fork(watchReceiveMessage),
     fork(watchReadMessage),
     fork(watchReceiveMessageFromUser),

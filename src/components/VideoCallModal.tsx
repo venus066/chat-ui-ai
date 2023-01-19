@@ -1,9 +1,7 @@
 import React from "react";
 import { Button, Modal, ModalBody } from "reactstrap";
-
 // interface
 import { CallItem } from "../data/calls";
-
 //images
 import imagePlaceholder from "../assets/images/users/profile-placeholder.png";
 

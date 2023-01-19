@@ -1,6 +1,6 @@
 // @flow
-import React, { useState, InputHTMLAttributes } from "react";
-import { Input, Label, FormFeedback } from "reactstrap";
+import React, { InputHTMLAttributes, useState } from "react";
+import { FormFeedback, Input, Label } from "reactstrap";
 import classNames from "classnames";
 
 import { FieldErrors } from "react-hook-form";

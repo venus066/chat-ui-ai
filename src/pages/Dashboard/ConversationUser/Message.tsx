@@ -1,29 +1,15 @@
 import React, { useState } from "react";
-import {
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-} from "reactstrap";
+import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from "reactstrap";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
-
 // components
 import LightBox from "../../../components/LightBox";
-
 //images
 import imagePlaceholder from "../../../assets/images/users/profile-placeholder.png";
-
 // interface
-import {
-  MessagesTypes,
-  ImageTypes,
-  AttachmentTypes,
-} from "../../../data/messages";
-
+import { AttachmentTypes, ImageTypes, MessagesTypes } from "../../../data/messages";
 // hooks
 import { useProfile } from "../../../hooks";
-
 // utils
 import { formateDate } from "../../../utils";
 import RepliedMessage from "./RepliedMessage";

@@ -1,5 +1,4 @@
 import React from "react";
-
 // simplebar
 import SimpleBar from "simplebar-react";
 import "simplebar/dist/simplebar.min.css";

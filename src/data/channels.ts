@@ -1,12 +1,11 @@
 // interfaces
-import { contacts } from "./contacts";
-import { MediaTypes, AttachedfileTypes } from "./myProfile";
+// interface
+import { contacts, ContactTypes } from "./contacts";
+import { AttachedfileTypes, MediaTypes } from "./myProfile";
 
 import img1 from "../assets/images/small/img-1.jpg";
 import img2 from "../assets/images/small/img-2.jpg";
 
-// interface
-import { ContactTypes } from "./contacts";
 interface MemberTypes extends ContactTypes {
   isAdmin?: boolean;
 }

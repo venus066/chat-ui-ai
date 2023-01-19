@@ -1,8 +1,7 @@
-import { takeEvery, fork, put, all, call } from "redux-saga/effects";
-
+import { all, call, fork, put, takeEvery } from "redux-saga/effects";
 // Login Redux States
 import { ProfileActionTypes } from "./types";
-import { profileApiResponseSuccess, profileApiResponseError } from "./actions";
+import { profileApiResponseError, profileApiResponseSuccess } from "./actions";
 
 import { getProfileDetails as getProfileDetailsApi } from "../../api/index";
 
