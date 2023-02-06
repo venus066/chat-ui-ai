@@ -16,10 +16,6 @@ const Logout = (props: any) => {
     dispatch(logoutUser());
   }, [dispatch]);
 
-  // if (isUserLogout) {
-  //   return <Redirect to="/auth-login" />;
-  // }
-
   return (
     <NonAuthLayoutWrapper>
       <Row className="justify-content-center my-auto">
