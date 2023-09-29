@@ -11,6 +11,9 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+![telico](https://github.com/venus066/chat-ui-ai/assets/118212913/a49a273b-f9e1-42d2-b1a2-683669f2050d)
+
+
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
